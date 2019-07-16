@@ -5,7 +5,11 @@ public class BallConfig : ScriptableObject {
 
     public float drag = 0.1f;
     public float gravityScale = 4f;
-    public bool freezeRotation = true;
+    public float bounciness = 0.8f;
 
-    public bool test;
+    public void Apply(Ball ball) {
+        ball.body.drag = drag;
+        ball.body.gravityScale = gravityScale;
+        ball.body.sharedMaterial.bounciness = bounciness;
+    }
 }
