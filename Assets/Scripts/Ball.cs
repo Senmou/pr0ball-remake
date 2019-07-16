@@ -2,19 +2,16 @@
 
 public class Ball : MonoBehaviour {
 
-    public BallConfig ballConfig;
+    public BallConfig ballConfigDefault;
+
+    public float damage = 1f;
+    public float critChance = 0f;
+    public float critDamageMultiplier = 1f;
 
     [HideInInspector] public Rigidbody2D body;
 
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
-
-        ApplyConfig(ballConfig);
-    }
-
-    private void ApplyConfig(BallConfig config) {
-        body.drag = config.drag;
-        body.gravityScale = config.gravityScale;
-        body.freezeRotation = config.freezeRotation;
+        ballConfigDefault.Apply(this);
     }
 }
