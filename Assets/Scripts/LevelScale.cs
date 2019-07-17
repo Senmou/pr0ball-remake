@@ -11,7 +11,7 @@ public class LevelScale : MonoBehaviour {
     public Transform leftWall;
     public Transform rightWall;
 
-    private void Update() {
+    private void Awake() {
         top.localScale = new Vector2(levelWidth + 2f * wallThickness, wallThickness);
         ground.localScale = new Vector2(levelWidth + 2f * wallThickness, wallThickness);
         leftWall.localScale = new Vector2(wallThickness, levelHeight + 2f * wallThickness);
