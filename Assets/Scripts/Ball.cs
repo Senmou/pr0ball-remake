@@ -10,8 +10,14 @@ public class Ball : MonoBehaviour {
 
     [HideInInspector] public Rigidbody2D body;
 
+    private float maxVelocity = 50f;
+
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
         ballConfigDefault.Apply(this);
+    }
+
+    private void FixedUpdate() {
+        body.velocity = Vector2.ClampMagnitude(body.velocity, maxVelocity);
     }
 }

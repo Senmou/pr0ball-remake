@@ -47,6 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballConfigDefault: {fileID: 11400000, guid: 2f2748d32860b5242a850236e82a6d48, type: 2}
+  damage: 1
+  critChance: 0
+  critDamageMultiplier: 1
   body: {fileID: 0}
 --- !u!50 &4788159331868298045
 Rigidbody2D:
@@ -104,7 +107,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1410852521
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 78dbbf2b8223f1c45b042fb18c1de5d1, type: 3}
   m_Color: {r: 0, g: 0.56078434, b: 1, a: 1}
