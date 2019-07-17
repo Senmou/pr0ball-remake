@@ -13,8 +13,5 @@ MonoBehaviour:
   m_Name: BallConfigDefault
   m_EditorClassIdentifier: 
   drag: 0.1
-  damage: 1
   gravityScale: 4
-  critChance: 0.02
-  critDamageMultiplier: 10
-  freezeRotation: 1
+  bounciness: 0.8
