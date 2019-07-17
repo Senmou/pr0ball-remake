@@ -381,7 +381,7 @@ GameObject:
   - component: {fileID: 1428061050}
   - component: {fileID: 1428061052}
   m_Layer: 9
-  m_Name: Wall_right
+  m_Name: RightWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -505,6 +505,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1687258585}
+  - component: {fileID: 1687258587}
   - component: {fileID: 1687258584}
   - component: {fileID: 1687258582}
   - component: {fileID: 1687258586}
@@ -562,7 +563,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 20
+  orthographic size: 21.86667
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -651,6 +652,22 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &1687258587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687258581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4e21b37e5e2412449a3032d22d93dd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  top: {fileID: 1379312425}
+  ground: {fileID: 142249378}
+  wallLeft: {fileID: 1899597096}
+  wallRight: {fileID: 1428061049}
 --- !u!1 &1830602772
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,6 +677,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1830602773}
+  - component: {fileID: 1830602774}
   m_Layer: 9
   m_Name: Level
   m_TagString: Untagged
@@ -685,6 +703,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1830602774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830602772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d80c7a5c1b9baf4b9cce3de52d96f4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelWidth: 24
+  levelHeight: 40
+  wallThickness: 0.2
+  top: {fileID: 1379312425}
+  ground: {fileID: 142249378}
+  leftWall: {fileID: 1899597096}
+  rightWall: {fileID: 1428061049}
 --- !u!1 &1899597095
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,7 +735,7 @@ GameObject:
   - component: {fileID: 1899597097}
   - component: {fileID: 1899597099}
   m_Layer: 9
-  m_Name: Wall_left
+  m_Name: LeftWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
