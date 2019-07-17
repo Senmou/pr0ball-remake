@@ -5,12 +5,23 @@ public class SetUpUI : MonoBehaviour {
     public Vector2 worldPos;
     public Vector2 sizeInUnits;
 
+    private Canvas canvas;
+
     private void OnValidate() {
         SetPos();
-        SetSize();
     }
 
-    private void Start() {
+    private void Awake() {
+        canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
+    }
+
+    //private void Start() {
+    //    SetPos();
+    //    SetSize();
+    //}
+
+    // Todo: just for testing, switch back to Start()
+    private void Update() {
         SetPos();
         SetSize();
     }
@@ -32,9 +43,10 @@ public class SetUpUI : MonoBehaviour {
         // pixel per unit
         float ppu = Screen.width / width;
 
+        // divide by the canvas' scaleFactor to negate it's automatic down scaling by the canvas scaler
         RectTransform rect = GetComponent<RectTransform>();
-        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, ppu);
-        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, ppu);
+        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, ppu / canvas.scaleFactor);
+        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, ppu / canvas.scaleFactor);
 
         rect.localScale = sizeInUnits;
     }
