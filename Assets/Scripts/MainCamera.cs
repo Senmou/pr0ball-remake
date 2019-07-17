@@ -7,6 +7,10 @@ public class MainCamera : MonoBehaviour {
     public Transform wallLeft;
     public Transform wallRight;
 
+    private void OnValidate() {
+        ScaleCamera();
+    }
+
     private void Start() {
         // Called in Start(), so the level's walls are already set up, which happens in Awake()
         ScaleCamera();
@@ -14,8 +18,10 @@ public class MainCamera : MonoBehaviour {
 
     private void ScaleCamera() {
 
+        float spaceForUI = 8f;
+
         // Outer bounds of the walls
-        float levelHeight = top.position.y - ground.position.y + top.localScale.y + ground.localScale.y;
+        float levelHeight = top.position.y - ground.position.y + top.localScale.y + ground.localScale.y + spaceForUI;
         float levelWidth = wallRight.position.x - wallLeft.position.x + wallRight.localScale.x + wallLeft.localScale.x;
 
         float unitsPerPixelWidth = levelWidth / Screen.width;
