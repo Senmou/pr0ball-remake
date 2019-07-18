@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class OptionsMenu : MonoBehaviour {
 
-    private Animator animator;
+    private UIMovement moveUI;
 
     private void Awake() {
-        animator = GetComponent<Animator>();
+        moveUI = GetComponent<UIMovement>();
     }
 
     public void OnClickBackButton() {
@@ -15,10 +14,10 @@ public class OptionsMenu : MonoBehaviour {
     }
 
     public void FadeIn() {
-        animator.SetTrigger("FadeIn");
+        moveUI.FadeTo(new Vector2(0f, 0f), 0.5f);
     }
 
     public void FadeOut() {
-        animator.SetTrigger("FadeOut");
+        moveUI.FadeTo(new Vector2(-30f, 0f), 0.5f);
     }
 }

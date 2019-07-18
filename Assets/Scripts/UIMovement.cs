@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
-public class SetUpUI : MonoBehaviour {
+public class UIMovement : MonoBehaviour {
 
     public Vector2 worldPos;
     public Vector2 sizeInUnits;
@@ -8,27 +9,38 @@ public class SetUpUI : MonoBehaviour {
     private Canvas canvas;
 
     private void OnValidate() {
-        SetPos();
+        SetPos(worldPos);
     }
 
     private void Awake() {
         canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
     }
 
-    //private void Start() {
-    //    SetPos();
-    //    SetSize();
-    //}
-
-    // Todo: just for testing, switch back to Start()
-    private void Update() {
-        SetPos();
+    private void Start() {
+        SetPos(worldPos);
         SetSize();
     }
 
-    private void SetPos() {
-        Vector2 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+    public void SetPos(Vector2 targetPos) {
+        Vector2 screenPos = Camera.main.WorldToScreenPoint(targetPos);
         transform.position = screenPos;
+    }
+
+    public void FadeTo(Vector2 targetPos, float timeToFade) {
+        StartCoroutine(FadePosition(targetPos, timeToFade));
+    }
+
+    private IEnumerator FadePosition(Vector2 targetPos, float timeToFade) {
+
+        Vector2 screenTargetPos = Camera.main.WorldToScreenPoint(targetPos);
+
+        float t = 0f;
+        while (t < 1f) {
+            transform.position = Vector2.Lerp(transform.position, screenTargetPos, t);
+            t += Time.unscaledDeltaTime / timeToFade;
+            yield return null;
+        }
+        yield return null;
     }
 
     private void SetSize() {
