@@ -11,13 +11,19 @@ public class Ball : MonoBehaviour {
     [HideInInspector] public Rigidbody2D body;
 
     private float maxVelocity = 50f;
+    private AudioSource audioSource;
 
     private void Awake() {
+        audioSource = GetComponent<AudioSource>();
         body = GetComponent<Rigidbody2D>();
         ballConfigDefault.Apply(this);
     }
 
     private void FixedUpdate() {
         body.velocity = Vector2.ClampMagnitude(body.velocity, maxVelocity);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        audioSource.Play();
     }
 }

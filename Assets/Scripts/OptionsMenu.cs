@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour {
 
@@ -14,10 +15,12 @@ public class OptionsMenu : MonoBehaviour {
     }
 
     public void FadeIn() {
+        GameController.instance.PauseGame();
         moveUI.FadeTo(new Vector2(0f, 0f), 0.5f);
     }
 
     public void FadeOut() {
+        GameController.instance.ResumeGame();
         moveUI.FadeTo(new Vector2(-30f, 0f), 0.5f);
     }
 }
