@@ -7,16 +7,17 @@ using TMPro;
 public class BallController : MonoBehaviour {
 
     public Slider lifeTimeSlider;
-    public Transform ballSpawnPoint;
+    public Transform spawnPoint;
     public TextMeshProUGUI maxBallCountUI;
     public TextMeshProUGUI currentBallCountUI;
 
-    private int currentBallCount;
     private int maxBallCount = 20;
     private float maxLifeTime = 5f;
+    private float shootingRate = 0.1f;
 
+    private int BallCount { get => balls.Count; }
     public bool LifeTimeExeeded { get => lifeTime <= 0f; }
-    public bool AllBallsShot { get => currentBallCount == maxBallCount; }
+    public bool AllBallsShot { get => BallCount == maxBallCount; }
 
     private float lifeTime;
     private string poolName = "BallPool";
@@ -28,7 +29,7 @@ public class BallController : MonoBehaviour {
     }
 
     public void OnCycleFinish() {
-        currentBallCount = 0;
+        ReturnAllToPool();
         lifeTime = maxLifeTime;
         lifeTimeSlider.maxValue = maxLifeTime;
         UpdateLifeTimeSlider();
@@ -40,12 +41,12 @@ public class BallController : MonoBehaviour {
     }
 
     public void Shoot() {
-        InvokeRepeating("ShootBall", 0f, 0.2f);
+        InvokeRepeating("ShootBall", 0f, shootingRate);
     }
 
     private void ShootBall() {
-        if (currentBallCount < maxBallCount) {
-            currentBallCount++;
+        if (BallCount < maxBallCount) {
+            CreateBall(spawnPoint.position);
             UpdateBallCountUI();
         } else
             CancelInvoke();
@@ -57,18 +58,18 @@ public class BallController : MonoBehaviour {
 
     private void UpdateBallCountUI() {
         maxBallCountUI.text = "/ " + maxBallCount.ToString();
-        currentBallCountUI.text = currentBallCount.ToString();
+        currentBallCountUI.text = BallCount.ToString();
     }
 
     private void InitBallPool() {
         for (int i = 0; i < 20; i++) {
-            CreateBall();
+            CreateBall(Vector2.zero);
         }
         ReturnAllToPool();
     }
 
-    private void CreateBall() {
-        Ball ball = EasyObjectPool.instance.GetObjectFromPool(poolName, Vector3.zero, Quaternion.identity).GetComponent<Ball>();
+    private void CreateBall(Vector2 spawnPoint) {
+        Ball ball = EasyObjectPool.instance.GetObjectFromPool(poolName, spawnPoint, Quaternion.identity).GetComponent<Ball>();
         if (ball)
             balls.Add(ball);
     }

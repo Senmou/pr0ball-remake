@@ -2,6 +2,7 @@
 
 public class Ball : MonoBehaviour {
 
+    public Cannon cannon;
     public BallConfig ballConfigDefault;
 
     public float damage = 1f;
@@ -10,13 +11,19 @@ public class Ball : MonoBehaviour {
 
     [HideInInspector] public Rigidbody2D body;
 
+    private float startForce = 300f;
     private float maxVelocity = 50f;
     private AudioSource audioSource;
 
     private void Awake() {
         audioSource = GameObject.Find("SfxBounce").GetComponent<AudioSource>();
         body = GetComponent<Rigidbody2D>();
+        cannon = FindObjectOfType<Cannon>();
         ballConfigDefault.Apply(this);
+    }
+
+    private void OnEnable() {
+        body.AddForce(cannon.transform.up * startForce, ForceMode2D.Impulse);
     }
 
     private void FixedUpdate() {
