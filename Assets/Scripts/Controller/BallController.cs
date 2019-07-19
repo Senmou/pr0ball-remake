@@ -4,6 +4,7 @@ using MarchingBytes;
 using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 public class BallController : MonoBehaviour {
 
@@ -14,7 +15,7 @@ public class BallController : MonoBehaviour {
 
     private int maxBallCount = 20;
     private float maxLifeTime = 5f;
-    private float shootingRate = 0.1f;
+    private float shootingRate = 0.08f;
 
     private int BallCount { get => balls.Count; }
     public bool LifeTimeExeeded { get => lifeTime <= 0f; }
@@ -25,14 +26,15 @@ public class BallController : MonoBehaviour {
     private List<Ball> balls = new List<Ball>();
 
     private void Start() {
-        OnCycleFinish();
+        InitData();
+        UpdateBallCountUI();
     }
 
-    public void OnCycleFinish() {
-        ReturnAllToPool();
+    public void OnCycleFinish(GameStateController controller) {
         lifeTime = maxLifeTime;
         lifeTimeSlider.maxValue = maxLifeTime;
         UpdateLifeTimeSlider();
+        StartCoroutine(CollectBalls(controller));
     }
 
     public void DrainLifeTime() {
@@ -42,6 +44,30 @@ public class BallController : MonoBehaviour {
 
     public void Shoot() {
         InvokeRepeating("ShootBall", 0f, shootingRate);
+    }
+
+    private IEnumerator CollectBalls(GameStateController controller) {
+
+        Ball[] temp = new Ball[maxBallCount];
+        balls.CopyTo(temp);
+
+        foreach (Ball ball in temp) {
+            StartCoroutine(ball.MoveToPosition(Random.Range(0.2f, 0.5f), controller));
+            yield return null;
+            UpdateBallCountUI();
+        }
+        yield return null;
+    }
+
+    public void RemoveFromList(Ball ball, GameStateController controller) {
+        balls.Remove(ball);
+        controller.cycleFinished = EasyObjectPool.instance.AreAllBallsBack("BallPool", maxBallCount);
+    }
+
+    private void InitData() {
+        lifeTime = maxLifeTime;
+        lifeTimeSlider.maxValue = maxLifeTime;
+        UpdateLifeTimeSlider();
     }
 
     private void ShootBall() {

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using MarchingBytes;
+using System.Collections;
+using UnityEngine;
 
 public class Ball : MonoBehaviour {
 
@@ -14,11 +16,17 @@ public class Ball : MonoBehaviour {
     private float startForce = 300f;
     private float maxVelocity = 50f;
     private AudioSource audioSource;
+    private Transform bezierMidPoint;
+    private Transform bezierEndPoint;
+    private BallController ballController;
 
     private void Awake() {
         audioSource = GameObject.Find("SfxBounce").GetComponent<AudioSource>();
         body = GetComponent<Rigidbody2D>();
         cannon = FindObjectOfType<Cannon>();
+        ballController = FindObjectOfType<BallController>();
+        bezierMidPoint = GameObject.FindGameObjectWithTag("BezierMidPoint").transform;
+        bezierEndPoint = GameObject.FindGameObjectWithTag("BezierEndPoint").transform;
         ballConfigDefault.Apply(this);
     }
 
@@ -28,6 +36,31 @@ public class Ball : MonoBehaviour {
 
     private void FixedUpdate() {
         body.velocity = Vector2.ClampMagnitude(body.velocity, maxVelocity);
+    }
+
+    public void ReturnToPool() {
+        EasyObjectPool.instance.ReturnObjectToPool(gameObject);
+    }
+
+    public IEnumerator MoveToPosition(float timeToReachTarget, GameStateController controller) {
+        float t = 0f;
+        Vector2 startPos = transform.position;
+        Vector3 midPointTest = new Vector2(20f, startPos.y);
+        Vector3 midPointOffset = new Vector2(Random.Range(-45f, 30f), 0f);
+        while (t < 1f) {
+            transform.position = Bezier(startPos, midPointTest + midPointOffset, bezierEndPoint.position, t);
+            t += Time.deltaTime / timeToReachTarget;
+            yield return null;
+        }
+        ReturnToPool();
+        ballController.RemoveFromList(this, controller);
+        yield return null;
+    }
+
+    public Vector2 Bezier(Vector2 a, Vector2 b, Vector2 c, float t) {
+        var ab = Vector2.Lerp(a, b, t);
+        var bc = Vector2.Lerp(b, c, t);
+        return Vector2.Lerp(ab, bc, t);
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {

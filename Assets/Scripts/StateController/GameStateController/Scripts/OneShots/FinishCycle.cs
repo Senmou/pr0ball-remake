@@ -4,7 +4,7 @@
 public class FinishCycle : OneShot {
 
     public override void Act(StateController controller) {
-        (controller as GameStateController).ballController.OnCycleFinish();
-        (controller as GameStateController).cycleFinished = true;
+        GameStateController c = controller as GameStateController;
+        c.ballController.OnCycleFinish(c);
     }
 }
