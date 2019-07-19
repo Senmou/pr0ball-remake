@@ -14,7 +14,7 @@ public class Ball : MonoBehaviour {
     private AudioSource audioSource;
 
     private void Awake() {
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GameObject.Find("SfxBounce").GetComponent<AudioSource>();
         body = GetComponent<Rigidbody2D>();
         ballConfigDefault.Apply(this);
     }

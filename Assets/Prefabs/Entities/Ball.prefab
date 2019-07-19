@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08dc0f58e4a6bd74091e0c0965afd1ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
   ballConfigDefault: {fileID: 11400000, guid: 2f2748d32860b5242a850236e82a6d48, type: 2}
   damage: 1
   critChance: 0

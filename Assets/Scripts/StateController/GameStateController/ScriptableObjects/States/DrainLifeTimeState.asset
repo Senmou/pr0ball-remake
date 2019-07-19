@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ecde50b3ee134147aadb36a27fdba37, type: 3}
+  m_Name: DrainLifeTimeState
+  m_EditorClassIdentifier: 
+  oneShots: []
+  actions:
+  - {fileID: 11400000, guid: 76e7aee14dc70ce4e83c003b91748013, type: 2}
+  transitions:
+  - decision: {fileID: 11400000, guid: 72a6b8e9a57f77b48a899184847d7023, type: 2}
+    trueState: {fileID: 11400000, guid: 8fe84f25f21813a43bec2e420d21b0a2, type: 2}
+    falseState: {fileID: 11400000, guid: f8f6ed59bdf2e8c4280ca3ba4205f594, type: 2}
+    alwaysTrue: 0

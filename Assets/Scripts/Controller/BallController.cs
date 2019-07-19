@@ -1,49 +1,42 @@
-﻿using TMPro;
+﻿using MarchingBytes;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BallController : MonoBehaviour {
 
+    public Slider lifeTimeSlider;
     public Transform ballSpawnPoint;
     public TextMeshProUGUI maxBallCountUI;
     public TextMeshProUGUI currentBallCountUI;
-    public Slider lifeTimeSlider;
 
-    public int maxBallCount;
-    public int currentBallCount;
-    public float maxBallLifeTime;
+    private int currentBallCount;
+    private int maxBallCount = 20;
+    private float maxLifeTime = 5f;
 
-    private float ballLifeTime;
+    public bool LifeTimeExeeded { get => lifeTime <= 0f; }
+    public bool AllBallsShot { get => currentBallCount == maxBallCount; }
 
-    private bool AllBallsShot {
-        get => currentBallCount == maxBallCount;
-    }
+    private float lifeTime;
+    private string poolName = "BallPool";
+    private List<Ball> balls = new List<Ball>();
 
     private void Start() {
-        lifeTimeSlider.maxValue = maxBallLifeTime;
-        lifeTimeSlider.value = lifeTimeSlider.maxValue;
-        ballLifeTime = maxBallLifeTime;
+        InitBallPool();
+        OnCycleFinish();
     }
 
-    private void Update() {
-        maxBallCountUI.text = "/ " + maxBallCount.ToString();
-        currentBallCountUI.text = currentBallCount.ToString();
+    public void OnCycleFinish() {
+        currentBallCount = 0;
+        lifeTime = maxLifeTime;
+        lifeTimeSlider.maxValue = maxLifeTime;
+        UpdateLifeTimeSlider();
+    }
 
-        if (Input.GetMouseButtonUp(0)) {
-            Shoot();
-        }
-
-        if (AllBallsShot) {
-            ballLifeTime -= Time.deltaTime;
-
-            if(ballLifeTime <= 0f) {
-                Debug.Log("Ball life time exeeded");
-                currentBallCount = 0;
-                ballLifeTime = maxBallLifeTime;
-            }
-        }
-
-        lifeTimeSlider.value = ballLifeTime;
+    public void DrainLifeTime() {
+        lifeTime -= Time.deltaTime;
+        UpdateLifeTimeSlider();
     }
 
     public void Shoot() {
@@ -52,9 +45,38 @@ public class BallController : MonoBehaviour {
 
     private void ShootBall() {
         if (currentBallCount < maxBallCount) {
-
             currentBallCount++;
+            UpdateBallCountUI();
         } else
             CancelInvoke();
+    }
+
+    private void UpdateLifeTimeSlider() {
+        lifeTimeSlider.value = lifeTime;
+    }
+
+    private void UpdateBallCountUI() {
+        maxBallCountUI.text = "/ " + maxBallCount.ToString();
+        currentBallCountUI.text = currentBallCount.ToString();
+    }
+
+    private void InitBallPool() {
+        for (int i = 0; i < 20; i++) {
+            CreateBall();
+        }
+        ReturnAllToPool();
+    }
+
+    private void CreateBall() {
+        Ball ball = EasyObjectPool.instance.GetObjectFromPool(poolName, Vector3.zero, Quaternion.identity).GetComponent<Ball>();
+        if (ball)
+            balls.Add(ball);
+    }
+
+    private void ReturnAllToPool() {
+        foreach (Ball ball in balls) {
+            EasyObjectPool.instance.ReturnObjectToPool(ball.gameObject);
+        }
+        balls.Clear();
     }
 }

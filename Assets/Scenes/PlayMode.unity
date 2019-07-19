@@ -282,7 +282,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -362.96295}
+  m_AnchoredPosition: {x: 426, y: -534.9814}
   m_SizeDelta: {x: 16.59751, y: 16.59751}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &76008129
@@ -949,7 +949,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 139.9177, y: 364.2798}
+  m_AnchoredPosition: {x: 873.7367, y: 1792.1953}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &677439111
@@ -1375,12 +1375,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e58901aa1b4294783f52d3b466c7d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeTimeSlider: {fileID: 1121577801}
   ballSpawnPoint: {fileID: 296674334}
   maxBallCountUI: {fileID: 1259513673}
   currentBallCountUI: {fileID: 677439111}
-  maxBallCount: 5
-  currentBallCount: 0
-  ballLifeTime: 5
 --- !u!4 &893633903
 Transform:
   m_ObjectHideFlags: 0
@@ -2030,7 +2028,7 @@ GameObject:
   - component: {fileID: 1121577802}
   - component: {fileID: 1121577801}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: LifeTimeSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2054,7 +2052,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 339.09467}
+  m_AnchoredPosition: {x: 426, y: 1711.6028}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1121577801
@@ -2120,6 +2118,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldPos: {x: 0, y: 20.6}
   sizeInUnits: {x: 24.4, y: 0.8}
+--- !u!1 &1129294845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1129294847}
+  - component: {fileID: 1129294846}
+  m_Layer: 0
+  m_Name: GameStateController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1129294846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129294845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b460fb2854c4ef3439730f85cb27f4cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: {fileID: 11400000, guid: 263da600bc7e3614d897191d25189b99, type: 2}
+  remainState: {fileID: 11400000, guid: f8f6ed59bdf2e8c4280ca3ba4205f594, type: 2}
+  lockOneShots: 0
+  ballController: {fileID: 893633902}
+  cycleFinished: 0
+--- !u!4 &1129294847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129294845}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.450633, y: 4.054899, z: -0.3612154}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1169974799
 GameObject:
   m_ObjectHideFlags: 0
@@ -2265,7 +2311,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 166.25513, y: 364.2798}
+  m_AnchoredPosition: {x: 958.0165, y: 1792.1953}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1259513673
@@ -2630,7 +2676,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -493.82715, y: 0}
+  m_AnchoredPosition: {x: -1154.2468, y: 626.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1328174062
@@ -2714,7 +2760,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -382.51688, y: 860.6631}
+  m_AnchoredPosition: {x: -100.74895, y: 1811.685}
   m_SizeDelta: {x: 16.59751, y: 16.59751}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1333719631
@@ -3829,6 +3875,55 @@ MonoBehaviour:
   ground: {fileID: 142249378}
   wallLeft: {fileID: 1899597096}
   wallRight: {fileID: 1428061049}
+--- !u!1 &1695255513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1695255515}
+  - component: {fileID: 1695255514}
+  m_Layer: 0
+  m_Name: EasyObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1695255514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695255513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd53aa52f082d402bbb1db7e3b67072a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolInfo:
+  - poolName: BallPool
+    prefab: {fileID: 4691551078425360276, guid: 6a6e33a7ed415f846a90e17498144b87,
+      type: 3}
+    poolSize: 20
+    fixedSize: 1
+--- !u!4 &1695255515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695255513}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1777696401
 GameObject:
   m_ObjectHideFlags: 0
