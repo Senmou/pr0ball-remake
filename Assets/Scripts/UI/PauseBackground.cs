@@ -17,7 +17,7 @@ public class PauseBackground : MonoBehaviour {
 
     private void OnGamePaused() {
         StopAllCoroutines();
-        StartCoroutine(FadeAlpha(0.85f));
+        StartCoroutine(FadeAlpha(maxAlpha));
         image.raycastTarget = true;
     }
 
@@ -32,7 +32,7 @@ public class PauseBackground : MonoBehaviour {
         Color color = image.color;
 
         float t = 0f;
-        while(t < 1f) {
+        while (t < 1f) {
             color.a = Mathf.Lerp(color.a, alpha, t);
             image.color = color;
             t += Time.unscaledDeltaTime / fadeTime;

@@ -21,12 +21,6 @@ public class UIMovement : MonoBehaviour {
         SetSize();
     }
 
-    // TODO: JUST FOR TESTING
-    private void Update() {
-        SetPos(worldPos);
-        SetSize();
-    }
-
     public void SetPos(Vector2 targetPos) {
         Vector2 screenPos = Camera.main.WorldToScreenPoint(targetPos);
         transform.position = screenPos;
@@ -37,7 +31,6 @@ public class UIMovement : MonoBehaviour {
     }
 
     private IEnumerator FadePosition(Vector2 targetPos, float timeToFade) {
-
         Vector2 screenTargetPos = Camera.main.WorldToScreenPoint(targetPos);
 
         float t = 0f;
@@ -50,7 +43,6 @@ public class UIMovement : MonoBehaviour {
     }
 
     private void SetSize() {
-
         Vector2 lowerLeft = Camera.main.ScreenToWorldPoint(new Vector2(0f, 0f));
         Vector2 upperRight = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
 
