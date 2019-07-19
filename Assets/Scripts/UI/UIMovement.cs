@@ -21,6 +21,12 @@ public class UIMovement : MonoBehaviour {
         SetSize();
     }
 
+    // TODO: JUST FOR TESTING
+    private void Update() {
+        SetPos(worldPos);
+        SetSize();
+    }
+
     public void SetPos(Vector2 targetPos) {
         Vector2 screenPos = Camera.main.WorldToScreenPoint(targetPos);
         transform.position = screenPos;
