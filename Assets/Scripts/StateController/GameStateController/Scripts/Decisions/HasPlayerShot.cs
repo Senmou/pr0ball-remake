@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "GameStateController/Decisions/HasPlayerShot")]
 public class HasPlayerShot : Decision {

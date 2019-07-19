@@ -14,6 +14,17 @@ public class PauseBackground : MonoBehaviour {
         EventManager.StartListening("GameResumed", OnGameResumed);
     }
 
+    private void Start() {
+        OnAppStart();
+    }
+
+    public void OnAppStart() {
+        image.enabled = true;
+        Color startColor = image.color;
+        startColor.a = 1f;
+        image.color = startColor;
+    }
+
     private void OnGamePaused() {
         StopAllCoroutines();
         StartCoroutine(FadeIn());

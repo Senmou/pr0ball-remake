@@ -1,13 +1,17 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
-    public void OnClickStartButton() {
-        SceneManager.LoadScene(1);
+    private UIMovement moveUI;
+    private PauseBackground pauseBackground;
+
+    private void Awake() {
+        moveUI = GetComponent<UIMovement>();
+        pauseBackground = FindObjectOfType<PauseBackground>();
     }
 
-    public void OnClickOptionsButton() {
-        SceneManager.LoadScene(2);
+    public void HideMainMenu() {
+        moveUI.FadeTo(new Vector2(30f, 0f), 0.5f);
+        EventManager.TriggerEvent("GameResumed");
     }
 }
