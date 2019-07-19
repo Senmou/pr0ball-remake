@@ -9,7 +9,8 @@ public class Cannon : MonoBehaviour {
     private float limit = 70f;
 
     private void Update() {
-        RotateCannon();
+        if (!GameController.isGamePaused)
+            RotateCannon();
     }
 
     private void RotateCannon() {
