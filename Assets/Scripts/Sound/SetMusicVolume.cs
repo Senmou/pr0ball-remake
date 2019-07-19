@@ -7,25 +7,20 @@ public class SetMusicVolume : MonoBehaviour {
     public AudioMixer audioMixer;
 
     private Slider slider;
+    private MusicData musicData;
 
     private void Awake() {
         slider = GetComponent<Slider>();
+        musicData = PersistentData.instance.musicData;
     }
 
     private void Start() {
-        float volumePref = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
-        slider.value = volumePref;
-        SetVolume(volumePref);
+        slider.value = musicData.volume;
+        SetVolume(musicData.volume);
     }
 
     public void SetVolume(float sliderValue) {
         audioMixer.SetFloat("MusicVolume", Mathf.Log10(sliderValue) * 20f);
-    }
-
-    private void OnApplicationPause(bool pause) {
-        if (pause) {
-            PlayerPrefs.SetFloat("MusicVolume", slider.value);
-            PlayerPrefs.Save();
-        }
+        musicData.volume = sliderValue;
     }
 }

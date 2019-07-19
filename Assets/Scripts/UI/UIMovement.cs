@@ -27,6 +27,7 @@ public class UIMovement : MonoBehaviour {
     }
 
     public void FadeTo(Vector2 targetPos, float timeToFade) {
+        StopAllCoroutines();
         StartCoroutine(FadePosition(targetPos, timeToFade));
     }
 

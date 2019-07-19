@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using MarchingBytes;
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class BallController : MonoBehaviour {
 
@@ -24,7 +25,6 @@ public class BallController : MonoBehaviour {
     private List<Ball> balls = new List<Ball>();
 
     private void Start() {
-        InitBallPool();
         OnCycleFinish();
     }
 
@@ -61,17 +61,12 @@ public class BallController : MonoBehaviour {
         currentBallCountUI.text = BallCount.ToString();
     }
 
-    private void InitBallPool() {
-        for (int i = 0; i < 20; i++) {
-            CreateBall(Vector2.zero);
-        }
-        ReturnAllToPool();
-    }
-
     private void CreateBall(Vector2 spawnPoint) {
-        Ball ball = EasyObjectPool.instance.GetObjectFromPool(poolName, spawnPoint, Quaternion.identity).GetComponent<Ball>();
-        if (ball)
+        GameObject go = EasyObjectPool.instance.GetObjectFromPool(poolName, spawnPoint, Quaternion.identity);
+        if (go != null) {
+            Ball ball = go.GetComponent<Ball>();
             balls.Add(ball);
+        }
     }
 
     private void ReturnAllToPool() {
@@ -79,5 +74,13 @@ public class BallController : MonoBehaviour {
             EasyObjectPool.instance.ReturnObjectToPool(ball.gameObject);
         }
         balls.Clear();
+    }
+
+    public bool IsPointerOverUIObject() {
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+        return results.Count > 0;
     }
 }

@@ -7,25 +7,20 @@ public class SetSfxVolume : MonoBehaviour {
     public AudioMixer audioMixer;
 
     private Slider slider;
+    private SfxData sfxData;
 
     private void Awake() {
         slider = GetComponent<Slider>();
+        sfxData = PersistentData.instance.sfxData;
     }
 
     private void Start() {
-        float volumePref = PlayerPrefs.GetFloat("SfxVolume", 0.5f);
-        slider.value = volumePref;
-        SetVolume(volumePref);
+        slider.value = sfxData.volume;
+        SetVolume(sfxData.volume);
     }
 
     public void SetVolume(float sliderValue) {
         audioMixer.SetFloat("SfxVolume", Mathf.Log10(sliderValue) * 20f);
-    }
-
-    private void OnApplicationPause(bool pause) {
-        if (pause) {
-            PlayerPrefs.SetFloat("SfxVolume", slider.value);
-            PlayerPrefs.Save();
-        }
+        sfxData.volume = sliderValue;
     }
 }
