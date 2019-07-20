@@ -20,13 +20,8 @@ public class GameController : MonoBehaviour {
 
     private void OnBackButtonPressed() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.LoadScene(0);
         }
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode) {
-        Debug.Log(scene.name);
     }
 
     public void PauseGame() {

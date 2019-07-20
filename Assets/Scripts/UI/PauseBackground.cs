@@ -7,9 +7,11 @@ public class PauseBackground : MonoBehaviour {
     private Image image;
     private float fadeTime = 0.5f;
     private float maxAlpha = 0.99f;
+    private Button clickableBackground;
 
     private void Awake() {
         image = GetComponent<Image>();
+        clickableBackground = GetComponent<Button>();
         EventManager.StartListening("GamePaused", OnGamePaused);
         EventManager.StartListening("GameResumed", OnGameResumed);
     }
@@ -19,6 +21,7 @@ public class PauseBackground : MonoBehaviour {
     }
 
     public void OnAppStart() {
+        clickableBackground.interactable = false;
         image.enabled = true;
         Color startColor = image.color;
         startColor.a = 1f;
@@ -36,6 +39,7 @@ public class PauseBackground : MonoBehaviour {
     }
 
     private IEnumerator FadeIn() {
+        clickableBackground.interactable = true;
         image.enabled = true;
 
         Color color = image.color;
@@ -51,6 +55,7 @@ public class PauseBackground : MonoBehaviour {
     }
 
     private IEnumerator FadeOut() {
+        clickableBackground.interactable = false;
 
         Color color = image.color;
 

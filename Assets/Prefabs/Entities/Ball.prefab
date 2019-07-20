@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4691551078425360276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -149,7 +149,7 @@ TrailRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_DynamicOccludee: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -175,7 +175,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1410852521
   m_SortingLayer: 2
-  m_SortingOrder: -1
+  m_SortingOrder: 0
   m_Time: 0.1
   m_Parameters:
     serializedVersion: 3
@@ -185,7 +185,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.20833397
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -193,17 +193,17 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.35357141
-        value: 0.1416667
-        inSlope: -0.9032257
-        outSlope: -0.9032257
+        time: 0.84642684
+        value: 0.025001049
+        inSlope: -0.20740314
+        outSlope: -0.20740314
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.3115578
+        inWeight: 0.18987174
         outWeight: 0
       - serializedVersion: 3
-        time: 0.79642856
-        value: 0.01666671
+        time: 0.99641025
+        value: 0.0000041127205
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -242,8 +242,8 @@ TrailRenderer:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 5
-    numCapVertices: 5
+    numCornerVertices: 0
+    numCapVertices: 2
     alignment: 0
     textureMode: 0
     shadowBias: 0.5

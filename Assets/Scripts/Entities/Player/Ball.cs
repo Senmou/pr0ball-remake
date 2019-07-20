@@ -38,22 +38,27 @@ public class Ball : MonoBehaviour {
         body.velocity = Vector2.ClampMagnitude(body.velocity, maxVelocity);
     }
 
-    public void ReturnToPool() {
+    private void ReturnToPool() {
         EasyObjectPool.instance.ReturnObjectToPool(gameObject);
     }
 
-    public IEnumerator MoveToPosition(float timeToReachTarget, GameStateController controller) {
+    public void Move(float timeToReachEndPoint, GameStateController controller) {
+        StartCoroutine(MoveToPosition(timeToReachEndPoint, controller));
+    }
+
+    public IEnumerator MoveToPosition(float timeToReachEndPoint, GameStateController controller) {
         float t = 0f;
         Vector2 startPos = transform.position;
         Vector3 midPointTest = new Vector2(20f, startPos.y);
         Vector3 midPointOffset = new Vector2(Random.Range(-45f, 30f), 0f);
         while (t < 1f) {
             transform.position = Bezier(startPos, midPointTest + midPointOffset, bezierEndPoint.position, t);
-            t += Time.deltaTime / timeToReachTarget;
+            t += Time.deltaTime / timeToReachEndPoint;
             yield return null;
         }
         ReturnToPool();
-        ballController.RemoveFromList(this, controller);
+        ballController.RemoveFromList(this);
+        controller.cycleFinished = EasyObjectPool.instance.AllObjectsReturnedToPool(ballController.poolName, ballController.MaxBallCount);
         yield return null;
     }
 
