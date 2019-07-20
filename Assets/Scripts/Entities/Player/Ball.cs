@@ -16,7 +16,6 @@ public class Ball : MonoBehaviour {
     private float startForce = 300f;
     private float maxVelocity = 50f;
     private AudioSource audioSource;
-    private Transform bezierMidPoint;
     private Transform bezierEndPoint;
     private BallController ballController;
 
@@ -25,8 +24,7 @@ public class Ball : MonoBehaviour {
         body = GetComponent<Rigidbody2D>();
         cannon = FindObjectOfType<Cannon>();
         ballController = FindObjectOfType<BallController>();
-        bezierMidPoint = GameObject.FindGameObjectWithTag("BezierMidPoint").transform;
-        bezierEndPoint = GameObject.FindGameObjectWithTag("BezierEndPoint").transform;
+        bezierEndPoint = GameObject.FindGameObjectWithTag("BallCounterIcon").transform;
         ballConfigDefault.Apply(this);
     }
 
@@ -49,10 +47,11 @@ public class Ball : MonoBehaviour {
     public IEnumerator MoveToPosition(float timeToReachEndPoint, GameStateController controller) {
         float t = 0f;
         Vector2 startPos = transform.position;
-        Vector3 midPointTest = new Vector2(20f, startPos.y);
-        Vector3 midPointOffset = new Vector2(Random.Range(-45f, 30f), 0f);
+        Vector3 bezierMidPoint = new Vector2(20f, startPos.y);
+        Vector3 bezierMidPointOffset = new Vector2(Random.Range(-45f, 30f), 0f);
+        Vector2 endPoint = Camera.main.ScreenToWorldPoint(bezierEndPoint.position);
         while (t < 1f) {
-            transform.position = Bezier(startPos, midPointTest + midPointOffset, bezierEndPoint.position, t);
+            transform.position = Bezier(startPos, bezierMidPoint + bezierMidPointOffset, endPoint, t);
             t += Time.deltaTime / timeToReachEndPoint;
             yield return null;
         }
@@ -63,8 +62,8 @@ public class Ball : MonoBehaviour {
     }
 
     public Vector2 Bezier(Vector2 a, Vector2 b, Vector2 c, float t) {
-        var ab = Vector2.Lerp(a, b, t);
-        var bc = Vector2.Lerp(b, c, t);
+        Vector2 ab = Vector2.Lerp(a, b, t);
+        Vector2 bc = Vector2.Lerp(b, c, t);
         return Vector2.Lerp(ab, bc, t);
     }
 
