@@ -16,6 +16,6 @@ public class HasPlayerShot : Decision {
                                mousePos.y < halfHeight &&
                                mousePos.y > -halfHeight;
 
-        return Input.GetMouseButtonUp(0) && mousePosInLevel && !c.ballController.IsPointerOverUIObject();
+        return Input.GetMouseButtonUp(0) && mousePosInLevel && !InputHelper.instance.IsPointerOverUIObject();
     }
 }

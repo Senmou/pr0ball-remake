@@ -49,7 +49,7 @@ public class Ball : MonoBehaviour {
         Vector2 startPos = transform.position;
         Vector3 bezierMidPoint = new Vector2(20f, startPos.y);
         Vector3 bezierMidPointOffset = new Vector2(Random.Range(-45f, 30f), 0f);
-        Vector2 endPoint = Camera.main.ScreenToWorldPoint(bezierEndPoint.position);
+        Vector2 endPoint = bezierEndPoint.position;
         while (t < 1f) {
             transform.position = Bezier(startPos, bezierMidPoint + bezierMidPointOffset, endPoint, t);
             t += Time.deltaTime / timeToReachEndPoint;

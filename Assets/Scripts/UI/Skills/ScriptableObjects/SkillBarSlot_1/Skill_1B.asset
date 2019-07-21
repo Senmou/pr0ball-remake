@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd22ad655eb8bb84da518d2e3abbd061, type: 3}
-  m_Name: Skill_1
+  m_Name: Skill_1B
   m_EditorClassIdentifier: 
-  skillName: 1
-  color: {r: 0.58431375, g: 0.050980397, b: 0.050980397, a: 1}
+  skillName: 1A
+  color: {r: 0.78, g: 0.050980393, b: 0.050980393, a: 1}

@@ -2,8 +2,6 @@
 
 public class PersistentData : MonoBehaviour {
 
-    #region Singleton
-
     public static PersistentData instance;
 
     private void Awake() {
@@ -12,16 +10,12 @@ public class PersistentData : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
-    }
 
-    #endregion
+        LoadAll();
+    }
 
     public SfxData sfxData = new SfxData();
     public MusicData musicData = new MusicData();
-
-    private void Start() {
-        LoadAll();
-    }
 
     private void LoadAll() {
         LoadSfxData();
@@ -42,11 +36,11 @@ public class PersistentData : MonoBehaviour {
     }
 
     private void LoadMusicData() {
-        musicData.volume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        musicData.volume = PlayerPrefs.GetInt("MusicVolume", 5);
     }
 
     private void SaveMusicData() {
-        PlayerPrefs.SetFloat("MusicVolume", musicData.volume);
+        PlayerPrefs.SetInt("MusicVolume", musicData.volume);
     }
 
     private void OnApplicationFocus(bool focus) {
@@ -73,5 +67,5 @@ public class SfxData {
 
 public class MusicData {
 
-    public float volume;
+    public int volume;
 }

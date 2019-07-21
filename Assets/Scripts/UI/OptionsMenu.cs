@@ -3,10 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class OptionsMenu : MonoBehaviour {
 
-    private UIMovement moveUI;
+    private MoveUI moveUI;
 
     private void Awake() {
-        moveUI = GetComponent<UIMovement>();
+        moveUI = GetComponent<MoveUI>();
     }
     
     public void OnClickBackButton() {

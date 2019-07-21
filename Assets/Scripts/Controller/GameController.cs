@@ -16,6 +16,9 @@ public class GameController : MonoBehaviour {
 
     private void Update() {
         OnBackButtonPressed();
+
+        if (Input.GetMouseButtonDown(0))
+            InputHelper.instance.PrintClickedElementsName();
     }
 
     private void OnBackButtonPressed() {
