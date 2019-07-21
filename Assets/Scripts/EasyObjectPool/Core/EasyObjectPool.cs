@@ -156,7 +156,6 @@ namespace MarchingBytes {
 
         public bool AllObjectsReturnedToPool(string poolName, int ballCount) {
             Pool pool = poolDictionary[poolName];
-            Debug.Log(pool.StackSize == pool.PoolSize);
             return pool.StackSize == pool.PoolSize;
         }
 
