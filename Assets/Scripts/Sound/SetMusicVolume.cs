@@ -10,13 +10,13 @@ public class SetMusicVolume : MonoBehaviour {
     public TextMeshProUGUI volumeUI;
     public AudioMixer audioMixer;
 
-    private int maxVolume = 10;
-    private int currentVolume;
+    private float maxVolume = 10f;
+    private float currentVolume;
 
     private MusicData musicData;
 
     private void OnValidate() {
-        currentVolume = Mathf.Clamp(currentVolume, 0, 10);
+        currentVolume = Mathf.Clamp(currentVolume, 0f, maxVolume);
     }
 
     private void Awake() {
@@ -52,14 +52,11 @@ public class SetMusicVolume : MonoBehaviour {
         plus.interactable = !(currentVolume == maxVolume);
     }
 
-    private void SetVolume(int volume) {
-        float value = Remap(volume);
+    private void SetVolume(float volume) {
+        float value = volume.Map(0f, maxVolume, -40f, 0f);
+        value = currentVolume <= 0f ? -80f : value;
         audioMixer.SetFloat("MusicVolume", value);
         musicData.volume = volume;
         volumeUI.text = volume.ToString();
     }
-
-    // volume goes from 0 to 10, but AudioMixer works with -80 to 0
-    private float Remap(int value) => value / 10f * 80f - 80f;
-
 }

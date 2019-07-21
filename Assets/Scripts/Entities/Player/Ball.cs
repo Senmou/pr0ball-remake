@@ -40,11 +40,11 @@ public class Ball : MonoBehaviour {
         EasyObjectPool.instance.ReturnObjectToPool(gameObject);
     }
 
-    public void Move(float timeToReachEndPoint, GameStateController controller) {
+    public void Move(float timeToReachEndPoint, PlayStateController controller) {
         StartCoroutine(MoveToPosition(timeToReachEndPoint, controller));
     }
 
-    public IEnumerator MoveToPosition(float timeToReachEndPoint, GameStateController controller) {
+    public IEnumerator MoveToPosition(float timeToReachEndPoint, PlayStateController controller) {
         float t = 0f;
         Vector2 startPos = transform.position;
         Vector3 bezierMidPoint = new Vector2(20f, startPos.y);

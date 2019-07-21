@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using MarchingBytes;
 using UnityEngine;
 using TMPro;
-using UnityEngine.EventSystems;
 using System.Collections;
 
 public class BallController : MonoBehaviour {
@@ -15,8 +14,8 @@ public class BallController : MonoBehaviour {
     public TextMeshProUGUI maxBallCountUI;
     public TextMeshProUGUI currentBallCountUI;
 
-    private int maxBallCount = 20;
-    private float maxLifeTime = 5f;
+    private int maxBallCount = 3;
+    private float maxLifeTime = 1f;
     private float shootingRate = 0.08f;
 
     private int BallCount { get => balls.Count; }
@@ -32,7 +31,7 @@ public class BallController : MonoBehaviour {
         UpdateBallCountUI();
     }
 
-    public void OnCycleFinish(GameStateController controller) {
+    public void OnCycleFinish(PlayStateController controller) {
         lifeTime = maxLifeTime;
         lifeTimeSlider.maxValue = maxLifeTime;
         UpdateLifeTimeSlider();
@@ -48,7 +47,7 @@ public class BallController : MonoBehaviour {
         InvokeRepeating("ShootBall", 0f, shootingRate);
     }
 
-    private IEnumerator CollectBalls(GameStateController controller) {
+    private IEnumerator CollectBalls(PlayStateController controller) {
 
         Ball[] temp = new Ball[maxBallCount];
         balls.CopyTo(temp);

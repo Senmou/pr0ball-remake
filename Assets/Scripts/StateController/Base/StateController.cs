@@ -5,7 +5,7 @@ public abstract class StateController : MonoBehaviour {
     public State currentState;
     public State remainState;
 
-    public bool lockOneShots = false;
+    [HideInInspector] public bool lockOneShots = false;
 
     public virtual void Update() {
         currentState.UpdateState(this);

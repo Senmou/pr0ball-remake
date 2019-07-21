@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "GameStateController/Decisions/HasPlayerShot")]
+[CreateAssetMenu(menuName = "PlayStateController/Decisions/HasPlayerShot")]
 public class HasPlayerShot : Decision {
 
     public override bool Decide(StateController controller) {
-        GameStateController c = controller as GameStateController;
+        PlayStateController c = controller as PlayStateController;
 
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 

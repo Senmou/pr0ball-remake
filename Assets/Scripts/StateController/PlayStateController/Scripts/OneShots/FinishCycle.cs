@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "GameStateController/OneShots/FinishCycle")]
+[CreateAssetMenu(menuName = "PlayStateController/OneShots/FinishCycle")]
 public class FinishCycle : OneShot {
 
     public override void Act(StateController controller) {
-        GameStateController c = controller as GameStateController;
+        PlayStateController c = controller as PlayStateController;
         c.ballController.OnCycleFinish(c);
     }
 }

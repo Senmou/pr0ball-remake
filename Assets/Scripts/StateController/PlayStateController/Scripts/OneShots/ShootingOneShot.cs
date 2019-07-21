@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "GameStateController/OneShots/Shooting")]
+[CreateAssetMenu(menuName = "PlayStateController/OneShots/Shooting")]
 public class ShootingOneShot : OneShot {
 
     public override void Act(StateController controller) {
-        GameStateController c = controller as GameStateController;
+        PlayStateController c = controller as PlayStateController;
         c.ballController.Shoot();
     }
 }

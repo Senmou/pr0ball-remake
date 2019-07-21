@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
     public static GameController instance = null;
     public static bool isGamePaused = false;
+
+    private MainMenu mainMenu;
 
     private void Awake() {
         if (instance == null)
@@ -12,6 +13,8 @@ public class GameController : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
+
+        mainMenu = FindObjectOfType<MainMenu>();
     }
 
     private void Update() {
@@ -23,7 +26,7 @@ public class GameController : MonoBehaviour {
 
     private void OnBackButtonPressed() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            SceneManager.LoadScene(0);
+            mainMenu.Show();
         }
     }
 

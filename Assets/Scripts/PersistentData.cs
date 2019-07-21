@@ -36,11 +36,11 @@ public class PersistentData : MonoBehaviour {
     }
 
     private void LoadMusicData() {
-        musicData.volume = PlayerPrefs.GetInt("MusicVolume", 5);
+        musicData.volume = PlayerPrefs.GetFloat("MusicVolume", 5f);
     }
 
     private void SaveMusicData() {
-        PlayerPrefs.SetInt("MusicVolume", musicData.volume);
+        PlayerPrefs.SetFloat("MusicVolume", musicData.volume);
     }
 
     private void OnApplicationFocus(bool focus) {
@@ -67,5 +67,5 @@ public class SfxData {
 
 public class MusicData {
 
-    public int volume;
+    public float volume;
 }
