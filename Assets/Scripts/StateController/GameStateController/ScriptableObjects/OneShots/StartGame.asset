@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0779e49b9dc9a5949b89f93514cb9e93, type: 3}
-  m_Name: SetGameStartFlag
+  m_Name: StartGame
   m_EditorClassIdentifier: 

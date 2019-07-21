@@ -21,7 +21,7 @@ public class SetMusicVolume : MonoBehaviour {
 
     private void Awake() {
         musicData = PersistentData.instance.musicData;
-        currentVolume = musicData.volume;
+        currentVolume = (int)musicData.volume;
     }
 
     private void Start() {
@@ -48,8 +48,8 @@ public class SetMusicVolume : MonoBehaviour {
     }
 
     private void CheckButtonInteractability() {
-        minus.interactable = !(currentVolume == 0);
-        plus.interactable = !(currentVolume == maxVolume);
+        minus.interactable = !(currentVolume <= 0);
+        plus.interactable = !(currentVolume >= maxVolume);
     }
 
     private void SetVolume(float volume) {

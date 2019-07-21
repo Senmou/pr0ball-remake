@@ -21,7 +21,7 @@ public class SetSfxVolume : MonoBehaviour {
 
     private void Awake() {
         sfxData = PersistentData.instance.sfxData;
-        currentVolume = sfxData.volume;
+        currentVolume = (int)sfxData.volume;
     }
 
     private void Start() {
