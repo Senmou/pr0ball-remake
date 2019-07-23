@@ -6,7 +6,7 @@ public class LongPressButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     public UnityEvent OnLongClick;
 
-    private float holdDownTime = 0.2f;
+    private float holdDownTime = 0.15f;
     private float counter;
     private bool pointerDown;
 
