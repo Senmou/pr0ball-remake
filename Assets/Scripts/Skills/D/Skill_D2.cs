@@ -1,3 +1,3 @@
-﻿public class Skill_D2 : SkillBase {
+﻿public class Skill_D2 : Skill {
 
 }

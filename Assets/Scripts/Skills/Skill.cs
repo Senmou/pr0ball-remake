@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class SkillBase : MonoBehaviour {
+public abstract class Skill : MonoBehaviour {
 
     public int id;
     public Sprite icon;

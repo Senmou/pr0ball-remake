@@ -7,6 +7,8 @@ public class InputHelper : MonoBehaviour {
     #region Singleton
     public static InputHelper instance;
 
+    private float longPressCounter;
+
     private void Awake() {
         if (instance == null)
             instance = this;
@@ -37,7 +39,31 @@ public class InputHelper : MonoBehaviour {
 
         if (text.Length > 2)
             text = text.Remove(text.Length - 3);
+    }
 
-        //Debug.Log(text);
+    public bool ClickedOnTag(string tag) {
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+
+        foreach (var item in results) {
+            if (item.gameObject.tag == tag)
+                return true;
+        }
+        return false;
+    }
+
+    public bool LongPress(float seconds) {
+
+        if (Input.GetMouseButton(0))
+            longPressCounter += Time.unscaledDeltaTime;
+
+        if(longPressCounter >= seconds) {
+            longPressCounter = 0f;
+            return true;
+        }
+
+        return false;
     }
 }

@@ -1,5 +1,5 @@
 ﻿using UnityEngine.UI;
 
-public class Skill_A1 : SkillBase {
+public class Skill_A1 : Skill {
 
 }

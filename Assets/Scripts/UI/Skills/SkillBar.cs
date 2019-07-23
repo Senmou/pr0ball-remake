@@ -4,19 +4,27 @@ using UnityEngine.UI;
 
 public class SkillBar : MonoBehaviour {
 
-    public SkillBase[] equipedSkills;
-    public GameObject[] slots;
+    public SkillMenu skillMenu;
+    public SkillBarSlot[] slots;
+    public Skill[] equipedSkills;
 
-    public void SetSkill(int skillBarSlotId, SkillBase skill) {
-        equipedSkills[skillBarSlotId] = skill;
-        UpdateSlot(skillBarSlotId);
+    public void ShowMenuOnClick(SkillBarSlot slot) {
+        Vector2 menuPos = new Vector2(slot.transform.position.x, -12.25f);
+        skillMenu.DisplaySkills(slot.skills);
+        skillMenu.Show(menuPos);
+    }
+    
+    private void UpdateSlots() {
+        for (int i = 0; i < 4; i++) {
+            UpdateSlot(i);
+        }
     }
 
-    private void UpdateSlot(int slotId) {
-            Image image = slots[slotId].GetComponent<Image>();
-            image.sprite = equipedSkills[slotId].icon;
+    private void UpdateSlot(int id) {
+            Image image = slots[id].GetComponent<Image>();
+            image.sprite = equipedSkills[id].icon;
 
-            TextMeshProUGUI skillName = slots[slotId].GetComponentInChildren<TextMeshProUGUI>();
-            skillName.text = equipedSkills[slotId].name;
+            TextMeshProUGUI skillName = slots[id].GetComponentInChildren<TextMeshProUGUI>();
+            skillName.text = equipedSkills[id].name;
     }
 }
