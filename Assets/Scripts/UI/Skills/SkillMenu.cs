@@ -2,9 +2,18 @@
 
 public class SkillMenu : MonoBehaviour {
 
-    public Slot slot;
+    public int skillMenuId;
+    public SkillBase[] skills;
 
-    public void Toggle() {
-        gameObject.SetActive(!gameObject.activeSelf);
+    private SkillBar skillBar;
+    private SkillManager skillManager;
+
+    private void Awake() {
+        skillBar = FindObjectOfType<SkillBar>();
+        skillManager = FindObjectOfType<SkillManager>();
+    }
+
+    public void OnSkillSelected(int skillId) {
+        skillBar.SetSkill(skillMenuId, skillManager.GetSkill(skillId));
     }
 }

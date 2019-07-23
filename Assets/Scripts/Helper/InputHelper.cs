@@ -32,8 +32,12 @@ public class InputHelper : MonoBehaviour {
 
         string text = string.Empty;
         foreach (var item in results) {
-            text += " -> " + item.gameObject.name;
+            text += "[" + item.gameObject.name + "]" + " > ";
         }
-        Debug.Log(text);
+
+        if (text.Length > 2)
+            text = text.Remove(text.Length - 3);
+
+        //Debug.Log(text);
     }
 }
