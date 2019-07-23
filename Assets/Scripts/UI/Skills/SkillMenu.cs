@@ -8,9 +8,8 @@ public class SkillMenu : MonoBehaviour {
     public SkillBarSlot lastSkillBarSlotClicked;
 
     private void Update() {
-        if ((Input.GetMouseButtonDown(0) && !InputHelper.instance.IsPointerOverUIObject() ||
-            Input.GetMouseButtonUp(0) && InputHelper.instance.IsPointerOverUIObject()) &&
-            !InputHelper.instance.ClickedOnTag("SkillBarSlot")) {
+        if ((Input.GetMouseButtonDown(0) && !InputHelper.instance.IsPointerOverUIObject()) ||
+            (Input.GetMouseButtonUp(0) && !InputHelper.instance.ClickedOnTag("SkillBarSlot"))) {
             Hide();
         }
     }
