@@ -14,11 +14,13 @@ public class BallController : MonoBehaviour {
     public TextMeshProUGUI maxBallCountUI;
     public TextMeshProUGUI currentBallCountUI;
 
-    private int maxBallCount = 20;
-    private float maxLifeTime = 1f;
-    private float shootingRate = 0.05f;
+    public bool canShootAgain;
 
-    private int BallCount { get => balls.Count; }
+    private int maxBallCount = 1;
+    private float maxLifeTime = 3f;
+    private float shootingRate = 0.1f;
+
+    public int BallCount { get => balls.Count; }
     public int MaxBallCount { get => maxBallCount; }
     public bool LifeTimeExeeded { get => lifeTime <= 0f; }
     public bool AllBallsShot { get => BallCount == MaxBallCount; }
@@ -44,6 +46,7 @@ public class BallController : MonoBehaviour {
     }
 
     public void Shoot() {
+        canShootAgain = false;
         InvokeRepeating("ShootBall", 0f, shootingRate);
     }
 
@@ -61,10 +64,12 @@ public class BallController : MonoBehaviour {
 
     public void RemoveFromList(Ball ball) {
         balls.Remove(ball);
+        canShootAgain = BallCount == 0;
         UpdateBallCountUI();
     }
 
     private void InitData() {
+        canShootAgain = true;
         lifeTime = maxLifeTime;
         lifeTimeSlider.maxValue = maxLifeTime;
         UpdateLifeTimeSlider();
@@ -83,8 +88,8 @@ public class BallController : MonoBehaviour {
     }
 
     private void UpdateBallCountUI() {
-        maxBallCountUI.text = "/ " + maxBallCount.ToString();
         currentBallCountUI.text = BallCount.ToString();
+        maxBallCountUI.text = "/ " + maxBallCount.ToString();
     }
 
     private void CreateBall(Vector2 spawnPoint) {
@@ -93,12 +98,5 @@ public class BallController : MonoBehaviour {
             Ball ball = go.GetComponent<Ball>();
             balls.Add(ball);
         }
-    }
-
-    private void ReturnAllToPool() {
-        foreach (Ball ball in balls) {
-            EasyObjectPool.instance.ReturnObjectToPool(ball.gameObject);
-        }
-        balls.Clear();
     }
 }

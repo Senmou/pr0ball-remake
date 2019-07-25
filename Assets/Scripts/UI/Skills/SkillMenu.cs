@@ -7,6 +7,12 @@ public class SkillMenu : MonoBehaviour {
     // This skillBarSlot opened the current menu
     public SkillBarSlot lastSkillBarSlotClicked;
 
+    private PauseBackground pauseBackground;
+
+    private void Awake() {
+        pauseBackground = FindObjectOfType<PauseBackground>();
+    }
+
     private void Update() {
         if ((Input.GetMouseButtonDown(0) && !InputHelper.instance.IsPointerOverUIObject()) ||
             (Input.GetMouseButtonUp(0) && !InputHelper.instance.ClickedOnTag("SkillBarSlot"))) {
@@ -26,13 +32,13 @@ public class SkillMenu : MonoBehaviour {
     }
 
     public void Show(Vector2 pos) {
+        pauseBackground.EnableBackground();
         transform.position = pos;
         gameObject.SetActive(true);
     }
 
     public void Hide() {
+        pauseBackground.DisableBackground();
         gameObject.SetActive(false);
     }
-
-
 }

@@ -38,6 +38,16 @@ public class PauseBackground : MonoBehaviour {
         StartCoroutine(FadeOut());
     }
 
+    public void EnableBackground() {
+        image.enabled = true;
+        clickableBackground.interactable = true;
+    }
+
+    public void DisableBackground() {
+        image.enabled = false;
+        clickableBackground.interactable = false;
+    }
+
     private IEnumerator FadeIn() {
         clickableBackground.interactable = true;
         image.enabled = true;

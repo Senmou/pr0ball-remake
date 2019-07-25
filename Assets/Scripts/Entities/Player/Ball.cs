@@ -29,6 +29,7 @@ public class Ball : MonoBehaviour {
     }
 
     private void OnEnable() {
+        body.gravityScale = 0f;
         body.AddForce(cannon.transform.up * startForce, ForceMode2D.Impulse);
     }
 
@@ -57,7 +58,7 @@ public class Ball : MonoBehaviour {
         }
         ReturnToPool();
         ballController.RemoveFromList(this);
-        controller.cycleFinished = EasyObjectPool.instance.AllObjectsReturnedToPool(ballController.poolName, ballController.MaxBallCount);
+        controller.cycleFinished = ballController.BallCount == 0;
         yield return null;
     }
 
@@ -68,6 +69,7 @@ public class Ball : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
+        body.gravityScale = 4f;
         audioSource.Play();
     }
 }
