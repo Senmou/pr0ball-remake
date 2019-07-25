@@ -66,7 +66,7 @@ public class WaveController : MonoBehaviour {
     }
 
     private IEnumerator FadeOut() {
-        Vector2 targetPos = new Vector2(-30f, 8.3f);
+        Vector2 targetPos = new Vector2(30f, 8.3f);
 
         float distance = Mathf.Infinity;
         while (distance > 1f) {
@@ -74,7 +74,7 @@ public class WaveController : MonoBehaviour {
             distance = Vector2.Distance(waveUI.transform.position, targetPos);
             yield return null;
         }
-
+        waveUI.transform.position = new Vector2(-30f, 8.3f);
         yield return null;
     }
 

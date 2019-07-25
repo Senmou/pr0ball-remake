@@ -32,6 +32,10 @@ public class LevelController : MonoBehaviour {
     private void OnReachedNextLevel() {
         currentLevel++;
         UpdateLevelUI();
+        ShowCurrentLevel();
+    }
+
+    public void ShowCurrentLevel() {
         StopAllCoroutines();
         StartCoroutine(FadeIn());
     }

@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour {
     public static bool isGamePaused = false;
 
     private MainMenu mainMenu;
+    private SkillMenu skillMenu;
 
     private void Awake() {
         if (instance == null)
@@ -15,6 +16,11 @@ public class GameController : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
 
         mainMenu = FindObjectOfType<MainMenu>();
+        skillMenu = FindObjectOfType<SkillMenu>();
+    }
+
+    private void Start() {
+        skillMenu.Hide();
     }
 
     private void Update() {
