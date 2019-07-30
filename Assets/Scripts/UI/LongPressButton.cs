@@ -6,8 +6,8 @@ public class LongPressButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     public UnityEvent OnLongClick;
 
-    private float holdDownTime = 0.15f;
-    private float counter;
+    private float holdDownTimeLongClick = 0.15f;
+    private float longClickCounter;
     private bool pointerDown;
 
     public void OnPointerUp(PointerEventData eventData) {
@@ -19,15 +19,19 @@ public class LongPressButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     }
 
     private void Update() {
+        CheckForLongClick();
+    }
+
+    private void CheckForLongClick() {
         if (pointerDown)
-            counter += Time.unscaledDeltaTime;
+            longClickCounter += Time.unscaledDeltaTime;
 
         if (!pointerDown)
-            counter = 0f;
+            longClickCounter = 0f;
 
-        if (counter >= holdDownTime) {
+        if (longClickCounter >= holdDownTimeLongClick) {
             OnLongClick?.Invoke();
-            counter = 0f;
+            longClickCounter = 0f;
         }
     }
 }
