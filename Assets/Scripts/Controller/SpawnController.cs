@@ -6,9 +6,6 @@ public class SpawnController : MonoBehaviour {
 
     private const string poolName = "EnemyPool";
 
-    public BaseEnemy enemy;
-    public List<GameObject> setups;
-
     private void Awake() {
         EventManager.StartListening("WaveCompleted", CreateWave);
     }

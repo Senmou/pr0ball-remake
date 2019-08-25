@@ -13,14 +13,16 @@ public class BaseEnemy : MonoBehaviour {
     private void Awake() {
         body = GetComponentInChildren<Rigidbody2D>();
         healthPointUI = GetComponentInChildren<TextMeshProUGUI>();
+
+        EventManager.StartListening("WaveCompleted", MoveEnemy);
     }
 
     private void Start() {
         UpdateUI();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        TakeDamage(1);
+    private void MoveEnemy() {
+        transform.position += new Vector3(0f, 2.5f);
     }
 
     private void TakeDamage(int amount) {
@@ -34,5 +36,9 @@ public class BaseEnemy : MonoBehaviour {
 
     private void UpdateUI() {
         healthPointUI.text = healthPoints.ToString();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        TakeDamage(1);
     }
 }
