@@ -1,8 +1,8 @@
-﻿public class Fliese : BaseEnemy {
+﻿public class NewFag : BaseEnemy {
 
     private void Awake() {
         base.Awake();
 
-        maxHP = 1;
+        maxHP = 2;
     }
 }

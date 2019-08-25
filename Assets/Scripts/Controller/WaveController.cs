@@ -46,8 +46,6 @@ public class WaveController : MonoBehaviour {
         }
 
         UpdateWaveUI();
-        StopAllCoroutines();
-        StartCoroutine(FadeIn());
     }
 
     private IEnumerator FadeIn() {
