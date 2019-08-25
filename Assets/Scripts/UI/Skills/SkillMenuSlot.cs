@@ -35,6 +35,7 @@ public class SkillMenuSlot : MonoBehaviour {
             skill.locked = false;
             purchaseSfx.Play();
             unlockButton.Hide();
+            UpdateSlot();
         } else
             errorSfx.Play();
     }
