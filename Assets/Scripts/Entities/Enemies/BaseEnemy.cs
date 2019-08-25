@@ -26,8 +26,10 @@ public class BaseEnemy : MonoBehaviour {
     private void TakeDamage(int amount) {
         healthPoints -= amount;
         UpdateUI();
-        if (healthPoints <= 0)
+        if (healthPoints <= 0) {
             Destroy(gameObject);
+            Benis.instance.IncScore(benisValue);
+        }
     }
 
     private void UpdateUI() {

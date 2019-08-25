@@ -1,8 +1,7 @@
-﻿using UnityEngine.UI;
+﻿public class Skill_A1 : Skill {
 
-public class Skill_A1 : Skill {
-
-    private void OnEnable() {
+    private void Start() {
+        price = 2;
         coolDown = 2;
     }
 }

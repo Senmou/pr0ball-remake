@@ -148,7 +148,7 @@ namespace MarchingBytes {
                                      currentPoolInfo.poolSize, currentPoolInfo.fixedSize);
 
 
-                Debug.Log("Creating pool: " + currentPoolInfo.poolName);
+                //Debug.Log("Creating pool: " + currentPoolInfo.poolName);
                 //add to mapping dict
                 poolDictionary[currentPoolInfo.poolName] = pool;
             }

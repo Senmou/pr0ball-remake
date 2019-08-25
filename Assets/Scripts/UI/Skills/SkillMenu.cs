@@ -7,23 +7,21 @@ public class SkillMenu : MonoBehaviour {
     // This skillBarSlot opened the current menu
     public SkillBarSlot lastSkillBarSlotClicked;
 
+    private AudioSource errorSfx;
     private PauseBackground pauseBackground;
 
     private void Awake() {
+        errorSfx = GameObject.Find("SfxError").GetComponent<AudioSource>();
         pauseBackground = FindObjectOfType<PauseBackground>();
     }
-
-    private void Update() {
-        if ((Input.GetMouseButtonDown(0) && !InputHelper.instance.IsPointerOverUIObject()) ||
-            (Input.GetMouseButtonUp(0) && !InputHelper.instance.ClickedOnTag("SkillBarSlot"))) {
-            Hide();
-        }
-    }
-
+    
     public void EquipSkillOnClick(SkillMenuSlot slot) {
-        lastSkillBarSlotClicked.EquipSkill(slot.skill);
+        if (!slot.skill.locked)
+            lastSkillBarSlotClicked.EquipSkill(slot.skill);
+        else
+            errorSfx.Play();
     }
-
+    
     public void DisplaySkills(Skill[] newSkillsToDisplay) {
         for (int i = 0; i < 4; i++) {
             slots[i].skill = newSkillsToDisplay[i];
@@ -31,9 +29,8 @@ public class SkillMenu : MonoBehaviour {
         }
     }
 
-    public void Show(Vector2 pos) {
+    public void Show() {
         pauseBackground.EnableBackground();
-        transform.position = pos;
         gameObject.SetActive(true);
     }
 

@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour {
 
     private MainMenu mainMenu;
     private SkillMenu skillMenu;
+    private SpawnController spawnController;
 
     private void Awake() {
         if (instance == null)
@@ -17,10 +18,12 @@ public class GameController : MonoBehaviour {
 
         mainMenu = FindObjectOfType<MainMenu>();
         skillMenu = FindObjectOfType<SkillMenu>();
+        spawnController = FindObjectOfType<SpawnController>();
     }
 
     private void Start() {
         skillMenu.Hide();
+        spawnController.CreateWave();
     }
 
     private void Update() {

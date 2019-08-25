@@ -13,7 +13,7 @@ public class SpawnController : MonoBehaviour {
         EventManager.StartListening("WaveCompleted", CreateWave);
     }
 
-    private void CreateWave() {
+    public void CreateWave() {
         List<Transform> spawnPoints = SpawnPoints.instance.GetRandomSpawnpoints();
 
         for (int i = 0; i < spawnPoints.Count; i++) {

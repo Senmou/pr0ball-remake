@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class SkillBarSlot : MonoBehaviour {
 
-    public TextMeshProUGUI skillName;
     public TextMeshProUGUI coolDown;
 
     // There are 16 different skills in total
@@ -32,13 +31,12 @@ public class SkillBarSlot : MonoBehaviour {
 
     public void EquipSkill(Skill skill) {
         equipedSkill = skill;
-        equipedSkill.slot = this;
+        equipedSkill.barSlot = this;
         UpdateSlot();
     }
 
     public void UpdateSlot() {
-        image.sprite = equipedSkill.icon;
-        skillName.text = equipedSkill.name;
+        image.sprite = equipedSkill.Icon;
         coolDown.text = equipedSkill.coolDownCounter.ToString();
     }
 }

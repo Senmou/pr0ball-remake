@@ -286,8 +286,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64268c052f05fa349a67f96cd3fba2bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 5
-  benisValue: 0
+  healthPoints: 1
+  benisValue: 1
   body: {fileID: 0}
 --- !u!50 &2383270617393594537
 Rigidbody2D:
