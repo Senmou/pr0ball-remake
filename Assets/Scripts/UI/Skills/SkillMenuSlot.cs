@@ -7,7 +7,8 @@ public class SkillMenuSlot : MonoBehaviour {
     public Skill skill;
 
     private Image image;
-    private TextMeshProUGUI price;
+    private TextMeshProUGUI priceLabel;
+    private TextMeshProUGUI priceValue;
     private SkillMenu skillMenu;
     private SkillMenuUnlockButton unlockButton;
 
@@ -16,12 +17,17 @@ public class SkillMenuSlot : MonoBehaviour {
 
     private void Awake() {
         image = GetComponent<Image>();
-        price = GetComponentInChildren<TextMeshProUGUI>();
+        priceLabel = transform.FindChild<TextMeshProUGUI>("SkillData/Price/Label");
+        priceValue = transform.FindChild<TextMeshProUGUI>("SkillData/Price/Value");
         skillMenu = FindObjectOfType<SkillMenu>();
         unlockButton = GetComponentInChildren<SkillMenuUnlockButton>();
 
         purchaseSfx = GameObject.Find("SfxUnlockSkill").GetComponent<AudioSource>();
         errorSfx = GameObject.Find("SfxError").GetComponent<AudioSource>();
+    }
+
+    private void Start() {
+        priceLabel.text = "Preis:";
     }
 
     private void Update() {
@@ -42,7 +48,7 @@ public class SkillMenuSlot : MonoBehaviour {
 
     public void UpdateSlot() {
         image.sprite = skill.Icon;
-        price.text = skill.price.ToString();
+        priceValue.text = skill.price.ToString();
         unlockButton?.SetText(skill.price);
     }
 }
