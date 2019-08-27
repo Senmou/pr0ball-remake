@@ -1,29 +1,31 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class OptionsMenu : MonoBehaviour {
 
     private MoveUI moveUI;
-    private MainMenu mainMenu;
+
+    private bool isVisible;
 
     private void Awake() {
         moveUI = GetComponent<MoveUI>();
-        mainMenu = FindObjectOfType<MainMenu>();
+
+        EventManager.StartListening("BackButtonPressed", OnBackButtonPressed);
     }
 
-    public void OnClickBackButton() {
-        SceneManager.LoadScene(0);
+    private void OnBackButtonPressed() {
+        if (isVisible)
+            FadeOut();
     }
 
     public void FadeIn() {
+        isVisible = true;
         GameController.instance.PauseGame();
         moveUI.FadeTo(new Vector2(0f, 0f), 0.5f);
     }
 
     public void FadeOut() {
-        if (!mainMenu.visible) {
-            GameController.instance.ResumeGame();
-            moveUI.FadeTo(new Vector2(-30f, 0f), 0.5f);
-        }
+        isVisible = false;
+        GameController.instance.ResumeGame();
+        moveUI.FadeTo(new Vector2(-30f, 0f), 0.5f);
     }
 }

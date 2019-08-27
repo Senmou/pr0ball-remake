@@ -15,6 +15,8 @@ public class Skill : MonoBehaviour {
     public SkillBarSlot barSlot;
     public SkillMenuSlot menuSlot;
 
+    private SkillMenu skillMenu;
+
     public Sprite Icon {
         get {
             if (locked)
@@ -25,6 +27,7 @@ public class Skill : MonoBehaviour {
     }
 
     private void Awake() {
+        skillMenu = FindObjectOfType<SkillMenu>();
         EventManager.StartListening("WaveCompleted", OnWaveCompleted);
         locked = true;
         skillLevel = 0;
@@ -44,6 +47,10 @@ public class Skill : MonoBehaviour {
     }
 
     public virtual void UseSkill() {
+
+        if (skillMenu.gameObject.activeSelf)
+            return;
+
         if (coolDownCounter == 0) {
             Debug.Log("Used: " + name);
             ResetCoolDown();

@@ -21,7 +21,7 @@ public class PauseBackground : MonoBehaviour {
     }
 
     public void OnAppStart() {
-        clickableBackground.interactable = false;
+        //clickableBackground.interactable = false;
         image.enabled = true;
         Color startColor = image.color;
         startColor.a = 1f;
@@ -40,16 +40,16 @@ public class PauseBackground : MonoBehaviour {
 
     public void EnableBackground() {
         image.enabled = true;
-        clickableBackground.interactable = true;
+        //clickableBackground.interactable = true;
     }
 
     public void DisableBackground() {
         image.enabled = false;
-        clickableBackground.interactable = false;
+        //clickableBackground.interactable = false;
     }
 
     private IEnumerator FadeIn() {
-        clickableBackground.interactable = true;
+        //clickableBackground.interactable = true;
         image.enabled = true;
 
         Color color = image.color;
@@ -65,7 +65,7 @@ public class PauseBackground : MonoBehaviour {
     }
 
     private IEnumerator FadeOut() {
-        clickableBackground.interactable = false;
+        //clickableBackground.interactable = false;
 
         Color color = image.color;
 

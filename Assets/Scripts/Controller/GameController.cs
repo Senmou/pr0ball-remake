@@ -7,8 +7,9 @@ public class GameController : MonoBehaviour {
 
     private MainMenu mainMenu;
     private SkillMenu skillMenu;
+    private BallMenu ballMenu;
     private SpawnController spawnController;
-
+    
     private void Awake() {
         if (instance == null)
             instance = this;
@@ -18,11 +19,13 @@ public class GameController : MonoBehaviour {
 
         mainMenu = FindObjectOfType<MainMenu>();
         skillMenu = FindObjectOfType<SkillMenu>();
+        ballMenu = FindObjectOfType<BallMenu>();
         spawnController = FindObjectOfType<SpawnController>();
     }
 
     private void Start() {
         skillMenu.Hide();
+        ballMenu.Hide();
         spawnController.CreateWave();
     }
 
@@ -35,7 +38,7 @@ public class GameController : MonoBehaviour {
 
     private void OnBackButtonPressed() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            mainMenu.Show();
+            EventManager.TriggerEvent("BackButtonPressed");
         }
     }
 

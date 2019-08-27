@@ -39,6 +39,8 @@ public class InputHelper : MonoBehaviour {
 
         if (text.Length > 2)
             text = text.Remove(text.Length - 3);
+
+        Debug.Log(text);
     }
 
     public bool ClickedOnTag(string tag) {
@@ -59,7 +61,7 @@ public class InputHelper : MonoBehaviour {
         if (Input.GetMouseButton(0))
             longPressCounter += Time.unscaledDeltaTime;
 
-        if(longPressCounter >= seconds) {
+        if (longPressCounter >= seconds) {
             longPressCounter = 0f;
             return true;
         }
