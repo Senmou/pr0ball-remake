@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6710760174124373147}
   - component: {fileID: 5121368376329097066}
   m_Layer: 0
-  m_Name: TextMeshPro Text
+  m_Name: HPText
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 338860152524876274}
   - component: {fileID: 2383270617393594537}
   m_Layer: 0
-  m_Name: Newfag
+  m_Name: NewFag
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -238,8 +238,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da06cc3ad0f693c4da9ad5e750946a11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 2
+  currentHP: 0
   benisValue: 1
+  maxHP: 0
   body: {fileID: 0}
 --- !u!212 &338860152524876274
 SpriteRenderer:

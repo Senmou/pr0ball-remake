@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
@@ -9,7 +10,7 @@ public class GameController : MonoBehaviour {
     private SkillMenu skillMenu;
     private BallMenu ballMenu;
     private SpawnController spawnController;
-    
+
     private void Awake() {
         if (instance == null)
             instance = this;
@@ -49,6 +50,11 @@ public class GameController : MonoBehaviour {
     }
 
     public void ResumeGame() {
+        StartCoroutine(ResumeGameAtEndOfFrame());
+    }
+
+    private IEnumerator ResumeGameAtEndOfFrame() {
+        yield return new WaitForEndOfFrame();
         Time.timeScale = 1f;
         isGamePaused = false;
         EventManager.TriggerEvent("GameResumed");

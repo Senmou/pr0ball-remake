@@ -9,12 +9,12 @@ public class BallMenu : MonoBehaviour {
     }
 
     public void Show() {
-        pauseBackground.EnableBackground();
+        GameController.instance.PauseGame();
         gameObject.SetActive(true);
     }
 
     public void Hide() {
-        pauseBackground.DisableBackground();
+        GameController.instance.ResumeGame();
         gameObject.SetActive(false);
     }
 }
