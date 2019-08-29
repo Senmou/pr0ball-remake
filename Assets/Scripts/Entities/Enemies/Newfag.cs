@@ -1,8 +1,8 @@
-﻿public class NewFag : BaseEnemy {
+﻿using UnityEngine;
 
-    private void Awake() {
-        base.Awake();
+public class NewFag : BaseEnemy {
 
-        maxHP = 2;
+    private void OnEnable() {
+        maxHP = Mathf.FloorToInt(2f * levelController.currentLevel);
     }
 }

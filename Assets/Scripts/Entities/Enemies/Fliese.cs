@@ -1,8 +1,6 @@
 ﻿public class Fliese : BaseEnemy {
 
-    private void Awake() {
-        base.Awake();
-
-        maxHP = 1;
+    private void OnEnable() {
+        maxHP = 1 * levelController.currentLevel;
     }
 }

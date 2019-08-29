@@ -13,10 +13,15 @@ public class BaseEnemy : MonoBehaviour {
     [HideInInspector]
     public Rigidbody2D body;
 
+    protected LevelController levelController;
+
+    private EnemyController enemyController;
     private TextMeshProUGUI healthPointUI;
 
     protected void Awake() {
         body = GetComponentInChildren<Rigidbody2D>();
+        levelController = FindObjectOfType<LevelController>();
+        enemyController = FindObjectOfType<EnemyController>();
         healthPointUI = GetComponentInChildren<TextMeshProUGUI>();
         
         EventManager.StartListening("WaveCompleted", MoveEnemy);
@@ -39,6 +44,7 @@ public class BaseEnemy : MonoBehaviour {
         currentHP -= amount;
         UpdateUI();
         if (currentHP <= 0) {
+            enemyController.activeEnemies.Remove(this);
             EasyObjectPool.instance.ReturnObjectToPool(gameObject);
             Benis.instance.IncScore(benisValue);
         }
@@ -48,7 +54,12 @@ public class BaseEnemy : MonoBehaviour {
         healthPointUI.text = currentHP.ToString();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        TakeDamage(10);
+    private void OnCollisionEnter2D(Collision2D other) {
+        Ball ball = other.gameObject.GetComponent<Ball>();
+
+        if (ball == null)
+            return;
+
+        TakeDamage(ball.Damage());
     }
 }

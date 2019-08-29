@@ -7,9 +7,9 @@ public class Ball : MonoBehaviour {
     public Cannon cannon;
     public BallConfig ballConfigDefault;
 
-    public float damage = 1f;
-    public float critChance = 0f;
-    public float critDamageMultiplier = 1f;
+    private int damage = 1;
+    private float critChance = 0f;
+    private float critDamageMultiplier = 1f;
 
     [HideInInspector] public Rigidbody2D body;
 
@@ -18,12 +18,16 @@ public class Ball : MonoBehaviour {
     private AudioSource audioSource;
     private Transform bezierEndPoint;
     private BallController ballController;
+    private EnemyController enemyController;
+
+    private Vector2 randomEnemyPos = Vector2.zero;
 
     private void Awake() {
-        audioSource = GameObject.Find("SfxBounce").GetComponent<AudioSource>();
         body = GetComponent<Rigidbody2D>();
         cannon = FindObjectOfType<Cannon>();
         ballController = FindObjectOfType<BallController>();
+        enemyController = FindObjectOfType<EnemyController>();
+        audioSource = GameObject.Find("SfxBounce").GetComponent<AudioSource>();
         bezierEndPoint = GameObject.FindGameObjectWithTag("BallCounterIcon").transform;
         ballConfigDefault.Apply(this);
     }
@@ -33,12 +37,17 @@ public class Ball : MonoBehaviour {
         body.AddForce(cannon.transform.up * startForce, ForceMode2D.Impulse);
     }
 
+    private void Update() {
+        if (body.gravityScale > 0f)
+            MoveToEnemy();
+    }
+
     private void FixedUpdate() {
         body.velocity = Vector2.ClampMagnitude(body.velocity, maxVelocity);
     }
 
-    private void ReturnToPool() {
-        EasyObjectPool.instance.ReturnObjectToPool(gameObject);
+    public int Damage() {
+        return damage;
     }
 
     public void Move(float timeToReachEndPoint, PlayStateController controller) {
@@ -56,10 +65,19 @@ public class Ball : MonoBehaviour {
             t += Time.deltaTime / timeToReachEndPoint;
             yield return null;
         }
-        ReturnToPool();
+        EasyObjectPool.instance.ReturnObjectToPool(gameObject);
         ballController.RemoveFromList(this);
         controller.cycleFinished = ballController.BallCount == 0;
         yield return null;
+    }
+
+    private void SetNewRandomTarget() {
+        randomEnemyPos = enemyController.GetRandomTarget();
+    }
+
+    private void MoveToEnemy() {
+        Vector2 direction = (randomEnemyPos - (Vector2)transform.position).normalized;
+        body.AddForce(direction * 20, ForceMode2D.Impulse);
     }
 
     public Vector2 Bezier(Vector2 a, Vector2 b, Vector2 c, float t) {
@@ -68,8 +86,9 @@ public class Ball : MonoBehaviour {
         return Vector2.Lerp(ab, bc, t);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
+    private void OnCollisionEnter2D(Collision2D other) {
         body.gravityScale = 4f;
-        audioSource.Play();
+        audioSource.PlayOneShot(audioSource.clip);
+        SetNewRandomTarget();
     }
 }

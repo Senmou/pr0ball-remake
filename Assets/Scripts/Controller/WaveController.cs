@@ -9,7 +9,7 @@ public class Wave {
     public List<Transform> spawnPoints;
 
     public Wave() {
-        spawnPoints = SpawnPoints.instance.GetRandomSpawnpoints();
+        spawnPoints = SpawnPoints.instance.GetRandomSpawnPoints();
     }
 }
 
