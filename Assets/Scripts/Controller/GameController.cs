@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour {
     private MainMenu mainMenu;
     private SkillMenu skillMenu;
     private BallMenu ballMenu;
-    private SpawnController spawnController;
+    private EnemyController enemyController;
 
     private void Awake() {
         if (instance == null)
@@ -21,13 +21,13 @@ public class GameController : MonoBehaviour {
         mainMenu = FindObjectOfType<MainMenu>();
         skillMenu = FindObjectOfType<SkillMenu>();
         ballMenu = FindObjectOfType<BallMenu>();
-        spawnController = FindObjectOfType<SpawnController>();
+        enemyController = FindObjectOfType<EnemyController>();
     }
 
     private void Start() {
         skillMenu.Hide();
         ballMenu.Hide();
-        spawnController.CreateWave();
+        enemyController.CreateWave();
     }
 
     private void Update() {
