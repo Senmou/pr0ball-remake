@@ -7,7 +7,7 @@ public class Ball : MonoBehaviour {
     public Cannon cannon;
     public BallConfig ballConfigDefault;
 
-    private int damage = 1;
+    private int damage = 10;
     private float critChance = 0f;
     private float critDamageMultiplier = 1f;
 

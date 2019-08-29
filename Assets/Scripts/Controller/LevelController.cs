@@ -31,6 +31,10 @@ public class LevelController : MonoBehaviour {
 
     private void OnReachedNextLevel() {
         currentLevel++;
+        bool isBossLevel = currentLevel % 10 == 0;
+        if (isBossLevel) {
+            EventManager.TriggerEvent("ReachedBossLevel");
+        }
         UpdateLevelUI();
     }
 

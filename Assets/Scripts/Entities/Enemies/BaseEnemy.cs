@@ -25,10 +25,16 @@ public class BaseEnemy : MonoBehaviour {
         healthPointUI = GetComponentInChildren<TextMeshProUGUI>();
         
         EventManager.StartListening("WaveCompleted", MoveEnemy);
+        EventManager.StartListening("ReachedBossLevel", Despawn);
     }
 
     private void Start() {
         UpdateUI();
+    }
+
+    private void Despawn() {
+        enemyController.activeEnemies.Remove(this);
+        EasyObjectPool.instance.ReturnObjectToPool(gameObject);
     }
 
     public void SetData() {

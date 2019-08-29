@@ -36,10 +36,10 @@ public class GameController : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
             InputHelper.instance.PrintClickedElementsName();
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
             EventManager.TriggerEvent("WaveCompleted");
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
             EventManager.TriggerEvent("ReachedNextLevel");
     }
 

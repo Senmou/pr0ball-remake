@@ -8,6 +8,9 @@ public class EnemyController : MonoBehaviour {
     public LootDropTable enemyLDT;
     public List<BaseEnemy> activeEnemies;
 
+    // make sure that the boss only spawns once
+    private bool isBossSpawned;
+
     private const string poolName = "EnemyPool";
 
     private void OnValidate() {
@@ -15,13 +18,26 @@ public class EnemyController : MonoBehaviour {
     }
 
     private void Awake() {
+        isBossSpawned = false;
         EventManager.StartListening("WaveCompleted", OnWaveCompleted);
+        EventManager.StartListening("ReachedBossLevel", OnReachedBossLevel);
         activeEnemies = new List<BaseEnemy>();
         enemyLDT.ValidateTable();
     }
 
+    private void OnReachedBossLevel() {
+        StartCoroutine(SpawnBossDelayed());
+    }
+
+    private IEnumerator SpawnBossDelayed() {
+        isBossSpawned = true;
+        yield return new WaitForEndOfFrame();
+        CreateBossWave();
+    }
+
     public void OnWaveCompleted() {
-        StartCoroutine(CreateWaveDelayed());
+        if (!isBossSpawned)
+            StartCoroutine(CreateWaveDelayed());
     }
 
     public void CreateWave() {
@@ -35,7 +51,7 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    public void CreateBossWave() {
+    private void CreateBossWave() {
         List<Transform> spawnPoints = SpawnPoints.instance.GetRandomBossSpawnPoints();
 
         for (int i = 0; i < spawnPoints.Count; i++) {
