@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BaseEnemy : MonoBehaviour {
 
-    public int currentHP;
+    public long currentHP;
     public int benisValue;
 
     [HideInInspector]
-    public int maxHP;
+    public long maxHP;
 
     [HideInInspector]
     public Rigidbody2D body;
@@ -57,7 +57,7 @@ public class BaseEnemy : MonoBehaviour {
     }
 
     public void UpdateUI() {
-        healthPointUI.text = currentHP.ToString();
+        healthPointUI.text = currentHP.ToStringFormatted();
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
