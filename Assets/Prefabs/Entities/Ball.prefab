@@ -48,10 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cannon: {fileID: 0}
-  ballConfigDefault: {fileID: 11400000, guid: 2f2748d32860b5242a850236e82a6d48, type: 2}
-  damage: 1
-  critChance: 0
-  critDamageMultiplier: 1
+  ballConfig: {fileID: 11400000, guid: 2f2748d32860b5242a850236e82a6d48, type: 2}
   body: {fileID: 0}
 --- !u!50 &4788159331868298045
 Rigidbody2D:

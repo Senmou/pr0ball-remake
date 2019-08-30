@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour {
 
-    public Cannon cannon;
-    public BallConfig ballConfigDefault;
-
-    private int damage = 10;
-    private float critChance = 0f;
-    private float critDamageMultiplier = 1f;
-
+    [HideInInspector] public Cannon cannon;
     [HideInInspector] public Rigidbody2D body;
 
     private float startForce = 300f;
@@ -29,7 +23,7 @@ public class Ball : MonoBehaviour {
         enemyController = FindObjectOfType<EnemyController>();
         audioSource = GameObject.Find("SfxBounce").GetComponent<AudioSource>();
         bezierEndPoint = GameObject.FindGameObjectWithTag("BallCounterIcon").transform;
-        ballConfigDefault.Apply(this);
+        SO.instance.ballConfig.Apply(this);
     }
 
     private void OnEnable() {
@@ -47,7 +41,7 @@ public class Ball : MonoBehaviour {
     }
 
     public int Damage() {
-        return damage;
+        return SO.instance.ballConfig.damage;
     }
 
     public void Move(float timeToReachEndPoint, PlayStateController controller) {
