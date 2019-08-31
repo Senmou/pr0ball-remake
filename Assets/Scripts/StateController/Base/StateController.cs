@@ -12,7 +12,7 @@ public abstract class StateController : MonoBehaviour {
     }
 
     public void TransitionToState(State nextState) {
-        //Debug.Log(currentState.name + " => " + nextState.name);
+        Debug.Log(currentState.name + " => " + nextState.name);
         currentState = nextState;
     }
 }

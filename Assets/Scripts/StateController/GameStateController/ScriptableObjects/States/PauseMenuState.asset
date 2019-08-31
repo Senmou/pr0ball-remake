@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 88698c982dd994b48808b76a348efaf3, type: 3}
-  m_Name: MainMenuState
+  m_Name: PauseMenuState
   m_EditorClassIdentifier: 
   oneShots: []
   actions: []
   transitions:
-  - decision: {fileID: 11400000, guid: fe59303c2ecf6d64b86d2e75eda0a2fb, type: 2}
+  - decision: {fileID: 11400000, guid: f71037fd6a17fd345af154fdebe9e3bb, type: 2}
     trueState: {fileID: 11400000, guid: 514736504411ac44192acda566169d7b, type: 2}
     falseState: {fileID: 11400000, guid: f8f6ed59bdf2e8c4280ca3ba4205f594, type: 2}
     alwaysTrue: 0

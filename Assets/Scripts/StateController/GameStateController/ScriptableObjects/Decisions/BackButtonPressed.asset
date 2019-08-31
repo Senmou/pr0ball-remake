@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 350d7c7fcbcfbe64597598f6caf8e739, type: 3}
-  m_Name: StartButtonPressed
+  m_Script: {fileID: 11500000, guid: a7c9672ff61c1874fafda4b9174e9122, type: 3}
+  m_Name: BackButtonPressed
   m_EditorClassIdentifier: 

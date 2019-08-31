@@ -20,8 +20,12 @@ public class PauseBackground : MonoBehaviour {
         OnAppStart();
     }
 
+    public void Interactable(bool state) {
+        clickableBackground.interactable = state;
+    }
+
     public void OnAppStart() {
-        clickableBackground.interactable = false;
+        Interactable(false);
         image.enabled = true;
         Color startColor = image.color;
         startColor.a = 1f;
@@ -39,7 +43,7 @@ public class PauseBackground : MonoBehaviour {
     }
 
     private IEnumerator FadeIn() {
-        clickableBackground.interactable = true;
+        Interactable(true);
         image.enabled = true;
 
         Color color = image.color;
@@ -65,7 +69,7 @@ public class PauseBackground : MonoBehaviour {
             t += Time.unscaledDeltaTime / fadeTime;
             yield return null;
         }
-        clickableBackground.interactable = false;
+        Interactable(false);
         image.enabled = false;
         yield return null;
     }

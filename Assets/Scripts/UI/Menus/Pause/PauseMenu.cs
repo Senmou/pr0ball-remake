@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MainMenu : MonoBehaviour {
+public class PauseMenu : MonoBehaviour {
 
     [HideInInspector] public bool visible;
 
@@ -11,24 +11,25 @@ public class MainMenu : MonoBehaviour {
         moveUI = GetComponent<MoveUI>();
         pauseBackground = FindObjectOfType<PauseBackground>();
 
-        visible = true;
+        visible = false;
     }
 
     public void Hide() {
         if (visible) {
-            visible = false;
-            Vector2 oldPos = transform.position;
-            moveUI.FadeTo(oldPos + new Vector2(30f, 0f), 0.5f);
+            //Debug.Log("HIDE");
             GameController.instance.ResumeGame();
+            visible = false;
+            moveUI.FadeTo(new Vector2(30f, 0f), 0.5f);
         }
     }
 
     public void Show() {
         if (!visible) {
-            visible = true;
-            Vector2 oldPos = transform.position;
-            moveUI.FadeTo(oldPos + new Vector2(-30f, 0f), 0.5f);
+            //Debug.Log("SHOW");
             GameController.instance.PauseGame();
+            pauseBackground.Interactable(false);
+            visible = true;
+            moveUI.FadeTo(Vector2.zero, 0.5f);
         }
     }
 }

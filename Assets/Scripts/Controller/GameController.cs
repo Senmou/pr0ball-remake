@@ -6,10 +6,11 @@ public class GameController : MonoBehaviour {
     public static GameController instance = null;
     public static bool isGamePaused = false;
 
-    private MainMenu mainMenu;
+    private PauseMenu mainMenu;
     private SkillMenu skillMenu;
     private BallMenu ballMenu;
     private EnemyController enemyController;
+    private GameStateController gameStateController;
 
     private void Awake() {
         if (instance == null)
@@ -18,10 +19,11 @@ public class GameController : MonoBehaviour {
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
 
-        mainMenu = FindObjectOfType<MainMenu>();
+        mainMenu = FindObjectOfType<PauseMenu>();
         skillMenu = FindObjectOfType<SkillMenu>();
         ballMenu = FindObjectOfType<BallMenu>();
         enemyController = FindObjectOfType<EnemyController>();
+        gameStateController = FindObjectOfType<GameStateController>();
     }
 
     private void Start() {
@@ -41,6 +43,10 @@ public class GameController : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
             EventManager.TriggerEvent("ReachedNextLevel");
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            gameStateController.backButtonPressed = true;
+
     }
 
     private void OnBackButtonPressed() {
