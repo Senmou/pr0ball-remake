@@ -6,7 +6,7 @@ public class BallStats : MonoBehaviour {
     public float gravityScale = 4f;
     public float bounciness = 0.8f;
 
-    private int baseDamage = 1;
+    private int baseDamage = 50;
     private float critChance = 1f;
     private float critDamageMultiplier = 2.5f;
 

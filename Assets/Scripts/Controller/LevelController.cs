@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class LevelController : MonoBehaviour {
@@ -29,6 +28,10 @@ public class LevelController : MonoBehaviour {
         currentLevelUI.text = currentLevel.ToString();
     }
 
+    public void DecreaseLevel(int value) {
+        currentLevel -= value;
+    }
+
     private void OnReachedNextLevel() {
         currentLevel++;
         bool isBossLevel = currentLevel % 10 == 0;
@@ -36,38 +39,5 @@ public class LevelController : MonoBehaviour {
             EventManager.TriggerEvent("ReachedBossLevel");
         }
         UpdateLevelUI();
-    }
-
-    public void ShowCurrentLevel() {
-        StopAllCoroutines();
-        StartCoroutine(FadeIn());
-    }
-
-    private IEnumerator FadeIn() {
-
-        Vector2 targetPos = new Vector2(0f, 17.5f);
-
-        float distance = Mathf.Infinity;
-        while (distance > 1f) {
-            levelUI.transform.position = Vector2.Lerp(levelUI.transform.position, targetPos, Time.deltaTime * 10f);
-            distance = Vector2.Distance(levelUI.transform.position, targetPos);
-            yield return null;
-        }
-
-        yield return new WaitForSecondsRealtime(1f);
-        StartCoroutine(FadeOut());
-    }
-
-    private IEnumerator FadeOut() {
-        Vector2 targetPos = new Vector2(0f, 40f);
-
-        float distance = Mathf.Infinity;
-        while (distance > 1f) {
-            levelUI.transform.position = Vector2.Lerp(levelUI.transform.position, targetPos, Time.deltaTime * 10f);
-            distance = Vector2.Distance(levelUI.transform.position, targetPos);
-            yield return null;
-        }
-
-        yield return null;
     }
 }

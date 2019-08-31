@@ -30,15 +30,17 @@ public class WaveController : MonoBehaviour {
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
 
+        EventManager.StartListening("ReachedNextLevel", ResetWaveCount);
+        EventManager.StartListening("ReachedBossLevel", ResetWaveCount);
         EventManager.StartListening("WaveCompleted", OnWaveCompleted);
-        EventManager.StartListening("FailedLevel", OnFailedLevel);
+        EventManager.StartListening("FailedLevel", ResetWaveCount);
     }
 
     private void Start() {
         UpdateWaveUI();
     }
 
-    private void OnFailedLevel() {
+    private void ResetWaveCount() {
         currentWave = 1;
         UpdateWaveUI();
     }
@@ -53,35 +55,7 @@ public class WaveController : MonoBehaviour {
 
         UpdateWaveUI();
     }
-
-    private IEnumerator FadeIn() {
-
-        Vector2 targetPos = new Vector2(0f, 8.3f);
-
-        float distance = Mathf.Infinity;
-        while (distance > 1f) {
-            waveUI.transform.position = Vector2.Lerp(waveUI.transform.position, targetPos, Time.deltaTime * 10f);
-            distance = Vector2.Distance(waveUI.transform.position, targetPos);
-            yield return null;
-        }
-
-        yield return new WaitForSecondsRealtime(1f);
-        StartCoroutine(FadeOut());
-    }
-
-    private IEnumerator FadeOut() {
-        Vector2 targetPos = new Vector2(30f, 8.3f);
-
-        float distance = Mathf.Infinity;
-        while (distance > 1f) {
-            waveUI.transform.position = Vector2.Lerp(waveUI.transform.position, targetPos, Time.deltaTime * 10f);
-            distance = Vector2.Distance(waveUI.transform.position, targetPos);
-            yield return null;
-        }
-        waveUI.transform.position = new Vector2(-30f, 8.3f);
-        yield return null;
-    }
-
+    
     private void UpdateWaveUI() {
         currentWaveUI.text = currentWave.ToString() + "/" + wavesPerLevel;
     }

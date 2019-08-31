@@ -2014,7 +2014,7 @@ MonoBehaviour:
   waveUI: {fileID: 1412287867}
   currentWaveUI: {fileID: 1771655580}
   currentWave: 1
-  wavesPerLevel: 5
+  wavesPerLevel: 20
 --- !u!4 &164113833
 Transform:
   m_ObjectHideFlags: 0
@@ -17035,6 +17035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c6f344d3928a684fb2bab23dd0a02a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 0
 --- !u!1 &2018278104
 GameObject:
   m_ObjectHideFlags: 0

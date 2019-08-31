@@ -1,6 +1,5 @@
-﻿using MarchingBytes;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using MarchingBytes;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
@@ -13,6 +12,7 @@ public class EnemyController : MonoBehaviour {
     private PlayerHP playerHP;
     private bool isBossSpawned;
     private PlayStateController playStateController;
+    private LevelController levelController;
 
     private void OnValidate() {
         enemyLDT.ValidateTable();
@@ -22,6 +22,7 @@ public class EnemyController : MonoBehaviour {
         isBossSpawned = false;
         playerHP = FindObjectOfType<PlayerHP>();
         playStateController = FindObjectOfType<PlayStateController>();
+        levelController = FindObjectOfType<LevelController>();
         EventManager.StartListening("WaveCompleted", OnWaveCompleted);
         EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
         EventManager.StartListening("ReachedBossLevel", OnReachedBossLevel);
@@ -36,6 +37,7 @@ public class EnemyController : MonoBehaviour {
 
     private void OnFailedLevel() {
         DespawnAllEnemies();
+        SpawnInitialWaves();
     }
 
     private void OnReachedBossLevel() {
@@ -49,13 +51,31 @@ public class EnemyController : MonoBehaviour {
             isBossSpawned = false;
             int remainingEnemies = activeEnemies.Count;
             DespawnAllEnemies();
+
+            // Failed boss level
+            if (remainingEnemies >= playerHP.CurrentHP) {
+                levelController.DecreaseLevel(2);
+            } else {
+                DespawnAllEnemies();
+                SpawnInitialWaves();
+            }
+
             playerHP.TakeDamage(remainingEnemies);
+        } else {
+            DespawnAllEnemies();
+            SpawnInitialWaves();
         }
     }
 
     public void OnWaveCompleted() {
         if (!isBossSpawned)
-            StartCoroutine(CreateWaveDelayed());
+            CreateWave();
+        else {
+            // if boss is defeated
+            if(activeEnemies.Count == 0) {
+                EventManager.TriggerEvent("ReachedNextLevel");
+            }
+        }
     }
 
     public void DespawnAllEnemies() {
@@ -66,6 +86,7 @@ public class EnemyController : MonoBehaviour {
     }
 
     public void CreateWave() {
+        MoveEnemies();
         List<Transform> spawnPoints = SpawnPoints.instance.GetSpawnPoints();
 
         for (int i = 0; i < spawnPoints.Count; i++) {
@@ -73,6 +94,18 @@ public class EnemyController : MonoBehaviour {
             BaseEnemy newEnemy = EasyObjectPool.instance.GetObjectFromPool(sourcePool, spawnPoints[i].position, Quaternion.identity).GetComponent<BaseEnemy>();
             newEnemy.SetData();
             activeEnemies.Add(newEnemy);
+        }
+    }
+
+    public void SpawnInitialWaves() {
+        for (int i = 0; i < 10; i++) {
+            CreateWave();
+        }
+    }
+
+    private void MoveEnemies() {
+        foreach (var enemy in activeEnemies) {
+            enemy.transform.position += new Vector3(0f, 2f);
         }
     }
 
@@ -85,12 +118,6 @@ public class EnemyController : MonoBehaviour {
             newEnemy.SetData();
             activeEnemies.Add(newEnemy);
         }
-    }
-
-    // Create wave after the other enemies moved up
-    private IEnumerator CreateWaveDelayed() {
-        yield return new WaitForEndOfFrame();
-        CreateWave();
     }
 
     public Vector2 GetRandomTarget() {

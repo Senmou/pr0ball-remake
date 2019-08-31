@@ -24,8 +24,6 @@ public class BaseEnemy : MonoBehaviour {
         healthPointUI = GetComponentInChildren<TextMeshProUGUI>();
         playerHP = FindObjectOfType<PlayerHP>();
         deadline = GameObject.Find("Deadline").transform;
-
-        EventManager.StartListening("WaveCompleted", MoveEnemy);
     }
 
     private void Start() {
@@ -42,10 +40,6 @@ public class BaseEnemy : MonoBehaviour {
     public void SetData() {
         currentHP = maxHP;
         UpdateUI();
-    }
-
-    private void MoveEnemy() {
-        transform.position += new Vector3(0f, 2f);
     }
 
     private void ReturnToPool(BaseEnemy enemy) {

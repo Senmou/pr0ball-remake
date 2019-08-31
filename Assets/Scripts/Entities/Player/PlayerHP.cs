@@ -8,6 +8,10 @@ public class PlayerHP : MonoBehaviour {
     private int currentHP;
     private TextMeshProUGUI playerHp;
 
+    public int CurrentHP {
+        get => currentHP;
+    }
+
     private void Awake() {
         playerHp = transform.FindChild<TextMeshProUGUI>("Value");
 
