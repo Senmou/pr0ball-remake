@@ -17,7 +17,7 @@ public class BallController : MonoBehaviour {
     public bool canShootAgain;
 
     private int maxBallCount = 2;
-    private float maxLifeTime = 1f;
+    private float maxLifeTime = 3f;
     private float shootingRate = 0.1f;
 
     public int BallCount { get => balls.Count; }

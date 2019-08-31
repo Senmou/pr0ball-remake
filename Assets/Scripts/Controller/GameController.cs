@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour {
         ballMenu.Hide();
         enemyController.CreateWave();
     }
-
+    
     private void Update() {
         OnBackButtonPressed();
 

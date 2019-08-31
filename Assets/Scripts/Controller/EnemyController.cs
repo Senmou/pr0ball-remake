@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour {
 
     private PlayerHP playerHP;
     private bool isBossSpawned;
+    private PlayStateController playStateController;
 
     private void OnValidate() {
         enemyLDT.ValidateTable();
@@ -20,11 +21,16 @@ public class EnemyController : MonoBehaviour {
     private void Awake() {
         isBossSpawned = false;
         playerHP = FindObjectOfType<PlayerHP>();
+        playStateController = FindObjectOfType<PlayStateController>();
         EventManager.StartListening("WaveCompleted", OnWaveCompleted);
         EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
         EventManager.StartListening("ReachedBossLevel", OnReachedBossLevel);
         activeEnemies = new List<BaseEnemy>();
         enemyLDT.ValidateTable();
+    }
+
+    private void Update() {
+        playStateController.enemyCount = activeEnemies.Count;
     }
 
     private void OnReachedBossLevel() {
@@ -46,7 +52,7 @@ public class EnemyController : MonoBehaviour {
         if (!isBossSpawned)
             StartCoroutine(CreateWaveDelayed());
     }
-    
+
     public void DespawnAllEnemies() {
         foreach (var enemy in activeEnemies) {
             EasyObjectPool.instance.ReturnObjectToPool(enemy.gameObject);

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88698c982dd994b48808b76a348efaf3, type: 3}
   m_Name: PauseMenuState
   m_EditorClassIdentifier: 
-  oneShots: []
+  oneShots:
+  - {fileID: 11400000, guid: d78220d1f8e2951428545fe5d601b7c0, type: 2}
   actions: []
   transitions:
   - decision: {fileID: 11400000, guid: f71037fd6a17fd345af154fdebe9e3bb, type: 2}

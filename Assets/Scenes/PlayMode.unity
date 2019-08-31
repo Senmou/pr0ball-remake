@@ -7339,6 +7339,7 @@ MonoBehaviour:
   startButton: {fileID: 0}
   playStateController: {fileID: 0}
   backButtonPressed: 0
+  resumeButtonPressed: 0
 --- !u!4 &856189722
 Transform:
   m_ObjectHideFlags: 0
@@ -7590,8 +7591,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 917049759}
-  - component: {fileID: 917049762}
   - component: {fileID: 917049763}
+  - component: {fileID: 917049762}
   - component: {fileID: 917049761}
   - component: {fileID: 917049760}
   m_Layer: 5
@@ -7662,7 +7663,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 917049763}
-        m_MethodName: OnClick
+        m_MethodName: ResumeOnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7720,7 +7721,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 917049758}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63ab3c4451d502f4396061d7d8574a95, type: 3}
+  m_Script: {fileID: 11500000, guid: 43ae4da709c77af44be787bb7c609a49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &920751632
@@ -9841,7 +9842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b460fb2854c4ef3439730f85cb27f4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: {fileID: 11400000, guid: 874bca5ea0deb0d41bfc7a1d7bf583b3, type: 2}
+  currentState: {fileID: 11400000, guid: 263da600bc7e3614d897191d25189b99, type: 2}
   remainState: {fileID: 11400000, guid: f8f6ed59bdf2e8c4280ca3ba4205f594, type: 2}
   lockOneShots: 0
   levelScale: {fileID: 1830602774}
