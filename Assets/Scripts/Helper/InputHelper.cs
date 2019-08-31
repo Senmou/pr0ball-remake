@@ -40,7 +40,7 @@ public class InputHelper : MonoBehaviour {
         if (text.Length > 2)
             text = text.Remove(text.Length - 3);
 
-        Debug.Log(text);
+        //Debug.Log(text);
     }
 
     public bool ClickedOnTag(string tag) {

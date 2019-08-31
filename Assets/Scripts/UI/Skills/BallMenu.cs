@@ -6,17 +6,19 @@ public class BallMenu : MonoBehaviour {
     private TextMeshProUGUI damage;
     private TextMeshProUGUI critChance;
     private TextMeshProUGUI critMultiplier;
+    private BallStats ballStats;
 
     private void Awake() {
+        ballStats = FindObjectOfType<BallStats>();
         damage = transform.FindChild<TextMeshProUGUI>("Damage/Value");
         critChance = transform.FindChild<TextMeshProUGUI>("Crit/Value");
         critMultiplier = transform.FindChild<TextMeshProUGUI>("CritMultiplier/Value");
     }
 
     private void UpdateUI() {
-        damage.text = SO.instance.ballConfig.damage.ToString();
-        critChance.text = SO.instance.ballConfig.critChance.ToString();
-        critMultiplier.text = SO.instance.ballConfig.critDamageMultiplier.ToString();
+        damage.text = ballStats.Damage().ToString();
+        critChance.text = ballStats.CritChance.ToString();
+        critMultiplier.text = ballStats.CritDamageMultiplier.ToString();
     }
 
     public void Show() {

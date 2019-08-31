@@ -9,6 +9,8 @@ public class Ball : MonoBehaviour {
 
     private float startForce = 300f;
     private float maxVelocity = 50f;
+
+    private BallStats ballStats;
     private AudioSource audioSource;
     private Transform bezierEndPoint;
     private BallController ballController;
@@ -19,11 +21,12 @@ public class Ball : MonoBehaviour {
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
         cannon = FindObjectOfType<Cannon>();
+        ballStats = FindObjectOfType<BallStats>();
         ballController = FindObjectOfType<BallController>();
         enemyController = FindObjectOfType<EnemyController>();
         audioSource = GameObject.Find("SfxBounce").GetComponent<AudioSource>();
         bezierEndPoint = GameObject.FindGameObjectWithTag("BallCounterIcon").transform;
-        SO.instance.ballConfig.Apply(this);
+        ballStats.Apply(this);
     }
 
     private void OnEnable() {
@@ -41,7 +44,7 @@ public class Ball : MonoBehaviour {
     }
 
     public int Damage() {
-        return SO.instance.ballConfig.damage;
+        return ballStats.Damage();
     }
 
     public void Move(float timeToReachEndPoint, PlayStateController controller) {
