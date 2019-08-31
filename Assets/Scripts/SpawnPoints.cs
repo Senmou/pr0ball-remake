@@ -12,6 +12,8 @@ public class SpawnPoints : MonoBehaviour {
     public List<Setups> spawnPoints;
     public List<Setups> bossSpawnPoints;
 
+    private static int index = 0;
+
     private void Awake() {
         if (instance == null)
             instance = this;
@@ -19,8 +21,10 @@ public class SpawnPoints : MonoBehaviour {
             Destroy(gameObject);
     }
 
-    public List<Transform> GetRandomSpawnPoints() {
-        int index = Random.Range(0, spawnPoints.Count);
+    public List<Transform> GetSpawnPoints() {
+        index++;
+        if (index >= spawnPoints.Count)
+            index = 0;
         return spawnPoints[index].transforms;
     }
 

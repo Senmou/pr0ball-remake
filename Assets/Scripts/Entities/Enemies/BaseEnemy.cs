@@ -26,7 +26,6 @@ public class BaseEnemy : MonoBehaviour {
         deadline = GameObject.Find("Deadline").transform;
 
         EventManager.StartListening("WaveCompleted", MoveEnemy);
-        EventManager.StartListening("ReachedBossLevel", Despawn);
     }
 
     private void Start() {
@@ -38,11 +37,6 @@ public class BaseEnemy : MonoBehaviour {
             ReturnToPool(this);
             playerHP.TakeDamage(1);
         }
-    }
-
-    private void Despawn() {
-        enemyController.activeEnemies.Remove(this);
-        EasyObjectPool.instance.ReturnObjectToPool(gameObject);
     }
 
     public void SetData() {

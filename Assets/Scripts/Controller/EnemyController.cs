@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
 
+    private const string poolName = "EnemyPool";
+
     public LootDropTable enemyLDT;
     public List<BaseEnemy> activeEnemies;
 
-    // make sure that the boss only spawns once
+    private PlayerHP playerHP;
     private bool isBossSpawned;
-
-    private const string poolName = "EnemyPool";
 
     private void OnValidate() {
         enemyLDT.ValidateTable();
@@ -19,29 +19,43 @@ public class EnemyController : MonoBehaviour {
 
     private void Awake() {
         isBossSpawned = false;
+        playerHP = FindObjectOfType<PlayerHP>();
         EventManager.StartListening("WaveCompleted", OnWaveCompleted);
+        EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
         EventManager.StartListening("ReachedBossLevel", OnReachedBossLevel);
         activeEnemies = new List<BaseEnemy>();
         enemyLDT.ValidateTable();
     }
 
     private void OnReachedBossLevel() {
-        StartCoroutine(SpawnBossDelayed());
+        DespawnAllEnemies();
+        CreateBossWave();
+        isBossSpawned = true;
     }
 
-    private IEnumerator SpawnBossDelayed() {
-        isBossSpawned = true;
-        yield return new WaitForEndOfFrame();
-        CreateBossWave();
+    private void OnReachedNextLevel() {
+        if (isBossSpawned) {
+            isBossSpawned = false;
+            int remainingEnemies = activeEnemies.Count;
+            DespawnAllEnemies();
+            playerHP.TakeDamage(remainingEnemies);
+        }
     }
 
     public void OnWaveCompleted() {
         if (!isBossSpawned)
             StartCoroutine(CreateWaveDelayed());
     }
+    
+    public void DespawnAllEnemies() {
+        foreach (var enemy in activeEnemies) {
+            EasyObjectPool.instance.ReturnObjectToPool(enemy.gameObject);
+        }
+        activeEnemies.Clear();
+    }
 
     public void CreateWave() {
-        List<Transform> spawnPoints = SpawnPoints.instance.GetRandomSpawnPoints();
+        List<Transform> spawnPoints = SpawnPoints.instance.GetSpawnPoints();
 
         for (int i = 0; i < spawnPoints.Count; i++) {
             string sourcePool = enemyLDT.PickLootDropItem().poolName;
