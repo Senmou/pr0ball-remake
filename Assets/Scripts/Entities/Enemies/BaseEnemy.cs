@@ -43,7 +43,7 @@ public class BaseEnemy : MonoBehaviour {
     }
 
     private void MoveEnemy() {
-        transform.position += new Vector3(0f, 2.5f);
+        transform.position += new Vector3(0f, 2f);
     }
 
     private void TakeDamage(int amount) {
