@@ -25,12 +25,17 @@ public class EnemyController : MonoBehaviour {
         EventManager.StartListening("WaveCompleted", OnWaveCompleted);
         EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
         EventManager.StartListening("ReachedBossLevel", OnReachedBossLevel);
+        EventManager.StartListening("FailedLevel", OnFailedLevel);
         activeEnemies = new List<BaseEnemy>();
         enemyLDT.ValidateTable();
     }
 
     private void Update() {
         playStateController.enemyCount = activeEnemies.Count;
+    }
+
+    private void OnFailedLevel() {
+        DespawnAllEnemies();
     }
 
     private void OnReachedBossLevel() {

@@ -712,7 +712,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 76008127}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 52059370}
@@ -720,7 +720,7 @@ RectTransform:
   - {fileID: 1416314976}
   - {fileID: 2057200480}
   m_Father: {fileID: 829577300}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7117,10 +7117,10 @@ RectTransform:
   - {fileID: 1333719630}
   - {fileID: 450968779}
   - {fileID: 2008181995}
-  - {fileID: 1922095908}
   - {fileID: 76008128}
   - {fileID: 1821001709}
   - {fileID: 1412287868}
+  - {fileID: 1922095908}
   - {fileID: 398380689}
   - {fileID: 816369978}
   - {fileID: 1328174061}
@@ -7563,11 +7563,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolName: BallPool
-  lifeTimeSlider: {fileID: 1121577801}
+  canShootAgain: 0
   spawnPoint: {fileID: 296674334}
+  lifeTimeSlider: {fileID: 1121577801}
   maxBallCountUI: {fileID: 1259513673}
   currentBallCountUI: {fileID: 677439111}
-  canShootAgain: 0
 --- !u!4 &893633903
 Transform:
   m_ObjectHideFlags: 0
@@ -9847,6 +9847,7 @@ MonoBehaviour:
   lockOneShots: 0
   levelScale: {fileID: 1830602774}
   ballController: {fileID: 893633902}
+  enemyCount: 0
   hasGameStarted: 0
   cycleFinished: 0
 --- !u!4 &1129294847
@@ -12065,7 +12066,7 @@ RectTransform:
   m_Children:
   - {fileID: 1771655579}
   m_Father: {fileID: 829577300}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15067,7 +15068,7 @@ RectTransform:
   - {fileID: 1715340060}
   - {fileID: 1908944265}
   m_Father: {fileID: 829577300}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -15950,7 +15951,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 829577300}
-  m_RootOrder: 5
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

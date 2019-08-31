@@ -8,9 +8,11 @@ public class PauseBackground : MonoBehaviour {
     private float fadeTime = 0.5f;
     private float maxAlpha = 0.99f;
     private Button clickableBackground;
+    private RectTransform rect;
 
     private void Awake() {
         image = GetComponent<Image>();
+        rect = GetComponent<RectTransform>();
         clickableBackground = GetComponent<Button>();
         EventManager.StartListening("GamePaused", OnGamePaused);
         EventManager.StartListening("GameResumed", OnGameResumed);
@@ -22,6 +24,11 @@ public class PauseBackground : MonoBehaviour {
 
     public void Interactable(bool state) {
         clickableBackground.interactable = state;
+    }
+
+    // Used when showing the skillMenu, so the skillBar is not covered by the pauseBackground
+    public void SetBottomMargin(float value) {
+        rect.offsetMin = new Vector2(rect.offsetMin.x, value);
     }
 
     public void OnAppStart() {

@@ -1,32 +1,31 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine.UI;
 using MarchingBytes;
 using UnityEngine;
 using TMPro;
-using System.Collections;
 
 public class BallController : MonoBehaviour {
 
     [HideInInspector] public string poolName = "BallPool";
 
-    public Slider lifeTimeSlider;
+    public bool canShootAgain;
     public Transform spawnPoint;
+    public Slider lifeTimeSlider;
     public TextMeshProUGUI maxBallCountUI;
     public TextMeshProUGUI currentBallCountUI;
 
-    public bool canShootAgain;
-
+    private float lifeTime;
     private int maxBallCount = 2;
     private float maxLifeTime = 3f;
     private float shootingRate = 0.1f;
+
+    private List<Ball> balls = new List<Ball>();
 
     public int BallCount { get => balls.Count; }
     public int MaxBallCount { get => maxBallCount; }
     public bool LifeTimeExeeded { get => lifeTime <= 0f; }
     public bool AllBallsShot { get => BallCount == MaxBallCount; }
-
-    private float lifeTime;
-    private List<Ball> balls = new List<Ball>();
 
     private void Start() {
         InitData();

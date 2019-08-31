@@ -31,11 +31,13 @@ public class SkillMenu : MonoBehaviour {
 
     public void Show() {
         GameController.instance.PauseGame();
+        pauseBackground.SetBottomMargin(4f);
         gameObject.SetActive(true);
     }
 
     public void Hide() {
         GameController.instance.ResumeGame();
+        pauseBackground.SetBottomMargin(0f);
         gameObject.SetActive(false);
     }
 }

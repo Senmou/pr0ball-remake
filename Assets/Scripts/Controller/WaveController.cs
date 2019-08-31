@@ -31,9 +31,15 @@ public class WaveController : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
 
         EventManager.StartListening("WaveCompleted", OnWaveCompleted);
+        EventManager.StartListening("FailedLevel", OnFailedLevel);
     }
 
     private void Start() {
+        UpdateWaveUI();
+    }
+
+    private void OnFailedLevel() {
+        currentWave = 1;
         UpdateWaveUI();
     }
 

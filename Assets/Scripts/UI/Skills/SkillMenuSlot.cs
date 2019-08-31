@@ -31,9 +31,10 @@ public class SkillMenuSlot : MonoBehaviour {
     }
 
     private void Update() {
-        if (skill.locked) {
+        if (skill.locked)
             unlockButton.Show();
-        }
+        else
+            unlockButton.Hide();
     }
 
     public void UnlockSkill() {
