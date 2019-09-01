@@ -15,7 +15,7 @@ public class Ball : MonoBehaviour {
     private Transform bezierEndPoint;
     private BallController ballController;
     private EnemyController enemyController;
-    private Collider2D collider;
+    private new Collider2D collider;
 
     private Vector2 randomEnemyPos = Vector2.zero;
 
