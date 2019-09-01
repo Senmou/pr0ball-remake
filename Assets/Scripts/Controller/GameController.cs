@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour {
     private void Start() {
         skillMenu.Hide();
         ballMenu.Hide();
-        enemyController.SpawnInitialWaves();
+        enemyController.CreateInitialWaves();
     }
     
     private void Update() {

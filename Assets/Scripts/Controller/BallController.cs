@@ -55,6 +55,7 @@ public class BallController : MonoBehaviour {
         balls.CopyTo(temp);
 
         foreach (Ball ball in temp) {
+            ball.DisableCollider();
             ball.Move(Random.Range(0.2f, 0.5f), controller);
             yield return null;
         }

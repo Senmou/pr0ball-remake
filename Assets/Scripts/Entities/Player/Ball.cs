@@ -15,12 +15,14 @@ public class Ball : MonoBehaviour {
     private Transform bezierEndPoint;
     private BallController ballController;
     private EnemyController enemyController;
+    private Collider2D collider;
 
     private Vector2 randomEnemyPos = Vector2.zero;
 
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
         cannon = FindObjectOfType<Cannon>();
+        collider = GetComponent<Collider2D>();
         ballStats = FindObjectOfType<BallStats>();
         ballController = FindObjectOfType<BallController>();
         enemyController = FindObjectOfType<EnemyController>();
@@ -31,9 +33,14 @@ public class Ball : MonoBehaviour {
 
     private void OnEnable() {
         body.gravityScale = 0f;
+        collider.enabled = true;
         body.AddForce(cannon.transform.up * startForce, ForceMode2D.Impulse);
     }
 
+    public void DisableCollider() {
+        collider.enabled = false;
+    }
+    
     private void Update() {
         if (body.gravityScale > 0f)
             MoveToEnemy();
