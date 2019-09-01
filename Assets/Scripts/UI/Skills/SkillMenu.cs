@@ -15,7 +15,6 @@ public class SkillMenu : MonoBehaviour {
     private void Awake() {
         errorSfx = GameObject.Find("SfxError").GetComponent<AudioSource>();
         pauseBackground = FindObjectOfType<PauseBackground>();
-        EventManager.StartListening("BackButtonPressed", OnBackButtonPressed);
     }
 
     public void EquipSkillOnClick(SkillMenuSlot slot) {
@@ -33,21 +32,14 @@ public class SkillMenu : MonoBehaviour {
     }
 
     public void Show() {
-        isVisible = true;
         GameController.instance.PauseGame();
         pauseBackground.SetBottomMargin(4f);
         gameObject.SetActive(true);
     }
 
     public void Hide() {
-        isVisible = false;
         GameController.instance.ResumeGame();
         pauseBackground.SetBottomMargin(0f);
         gameObject.SetActive(false);
-    }
-
-    private void OnBackButtonPressed() {
-        if (isVisible)
-            Hide();
     }
 }
