@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -23,12 +22,16 @@ public class WaveController : MonoBehaviour {
     public int currentWave;
     public int wavesPerLevel;
 
+    private LevelController levelController;
+
     private void Awake() {
         if (instance == null)
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
+
+        levelController = FindObjectOfType<LevelController>();
 
         EventManager.StartListening("ReachedNextLevel", ResetWaveCount);
         EventManager.StartListening("ReachedBossLevel", ResetWaveCount);
@@ -50,12 +53,16 @@ public class WaveController : MonoBehaviour {
 
         if (currentWave > wavesPerLevel) {
             currentWave = 1;
-            EventManager.TriggerEvent("ReachedNextLevel");
+
+            if (levelController.upcomingBossLevel)
+                EventManager.TriggerEvent("ReachedBossLevel");
+            else
+                EventManager.TriggerEvent("ReachedNextLevel");
         }
 
         UpdateWaveUI();
     }
-    
+
     private void UpdateWaveUI() {
         currentWaveUI.text = currentWave.ToString() + "/" + wavesPerLevel;
     }

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efae44e4d5355b94190a688914616508, type: 3}
+  m_Name: OptionsMenuState
+  m_EditorClassIdentifier: 
+  oneShots:
+  - {fileID: 11400000, guid: 95a60e35be141d2428b082c59edd6dec, type: 2}
+  actions: []
+  transitions:
+  - decision: {fileID: 11400000, guid: c4a67378a7aad364fbbc7ec32b51f204, type: 2}
+    trueState: {fileID: 11400000, guid: 514736504411ac44192acda566169d7b, type: 2}
+    falseState: {fileID: 11400000, guid: f8f6ed59bdf2e8c4280ca3ba4205f594, type: 2}
+    alwaysTrue: 0
+  - decision: {fileID: 11400000, guid: d37e3d55f4c35ea4f8fcdc6908a5b05c, type: 2}
+    trueState: {fileID: 11400000, guid: 514736504411ac44192acda566169d7b, type: 2}
+    falseState: {fileID: 11400000, guid: f8f6ed59bdf2e8c4280ca3ba4205f594, type: 2}
+    alwaysTrue: 0
+  - decision: {fileID: 11400000, guid: 2d7f04b6b0bd74641b77f91ac14c819f, type: 2}
+    trueState: {fileID: 11400000, guid: 514736504411ac44192acda566169d7b, type: 2}
+    falseState: {fileID: 11400000, guid: f8f6ed59bdf2e8c4280ca3ba4205f594, type: 2}
+    alwaysTrue: 0

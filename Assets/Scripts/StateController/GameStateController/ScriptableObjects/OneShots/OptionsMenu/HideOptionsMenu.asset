@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0779e49b9dc9a5949b89f93514cb9e93, type: 3}
-  m_Name: StartGame
+  m_Script: {fileID: 11500000, guid: 66cdc741334aeb14db5899568877f6e5, type: 3}
+  m_Name: HideOptionsMenu
   m_EditorClassIdentifier: 

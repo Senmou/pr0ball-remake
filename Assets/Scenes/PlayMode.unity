@@ -7822,6 +7822,9 @@ MonoBehaviour:
   playStateController: {fileID: 0}
   backButtonPressed: 0
   resumeButtonPressed: 0
+  optionsButtonPressed: 0
+  optionsMenuCloseButtonPressed: 0
+  tappedOnPauseBackground: 0
 --- !u!4 &856189722
 Transform:
   m_ObjectHideFlags: 0
@@ -8412,7 +8415,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1328174062}
-        m_MethodName: FadeOut
+        m_MethodName: CloseButtonOnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12618,7 +12621,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1328174062}
-        m_MethodName: FadeIn
+        m_MethodName: OptionsButtonOnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14683,7 +14686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1596905799
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14710,7 +14713,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4, y: 6}
+  m_AnchoredPosition: {x: 4, y: -5}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!156049354 &1596905800
@@ -15211,6 +15214,7 @@ MonoBehaviour:
   levelUI: {fileID: 1821001708}
   currentLevelUI: {fileID: 1908944266}
   currentLevel: 1
+  upcomingBossLevel: 0
 --- !u!4 &1678836919
 Transform:
   m_ObjectHideFlags: 0
@@ -17599,8 +17603,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1328174062}
-        m_MethodName: FadeOut
+      - m_Target: {fileID: 1922095911}
+        m_MethodName: TappedOnPauseBackground
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

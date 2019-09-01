@@ -9,6 +9,7 @@ public class LevelController : MonoBehaviour {
     public TextMeshProUGUI currentLevelUI;
 
     public int currentLevel;
+    public bool upcomingBossLevel;
 
     private void Awake() {
         if (instance == null)
@@ -34,10 +35,7 @@ public class LevelController : MonoBehaviour {
 
     private void OnReachedNextLevel() {
         currentLevel++;
-        bool isBossLevel = currentLevel % 10 == 0;
-        if (isBossLevel) {
-            EventManager.TriggerEvent("ReachedBossLevel");
-        }
+        upcomingBossLevel = currentLevel % 10 == 9;
         UpdateLevelUI();
     }
 }

@@ -5,11 +5,6 @@ public class ResumeButtonPressed : Decision {
 
     public override bool Decide(StateController controller) {
         GameStateController c = controller as GameStateController;
-
-        if (c.resumeButtonPressed) {
-            c.resumeButtonPressed = false;
-            return true;
-        }
-        return false;
+        return c.resumeButtonPressed;
     }
 }
