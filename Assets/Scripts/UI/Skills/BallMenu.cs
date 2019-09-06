@@ -8,17 +8,28 @@ public class BallMenu : MonoBehaviour {
     private TextMeshProUGUI critMultiplier;
     private BallStats ballStats;
 
+    private GameStateController gameStateController;
+
     private void Awake() {
         ballStats = FindObjectOfType<BallStats>();
         damage = transform.FindChild<TextMeshProUGUI>("Damage/Value");
         critChance = transform.FindChild<TextMeshProUGUI>("Crit/Value");
         critMultiplier = transform.FindChild<TextMeshProUGUI>("CritMultiplier/Value");
+        gameStateController = FindObjectOfType<GameStateController>();
     }
 
     private void UpdateUI() {
         damage.text = ballStats.Damage().ToString();
         critChance.text = ballStats.CritChance.ToString();
         critMultiplier.text = ballStats.CritDamageMultiplier.ToString();
+    }
+
+    public void BallMenuButtonOnClick() {
+        gameStateController.ballMenuButtonPressed = true;
+    }
+
+    public void CloseButtonOnClick() {
+        gameStateController.ballMenuCloseButtonPressed = true;
     }
 
     public void Show() {

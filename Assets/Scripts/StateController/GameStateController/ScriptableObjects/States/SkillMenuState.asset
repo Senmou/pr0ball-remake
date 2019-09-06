@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c00df81eab3b6b1438e787a990bdcd46, type: 3}
   m_Name: SkillMenuState
   m_EditorClassIdentifier: 
-  oneShots: []
+  oneShots:
+  - {fileID: 11400000, guid: 00c9f1cfc51d8b7499b17c09c23dc1bc, type: 2}
   actions: []
-  transitions: []
+  transitions:
+  - decision: {fileID: 11400000, guid: c4a67378a7aad364fbbc7ec32b51f204, type: 2}
+    trueState: {fileID: 11400000, guid: 514736504411ac44192acda566169d7b, type: 2}
+    falseState: {fileID: 11400000, guid: f8f6ed59bdf2e8c4280ca3ba4205f594, type: 2}
+    alwaysTrue: 0
+  - decision: {fileID: 11400000, guid: d37e3d55f4c35ea4f8fcdc6908a5b05c, type: 2}
+    trueState: {fileID: 11400000, guid: 514736504411ac44192acda566169d7b, type: 2}
+    falseState: {fileID: 11400000, guid: f8f6ed59bdf2e8c4280ca3ba4205f594, type: 2}
+    alwaysTrue: 0

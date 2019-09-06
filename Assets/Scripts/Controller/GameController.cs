@@ -27,8 +27,8 @@ public class GameController : MonoBehaviour {
     }
 
     private void Start() {
-        skillMenu.Hide();
         ballMenu.Hide();
+        skillMenu.Hide();
         enemyController.CreateInitialWaves();
     }
     
@@ -43,6 +43,9 @@ public class GameController : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
             EventManager.TriggerEvent("ReachedNextLevel");
+
+        if (Input.GetKeyDown(KeyCode.B))
+            EventManager.TriggerEvent("ReachedBossLevel");
 
         if (Input.GetKeyDown(KeyCode.Escape))
             gameStateController.backButtonPressed = true;

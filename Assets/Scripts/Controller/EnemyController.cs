@@ -144,6 +144,7 @@ public class EnemyController : MonoBehaviour {
             BaseEnemy newEnemy = EasyObjectPool.instance.GetObjectFromPool(sourcePool, spawnPoints[i].position, Quaternion.identity).GetComponent<BaseEnemy>();
             newEnemy.SetData();
             activeEnemies.Add(newEnemy);
+            MoveEnemy(newEnemy);
         }
     }
 

@@ -583,7 +583,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 76008131}
-        m_MethodName: ShowMenuOnClick
+        m_MethodName: ShowMenuOnLongClick
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 52059374}
@@ -7818,13 +7818,13 @@ MonoBehaviour:
   currentState: {fileID: 11400000, guid: 04a06e9018990e549bac70e1c5b4c20d, type: 2}
   remainState: {fileID: 11400000, guid: f8f6ed59bdf2e8c4280ca3ba4205f594, type: 2}
   lockOneShots: 0
-  startButton: {fileID: 0}
-  playStateController: {fileID: 0}
   backButtonPressed: 0
   resumeButtonPressed: 0
   optionsButtonPressed: 0
   optionsMenuCloseButtonPressed: 0
   tappedOnPauseBackground: 0
+  skillBarLongClick: 0
+  skillMenu: {fileID: 0}
 --- !u!4 &856189722
 Transform:
   m_ObjectHideFlags: 0
@@ -9529,7 +9529,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 76008131}
-        m_MethodName: ShowMenuOnClick
+        m_MethodName: ShowMenuOnLongClick
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1070345408}
@@ -13255,7 +13255,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 76008131}
-        m_MethodName: ShowMenuOnClick
+        m_MethodName: ShowMenuOnLongClick
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1416314980}
@@ -17581,28 +17581,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 398380690}
-        m_MethodName: Hide
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 816369980}
-        m_MethodName: Hide
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1922095911}
         m_MethodName: TappedOnPauseBackground
         m_Mode: 1
@@ -19024,7 +19002,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 76008131}
-        m_MethodName: ShowMenuOnClick
+        m_MethodName: ShowMenuOnLongClick
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2057200484}

@@ -9,7 +9,9 @@ public class GameResumedState : State {
         c.skillBarLongClick = false;
         c.resumeButtonPressed = false;
         c.optionsButtonPressed = false;
+        c.ballMenuButtonPressed = false;
         c.tappedOnPauseBackground = false;
+        c.ballMenuCloseButtonPressed = false;
         c.optionsMenuCloseButtonPressed = false;
     }
 }
