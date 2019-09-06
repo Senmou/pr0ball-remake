@@ -38,7 +38,7 @@ public class SkillMenuSlot : MonoBehaviour {
     }
 
     public void UnlockSkill() {
-        if (Benis.instance.BuySkill(skill)) {
+        if (LevelController.instance.currentLevel >= skill.unlockLevel) {
             skill.locked = false;
             purchaseSfx.Play();
             unlockButton.Hide();
@@ -50,6 +50,6 @@ public class SkillMenuSlot : MonoBehaviour {
     public void UpdateSlot() {
         image.sprite = skill.Icon;
         priceValue.text = skill.price.ToString();
-        unlockButton?.SetText(skill.price);
+        unlockButton?.SetText(skill.unlockLevel);
     }
 }

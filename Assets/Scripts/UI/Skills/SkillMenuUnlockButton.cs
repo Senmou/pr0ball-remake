@@ -9,8 +9,8 @@ public class SkillMenuUnlockButton : MonoBehaviour {
         priceTag = GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    public void SetText(int price) {
-        priceTag.text = price.ToString();
+    public void SetText(int unlockLevel) {
+        priceTag.text = "Unlock at level: " + unlockLevel.ToString();
     }
 
     public void Hide() {

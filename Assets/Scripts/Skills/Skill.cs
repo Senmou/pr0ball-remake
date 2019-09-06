@@ -9,6 +9,7 @@ public class Skill : MonoBehaviour {
     public bool locked;
     public int price;
     public int skillLevel;
+    public int unlockLevel;
 
     public Sprite icon;
     public Sprite iconLocked;

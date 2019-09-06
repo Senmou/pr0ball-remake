@@ -2163,6 +2163,7 @@ MonoBehaviour:
   locked: 0
   price: 0
   skillLevel: 0
+  unlockLevel: 0
   icon: {fileID: 21300000, guid: bacdfd848c73c8e4eb4492be26396faf, type: 3}
   iconLocked: {fileID: 0}
   barSlot: {fileID: 2057200484}
@@ -3825,6 +3826,7 @@ MonoBehaviour:
   locked: 0
   price: 0
   skillLevel: 0
+  unlockLevel: 0
   icon: {fileID: 21300000, guid: 9a3ebc2c102bccd4e83529726e7f52d2, type: 3}
   iconLocked: {fileID: 21300000, guid: 6548719487816444b8d3b8e09fdea2cd, type: 3}
   barSlot: {fileID: 1070345408}
@@ -4849,6 +4851,7 @@ MonoBehaviour:
   locked: 0
   price: 0
   skillLevel: 0
+  unlockLevel: 0
   icon: {fileID: 21300000, guid: bacdfd848c73c8e4eb4492be26396faf, type: 3}
   iconLocked: {fileID: 0}
   barSlot: {fileID: 1416314980}
@@ -5775,6 +5778,7 @@ MonoBehaviour:
   locked: 0
   price: 0
   skillLevel: 0
+  unlockLevel: 0
   icon: {fileID: 21300000, guid: bacdfd848c73c8e4eb4492be26396faf, type: 3}
   iconLocked: {fileID: 0}
   barSlot: {fileID: 1416314980}
@@ -5964,7 +5968,7 @@ GameObject:
   - component: {fileID: 702875748}
   - component: {fileID: 702875747}
   m_Layer: 5
-  m_Name: Price
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6009,7 +6013,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 5
+  m_text: 'Unlock at level: X'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6037,8 +6041,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 0.5
-  m_fontSizeBase: 0.5
+  m_fontSize: 0.4
+  m_fontSizeBase: 0.4
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6052,7 +6056,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_firstOverflowCharacterIndex: -1
@@ -6078,10 +6082,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 702875747}
-    characterCount: 1
+    characterCount: 18
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 3
+    wordCount: 4
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -6148,6 +6152,7 @@ MonoBehaviour:
   locked: 0
   price: 0
   skillLevel: 0
+  unlockLevel: 0
   icon: {fileID: 21300000, guid: 6fe4f44164a136447a3b803067a26588, type: 3}
   iconLocked: {fileID: 21300000, guid: 6548719487816444b8d3b8e09fdea2cd, type: 3}
   barSlot: {fileID: 52059374}
@@ -6485,6 +6490,7 @@ MonoBehaviour:
   locked: 0
   price: 0
   skillLevel: 0
+  unlockLevel: 0
   icon: {fileID: 21300000, guid: bacdfd848c73c8e4eb4492be26396faf, type: 3}
   iconLocked: {fileID: 0}
   barSlot: {fileID: 2057200484}
@@ -7635,6 +7641,7 @@ MonoBehaviour:
   locked: 0
   price: 0
   skillLevel: 0
+  unlockLevel: 0
   icon: {fileID: 21300000, guid: bacdfd848c73c8e4eb4492be26396faf, type: 3}
   iconLocked: {fileID: 0}
   barSlot: {fileID: 2057200484}
@@ -8511,6 +8518,7 @@ MonoBehaviour:
   locked: 0
   price: 0
   skillLevel: 0
+  unlockLevel: 0
   icon: {fileID: 21300000, guid: bacdfd848c73c8e4eb4492be26396faf, type: 3}
   iconLocked: {fileID: 0}
   barSlot: {fileID: 1416314980}
@@ -9020,7 +9028,7 @@ GameObject:
   - component: {fileID: 1002573885}
   - component: {fileID: 1002573884}
   m_Layer: 5
-  m_Name: Price
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9065,7 +9073,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 5
+  m_text: 'Unlock at level: X'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9093,12 +9101,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 0.5
-  m_fontSizeBase: 0.5
+  m_fontSize: 0.4
+  m_fontSizeBase: 0.4
   m_fontWeight: 400
   m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMin: 0.47
+  m_fontSizeMax: 0.5
   m_fontStyle: 0
   m_textAlignment: 514
   m_isAlignmentEnumConverted: 1
@@ -9108,7 +9116,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_firstOverflowCharacterIndex: -1
@@ -9134,10 +9142,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1002573884}
-    characterCount: 1
+    characterCount: 18
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 3
+    wordCount: 4
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -9375,6 +9383,7 @@ MonoBehaviour:
   locked: 0
   price: 0
   skillLevel: 0
+  unlockLevel: 0
   icon: {fileID: 21300000, guid: dacb70cbac823254fb1237478975e332, type: 3}
   iconLocked: {fileID: 21300000, guid: 6548719487816444b8d3b8e09fdea2cd, type: 3}
   barSlot: {fileID: 1070345408}
@@ -10063,6 +10072,7 @@ MonoBehaviour:
   locked: 0
   price: 0
   skillLevel: 0
+  unlockLevel: 0
   icon: {fileID: 21300000, guid: 1f830d3b8ec027e4a905d239ee595f8b, type: 3}
   iconLocked: {fileID: 21300000, guid: 6548719487816444b8d3b8e09fdea2cd, type: 3}
   barSlot: {fileID: 52059374}
@@ -11572,6 +11582,7 @@ MonoBehaviour:
   locked: 0
   price: 0
   skillLevel: 0
+  unlockLevel: 0
   icon: {fileID: 21300000, guid: 4c1310c38b300bc4f84f39f2249e4132, type: 3}
   iconLocked: {fileID: 21300000, guid: 6548719487816444b8d3b8e09fdea2cd, type: 3}
   barSlot: {fileID: 52059374}
@@ -12021,6 +12032,7 @@ MonoBehaviour:
   locked: 0
   price: 0
   skillLevel: 0
+  unlockLevel: 0
   icon: {fileID: 21300000, guid: 989bbf270eaf5f346afc00227f003d14, type: 3}
   iconLocked: {fileID: 21300000, guid: 6548719487816444b8d3b8e09fdea2cd, type: 3}
   barSlot: {fileID: 52059374}
@@ -14464,6 +14476,7 @@ MonoBehaviour:
   locked: 0
   price: 0
   skillLevel: 0
+  unlockLevel: 0
   icon: {fileID: 21300000, guid: bacdfd848c73c8e4eb4492be26396faf, type: 3}
   iconLocked: {fileID: 0}
   barSlot: {fileID: 2057200484}
@@ -16028,6 +16041,7 @@ MonoBehaviour:
   locked: 0
   price: 0
   skillLevel: 0
+  unlockLevel: 0
   icon: {fileID: 21300000, guid: f2758f07394ac0d4f8101781fa7f6598, type: 3}
   iconLocked: {fileID: 21300000, guid: 6548719487816444b8d3b8e09fdea2cd, type: 3}
   barSlot: {fileID: 1070345408}
@@ -17670,7 +17684,7 @@ GameObject:
   - component: {fileID: 1937738131}
   - component: {fileID: 1937738130}
   m_Layer: 5
-  m_Name: Price
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17715,7 +17729,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 5
+  m_text: 'Unlock at level: X'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -17743,12 +17757,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 0.5
-  m_fontSizeBase: 0.5
+  m_fontSize: 0.4
+  m_fontSizeBase: 0.4
   m_fontWeight: 400
   m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMin: 0.4
+  m_fontSizeMax: 0.5
   m_fontStyle: 0
   m_textAlignment: 514
   m_isAlignmentEnumConverted: 1
@@ -17758,7 +17772,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_firstOverflowCharacterIndex: -1
@@ -17784,10 +17798,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1937738130}
-    characterCount: 1
+    characterCount: 18
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 3
+    wordCount: 4
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -18241,6 +18255,7 @@ MonoBehaviour:
   locked: 0
   price: 0
   skillLevel: 0
+  unlockLevel: 0
   icon: {fileID: 21300000, guid: bacdfd848c73c8e4eb4492be26396faf, type: 3}
   iconLocked: {fileID: 0}
   barSlot: {fileID: 1416314980}
@@ -18931,6 +18946,7 @@ MonoBehaviour:
   locked: 0
   price: 0
   skillLevel: 0
+  unlockLevel: 0
   icon: {fileID: 21300000, guid: f0cb8d6a9ae3de84f88aa6a9572d77d5, type: 3}
   iconLocked: {fileID: 21300000, guid: 6548719487816444b8d3b8e09fdea2cd, type: 3}
   barSlot: {fileID: 1070345408}
@@ -19594,7 +19610,7 @@ GameObject:
   - component: {fileID: 2127013932}
   - component: {fileID: 2127013931}
   m_Layer: 5
-  m_Name: Price
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19639,7 +19655,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 5
+  m_text: 'Unlock at level: X'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -19667,8 +19683,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 0.5
-  m_fontSizeBase: 0.5
+  m_fontSize: 0.4
+  m_fontSizeBase: 0.4
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -19682,7 +19698,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_firstOverflowCharacterIndex: -1
@@ -19708,10 +19724,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 2127013931}
-    characterCount: 1
+    characterCount: 18
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 3
+    wordCount: 4
     linkCount: 0
     lineCount: 1
     pageCount: 1

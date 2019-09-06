@@ -7,6 +7,7 @@ public class GameStateController : StateController {
     [HideInInspector] public bool optionsButtonPressed;
     [HideInInspector] public bool ballMenuButtonPressed;
     [HideInInspector] public bool ballMenuCloseButtonPressed;
+    [HideInInspector] public bool skillMenuCloseButtonPressed;
     [HideInInspector] public bool optionsMenuCloseButtonPressed;
     [HideInInspector] public bool tappedOnPauseBackground;
     [HideInInspector] public bool skillBarLongClick;

@@ -9,12 +9,14 @@ public class SkillMenu : MonoBehaviour {
 
     private AudioSource errorSfx;
     private PauseBackground pauseBackground;
+    private GameStateController gameStateController;
 
     private bool isVisible;
 
     private void Awake() {
-        errorSfx = GameObject.Find("SfxError").GetComponent<AudioSource>();
         pauseBackground = FindObjectOfType<PauseBackground>();
+        gameStateController = FindObjectOfType<GameStateController>();
+        errorSfx = GameObject.Find("SfxError").GetComponent<AudioSource>();
     }
 
     public void EquipSkillOnClick(SkillMenuSlot slot) {
@@ -29,6 +31,10 @@ public class SkillMenu : MonoBehaviour {
             slots[i].skill = newSkillsToDisplay[i];
             slots[i].UpdateSlot();
         }
+    }
+
+    public void CloseButtonOnClick() {
+        gameStateController.skillMenuCloseButtonPressed = true;
     }
 
     public void Show() {

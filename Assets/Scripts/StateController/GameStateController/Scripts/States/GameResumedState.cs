@@ -12,6 +12,7 @@ public class GameResumedState : State {
         c.ballMenuButtonPressed = false;
         c.tappedOnPauseBackground = false;
         c.ballMenuCloseButtonPressed = false;
+        c.skillMenuCloseButtonPressed = false;
         c.optionsMenuCloseButtonPressed = false;
     }
 }
