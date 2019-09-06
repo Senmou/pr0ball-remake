@@ -39,6 +39,8 @@ public class BallMenu : MonoBehaviour {
     }
 
     public void Hide() {
+        if (!gameObject.activeSelf)
+            return;
         GameController.instance.ResumeGame();
         gameObject.SetActive(false);
     }
