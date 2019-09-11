@@ -15,7 +15,7 @@ public class PlayerHP : MonoBehaviour {
     private void Awake() {
         playerHp = transform.FindChild<TextMeshProUGUI>("Value");
 
-        maxHP = 5;
+        maxHP = 50000;
         currentHP = maxHP;
         UpdateUI();
     }

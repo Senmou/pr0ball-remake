@@ -10,7 +10,7 @@ public class BaseEnemy : MonoBehaviour {
     [HideInInspector] public int benisValue;
     [HideInInspector] public Rigidbody2D body;
 
-    protected LevelController levelController;
+    protected WaveStateController waveStateController;
 
     private Transform deadline;
     private EnemyController enemyController;
@@ -19,7 +19,7 @@ public class BaseEnemy : MonoBehaviour {
 
     protected void Awake() {
         body = GetComponentInChildren<Rigidbody2D>();
-        levelController = FindObjectOfType<LevelController>();
+        waveStateController = FindObjectOfType<WaveStateController>();
         enemyController = FindObjectOfType<EnemyController>();
         healthPointUI = GetComponentInChildren<TextMeshProUGUI>();
         playerHP = FindObjectOfType<PlayerHP>();
@@ -54,7 +54,7 @@ public class BaseEnemy : MonoBehaviour {
         UpdateUI();
         if (currentHP <= 0) {
             ReturnToPool(this);
-            Benis.instance.IncScore(benisValue);
+            Score.instance.IncScore(benisValue);
         }
     }
 

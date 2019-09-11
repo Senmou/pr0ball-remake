@@ -2271,10 +2271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c31f14abe6aebdc479326af0c130067f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveUI: {fileID: 1412287867}
   currentWaveUI: {fileID: 1771655580}
-  currentWave: 1
-  wavesPerLevel: 20
 --- !u!4 &164113833
 Transform:
   m_ObjectHideFlags: 0
@@ -2287,7 +2284,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &165697916
 GameObject:
@@ -2895,7 +2892,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &284733021
 GameObject:
@@ -7364,7 +7361,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &809509269
 GameObject:
@@ -7830,6 +7827,7 @@ MonoBehaviour:
   optionsButtonPressed: 0
   ballMenuButtonPressed: 0
   ballMenuCloseButtonPressed: 0
+  skillMenuCloseButtonPressed: 0
   optionsMenuCloseButtonPressed: 0
   tappedOnPauseBackground: 0
   skillBarLongClick: 0
@@ -10706,6 +10704,7 @@ MonoBehaviour:
   lockOneShots: 0
   levelScale: {fileID: 1830602774}
   ballController: {fileID: 893633902}
+  waveStateController: {fileID: 0}
   enemyCount: 0
   hasGameStarted: 0
   cycleFinished: 0
@@ -11150,7 +11149,7 @@ Transform:
   m_LocalScale: {x: 24, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1196485161
 GameObject:
@@ -12080,7 +12079,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1278814535
 GameObject:
@@ -15228,10 +15227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e122c07eccbb47d449b64a11f3113575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelUI: {fileID: 1821001708}
   currentLevelUI: {fileID: 1908944266}
-  currentLevel: 1
-  upcomingBossLevel: 0
 --- !u!4 &1678836919
 Transform:
   m_ObjectHideFlags: 0
@@ -15244,7 +15240,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1684635572
 GameObject:
@@ -15624,6 +15620,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1715340059}
   m_CullTransparentMesh: 0
+--- !u!1 &1737669929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1737669931}
+  - component: {fileID: 1737669930}
+  m_Layer: 0
+  m_Name: WaveStateController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1737669930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737669929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef687dd9db0fc284ca2777b61c4cb327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: {fileID: 11400000, guid: a2d854e91d7ac9d49b90ddd4d83ef839, type: 2}
+  remainState: {fileID: 11400000, guid: f8f6ed59bdf2e8c4280ca3ba4205f594, type: 2}
+  lockOneShots: 0
+  enemyController: {fileID: 0}
+  waveCompleted: 0
+  finalWaveCompleted: 0
+--- !u!4 &1737669931
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737669929}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.740258, y: 3.5779207, z: -0.62286484}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1765761682
 GameObject:
   m_ObjectHideFlags: 0
@@ -16298,7 +16343,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 816369980}
-        m_MethodName: Hide
+        m_MethodName: CloseButtonOnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16343,7 +16388,7 @@ Transform:
   - {fileID: 2008375639}
   - {fileID: 1596905799}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1818905181
 MonoBehaviour:
@@ -19216,7 +19261,7 @@ Transform:
   - {fileID: 1487359798}
   - {fileID: 1866840003}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2084965266
 GameObject:

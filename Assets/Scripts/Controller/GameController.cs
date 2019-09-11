@@ -41,8 +41,8 @@ public class GameController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.RightArrow))
             EventManager.TriggerEvent("WaveCompleted");
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-            EventManager.TriggerEvent("ReachedNextLevel");
+        if (Input.GetKey(KeyCode.UpArrow))
+            EventManager.TriggerEvent("WaveCompleted");
 
         if (Input.GetKeyDown(KeyCode.B))
             EventManager.TriggerEvent("ReachedBossLevel");

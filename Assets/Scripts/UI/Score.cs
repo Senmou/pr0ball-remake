@@ -1,9 +1,9 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class Benis : MonoBehaviour {
+public class Score : MonoBehaviour {
 
-    public static Benis instance;
+    public static Score instance;
 
     public TextMeshProUGUI scoreUI;
 

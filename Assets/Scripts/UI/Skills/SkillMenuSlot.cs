@@ -1,25 +1,27 @@
-﻿using TMPro;
+﻿using UnityEngine.UI;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class SkillMenuSlot : MonoBehaviour {
 
     public Skill skill;
 
     private Image image;
+    private SkillMenu skillMenu;
     private TextMeshProUGUI priceLabel;
     private TextMeshProUGUI priceValue;
-    private SkillMenu skillMenu;
     private SkillMenuUnlockButton unlockButton;
+    private WaveStateController waveStateController;
 
     private AudioSource purchaseSfx;
     private AudioSource errorSfx;
 
     private void Awake() {
         image = GetComponent<Image>();
+        skillMenu = FindObjectOfType<SkillMenu>();
         priceLabel = transform.FindChild<TextMeshProUGUI>("SkillData/Price/Label");
         priceValue = transform.FindChild<TextMeshProUGUI>("SkillData/Price/Value");
-        skillMenu = FindObjectOfType<SkillMenu>();
+        waveStateController = FindObjectOfType<WaveStateController>();
         unlockButton = GetComponentInChildren<SkillMenuUnlockButton>();
 
         purchaseSfx = GameObject.Find("SfxUnlockSkill").GetComponent<AudioSource>();
@@ -38,7 +40,7 @@ public class SkillMenuSlot : MonoBehaviour {
     }
 
     public void UnlockSkill() {
-        if (LevelController.instance.currentLevel >= skill.unlockLevel) {
+        if (waveStateController.CurrentLevel >= skill.unlockLevel) {
             skill.locked = false;
             purchaseSfx.Play();
             unlockButton.Hide();

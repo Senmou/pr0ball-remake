@@ -42,8 +42,8 @@ public class Ball : MonoBehaviour {
     }
     
     private void Update() {
-        if (body.gravityScale > 0f)
-            MoveToEnemy();
+        //if (body.gravityScale > 0f)
+        //    MoveToEnemy();
     }
 
     private void FixedUpdate() {

@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections;
 using MarchingBytes;
 using UnityEngine;
 
@@ -9,25 +9,16 @@ public class EnemyController : MonoBehaviour {
 
     public LootDropTable enemyLDT;
     public List<BaseEnemy> activeEnemies;
-
-    private PlayerHP playerHP;
-    private bool isBossSpawned;
+    
     private PlayStateController playStateController;
-    private LevelController levelController;
 
     private void OnValidate() {
         enemyLDT.ValidateTable();
     }
 
     private void Awake() {
-        isBossSpawned = false;
-        playerHP = FindObjectOfType<PlayerHP>();
         playStateController = FindObjectOfType<PlayStateController>();
-        levelController = FindObjectOfType<LevelController>();
-        EventManager.StartListening("WaveCompleted", OnWaveCompleted);
-        EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
-        EventManager.StartListening("ReachedBossLevel", OnReachedBossLevel);
-        EventManager.StartListening("FailedLevel", OnFailedLevel);
+       
         activeEnemies = new List<BaseEnemy>();
         enemyLDT.ValidateTable();
     }
@@ -35,52 +26,7 @@ public class EnemyController : MonoBehaviour {
     private void Update() {
         playStateController.enemyCount = activeEnemies.Count;
     }
-
-    private void OnFailedLevel() {
-        DespawnAllEnemies();
-        CreateInitialWaves();
-    }
-
-    private void OnReachedBossLevel() {
-        DespawnAllEnemies();
-        CreateBossWave();
-        isBossSpawned = true;
-    }
-
-    private void OnReachedNextLevel() {
-        if (isBossSpawned) {
-            isBossSpawned = false;
-            int remainingEnemies = activeEnemies.Count;
-            DespawnAllEnemies();
-
-            // Failed boss level
-            if (remainingEnemies >= playerHP.CurrentHP) {
-                levelController.DecreaseLevel(2);
-            } else {
-                DespawnAllEnemies();
-                CreateInitialWaves();
-            }
-
-            playerHP.TakeDamage(remainingEnemies);
-        } else {
-            DespawnAllEnemies();
-            CreateInitialWaves();
-        }
-    }
-
-    public void OnWaveCompleted() {
-        if (!isBossSpawned) {
-            if (activeEnemies.Count == 0)
-                EventManager.TriggerEvent("ReachedNextLevel");
-            else
-                CreateWave();
-        } else {
-            // if boss is defeated
-            if (activeEnemies.Count == 0)
-                EventManager.TriggerEvent("ReachedNextLevel");
-        }
-    }
-
+    
     public void DespawnAllEnemies() {
         foreach (var enemy in activeEnemies) {
             EasyObjectPool.instance.ReturnObjectToPool(enemy.gameObject);
@@ -136,7 +82,7 @@ public class EnemyController : MonoBehaviour {
         yield return null;
     }
 
-    private void CreateBossWave() {
+    public void CreateBossWave() {
         List<Transform> spawnPoints = SpawnPoints.instance.GetRandomBossSpawnPoints();
 
         for (int i = 0; i < spawnPoints.Count; i++) {
