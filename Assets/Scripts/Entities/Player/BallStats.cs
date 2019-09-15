@@ -1,17 +1,23 @@
 ﻿using UnityEngine;
 
-public class BallStats : MonoBehaviour {
+public enum BallType { BLUE, GREEN }
 
-    public float drag = 0.1f;
-    public float gravityScale = 4f;
-    public float bounciness = 0.8f;
+[System.Serializable]
+public class BallStats {
 
-    private int baseDamage = 1;
-    private float critChance = 1f;
-    private float critDamageMultiplier = 2.5f;
+    public BallType ballType;
+    public BallPhysics ballPhysics;
 
-    public float CritChance { get => critChance; }
-    public float CritDamageMultiplier { get => critDamageMultiplier; }
+    [System.Serializable]
+    public class BallPhysics {
+        public float drag = 0.1f;
+        public float gravityScale = 4f;
+        public float bounciness = 0.8f;
+    }
+
+    public int baseDamage = 1;
+    public float critChance = 1f;
+    public float critDamageMultiplier = 2.5f;
 
     public int Damage() {
         float damage = baseDamage;
@@ -26,8 +32,8 @@ public class BallStats : MonoBehaviour {
     }
 
     public void Apply(Ball ball) {
-        ball.body.drag = drag;
-        ball.body.gravityScale = gravityScale;
-        ball.body.sharedMaterial.bounciness = bounciness;
+        ball.body.drag = ballPhysics.drag;
+        ball.body.gravityScale = ballPhysics.gravityScale;
+        ball.body.sharedMaterial.bounciness = ballPhysics.bounciness;
     }
 }

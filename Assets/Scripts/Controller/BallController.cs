@@ -7,7 +7,7 @@ using TMPro;
 
 public class BallController : MonoBehaviour {
 
-    [HideInInspector] public string poolName = "BallPool";
+    public LootDropTable ballLDT;
 
     public bool canShootAgain;
     public Transform spawnPoint;
@@ -26,6 +26,14 @@ public class BallController : MonoBehaviour {
     public int MaxBallCount { get => maxBallCount; }
     public bool LifeTimeExeeded { get => lifeTime <= 0f; }
     public bool AllBallsShot { get => BallCount == MaxBallCount; }
+
+    private void OnValidate() {
+        ballLDT.ValidateTable();
+    }
+
+    private void Awake() {
+        ballLDT.ValidateTable();
+    }
 
     private void Start() {
         InitData();
@@ -93,7 +101,10 @@ public class BallController : MonoBehaviour {
     }
 
     private void CreateBall(Vector2 spawnPoint) {
-        GameObject go = EasyObjectPool.instance.GetObjectFromPool(poolName, spawnPoint, Quaternion.identity);
+
+        string sourcePool = ballLDT.PickLootDropItem().poolName;
+        GameObject go = EasyObjectPool.instance.GetObjectFromPool(sourcePool, spawnPoint, Quaternion.identity);
+
         if (go != null) {
             Ball ball = go.GetComponent<Ball>();
             balls.Add(ball);

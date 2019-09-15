@@ -10,25 +10,24 @@ public class Ball : MonoBehaviour {
     private float startForce = 300f;
     private float maxVelocity = 50f;
 
-    private BallStats ballStats;
+    protected BallStats ballStats;
+
+    private new Collider2D collider;
     private AudioSource audioSource;
     private Transform bezierEndPoint;
     private BallController ballController;
     private EnemyController enemyController;
-    private new Collider2D collider;
 
     private Vector2 randomEnemyPos = Vector2.zero;
 
-    private void Awake() {
+    protected void Awake() {
         body = GetComponent<Rigidbody2D>();
         cannon = FindObjectOfType<Cannon>();
         collider = GetComponent<Collider2D>();
-        ballStats = FindObjectOfType<BallStats>();
         ballController = FindObjectOfType<BallController>();
         enemyController = FindObjectOfType<EnemyController>();
         audioSource = GameObject.Find("SfxBounce").GetComponent<AudioSource>();
         bezierEndPoint = GameObject.FindGameObjectWithTag("BallCounterIcon").transform;
-        ballStats.Apply(this);
     }
 
     private void OnEnable() {
@@ -41,11 +40,6 @@ public class Ball : MonoBehaviour {
         collider.enabled = false;
     }
     
-    private void Update() {
-        //if (body.gravityScale > 0f)
-        //    MoveToEnemy();
-    }
-
     private void FixedUpdate() {
         body.velocity = Vector2.ClampMagnitude(body.velocity, maxVelocity);
     }

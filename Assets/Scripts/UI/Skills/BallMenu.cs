@@ -4,7 +4,7 @@ using UnityEngine;
 public class BallMenu : MonoBehaviour {
 
     private MoveUI moveUI;
-    private BallStats ballStats;
+    //private BallStats ballStats;
     private TextMeshProUGUI damage;
     private TextMeshProUGUI critChance;
     private TextMeshProUGUI critMultiplier;
@@ -13,7 +13,7 @@ public class BallMenu : MonoBehaviour {
 
     private void Awake() {
         moveUI = GetComponent<MoveUI>();
-        ballStats = FindObjectOfType<BallStats>();
+        //ballStats = FindObjectOfType<BallStats>();
         damage = transform.FindChild<TextMeshProUGUI>("Damage/Value");
         critChance = transform.FindChild<TextMeshProUGUI>("Crit/Value");
         critMultiplier = transform.FindChild<TextMeshProUGUI>("CritMultiplier/Value");
@@ -21,9 +21,9 @@ public class BallMenu : MonoBehaviour {
     }
 
     private void UpdateUI() {
-        damage.text = ballStats.Damage().ToString();
-        critChance.text = ballStats.CritChance.ToString();
-        critMultiplier.text = ballStats.CritDamageMultiplier.ToString();
+        //damage.text = ballStats.Damage().ToString();
+        //critChance.text = ballStats.CritChance.ToString();
+        //critMultiplier.text = ballStats.CritDamageMultiplier.ToString();
     }
 
     public void BallMenuButtonOnClick() {

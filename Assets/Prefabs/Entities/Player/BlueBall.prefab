@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5097657340184883239}
-  - component: {fileID: 6655456650157361544}
+  - component: {fileID: 761471560624341165}
   - component: {fileID: 4788159331868298045}
   - component: {fileID: 3317043405471346669}
   - component: {fileID: 2603739272314104664}
   - component: {fileID: 2147208075993791555}
   m_Layer: 8
-  m_Name: Ball
+  m_Name: BlueBall
   m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6655456650157361544
+--- !u!114 &761471560624341165
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,11 +44,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4691551078425360276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08dc0f58e4a6bd74091e0c0965afd1ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 2976f520632207c41bf060b65dbab9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cannon: {fileID: 0}
-  ballConfig: {fileID: 11400000, guid: 2f2748d32860b5242a850236e82a6d48, type: 2}
   body: {fileID: 0}
 --- !u!50 &4788159331868298045
 Rigidbody2D:
