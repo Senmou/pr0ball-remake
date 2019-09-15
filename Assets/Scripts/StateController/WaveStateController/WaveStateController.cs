@@ -2,6 +2,7 @@
 
 public class WaveStateController : StateController {
 
+    [HideInInspector] public PlayerHP playerHP;
     [HideInInspector] public EnemyController enemyController;
     [HideInInspector] public bool waveCompleted;
     [HideInInspector] public bool levelCompleted;
@@ -29,6 +30,7 @@ public class WaveStateController : StateController {
         currentWave = 1;
         currentLevel = 1;
 
+        playerHP = FindObjectOfType<PlayerHP>();
         enemyController = FindObjectOfType<EnemyController>();
         EventManager.StartListening("WaveCompleted", OnWaveCompleted);
     }
@@ -38,6 +40,7 @@ public class WaveStateController : StateController {
         if (currentWave == wavesPerLevel) {
             if (CurrentLevel % 10 == 9) {
                 bossLevelUpcoming = true;
+                CurrentWave++;
                 return;
             }
             levelCompleted = true;

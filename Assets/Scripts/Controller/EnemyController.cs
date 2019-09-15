@@ -34,6 +34,12 @@ public class EnemyController : MonoBehaviour {
         activeEnemies.Clear();
     }
 
+    public int DespawnBoss() {
+        int remainingEnemies = activeEnemies.Count;
+        DespawnAllEnemies();
+        return remainingEnemies;
+    }
+
     public void CreateWave() {
         MoveEnemies();
         List<Transform> spawnPoints = SpawnPoints.instance.GetRandomSpawnPoints();
