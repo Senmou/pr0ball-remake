@@ -2957,6 +2957,7 @@ MonoBehaviour:
       drag: 0.1
       gravityScale: 4
       bounciness: 0.8
+    spawnChance: 0
     baseDamage: 1
     critChance: 1
     critDamageMultiplier: 2.5
@@ -2965,6 +2966,16 @@ MonoBehaviour:
       drag: 0.1
       gravityScale: 4
       bounciness: 0.8
+    spawnChance: 60
+    baseDamage: 10
+    critChance: 1
+    critDamageMultiplier: 2.5
+  - ballType: 2
+    ballPhysics:
+      drag: 0.1
+      gravityScale: 4
+      bounciness: 0.8
+    spawnChance: 60
     baseDamage: 10
     critChance: 1
     critDamageMultiplier: 2.5
@@ -8757,24 +8768,24 @@ MonoBehaviour:
     - item: {fileID: 4691551078425360276, guid: 6a6e33a7ed415f846a90e17498144b87,
         type: 3}
       poolName: BlueBallPool
-      probabilityWeight: 81
-      probabilityPercent: 81
+      probabilityWeight: 1
+      probabilityPercent: 33.333332
       probabilityRangeFrom: 0
-      probabilityRangeTo: 81
+      probabilityRangeTo: 1
     - item: {fileID: 4691551078425360276, guid: dee40261551988a4b9871df6ef66bc16,
         type: 3}
       poolName: GreenBallPool
-      probabilityWeight: 10
-      probabilityPercent: 10
-      probabilityRangeFrom: 81
-      probabilityRangeTo: 91
+      probabilityWeight: 1
+      probabilityPercent: 33.333332
+      probabilityRangeFrom: 1
+      probabilityRangeTo: 2
     - item: {fileID: 4691551078425360276, guid: 960e0001cea24d24c829897806dcd7f6,
         type: 3}
       poolName: OrangeBallPool
-      probabilityWeight: 9
-      probabilityPercent: 9
-      probabilityRangeFrom: 91
-      probabilityRangeTo: 100
+      probabilityWeight: 1
+      probabilityPercent: 33.333332
+      probabilityRangeFrom: 2
+      probabilityRangeTo: 3
   canShootAgain: 0
   spawnPoint: {fileID: 296674334}
   lifeTimeSlider: {fileID: 1121577801}
@@ -13771,6 +13782,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 100469478}
   m_RootOrder: 35
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1410828778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1410828780}
+  - component: {fileID: 1410828779}
+  m_Layer: 0
+  m_Name: Prefabs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1410828779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410828778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bd67a1f19ee193499716e75f1041b06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - prefab: {fileID: 4691551078425360276, guid: 6a6e33a7ed415f846a90e17498144b87,
+      type: 3}
+    ballType: 0
+  - prefab: {fileID: 4691551078425360276, guid: dee40261551988a4b9871df6ef66bc16,
+      type: 3}
+    ballType: 1
+  - prefab: {fileID: 4691551078425360276, guid: 960e0001cea24d24c829897806dcd7f6,
+      type: 3}
+    ballType: 2
+--- !u!4 &1410828780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410828778}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -56.11012, y: 6.874383, z: -0.20927335}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1412287867
 GameObject:
