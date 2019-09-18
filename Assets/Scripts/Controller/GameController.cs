@@ -39,13 +39,10 @@ public class GameController : MonoBehaviour {
             InputHelper.instance.PrintClickedElementsName();
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
-            EventManager.TriggerEvent("WaveCompleted");
+            LevelData.Wave++;
 
         if (Input.GetKey(KeyCode.UpArrow))
-            EventManager.TriggerEvent("WaveCompleted");
-
-        if (Input.GetKeyDown(KeyCode.B))
-            EventManager.TriggerEvent("ReachedBossLevel");
+            LevelData.Wave++;
 
         if (Input.GetKeyDown(KeyCode.Escape))
             gameStateController.backButtonPressed = true;

@@ -3,13 +3,13 @@ using TMPro;
 
 public class LevelUI : MonoBehaviour {
 
-    public TextMeshProUGUI levelUI;
+    private TextMeshProUGUI levelUI;
 
     private void Awake() {
         levelUI = GetComponent<TextMeshProUGUI>();
     }
 
     private void Update() {
-        levelUI.text = LevelData.level.ToString();
+        levelUI.text = LevelData.Level.ToString();
     }
 }

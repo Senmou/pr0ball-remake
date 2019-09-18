@@ -40,7 +40,7 @@ public class SkillMenuSlot : MonoBehaviour {
     }
 
     public void UnlockSkill() {
-        if (LevelData.level >= skill.unlockLevel) {
+        if (LevelData.Level >= skill.unlockLevel) {
             skill.locked = false;
             purchaseSfx.Play();
             unlockButton.Hide();
