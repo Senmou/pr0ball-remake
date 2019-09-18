@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8963b6ff5b015aa489d7bf56719ca063, type: 3}
-  m_Name: DespawnBoss
+  m_Script: {fileID: 11500000, guid: d468f31a66e66bb45938265555597036, type: 3}
+  m_Name: BossLevelCompleted
   m_EditorClassIdentifier: 

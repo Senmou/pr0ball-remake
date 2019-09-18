@@ -5,6 +5,7 @@ public class FinishCycle : OneShot {
 
     public override void Act(StateController controller) {
         PlayStateController c = controller as PlayStateController;
+        c.ballController.CancelShooting();
         c.ballController.OnCycleFinish(c);
     }
 }

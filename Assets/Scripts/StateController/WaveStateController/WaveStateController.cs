@@ -27,8 +27,8 @@ public class WaveStateController : StateController {
     public int CurrentLevel { get => currentLevel; }
 
     private void Awake() {
-        currentWave = 1;
-        currentLevel = 1;
+        currentWave = 20;
+        currentLevel = 9;
 
         playerHP = FindObjectOfType<PlayerHP>();
         enemyController = FindObjectOfType<EnemyController>();
@@ -49,5 +49,10 @@ public class WaveStateController : StateController {
             waveCompleted = true;
 
         CurrentWave++;
+    }
+
+    public void OnBossCompleted() {
+        //currentLevel++;
+        //currentWave = 1;
     }
 }

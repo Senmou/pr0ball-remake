@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "WaveStateController/OneShots/SpawnInitialWaves")]
+[CreateAssetMenu(menuName = "PlayStateController/OneShots/SpawnInitialWaves")]
 public class SpawnInitialWaves : OneShot {
 
     public override void Act(StateController controller) {
-        WaveStateController c = controller as WaveStateController;
+        PlayStateController c = controller as PlayStateController;
         c.enemyController.CreateInitialWaves();
     }
 }

@@ -2,15 +2,14 @@
 
 public class PlayStateController : StateController {
 
-    public LevelScale levelScale;
-    public BallController ballController;
-    public WaveStateController waveStateController;
-
-    [HideInInspector] public int enemyCount;
-    [HideInInspector] public bool hasGameStarted;
     [HideInInspector] public bool cycleFinished;
+    [HideInInspector] public bool hasGameStarted;
+
+    [HideInInspector] public LevelScale levelScale;
+    [HideInInspector] public BallController ballController;
+    [HideInInspector] public EnemyController enemyController;
 
     private void Awake() {
-        waveStateController = FindObjectOfType<WaveStateController>();
+        enemyController = FindObjectOfType<EnemyController>();
     }
 }

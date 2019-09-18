@@ -16,7 +16,7 @@ public class BallController : MonoBehaviour {
     public TextMeshProUGUI currentBallCountUI;
 
     private float lifeTime;
-    private int maxBallCount = 2;
+    private int maxBallCount = 30;
     private float maxLifeTime = 3f;
     private float shootingRate = 0.1f;
 
@@ -26,13 +26,22 @@ public class BallController : MonoBehaviour {
     public int MaxBallCount { get => maxBallCount; }
     public bool LifeTimeExeeded { get => lifeTime <= 0f; }
     public bool AllBallsShot { get => BallCount == MaxBallCount; }
-
+    
     private void OnValidate() {
         ballLDT.ValidateTable();
     }
 
     private void Awake() {
+        SetLDIWeights();
         ballLDT.ValidateTable();
+    }
+
+    private void SetLDIWeights() {
+        ballLDT.SetWeight("GreenBallPool", BallTypes.instance.GetBallStats(BallType.GREEN).spawnChance);
+        ballLDT.SetWeight("OrangeBallPool", BallTypes.instance.GetBallStats(BallType.ORANGE).spawnChance);
+
+        float blueBallSpawnChance = 100f - BallTypes.instance.GetBallStats(BallType.GREEN).spawnChance - BallTypes.instance.GetBallStats(BallType.ORANGE).spawnChance;
+        ballLDT.SetWeight("BlueBallPool", blueBallSpawnChance);
     }
 
     private void Start() {
@@ -52,6 +61,10 @@ public class BallController : MonoBehaviour {
         UpdateLifeTimeSlider();
     }
 
+    public void CancelShooting() {
+        CancelInvoke("ShootBall");
+    }
+
     public void Shoot() {
         canShootAgain = false;
         InvokeRepeating("ShootBall", 0f, shootingRate);
@@ -63,6 +76,7 @@ public class BallController : MonoBehaviour {
         balls.CopyTo(temp);
 
         foreach (Ball ball in temp) {
+            if (ball == null) continue;
             ball.DisableCollider();
             ball.Move(Random.Range(0.2f, 0.5f), controller);
             yield return null;

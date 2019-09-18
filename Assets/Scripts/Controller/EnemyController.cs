@@ -22,22 +22,12 @@ public class EnemyController : MonoBehaviour {
         activeEnemies = new List<BaseEnemy>();
         enemyLDT.ValidateTable();
     }
-
-    private void Update() {
-        playStateController.enemyCount = activeEnemies.Count;
-    }
     
     public void DespawnAllEnemies() {
         foreach (var enemy in activeEnemies) {
             EasyObjectPool.instance.ReturnObjectToPool(enemy.gameObject);
         }
         activeEnemies.Clear();
-    }
-
-    public int DespawnBoss() {
-        int remainingEnemies = activeEnemies.Count;
-        DespawnAllEnemies();
-        return remainingEnemies;
     }
 
     public void CreateWave() {
@@ -53,6 +43,11 @@ public class EnemyController : MonoBehaviour {
     }
 
     public void CreateInitialWaves() {
+        StartCoroutine(CreateInitalWavesDelayed());
+    }
+
+    private IEnumerator CreateInitalWavesDelayed() {
+        yield return new WaitForEndOfFrame();
         List<Transform> spawnPoints = SpawnPoints.instance.GetInitialSpawnPoints();
 
         for (int i = 0; i < spawnPoints.Count; i++) {

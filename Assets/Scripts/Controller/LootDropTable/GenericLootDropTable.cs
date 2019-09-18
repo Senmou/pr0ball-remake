@@ -8,6 +8,19 @@ public class GenericLootDropTable<T> where T : GenericLootDropItem {
 
     float probabilityTotalWeight;
 
+    private T GetItem(string poolName) {
+        foreach (var item in lootDropItems) {
+            if (item.poolName == poolName)
+                return item;
+        }
+        return null;
+    }
+
+    public void SetWeight(string poolName, float weight) {
+        T item = GetItem(poolName);
+        item.probabilityWeight = weight;
+    }
+
     public void ValidateTable() {
         if (lootDropItems != null && lootDropItems.Count > 0) {
             float currentProbabilityWeightMaximum = 0f;
@@ -30,7 +43,7 @@ public class GenericLootDropTable<T> where T : GenericLootDropItem {
             }
         }
     }
-
+    
     public T PickLootDropItem() {
         float pickedNumber = Random.Range(0f, probabilityTotalWeight);
 

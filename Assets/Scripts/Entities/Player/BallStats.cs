@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 
-public enum BallType { BLUE, GREEN }
+public enum BallType { BLUE, GREEN, ORANGE }
 
 [System.Serializable]
 public class BallStats {
 
     public BallType ballType;
     public BallPhysics ballPhysics;
+    public float spawnChance;
 
     [System.Serializable]
     public class BallPhysics {
@@ -23,10 +24,8 @@ public class BallStats {
         float damage = baseDamage;
 
         float r = Random.Range(0f, 100f);
-        if (r < critChance) {
+        if (r < critChance)
             damage *= critDamageMultiplier;
-            Debug.Log("CRIT: " + damage);
-        }
 
         return (int)damage;
     }

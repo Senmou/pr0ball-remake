@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5097657340184883239}
-  - component: {fileID: 4677439521175981149}
+  - component: {fileID: 2270915111992270641}
   - component: {fileID: 4788159331868298045}
   - component: {fileID: 3317043405471346669}
   - component: {fileID: 2603739272314104664}
   - component: {fileID: 2147208075993791555}
   m_Layer: 8
-  m_Name: GreenBall
+  m_Name: OrangeBall
   m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4677439521175981149
+--- !u!114 &2270915111992270641
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4691551078425360276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 485b3a4c97013644c9d8ce6043038c2d, type: 3}
+  m_Script: {fileID: 11500000, guid: 3dd9325181525a042a30a2eb71fa9d46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cannon: {fileID: 0}
@@ -108,7 +108,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 78dbbf2b8223f1c45b042fb18c1de5d1, type: 3}
-  m_Color: {r: 0.105731584, g: 0.8301887, b: 0.25508916, a: 1}
+  m_Color: {r: 1, g: 0.4829951, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -152,7 +152,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0dcf1edc409641c4ea27a20ae7312b0b, type: 2}
+  - {fileID: 2100000, guid: 88a66b5797001874eb094e66289ff083, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

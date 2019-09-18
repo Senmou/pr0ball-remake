@@ -15,6 +15,6 @@ public class WaveUI : MonoBehaviour {
     }
 
     private void UpdateUI() {
-        currentWaveUI.text = waveStateController.CurrentWave.ToString() + "/" + WaveStateController.wavesPerLevel;
+        currentWaveUI.text = LevelData.wave.ToString() + "/" + LevelData.wavesPerLevel.ToString();
     }
 }

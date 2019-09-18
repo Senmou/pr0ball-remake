@@ -15,6 +15,6 @@ public class LevelUI : MonoBehaviour {
     }
 
     private void UpdateUI() {
-        currentLevelUI.text = waveStateController.CurrentLevel.ToString();
+        currentLevelUI.text = LevelData.level.ToString();
     }
 }

@@ -40,7 +40,7 @@ public class SkillMenuSlot : MonoBehaviour {
     }
 
     public void UnlockSkill() {
-        if (waveStateController.CurrentLevel >= skill.unlockLevel) {
+        if (LevelData.level >= skill.unlockLevel) {
             skill.locked = false;
             purchaseSfx.Play();
             unlockButton.Hide();
