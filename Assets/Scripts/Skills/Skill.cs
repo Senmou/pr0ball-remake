@@ -49,7 +49,7 @@ public class Skill : MonoBehaviour {
 
     public virtual void UseSkill() {
 
-        if (skillMenu.gameObject.activeSelf)
+        if (skillMenu.isVisible)
             return;
 
         if (coolDownCounter == 0) {

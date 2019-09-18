@@ -13,15 +13,16 @@ public class SkillBar : MonoBehaviour {
 
     // Used when a long press on the SkillBarSlot is detected
     public void ShowMenuOnLongClick(SkillBarSlot slot) {
-        skillMenu.DisplaySkills(slot.skills);
-        skillMenu.lastSkillBarSlotClicked = slot;
-        gameStateController.skillBarLongClick = true;
+        if (!skillMenu.isVisible) {
+            skillMenu.DisplaySkills(slot.skills);
+            skillMenu.lastSkillBarSlotClicked = slot;
+            gameStateController.skillBarLongClick = true;
+        }
     }
 
     // Used when SkillBarSlot is tapped while the menu is open
     public void SwitchMenuOnClick(SkillBarSlot slot) {
-
-        if (skillMenu.gameObject.activeSelf) {
+        if (skillMenu.isVisible) {
             skillMenu.lastSkillBarSlotClicked = slot;
             skillMenu.DisplaySkills(slot.skills);
             skillMenu.Show();

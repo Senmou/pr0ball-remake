@@ -12,7 +12,7 @@ public class SkillMenu : MonoBehaviour {
     private PauseBackground pauseBackground;
     private GameStateController gameStateController;
 
-    private bool isVisible;
+    public bool isVisible;
 
     private void Awake() {
         moveUI = GetComponent<MoveUI>();
@@ -40,12 +40,14 @@ public class SkillMenu : MonoBehaviour {
     }
 
     public void Show() {
+        isVisible = true;
         GameController.instance.PauseGame();
         pauseBackground.SetBottomMargin(4f);
         moveUI.FadeTo(new Vector2(0f, 0f), 0.5f);
     }
 
     public void Hide() {
+        isVisible = false;
         GameController.instance.ResumeGame();
         pauseBackground.SetBottomMargin(0f);
         moveUI.FadeTo(new Vector2(0f, -50f), 0.5f);
