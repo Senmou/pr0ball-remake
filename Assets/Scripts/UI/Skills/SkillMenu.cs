@@ -7,6 +7,7 @@ public class SkillMenu : MonoBehaviour {
     // This skillBarSlot opened the current menu
     public SkillBarSlot lastSkillBarSlotClicked;
 
+    private MoveUI moveUI;
     private AudioSource errorSfx;
     private PauseBackground pauseBackground;
     private GameStateController gameStateController;
@@ -14,6 +15,7 @@ public class SkillMenu : MonoBehaviour {
     private bool isVisible;
 
     private void Awake() {
+        moveUI = GetComponent<MoveUI>();
         pauseBackground = FindObjectOfType<PauseBackground>();
         gameStateController = FindObjectOfType<GameStateController>();
         errorSfx = GameObject.Find("SfxError").GetComponent<AudioSource>();
@@ -40,12 +42,12 @@ public class SkillMenu : MonoBehaviour {
     public void Show() {
         GameController.instance.PauseGame();
         pauseBackground.SetBottomMargin(4f);
-        gameObject.SetActive(true);
+        moveUI.FadeTo(new Vector2(0f, 0f), 0.5f);
     }
 
     public void Hide() {
         GameController.instance.ResumeGame();
         pauseBackground.SetBottomMargin(0f);
-        gameObject.SetActive(false);
+        moveUI.FadeTo(new Vector2(0f, -50f), 0.5f);
     }
 }

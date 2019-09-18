@@ -8093,7 +8093,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 6.858, y: 11.429}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &816369979
@@ -11393,7 +11393,8 @@ MonoBehaviour:
   reachedNextWave: 0
   reachedNextLevel: 0
   reachedBossLevel: 0
-  spawningFinished: 0
+  nextLevelIsBoss: 0
+  playerHP: {fileID: 0}
   levelScale: {fileID: 1830602774}
   ballController: {fileID: 893633902}
   enemyController: {fileID: 0}
