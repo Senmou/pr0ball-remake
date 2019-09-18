@@ -10,8 +10,6 @@ public class BaseEnemy : MonoBehaviour {
     [HideInInspector] public int benisValue;
     [HideInInspector] public Rigidbody2D body;
 
-    protected WaveStateController waveStateController;
-
     private Transform deadline;
     private EnemyController enemyController;
     private TextMeshProUGUI healthPointUI;
@@ -19,7 +17,6 @@ public class BaseEnemy : MonoBehaviour {
 
     protected void Awake() {
         body = GetComponentInChildren<Rigidbody2D>();
-        waveStateController = FindObjectOfType<WaveStateController>();
         enemyController = FindObjectOfType<EnemyController>();
         healthPointUI = GetComponentInChildren<TextMeshProUGUI>();
         playerHP = FindObjectOfType<PlayerHP>();

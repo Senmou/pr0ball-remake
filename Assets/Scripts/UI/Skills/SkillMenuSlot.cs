@@ -11,7 +11,6 @@ public class SkillMenuSlot : MonoBehaviour {
     private TextMeshProUGUI priceLabel;
     private TextMeshProUGUI priceValue;
     private SkillMenuUnlockButton unlockButton;
-    private WaveStateController waveStateController;
 
     private AudioSource purchaseSfx;
     private AudioSource errorSfx;
@@ -21,7 +20,6 @@ public class SkillMenuSlot : MonoBehaviour {
         skillMenu = FindObjectOfType<SkillMenu>();
         priceLabel = transform.FindChild<TextMeshProUGUI>("SkillData/Price/Label");
         priceValue = transform.FindChild<TextMeshProUGUI>("SkillData/Price/Value");
-        waveStateController = FindObjectOfType<WaveStateController>();
         unlockButton = GetComponentInChildren<SkillMenuUnlockButton>();
 
         purchaseSfx = GameObject.Find("SfxUnlockSkill").GetComponent<AudioSource>();
