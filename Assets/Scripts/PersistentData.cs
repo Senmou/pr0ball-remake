@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 public class PersistentData : MonoBehaviour {
 
@@ -11,61 +12,35 @@ public class PersistentData : MonoBehaviour {
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
 
-        LoadAll();
+        Serialization.Load();
     }
 
     public SfxData sfxData = new SfxData();
     public MusicData musicData = new MusicData();
 
-    private void LoadAll() {
-        LoadSfxData();
-        LoadMusicData();
-    }
-
-    private void SaveAll() {
-        SaveSfxData();
-        SaveMusicData();
-    }
-
-    private void LoadSfxData() {
-        sfxData.volume = PlayerPrefs.GetFloat("SfxVolume", 0.5f);
-    }
-
-    private void SaveSfxData() {
-        PlayerPrefs.SetFloat("SfxVolume", sfxData.volume);
-    }
-
-    private void LoadMusicData() {
-        musicData.volume = PlayerPrefs.GetFloat("MusicVolume", 5f);
-    }
-
-    private void SaveMusicData() {
-        PlayerPrefs.SetFloat("MusicVolume", musicData.volume);
-    }
-
     private void OnApplicationFocus(bool focus) {
         if (!focus) {
-            SaveAll();
+            Serialization.Save();
         }
     }
 
     private void OnApplicationPause(bool pause) {
         if (pause) {
-            SaveAll();
+            Serialization.Save();
         }
     }
 
     private void OnApplicationQuit() {
-        SaveAll();
+        Serialization.Save();
     }
 }
 
+[Serializable]
 public class SfxData {
-
     public float volume;
 }
 
+[Serializable]
 public class MusicData {
-
     public float volume;
 }
