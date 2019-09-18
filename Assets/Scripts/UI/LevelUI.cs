@@ -3,18 +3,13 @@ using TMPro;
 
 public class LevelUI : MonoBehaviour {
 
-    public TextMeshProUGUI currentLevelUI;
-    private WaveStateController waveStateController;
+    public TextMeshProUGUI levelUI;
 
     private void Awake() {
-        waveStateController = FindObjectOfType<WaveStateController>();
+        levelUI = GetComponent<TextMeshProUGUI>();
     }
 
     private void Update() {
-        UpdateUI();
-    }
-
-    private void UpdateUI() {
-        currentLevelUI.text = LevelData.level.ToString();
+        levelUI.text = LevelData.level.ToString();
     }
 }
