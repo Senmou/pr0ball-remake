@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour {
     private BallMenu ballMenu;
     private EnemyController enemyController;
     private GameStateController gameStateController;
+    private PlayerHP playerHP;
 
     private void Awake() {
         if (instance == null)
@@ -24,6 +25,7 @@ public class GameController : MonoBehaviour {
         ballMenu = FindObjectOfType<BallMenu>();
         enemyController = FindObjectOfType<EnemyController>();
         gameStateController = FindObjectOfType<GameStateController>();
+        playerHP = FindObjectOfType<PlayerHP>();
     }
 
     private void Start() {
@@ -43,6 +45,9 @@ public class GameController : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.UpArrow))
             LevelData.Wave++;
+
+        if (Input.GetKey(KeyCode.LeftArrow))
+            playerHP.TakeDamage(1);
 
         if (Input.GetKeyDown(KeyCode.Escape))
             gameStateController.backButtonPressed = true;

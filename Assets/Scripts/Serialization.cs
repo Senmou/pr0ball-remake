@@ -43,9 +43,7 @@ public static class Serialization {
             FileStream stream = new FileStream(filePath, FileMode.Open);
             SaveData saveData = formatter.Deserialize(stream) as SaveData;
 
-            PersistentData.instance.sfxData = saveData.sfxData;
-            PersistentData.instance.musicData = saveData.musicData;
-            PersistentData.instance.scoreData = saveData.scoreData;
+            PersistentData.instance.LoadDataFromSaveFile(saveData);
 
             Debug.Log("Loaded data from: " + filePath);
             stream.Close();

@@ -5,6 +5,11 @@ public class PersistentData : MonoBehaviour {
 
     public static PersistentData instance;
 
+    public SfxData sfxData;
+    public MusicData musicData;
+    public ScoreData scoreData;
+    public PlayerData playerData;
+
     private void Awake() {
         if (instance == null)
             instance = this;
@@ -12,12 +17,20 @@ public class PersistentData : MonoBehaviour {
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
 
+        sfxData = new SfxData();
+        musicData = new MusicData();
+        scoreData = new ScoreData();
+        playerData = new PlayerData();
+
         Serialization.Load();
     }
 
-    public SfxData sfxData = new SfxData();
-    public MusicData musicData = new MusicData();
-    public ScoreData scoreData = new ScoreData();
+    public void LoadDataFromSaveFile(SaveData saveData) {
+        sfxData = saveData.sfxData;
+        musicData = saveData.musicData;
+        scoreData = saveData.scoreData;
+        playerData = saveData.playerData;
+    }
 
     private void OnApplicationFocus(bool focus) {
         if (!focus) {
@@ -49,4 +62,9 @@ public class MusicData {
 [Serializable]
 public class ScoreData {
     public int score;
+}
+
+[Serializable]
+public class PlayerData {
+    public int hp;
 }
