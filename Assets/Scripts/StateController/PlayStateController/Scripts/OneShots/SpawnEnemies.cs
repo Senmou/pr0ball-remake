@@ -15,7 +15,6 @@ public class SpawnEnemies : OneShot {
             c.fightingBoss = false;
             c.reachedBossLevel = false;
             LevelData.LevelFailed();
-            Debug.Log("failed boss");
             return;
         }
 
@@ -26,7 +25,6 @@ public class SpawnEnemies : OneShot {
             LevelData.LevelUp();
             LevelData.Wave = 1;
             c.enemyController.CreateInitialWaves();
-            Debug.Log("finished boss successfully");
             return;
         }
 
@@ -41,7 +39,6 @@ public class SpawnEnemies : OneShot {
         if (c.reachedNextLevel) {
             c.enemyController.DespawnAllEnemies();
             c.enemyController.CreateInitialWaves();
-            Debug.Log("reached next level");
             return;
         }
 
@@ -54,10 +51,8 @@ public class SpawnEnemies : OneShot {
                 else
                     c.enemyController.CreateInitialWaves();
                 LevelData.LevelUp();
-                Debug.Log("cleared level and reached next level");
             } else {
                 c.enemyController.CreateWave();
-                Debug.Log("reached next wave");
                 return;
             }
         }
@@ -66,7 +61,6 @@ public class SpawnEnemies : OneShot {
             c.fightingBoss = true;
             c.enemyController.DespawnAllEnemies();
             c.enemyController.CreateBossWave();
-            Debug.Log("reached boss");
         }
     }
 }

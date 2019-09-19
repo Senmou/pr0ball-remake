@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class BaseEnemy : MonoBehaviour {
 
-
     [HideInInspector] public long maxHP;
     [HideInInspector] public long currentHP;
     [HideInInspector] public int benisValue;
     [HideInInspector] public Rigidbody2D body;
 
-    private Transform deadline;
-    private EnemyController enemyController;
-    private TextMeshProUGUI healthPointUI;
     private PlayerHP playerHP;
+    private Transform deadline;
+    private TextMeshProUGUI healthPointUI;
+    private EnemyController enemyController;
 
     protected void Awake() {
+        playerHP = FindObjectOfType<PlayerHP>();
         body = GetComponentInChildren<Rigidbody2D>();
         enemyController = FindObjectOfType<EnemyController>();
         healthPointUI = GetComponentInChildren<TextMeshProUGUI>();
-        playerHP = FindObjectOfType<PlayerHP>();
         deadline = GameObject.Find("Deadline").transform;
     }
 
@@ -33,7 +32,7 @@ public class BaseEnemy : MonoBehaviour {
             playerHP.TakeDamage(1);
         }
     }
-
+    
     public void SetData() {
         currentHP = maxHP;
         UpdateUI();

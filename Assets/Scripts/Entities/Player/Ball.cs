@@ -39,7 +39,7 @@ public class Ball : MonoBehaviour {
     public void DisableCollider() {
         collider.enabled = false;
     }
-    
+
     private void FixedUpdate() {
         body.velocity = Vector2.ClampMagnitude(body.velocity, maxVelocity);
     }
@@ -65,7 +65,10 @@ public class Ball : MonoBehaviour {
         }
         EasyObjectPool.instance.ReturnObjectToPool(gameObject);
         ballController.RemoveFromList(this);
-        controller.cycleFinished = ballController.BallCount == 0;
+
+        if (ballController.BallCount == 0)
+            controller.cycleFinished = true;
+
         yield return null;
     }
 

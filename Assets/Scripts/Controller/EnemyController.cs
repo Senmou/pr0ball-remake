@@ -18,7 +18,6 @@ public class EnemyController : MonoBehaviour {
 
     private void Awake() {
         playStateController = FindObjectOfType<PlayStateController>();
-       
         activeEnemies = new List<BaseEnemy>();
         enemyLDT.ValidateTable();
     }
