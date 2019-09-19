@@ -88,7 +88,7 @@ public class Ball : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        body.gravityScale = 4f;
+        body.gravityScale = 5f;
         audioSource.PlayOneShot(audioSource.clip);
         SetNewRandomTarget();
     }
