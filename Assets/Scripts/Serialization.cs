@@ -6,7 +6,7 @@ using System;
 
 public static class Serialization {
 
-    public static string fileName = "saveData.bin";
+    public static string fileName = "saveData.dat";
     public static string directory = Path.Combine(Application.persistentDataPath, "data");
     public static string filePath = Path.Combine(directory, fileName);
 
@@ -38,6 +38,7 @@ public static class Serialization {
             return false;
 
         try {
+            
             IFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(filePath, FileMode.Open);
             SaveData saveData = formatter.Deserialize(stream) as SaveData;
