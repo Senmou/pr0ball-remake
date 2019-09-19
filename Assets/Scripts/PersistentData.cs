@@ -17,6 +17,7 @@ public class PersistentData : MonoBehaviour {
 
     public SfxData sfxData = new SfxData();
     public MusicData musicData = new MusicData();
+    public ScoreData scoreData = new ScoreData();
 
     private void OnApplicationFocus(bool focus) {
         if (!focus) {
@@ -43,4 +44,9 @@ public class SfxData {
 [Serializable]
 public class MusicData {
     public float volume;
+}
+
+[Serializable]
+public class ScoreData {
+    public int score;
 }

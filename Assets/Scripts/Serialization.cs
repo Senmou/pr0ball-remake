@@ -45,6 +45,8 @@ public static class Serialization {
 
             PersistentData.instance.sfxData = saveData.sfxData;
             PersistentData.instance.musicData = saveData.musicData;
+            PersistentData.instance.scoreData = saveData.scoreData;
+
             Debug.Log("Loaded data from: " + filePath);
             stream.Close();
             return true;

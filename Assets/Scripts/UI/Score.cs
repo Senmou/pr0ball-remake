@@ -14,6 +14,9 @@ public class Score : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
+
+        score = PersistentData.instance.scoreData.score;
+        UpdateScore();
     }
 
     private void Start() {
@@ -36,5 +39,6 @@ public class Score : MonoBehaviour {
 
     private void UpdateScore() {
         scoreUI.text = score.ToString();
+        PersistentData.instance.scoreData.score = score;
     }
 }
