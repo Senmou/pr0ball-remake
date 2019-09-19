@@ -4,26 +4,34 @@ using UnityEngine;
 public class BallMenu : MonoBehaviour {
 
     private MoveUI moveUI;
-    //private BallStats ballStats;
     private TextMeshProUGUI damage;
     private TextMeshProUGUI critChance;
     private TextMeshProUGUI critMultiplier;
-
     private GameStateController gameStateController;
+    private TextMeshProUGUI blueBallSpawnChanceUI;
+    private TextMeshProUGUI greenBallSpawnChanceUI;
+    private TextMeshProUGUI orangeBallSpawnChanceUI;
 
     private void Awake() {
         moveUI = GetComponent<MoveUI>();
-        //ballStats = FindObjectOfType<BallStats>();
         damage = transform.FindChild<TextMeshProUGUI>("Damage/Value");
         critChance = transform.FindChild<TextMeshProUGUI>("Crit/Value");
         critMultiplier = transform.FindChild<TextMeshProUGUI>("CritMultiplier/Value");
         gameStateController = FindObjectOfType<GameStateController>();
+
+        blueBallSpawnChanceUI = transform.FindChild<TextMeshProUGUI>("BlueBall/SpawnChance");
+        greenBallSpawnChanceUI = transform.FindChild<TextMeshProUGUI>("GreenBall/SpawnChance");
+        orangeBallSpawnChanceUI = transform.FindChild<TextMeshProUGUI>("OrangeBall/SpawnChance");
     }
 
     private void UpdateUI() {
-        //damage.text = ballStats.Damage().ToString();
-        //critChance.text = ballStats.CritChance.ToString();
-        //critMultiplier.text = ballStats.CritDamageMultiplier.ToString();
+        blueBallSpawnChanceUI.text = BallTypes.instance.GetBallStats(BallType.BLUE).spawnChance + "%";
+        greenBallSpawnChanceUI.text = BallTypes.instance.GetBallStats(BallType.GREEN).spawnChance + "%";
+        orangeBallSpawnChanceUI.text = BallTypes.instance.GetBallStats(BallType.ORANGE).spawnChance + "%";
+    }
+
+    private void Update() {
+        UpdateUI();
     }
 
     public void BallMenuButtonOnClick() {
