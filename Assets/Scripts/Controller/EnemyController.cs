@@ -10,6 +10,7 @@ public class EnemyController : MonoBehaviour {
     public LootDropTable enemyLDT;
     public List<BaseEnemy> activeEnemies;
     
+    private Transform dottedLine;
     private PlayStateController playStateController;
 
     private void OnValidate() {
@@ -17,11 +18,20 @@ public class EnemyController : MonoBehaviour {
     }
 
     private void Awake() {
+        dottedLine = GameObject.Find("DottedLine").transform;
         playStateController = FindObjectOfType<PlayStateController>();
         activeEnemies = new List<BaseEnemy>();
         enemyLDT.ValidateTable();
     }
     
+    public bool AllEnemiesBelowDottedLine() {
+        foreach (var enemy in activeEnemies) {
+            if (enemy.transform.position.y >= dottedLine.position.y)
+                return false;
+        }
+        return true;
+    }
+
     public void DespawnAllEnemies() {
         foreach (var enemy in activeEnemies) {
             EasyObjectPool.instance.ReturnObjectToPool(enemy.gameObject);

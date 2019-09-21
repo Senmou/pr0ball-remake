@@ -44,12 +44,14 @@ public class SpawnEnemies : OneShot {
 
         if (c.reachedNextWave) {
 
-            // cleared level before wave 20 is over
-            if (c.enemyController.activeEnemies.Count == 0) {
+            // cleared level before wave 20 is over OR all enemies are below the dotted line
+            if (c.enemyController.activeEnemies.Count == 0 || c.enemyController.AllEnemiesBelowDottedLine()) {
                 if (c.nextLevelIsBoss)
                     StartBossLevel();
-                else
+                else {
+                    c.enemyController.DespawnAllEnemies();
                     c.enemyController.CreateInitialWaves();
+                }
                 LevelData.LevelUp();
             } else {
                 c.enemyController.CreateWave();
