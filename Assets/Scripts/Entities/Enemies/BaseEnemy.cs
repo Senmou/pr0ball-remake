@@ -9,28 +9,17 @@ public class BaseEnemy : MonoBehaviour {
     [HideInInspector] public int benisValue;
     [HideInInspector] public Rigidbody2D body;
 
-    private PlayerHP playerHP;
-    private Transform deadline;
     private TextMeshProUGUI healthPointUI;
     private EnemyController enemyController;
 
     protected void Awake() {
-        playerHP = FindObjectOfType<PlayerHP>();
         body = GetComponentInChildren<Rigidbody2D>();
         enemyController = FindObjectOfType<EnemyController>();
         healthPointUI = GetComponentInChildren<TextMeshProUGUI>();
-        deadline = GameObject.Find("Deadline").transform;
     }
 
     private void Start() {
         UpdateUI();
-    }
-
-    private void Update() {
-        if (transform.position.y >= deadline.position.y) {
-            ReturnToPool(this);
-            playerHP.TakeDamage(1);
-        }
     }
     
     public void SetData() {

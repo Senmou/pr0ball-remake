@@ -28,7 +28,7 @@ public class SpawnPoints : MonoBehaviour {
         index = 0;
     }
 
-    public List<Transform> GetRandomSpawnPoints() {
+    public List<Transform> GetNextSpawnPoints() {
         index++;
         if (index >= spawnPoints.Count)
             index = 0;
@@ -36,6 +36,7 @@ public class SpawnPoints : MonoBehaviour {
     }
 
     public List<Transform> GetInitialSpawnPoints() {
+        index = 0;
         return initialSpawnPoints.transforms;
     }
 

@@ -16,8 +16,8 @@ public class BallController : MonoBehaviour {
     public TextMeshProUGUI currentBallCountUI;
 
     private float lifeTime;
-    private int maxBallCount = 5;
-    private float maxLifeTime = 3f;
+    private int maxBallCount = 1;
+    private float maxLifeTime = 2f;
     private float shootingRate = 0.1f;
 
     private List<Ball> balls = new List<Ball>();

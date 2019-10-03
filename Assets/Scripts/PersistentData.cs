@@ -8,7 +8,6 @@ public class PersistentData : MonoBehaviour {
     public SfxData sfxData;
     public MusicData musicData;
     public ScoreData scoreData;
-    public PlayerData playerData;
 
     private void Awake() {
         if (instance == null)
@@ -20,7 +19,6 @@ public class PersistentData : MonoBehaviour {
         sfxData = new SfxData();
         musicData = new MusicData();
         scoreData = new ScoreData();
-        playerData = new PlayerData();
 
         Serialization.Load();
     }
@@ -29,7 +27,6 @@ public class PersistentData : MonoBehaviour {
         sfxData = saveData.sfxData;
         musicData = saveData.musicData;
         scoreData = saveData.scoreData;
-        playerData = saveData.playerData;
     }
 
     private void OnApplicationFocus(bool focus) {
@@ -62,9 +59,4 @@ public class MusicData {
 [Serializable]
 public class ScoreData {
     public int score;
-}
-
-[Serializable]
-public class PlayerData {
-    public int hp;
 }

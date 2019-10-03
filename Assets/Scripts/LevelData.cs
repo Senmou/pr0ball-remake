@@ -14,7 +14,7 @@
         wave = 1;
     }
 
-    public static void LevelFailed() {
+    public static void BossLevelFailed() {
         level -= 2;
         wave = 1;
     }

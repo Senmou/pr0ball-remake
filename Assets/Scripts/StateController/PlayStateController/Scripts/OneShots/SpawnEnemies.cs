@@ -9,12 +9,11 @@ public class SpawnEnemies : OneShot {
         // failed boss level
         if (c.fightingBoss && c.reachedNextLevel) {
             int remainingEnemies = c.enemyController.activeEnemies.Count;
-            c.playerHP.TakeDamage(remainingEnemies);
             c.enemyController.DespawnAllEnemies();
             c.enemyController.CreateInitialWaves();
             c.fightingBoss = false;
             c.reachedBossLevel = false;
-            LevelData.LevelFailed();
+            LevelData.BossLevelFailed();
             return;
         }
 
@@ -55,6 +54,14 @@ public class SpawnEnemies : OneShot {
                 LevelData.LevelUp();
             } else {
                 c.enemyController.CreateWave();
+
+                // at least one enemy reached the deadline; level restart
+                if (c.enemyController.EnemyReachedDeadline()) {
+                    c.enemyController.DespawnAllEnemies();
+                    c.enemyController.CreateInitialWaves();
+                    LevelData.Wave = 1;
+                }
+
                 return;
             }
         }

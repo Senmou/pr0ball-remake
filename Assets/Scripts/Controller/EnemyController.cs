@@ -9,21 +9,32 @@ public class EnemyController : MonoBehaviour {
 
     public LootDropTable enemyLDT;
     public List<BaseEnemy> activeEnemies;
-    
+    public PlayStateController playStateController;
+
+    private Transform deadline;
     private Transform dottedLine;
-    private PlayStateController playStateController;
 
     private void OnValidate() {
         enemyLDT.ValidateTable();
     }
 
     private void Awake() {
+        activeEnemies = new List<BaseEnemy>();
+        deadline = GameObject.Find("Deadline").transform;
         dottedLine = GameObject.Find("DottedLine").transform;
         playStateController = FindObjectOfType<PlayStateController>();
-        activeEnemies = new List<BaseEnemy>();
+
         enemyLDT.ValidateTable();
     }
-    
+
+    public bool EnemyReachedDeadline() {
+        foreach (var enemy in activeEnemies) {
+            if (enemy.transform.position.y >= deadline.position.y)
+                return true;
+        }
+        return false;
+    }
+
     public bool AllEnemiesBelowDottedLine() {
         foreach (var enemy in activeEnemies) {
             if (enemy.transform.position.y >= dottedLine.position.y)
@@ -41,7 +52,7 @@ public class EnemyController : MonoBehaviour {
 
     public void CreateWave() {
         MoveEnemies();
-        List<Transform> spawnPoints = SpawnPoints.instance.GetRandomSpawnPoints();
+        List<Transform> spawnPoints = SpawnPoints.instance.GetNextSpawnPoints();
 
         for (int i = 0; i < spawnPoints.Count; i++) {
             string sourcePool = enemyLDT.PickLootDropItem().poolName;
