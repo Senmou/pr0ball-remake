@@ -15,17 +15,19 @@ public class Score : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
+        EventManager.StartListening("SaveGame", OnSaveGame);
+
         score = PersistentData.instance.scoreData.score;
         UpdateScore();
     }
 
-    private void Start() {
-        score = 0;
+    private void OnSaveGame() {
+        PersistentData.instance.scoreData.score = score;
     }
 
-    public bool BuySkill(Skill skill) {
-        if (score >= skill.price) {
-            score -= skill.price;
+    public bool PurchaseUpgrade(int upgradePrice) {
+        if (score >= upgradePrice) {
+            score -= upgradePrice;
             UpdateScore();
             return true;
         } else
@@ -39,6 +41,5 @@ public class Score : MonoBehaviour {
 
     private void UpdateScore() {
         scoreUI.text = score.ToString();
-        PersistentData.instance.scoreData.score = score;
     }
 }

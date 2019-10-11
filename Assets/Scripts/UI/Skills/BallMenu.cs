@@ -6,6 +6,8 @@ public class BallMenu : MonoBehaviour {
     private const string maxValue = " (MAX)";
 
     struct TextFields {
+        public TextMeshProUGUI upgradePriceUI;
+
         public TextMeshProUGUI currentLevelUI;
         public TextMeshProUGUI currentDamageUI;
         public TextMeshProUGUI currentCritChanceUI;
@@ -19,15 +21,18 @@ public class BallMenu : MonoBehaviour {
 
     private MoveUI moveUI;
     private BallStats blueBall;
-    private BallController ballController;
     private GameStateController gameStateController;
 
-    TextFields blueBallUI = new TextFields();
+    private TextMeshProUGUI scoreUI;
+    private TextFields blueBallUI = new TextFields();
 
     private void Awake() {
         moveUI = GetComponent<MoveUI>();
         blueBall = BallTypes.instance.GetBall(BallColor.BLUE);
 
+        scoreUI = transform.FindChild<TextMeshProUGUI>("Score/Value");
+
+        blueBallUI.upgradePriceUI = transform.FindChild<TextMeshProUGUI>("BlueBall/Price/Value");
         blueBallUI.currentLevelUI = transform.FindChild<TextMeshProUGUI>("BlueBall/CurrentStats/Level/Value");
         blueBallUI.currentDamageUI = transform.FindChild<TextMeshProUGUI>("BlueBall/CurrentStats/Damage/Value");
         blueBallUI.currentCritChanceUI = transform.FindChild<TextMeshProUGUI>("BlueBall/CurrentStats/Crit/Value");
@@ -37,12 +42,23 @@ public class BallMenu : MonoBehaviour {
         blueBallUI.nextCritChanceUI = transform.FindChild<TextMeshProUGUI>("BlueBall/NextLevelStats/Crit/Value");
         blueBallUI.nextCritMultiplierUI = transform.FindChild<TextMeshProUGUI>("BlueBall/NextLevelStats/CritMultiplier/Value");
 
-        ballController = FindObjectOfType<BallController>();
         gameStateController = FindObjectOfType<GameStateController>();
+
+        blueBall.level = PersistentData.instance.ballData.blueBallLevel;
+
+        EventManager.StartListening("SaveGame", OnSaveGame);
+    }
+
+    private void OnSaveGame() {
+        PersistentData.instance.ballData.blueBallLevel = blueBall.level;
     }
 
     private void UpdateUI() {
-        blueBallUI.currentLevelUI.text = ballController.BallLevel.ToString();
+        scoreUI.text = Score.instance.score.ToString();
+
+        blueBallUI.upgradePriceUI.text = blueBall.UpgradePrice.ToString();
+
+        blueBallUI.currentLevelUI.text = blueBall.level.ToString();
         blueBallUI.currentDamageUI.text = blueBall.BaseDamage.ToString();
         blueBallUI.currentCritChanceUI.text = blueBall.CritChance.ToString() + "%";
         blueBallUI.currentCritMultiplierUI.text = blueBall.CritDamageMultiplier.ToString() + "x";
@@ -58,7 +74,9 @@ public class BallMenu : MonoBehaviour {
     }
 
     public void UpgradeBlueBallButtonOnClick() {
-        ballController.BallLevel++;
+        if (Score.instance.PurchaseUpgrade(blueBall.UpgradePrice)) {
+            blueBall.level++;
+        }
     }
 
     public void BallMenuButtonOnClick() {

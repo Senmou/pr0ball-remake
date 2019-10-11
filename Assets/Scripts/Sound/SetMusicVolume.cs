@@ -1,31 +1,34 @@
-﻿using TMPro;
-using UnityEngine;
-using UnityEngine.Audio;
+﻿using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEngine;
+using TMPro;
 
 public class SetMusicVolume : MonoBehaviour {
 
     public Button plus;
     public Button minus;
-    public TextMeshProUGUI volumeUI;
     public AudioMixer audioMixer;
+    public TextMeshProUGUI volumeUI;
 
-    private float maxVolume = 10f;
     private float currentVolume;
-
-    private MusicData musicData;
+    private float maxVolume = 10f;
 
     private void OnValidate() {
         currentVolume = Mathf.Clamp(currentVolume, 0f, maxVolume);
     }
 
     private void Awake() {
-        musicData = PersistentData.instance.musicData;
-        currentVolume = (int)musicData.volume;
+        currentVolume = (int)PersistentData.instance.musicData.volume;
+
+        EventManager.StartListening("SaveGame", OnSaveGame);
+    }
+
+    private void OnSaveGame() {
+        PersistentData.instance.musicData.volume = currentVolume;
     }
 
     private void Start() {
-        SetVolume(musicData.volume);
+        SetVolume(currentVolume);
         CheckButtonInteractability();
     }
 
@@ -56,7 +59,6 @@ public class SetMusicVolume : MonoBehaviour {
         float value = volume.Map(0f, maxVolume, -40f, 0f);
         value = currentVolume <= 0f ? -80f : value;
         audioMixer.SetFloat("MusicVolume", value);
-        musicData.volume = volume;
         volumeUI.text = volume.ToString();
     }
 }

@@ -12,6 +12,8 @@ public static class Serialization {
 
     public static void Save() {
 
+        EventManager.TriggerEvent("SaveGame");
+
         try {
             SaveData saveData = new SaveData();
 
@@ -29,7 +31,6 @@ public static class Serialization {
             Debug.LogWarning("Error: " + e.Message);
             throw;
         }
-
     }
 
     public static bool Load() {

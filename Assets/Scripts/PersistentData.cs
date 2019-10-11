@@ -8,6 +8,7 @@ public class PersistentData : MonoBehaviour {
     public SfxData sfxData;
     public MusicData musicData;
     public ScoreData scoreData;
+    public BallData ballData;
 
     private void Awake() {
         if (instance == null)
@@ -19,6 +20,7 @@ public class PersistentData : MonoBehaviour {
         sfxData = new SfxData();
         musicData = new MusicData();
         scoreData = new ScoreData();
+        ballData = new BallData();
 
         Serialization.Load();
     }
@@ -27,6 +29,7 @@ public class PersistentData : MonoBehaviour {
         sfxData = saveData.sfxData;
         musicData = saveData.musicData;
         scoreData = saveData.scoreData;
+        ballData = saveData.ballData;
     }
 
     private void OnApplicationFocus(bool focus) {
@@ -49,14 +52,35 @@ public class PersistentData : MonoBehaviour {
 [Serializable]
 public class SfxData {
     public float volume;
+
+    public SfxData(){
+        volume = 5;
+    }
 }
 
 [Serializable]
 public class MusicData {
     public float volume;
+
+    public MusicData() {
+        volume = 5;
+    }
 }
 
 [Serializable]
 public class ScoreData {
     public int score;
+
+    public ScoreData() {
+        score = 0;
+    }
+}
+
+[Serializable]
+public class BallData {
+    public int blueBallLevel;
+
+    public BallData() {
+        blueBallLevel = 1;
+    }
 }

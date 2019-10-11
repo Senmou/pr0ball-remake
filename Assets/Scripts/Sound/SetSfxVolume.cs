@@ -13,19 +13,22 @@ public class SetSfxVolume : MonoBehaviour {
     private float maxVolume = 10f;
     private float currentVolume;
 
-    private SfxData sfxData;
-
     private void OnValidate() {
         currentVolume = Mathf.Clamp(currentVolume, 0f, maxVolume);
     }
 
     private void Awake() {
-        sfxData = PersistentData.instance.sfxData;
-        currentVolume = (int)sfxData.volume;
+        currentVolume = (int)PersistentData.instance.sfxData.volume;
+
+        EventManager.StartListening("SaveGame", OnSaveGame);
+    }
+
+    private void OnSaveGame() {
+        PersistentData.instance.sfxData.volume = currentVolume;
     }
 
     private void Start() {
-        SetVolume(sfxData.volume);
+        SetVolume(currentVolume);
         CheckButtonInteractability();
     }
 
@@ -56,7 +59,6 @@ public class SetSfxVolume : MonoBehaviour {
         float value = volume.Map(0f, maxVolume, -40f, 0f);
         value = currentVolume <= 0f ? -80f : value;
         audioMixer.SetFloat("SfxVolume", value);
-        sfxData.volume = volume;
         volumeUI.text = volume.ToString();
     }
 }

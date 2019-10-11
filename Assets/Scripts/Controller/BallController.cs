@@ -23,17 +23,6 @@ public class BallController : MonoBehaviour {
 
     private List<Ball> balls = new List<Ball>();
 
-    private const int maxBallLevel = 20;
-    private int ballLevel = 1;
-    public int BallLevel {
-        get => ballLevel;
-        set {
-            ballLevel = value;
-            if (ballLevel > maxBallLevel)
-                ballLevel = maxBallLevel;
-            maxBallCount = ballLevel;
-        }
-    }
     public int BallCount { get => balls.Count; }
     public int MaxBallCount { get => maxBallCount; }
     public bool LifeTimeExeeded { get => lifeTime <= 0f; }

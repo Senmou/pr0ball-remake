@@ -44,9 +44,7 @@ public class Ball : MonoBehaviour {
         body.velocity = Vector2.ClampMagnitude(body.velocity, maxVelocity);
     }
 
-    public int Damage() {
-        return ballStats.ModifiedDamage();
-    }
+    public int Damage() => ballStats.ModifiedDamage();
 
     public void Move(float timeToReachEndPoint, PlayStateController controller) {
         StartCoroutine(MoveToPosition(timeToReachEndPoint, controller));
