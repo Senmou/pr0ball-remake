@@ -1,31 +1,36 @@
 ﻿using UnityEngine;
 
-public enum BallType { BLUE, GREEN, ORANGE }
+public enum BallColor { BLUE, GREEN, ORANGE }
 
 [System.Serializable]
 public class BallStats {
 
-    public BallType ballType;
+    public BallColor ballColor;
     public BallPhysics ballPhysics;
+
+    private int BallLevel { get => GameObject.FindObjectOfType<BallController>().BallLevel; }
+
     public float spawnChance;
 
-    [System.Serializable]
-    public class BallPhysics {
-        public float drag = 0.1f;
-        public float gravityScale = 4f;
-        public float bounciness = 0.8f;
-    }
+    public int BaseDamage { get => CalcBaseDamage(BallLevel); }
+    public float CritChance { get => CalcCritChance(BallLevel); }
+    public float CritDamageMultiplier { get => CalcCritDamageMultiplier(BallLevel); }
 
-    public int baseDamage = 1;
-    public float critChance = 1f;
-    public float critDamageMultiplier = 2.5f;
+    public int NextLevel { get => BallLevel + 1; }
+    public int NextBaseDamage { get => CalcBaseDamage(BallLevel + 1); }
+    public float NextCritChance { get => CalcCritChance(BallLevel + 1); }
+    public float NextCritDamageMultiplier { get => CalcCritDamageMultiplier(BallLevel + 1); }
 
-    public int Damage() {
-        float damage = baseDamage;
+    private int CalcBaseDamage(int level) => level * 2;
+    private float CalcCritChance(int level) => level * 0.2f;
+    private float CalcCritDamageMultiplier(int level) => 2f + (level - 1) * 0.05f;
+
+    public int ModifiedDamage() {
+        float damage = BaseDamage;
 
         float r = Random.Range(0f, 100f);
-        if (r < critChance)
-            damage *= critDamageMultiplier;
+        if (r < CritChance)
+            damage *= CritDamageMultiplier;
 
         return (int)damage;
     }
@@ -34,5 +39,12 @@ public class BallStats {
         ball.body.drag = ballPhysics.drag;
         ball.body.gravityScale = ballPhysics.gravityScale;
         ball.body.sharedMaterial.bounciness = ballPhysics.bounciness;
+    }
+
+    [System.Serializable]
+    public class BallPhysics {
+        public float drag = 0.1f;
+        public float gravityScale = 4f;
+        public float bounciness = 0.8f;
     }
 }

@@ -45,7 +45,7 @@ public class Ball : MonoBehaviour {
     }
 
     public int Damage() {
-        return ballStats.Damage();
+        return ballStats.ModifiedDamage();
     }
 
     public void Move(float timeToReachEndPoint, PlayStateController controller) {

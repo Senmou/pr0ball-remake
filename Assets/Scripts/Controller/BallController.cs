@@ -9,11 +9,12 @@ public class BallController : MonoBehaviour {
 
     public LootDropTable ballLDT;
 
-    public bool canShootAgain;
-    public Transform spawnPoint;
-    public Slider lifeTimeSlider;
-    public TextMeshProUGUI maxBallCountUI;
-    public TextMeshProUGUI currentBallCountUI;
+    [HideInInspector] public bool canShootAgain;
+
+    private Transform spawnPoint;
+    private Slider lifeTimeSlider;
+    private TextMeshProUGUI maxBallCountUI;
+    private TextMeshProUGUI currentBallCountUI;
 
     private float lifeTime;
     private int maxBallCount = 1;
@@ -22,6 +23,17 @@ public class BallController : MonoBehaviour {
 
     private List<Ball> balls = new List<Ball>();
 
+    private const int maxBallLevel = 20;
+    private int ballLevel = 1;
+    public int BallLevel {
+        get => ballLevel;
+        set {
+            ballLevel = value;
+            if (ballLevel > maxBallLevel)
+                ballLevel = maxBallLevel;
+            maxBallCount = ballLevel;
+        }
+    }
     public int BallCount { get => balls.Count; }
     public int MaxBallCount { get => maxBallCount; }
     public bool LifeTimeExeeded { get => lifeTime <= 0f; }
@@ -32,15 +44,21 @@ public class BallController : MonoBehaviour {
     }
 
     private void Awake() {
+
+        spawnPoint = GameObject.Find("BallSpawnPoint").transform;
+        lifeTimeSlider = GameObject.Find("LifeTimeSlider").GetComponent<Slider>();
+        maxBallCountUI = GameObject.Find("MaxBallCount").GetComponent<TextMeshProUGUI>();
+        currentBallCountUI = GameObject.Find("CurrentBallCount").GetComponent<TextMeshProUGUI>();
+
         SetLDIWeights();
         ballLDT.ValidateTable();
     }
 
     private void SetLDIWeights() {
-        ballLDT.SetWeight("GreenBallPool", BallTypes.instance.GetBallStats(BallType.GREEN).spawnChance);
-        ballLDT.SetWeight("OrangeBallPool", BallTypes.instance.GetBallStats(BallType.ORANGE).spawnChance);
+        ballLDT.SetWeight("GreenBallPool", BallTypes.instance.GetBall(BallColor.GREEN).spawnChance);
+        ballLDT.SetWeight("OrangeBallPool", BallTypes.instance.GetBall(BallColor.ORANGE).spawnChance);
 
-        float blueBallSpawnChance = 100f - BallTypes.instance.GetBallStats(BallType.GREEN).spawnChance - BallTypes.instance.GetBallStats(BallType.ORANGE).spawnChance;
+        float blueBallSpawnChance = 100f - BallTypes.instance.GetBall(BallColor.GREEN).spawnChance - BallTypes.instance.GetBall(BallColor.ORANGE).spawnChance;
         ballLDT.SetWeight("BlueBallPool", blueBallSpawnChance);
     }
 

@@ -6,7 +6,7 @@ public class Prefabs : MonoBehaviour {
     [System.Serializable]
     public struct ListElement {
         public GameObject prefab;
-        public BallType ballType;
+        public BallColor ballType;
     }
 
     #region Singleton
@@ -22,7 +22,7 @@ public class Prefabs : MonoBehaviour {
 
     public List<ListElement> prefabs;
 
-    public GameObject GetGO(BallType ballType) {
+    public GameObject GetGO(BallColor ballType) {
         foreach (var item in prefabs) {
             if (item.ballType == ballType)
                 return item.prefab;

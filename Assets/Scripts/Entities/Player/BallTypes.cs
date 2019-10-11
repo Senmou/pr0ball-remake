@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class BallTypes : MonoBehaviour {
 
+    #region Singleton
     public static BallTypes instance;
 
     private void Awake() {
@@ -11,14 +12,16 @@ public class BallTypes : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
     }
+    #endregion
 
-    public List<BallStats> ballStats;
+    public List<BallStats> balls;
 
-    public BallStats GetBallStats(BallType ballType) {
-        foreach (var stats in ballStats) {
-            if (stats.ballType == ballType)
+    public BallStats GetBall(BallColor ballColor) {
+        foreach (var stats in balls) {
+            if (stats.ballColor == ballColor)
                 return stats;
         }
-        return ballStats[0];
+        Debug.LogWarning("Ball with color [" + ballColor + "] not found. Returned first ball.");
+        return balls[0];
     }
 }
