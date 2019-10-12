@@ -2920,7 +2920,7 @@ GameObject:
   - component: {fileID: 165423071}
   - component: {fileID: 165423070}
   m_Layer: 0
-  m_Name: Sound
+  m_Name: NativeAndroidSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19092,7 +19092,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243184007668415506, guid: 7234ea02f96a8df46a7f8f908a538bc1,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 53d8945594ed5dd4f841137df5df9db5, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a519d5e1dfbea1d46ac8a620978379b9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
