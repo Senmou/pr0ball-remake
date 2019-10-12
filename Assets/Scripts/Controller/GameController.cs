@@ -47,6 +47,11 @@ public class GameController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape))
             gameStateController.backButtonPressed = true;
 
+        if (Input.GetKeyDown(KeyCode.Space))
+            Time.timeScale = 0.2f;
+
+        if (Input.GetKeyUp(KeyCode.Space))
+            Time.timeScale = 1f;
     }
 
     private void OnBackButtonPressed() {

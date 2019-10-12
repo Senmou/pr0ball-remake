@@ -847,7 +847,7 @@ MonoBehaviour:
   - {fileID: 1261172728}
   - {fileID: 1224232814}
   - {fileID: 1089838351}
-  equipedSkill: {fileID: 0}
+  equippedSkill: {fileID: 0}
 --- !u!114 &52059375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1033,11 +1033,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillMenu: {fileID: 816369980}
-  slots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &80532498
 GameObject:
   m_ObjectHideFlags: 0
@@ -2825,7 +2820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 12
   coolDown: 0
-  coolDownCounter: 0
+  remainingCoolDown: 0
   name: D1
   locked: 0
   skillLevel: 0
@@ -4807,7 +4802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 6
   coolDown: 0
-  coolDownCounter: 0
+  remainingCoolDown: 0
   name: B3
   locked: 0
   skillLevel: 0
@@ -5991,7 +5986,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 10
   coolDown: 0
-  coolDownCounter: 0
+  remainingCoolDown: 0
   name: C3
   locked: 0
   skillLevel: 0
@@ -7481,7 +7476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 9
   coolDown: 0
-  coolDownCounter: 0
+  remainingCoolDown: 0
   name: C2
   locked: 0
   skillLevel: 0
@@ -7964,7 +7959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   coolDown: 0
-  coolDownCounter: 0
+  remainingCoolDown: 0
   name: A1
   locked: 0
   skillLevel: 0
@@ -7973,6 +7968,22 @@ MonoBehaviour:
   iconLocked: {fileID: 21300000, guid: 6548719487816444b8d3b8e09fdea2cd, type: 3}
   barSlot: {fileID: 52059374}
   menuSlot: {fileID: 463601757}
+  dps: 100
+  laserMat: {fileID: 2100000, guid: 4e62e3e76d43aa64497d96abd7aba523, type: 2}
+  contactFilter:
+    useTriggers: 0
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 1024
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
 --- !u!4 &726557513
 Transform:
   m_ObjectHideFlags: 0
@@ -8141,7 +8152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 14
   coolDown: 0
-  coolDownCounter: 0
+  remainingCoolDown: 0
   name: D3
   locked: 0
   skillLevel: 0
@@ -8925,6 +8936,8 @@ MonoBehaviour:
     score: 0
   ballData:
     blueBallLevel: 0
+  skillData:
+    equippedSkillIDs: ffffffffffffffffffffffffffffffff
 --- !u!4 &789605114
 Transform:
   m_ObjectHideFlags: 0
@@ -9300,7 +9313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 13
   coolDown: 0
-  coolDownCounter: 0
+  remainingCoolDown: 0
   name: D2
   locked: 0
   skillLevel: 0
@@ -9929,14 +9942,14 @@ MonoBehaviour:
       gravityScale: 0
       bounciness: 0
     level: 1
-    spawnChance: 10
+    spawnChance: 0
   - ballColor: 2
     ballPhysics:
       drag: 0
       gravityScale: 0
       bounciness: 0
     level: 1
-    spawnChance: 5
+    spawnChance: 0
 --- !u!1 &895507746
 GameObject:
   m_ObjectHideFlags: 0
@@ -10372,7 +10385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 8
   coolDown: 0
-  coolDownCounter: 0
+  remainingCoolDown: 0
   name: C1
   locked: 0
   skillLevel: 0
@@ -11396,7 +11409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4
   coolDown: 0
-  coolDownCounter: 0
+  remainingCoolDown: 0
   name: B1
   locked: 0
   skillLevel: 0
@@ -11626,7 +11639,7 @@ MonoBehaviour:
   - {fileID: 1790730456}
   - {fileID: 417841075}
   - {fileID: 2049871070}
-  equipedSkill: {fileID: 0}
+  equippedSkill: {fileID: 0}
 --- !u!114 &1070345409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12084,7 +12097,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3
   coolDown: 0
-  coolDownCounter: 0
+  remainingCoolDown: 0
   name: A4
   locked: 0
   skillLevel: 0
@@ -13993,7 +14006,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   coolDown: 0
-  coolDownCounter: 0
+  remainingCoolDown: 0
   name: A3
   locked: 0
   skillLevel: 0
@@ -14642,7 +14655,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   coolDown: 0
-  coolDownCounter: 0
+  remainingCoolDown: 0
   name: A2
   locked: 0
   skillLevel: 0
@@ -16192,7 +16205,7 @@ MonoBehaviour:
   - {fileID: 671528801}
   - {fileID: 480828152}
   - {fileID: 1971445042}
-  equipedSkill: {fileID: 0}
+  equippedSkill: {fileID: 0}
 --- !u!114 &1416314981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17559,7 +17572,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 15
   coolDown: 0
-  coolDownCounter: 0
+  remainingCoolDown: 0
   name: D4
   locked: 0
   skillLevel: 0
@@ -19462,7 +19475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 5
   coolDown: 0
-  coolDownCounter: 0
+  remainingCoolDown: 0
   name: B2
   locked: 0
   skillLevel: 0
@@ -22124,7 +22137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 11
   coolDown: 0
-  coolDownCounter: 0
+  remainingCoolDown: 0
   name: C4
   locked: 0
   skillLevel: 0
@@ -23083,7 +23096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 7
   coolDown: 0
-  coolDownCounter: 0
+  remainingCoolDown: 0
   name: B4
   locked: 0
   skillLevel: 0
@@ -23230,7 +23243,7 @@ MonoBehaviour:
   - {fileID: 847266194}
   - {fileID: 753466626}
   - {fileID: 1530122880}
-  equipedSkill: {fileID: 0}
+  equippedSkill: {fileID: 0}
 --- !u!114 &2057200485
 MonoBehaviour:
   m_ObjectHideFlags: 0

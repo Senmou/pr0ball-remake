@@ -19,10 +19,11 @@ public class BallController : MonoBehaviour {
 
     private float lifeTime;
     private int maxBallCount = 1;
-    private float maxLifeTime = 2f;
+    private float maxLifeTime = 10f;
     private float shootingRate = 0.1f;
 
     private List<Ball> balls = new List<Ball>();
+    public List<Ball> Balls { get => balls; }
 
     public int BallCount { get => balls.Count; }
     public int MaxBallCount { get => maxBallCount; }

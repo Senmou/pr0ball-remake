@@ -309,7 +309,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 2
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!1 &2023580359810677400
 GameObject:
@@ -321,7 +321,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7667022799862184163}
   - component: {fileID: 6947583972955884110}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Body
   m_TagString: Enemy
   m_Icon: {fileID: 0}

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.Events;
 
 public class Skill : MonoBehaviour {
 
@@ -9,6 +11,7 @@ public class Skill : MonoBehaviour {
     public bool locked;
     public int skillLevel;
     public int unlockLevel;
+    protected bool pending;
 
     public int UpgradePrice { get => CalcUpgradePrice(skillLevel); }
 
@@ -18,6 +21,7 @@ public class Skill : MonoBehaviour {
     public SkillMenuSlot menuSlot;
 
     private SkillMenu skillMenu;
+    protected BallController ballController;
 
     public Sprite Icon {
         get {
@@ -30,7 +34,7 @@ public class Skill : MonoBehaviour {
 
     protected void Awake() {
         skillMenu = FindObjectOfType<SkillMenu>();
-        EventManager.StartListening("WaveCompleted", OnWaveCompleted);
+        ballController = FindObjectOfType<BallController>();
 
         SkillData.Skill skillData = PersistentData.instance.skillData.GetSkillData(id);
         locked = skillData.locked;
@@ -38,8 +42,9 @@ public class Skill : MonoBehaviour {
         remainingCoolDown = skillData.remainingCoolDown;
 
         EventManager.StartListening("SaveGame", OnSaveGame);
+        EventManager.StartListening("WaveCompleted", OnWaveCompleted);
     }
-    
+
     private int CalcUpgradePrice(int skillLevel) => skillLevel;
 
     protected void OnSaveGame() {
@@ -47,10 +52,20 @@ public class Skill : MonoBehaviour {
     }
 
     public void OnWaveCompleted() {
-        if (remainingCoolDown > 0) {
+        if (remainingCoolDown > 0 && !pending) {
             remainingCoolDown--;
             barSlot.UpdateSlot();
         }
+    }
+
+    protected void Action() {
+        pending = true;
+        StartCoroutine(ActionCoroutine());
+    }
+
+    protected virtual IEnumerator ActionCoroutine() {
+        Debug.Log("Skill used: " + name);
+        yield return null;
     }
 
     public virtual void UseSkill() {
@@ -59,7 +74,7 @@ public class Skill : MonoBehaviour {
             return;
 
         if (remainingCoolDown == 0) {
-            Debug.Log("Used: " + name);
+            Action();
             ResetCoolDown();
             barSlot.UpdateSlot();
         } else

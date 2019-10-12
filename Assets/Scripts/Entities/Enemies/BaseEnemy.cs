@@ -22,6 +22,11 @@ public class BaseEnemy : MonoBehaviour {
         UpdateUI();
     }
     
+    // Helper function for adding healthPoints to enemies after "step" levels
+    protected long HP(long hp, int step) {
+        return (LevelData.Level / step) * hp;
+    }
+
     public void SetData() {
         currentHP = maxHP;
         UpdateUI();
@@ -34,7 +39,7 @@ public class BaseEnemy : MonoBehaviour {
             EasyObjectPool.instance.ReturnObjectToPool(gameObject);
     }
 
-    private void TakeDamage(int amount) {
+    public void TakeDamage(int amount) {
         currentHP -= amount;
         UpdateUI();
         if (currentHP <= 0) {
