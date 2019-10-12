@@ -7,7 +7,7 @@ public class SkillBarSlot : MonoBehaviour {
     public TextMeshProUGUI coolDown;
 
     public Skill[] skills;
-    public Skill equipedSkill;
+    public Skill equippedSkill;
 
     private Image image;
 
@@ -16,24 +16,24 @@ public class SkillBarSlot : MonoBehaviour {
     }
 
     private void Update() {
-        if (equipedSkill && equipedSkill.coolDownCounter == 0)
+        if (equippedSkill && equippedSkill.coolDownCounter == 0)
             coolDown.gameObject.SetActive(false);
         else
             coolDown.gameObject.SetActive(true);
     }
 
     public void UseSkill() {
-        equipedSkill?.UseSkill();
+        equippedSkill?.UseSkill();
     }
 
     public void EquipSkill(Skill skill) {
-        equipedSkill = skill;
-        equipedSkill.barSlot = this;
+        equippedSkill = skill;
+        equippedSkill.barSlot = this;
         UpdateSlot();
     }
 
     public void UpdateSlot() {
-        image.sprite = equipedSkill.Icon;
-        coolDown.text = equipedSkill.coolDownCounter.ToString();
+        image.sprite = equippedSkill.Icon;
+        coolDown.text = equippedSkill.coolDownCounter.ToString();
     }
 }

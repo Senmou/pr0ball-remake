@@ -20,7 +20,7 @@ public class SkillMenu : MonoBehaviour {
         gameStateController = FindObjectOfType<GameStateController>();
         errorSfx = GameObject.Find("SfxError").GetComponent<AudioSource>();
     }
-
+    
     public void EquipSkillOnClick(SkillMenuSlot slot) {
         if (!slot.skill.locked)
             lastSkillBarSlotClicked.EquipSkill(slot.skill);

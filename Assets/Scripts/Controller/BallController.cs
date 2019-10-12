@@ -46,6 +46,7 @@ public class BallController : MonoBehaviour {
 
     public void SetMaxBallCount(int value) {
         maxBallCount = value;
+        UpdateBallCountUI();
     }
 
     private void SetLDIWeights() {

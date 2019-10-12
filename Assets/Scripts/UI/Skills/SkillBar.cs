@@ -9,6 +9,32 @@ public class SkillBar : MonoBehaviour {
 
     private void Awake() {
         gameStateController = FindObjectOfType<GameStateController>();
+
+        EventManager.StartListening("SaveGame", OnSaveGame);
+    }
+
+    private void Start() {
+        InitSkillBarSlotsWithLoadedData();
+    }
+
+    private void InitSkillBarSlotsWithLoadedData() {
+        for (int i = 0; i < slots.Length; i++) {
+            int id = PersistentData.instance.skillData.equippedSkillIDs[i];
+            if (id == -1)
+                return;
+            // every slot holds 4 skills
+            // the skill id's are 0-15, therefore mod 4
+            slots[i].EquipSkill(slots[i].skills[id % 4]);
+            slots[i].UpdateSlot();
+        }
+    }
+
+    private void OnSaveGame() {
+        for (int i = 0; i < slots.Length; i++) {
+            if (slots[i].equippedSkill == null)
+                return;
+            PersistentData.instance.skillData.equippedSkillIDs[i] = slots[i].equippedSkill.id;
+        }
     }
 
     // Used when a long press on the SkillBarSlot is detected

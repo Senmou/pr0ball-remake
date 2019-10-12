@@ -49,9 +49,12 @@ public class BallMenu : MonoBehaviour {
         gameStateController = FindObjectOfType<GameStateController>();
 
         blueBall.level = PersistentData.instance.ballData.blueBallLevel;
-        ballController.SetMaxBallCount(blueBall.Quantity);
 
         EventManager.StartListening("SaveGame", OnSaveGame);
+    }
+
+    private void Start() {
+        ballController.SetMaxBallCount(blueBall.Quantity);
     }
 
     private void OnSaveGame() {

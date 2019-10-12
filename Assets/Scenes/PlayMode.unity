@@ -2828,7 +2828,6 @@ MonoBehaviour:
   coolDownCounter: 0
   name: D1
   locked: 0
-  price: 0
   skillLevel: 0
   unlockLevel: 0
   icon: {fileID: 21300000, guid: bacdfd848c73c8e4eb4492be26396faf, type: 3}
@@ -3188,7 +3187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 186588180}
   m_Layer: 5
-  m_Name: Price
+  m_Name: UpgradePrice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3974,7 +3973,7 @@ GameObject:
   m_Component:
   - component: {fileID: 327968044}
   m_Layer: 5
-  m_Name: Price
+  m_Name: UpgradePrice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4811,7 +4810,6 @@ MonoBehaviour:
   coolDownCounter: 0
   name: B3
   locked: 0
-  price: 0
   skillLevel: 0
   unlockLevel: 0
   icon: {fileID: 21300000, guid: 9a3ebc2c102bccd4e83529726e7f52d2, type: 3}
@@ -5996,7 +5994,6 @@ MonoBehaviour:
   coolDownCounter: 0
   name: C3
   locked: 0
-  price: 0
   skillLevel: 0
   unlockLevel: 0
   icon: {fileID: 21300000, guid: bacdfd848c73c8e4eb4492be26396faf, type: 3}
@@ -7487,7 +7484,6 @@ MonoBehaviour:
   coolDownCounter: 0
   name: C2
   locked: 0
-  price: 0
   skillLevel: 0
   unlockLevel: 0
   icon: {fileID: 21300000, guid: bacdfd848c73c8e4eb4492be26396faf, type: 3}
@@ -7971,7 +7967,6 @@ MonoBehaviour:
   coolDownCounter: 0
   name: A1
   locked: 0
-  price: 0
   skillLevel: 0
   unlockLevel: 0
   icon: {fileID: 21300000, guid: 6fe4f44164a136447a3b803067a26588, type: 3}
@@ -8149,7 +8144,6 @@ MonoBehaviour:
   coolDownCounter: 0
   name: D3
   locked: 0
-  price: 0
   skillLevel: 0
   unlockLevel: 0
   icon: {fileID: 21300000, guid: bacdfd848c73c8e4eb4492be26396faf, type: 3}
@@ -9309,7 +9303,6 @@ MonoBehaviour:
   coolDownCounter: 0
   name: D2
   locked: 0
-  price: 0
   skillLevel: 0
   unlockLevel: 0
   icon: {fileID: 21300000, guid: bacdfd848c73c8e4eb4492be26396faf, type: 3}
@@ -10382,7 +10375,6 @@ MonoBehaviour:
   coolDownCounter: 0
   name: C1
   locked: 0
-  price: 0
   skillLevel: 0
   unlockLevel: 0
   icon: {fileID: 21300000, guid: bacdfd848c73c8e4eb4492be26396faf, type: 3}
@@ -11242,7 +11234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1014220515}
   m_Layer: 5
-  m_Name: Price
+  m_Name: UpgradePrice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11407,7 +11399,6 @@ MonoBehaviour:
   coolDownCounter: 0
   name: B1
   locked: 0
-  price: 0
   skillLevel: 0
   unlockLevel: 0
   icon: {fileID: 21300000, guid: dacb70cbac823254fb1237478975e332, type: 3}
@@ -12096,7 +12087,6 @@ MonoBehaviour:
   coolDownCounter: 0
   name: A4
   locked: 0
-  price: 0
   skillLevel: 0
   unlockLevel: 0
   icon: {fileID: 21300000, guid: 1f830d3b8ec027e4a905d239ee595f8b, type: 3}
@@ -14006,7 +13996,6 @@ MonoBehaviour:
   coolDownCounter: 0
   name: A3
   locked: 0
-  price: 0
   skillLevel: 0
   unlockLevel: 0
   icon: {fileID: 21300000, guid: 4c1310c38b300bc4f84f39f2249e4132, type: 3}
@@ -14656,7 +14645,6 @@ MonoBehaviour:
   coolDownCounter: 0
   name: A2
   locked: 0
-  price: 0
   skillLevel: 0
   unlockLevel: 0
   icon: {fileID: 21300000, guid: 989bbf270eaf5f346afc00227f003d14, type: 3}
@@ -15863,13 +15851,13 @@ MonoBehaviour:
   prefabs:
   - prefab: {fileID: 4691551078425360276, guid: 6a6e33a7ed415f846a90e17498144b87,
       type: 3}
-    ballType: 0
+    ballColor: 0
   - prefab: {fileID: 4691551078425360276, guid: dee40261551988a4b9871df6ef66bc16,
       type: 3}
-    ballType: 1
+    ballColor: 0
   - prefab: {fileID: 4691551078425360276, guid: 960e0001cea24d24c829897806dcd7f6,
       type: 3}
-    ballType: 2
+    ballColor: 0
 --- !u!4 &1410828780
 Transform:
   m_ObjectHideFlags: 0
@@ -17574,7 +17562,6 @@ MonoBehaviour:
   coolDownCounter: 0
   name: D4
   locked: 0
-  price: 0
   skillLevel: 0
   unlockLevel: 0
   icon: {fileID: 21300000, guid: bacdfd848c73c8e4eb4492be26396faf, type: 3}
@@ -19478,7 +19465,6 @@ MonoBehaviour:
   coolDownCounter: 0
   name: B2
   locked: 0
-  price: 0
   skillLevel: 0
   unlockLevel: 0
   icon: {fileID: 21300000, guid: f2758f07394ac0d4f8101781fa7f6598, type: 3}
@@ -19564,7 +19550,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1811823760}
   m_Layer: 5
-  m_Name: Price
+  m_Name: UpgradePrice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22141,7 +22127,6 @@ MonoBehaviour:
   coolDownCounter: 0
   name: C4
   locked: 0
-  price: 0
   skillLevel: 0
   unlockLevel: 0
   icon: {fileID: 21300000, guid: bacdfd848c73c8e4eb4492be26396faf, type: 3}
@@ -23101,7 +23086,6 @@ MonoBehaviour:
   coolDownCounter: 0
   name: B4
   locked: 0
-  price: 0
   skillLevel: 0
   unlockLevel: 0
   icon: {fileID: 21300000, guid: f0cb8d6a9ae3de84f88aa6a9572d77d5, type: 3}

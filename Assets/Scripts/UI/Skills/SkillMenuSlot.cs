@@ -8,8 +8,7 @@ public class SkillMenuSlot : MonoBehaviour {
 
     private Image image;
     private SkillMenu skillMenu;
-    private TextMeshProUGUI priceLabel;
-    private TextMeshProUGUI priceValue;
+    private TextMeshProUGUI upgradePriceUI;
     private SkillMenuUnlockButton unlockButton;
 
     private AudioSource purchaseSfx;
@@ -18,20 +17,14 @@ public class SkillMenuSlot : MonoBehaviour {
     private void Awake() {
         image = GetComponent<Image>();
         skillMenu = FindObjectOfType<SkillMenu>();
-        priceLabel = transform.FindChild<TextMeshProUGUI>("SkillData/Price/Label");
-        priceValue = transform.FindChild<TextMeshProUGUI>("SkillData/Price/Value");
+        upgradePriceUI = transform.FindChild<TextMeshProUGUI>("SkillData/UpgradePrice/Value");
         unlockButton = GetComponentInChildren<SkillMenuUnlockButton>();
 
         purchaseSfx = GameObject.Find("SfxUnlockSkill").GetComponent<AudioSource>();
         errorSfx = GameObject.Find("SfxError").GetComponent<AudioSource>();
     }
-
-    private void Start() {
-        priceLabel.text = "Preis:";
-    }
-
+    
     private void Update() {
-
         if (skill && skill.locked)
             unlockButton.Show();
         else
@@ -48,9 +41,14 @@ public class SkillMenuSlot : MonoBehaviour {
             errorSfx.Play();
     }
 
+    public void UpgradeSkill() {
+        skill.skillLevel++;
+        UpdateSlot();
+    }
+
     public void UpdateSlot() {
         image.sprite = skill.Icon;
-        priceValue.text = skill.price.ToString();
         unlockButton?.SetText(skill.unlockLevel);
+        upgradePriceUI.text = skill.UpgradePrice.ToString();
     }
 }

@@ -9,6 +9,7 @@ public class PersistentData : MonoBehaviour {
     public MusicData musicData;
     public ScoreData scoreData;
     public BallData ballData;
+    public SkillData skillData;
 
     private void Awake() {
         if (instance == null)
@@ -21,15 +22,17 @@ public class PersistentData : MonoBehaviour {
         musicData = new MusicData();
         scoreData = new ScoreData();
         ballData = new BallData();
+        skillData = new SkillData();
 
         Serialization.Load();
     }
 
     public void LoadDataFromSaveFile(SaveData saveData) {
-            sfxData = saveData.sfxData ?? new SfxData();
-            musicData = saveData.musicData ?? new MusicData();
-            scoreData = saveData.scoreData ?? new ScoreData();
-            ballData = saveData.ballData ?? new BallData();
+        sfxData = saveData.sfxData ?? new SfxData();
+        musicData = saveData.musicData ?? new MusicData();
+        scoreData = saveData.scoreData ?? new ScoreData();
+        ballData = saveData.ballData ?? new BallData();
+        skillData = saveData.skillData ?? new SkillData();
     }
 
     private void OnApplicationFocus(bool focus) {
@@ -82,5 +85,43 @@ public class BallData {
 
     public BallData() {
         blueBallLevel = 1;
+    }
+}
+
+[Serializable]
+public class SkillData {
+
+    [Serializable]
+    public struct Skill {
+        public int level;
+        public bool locked;
+    }
+
+    private Skill[] skills;
+    public int[] equippedSkillIDs;
+
+    public void SetSkillData(int id, int level, bool locked) {
+        skills[id].level = level;
+        skills[id].locked = locked;
+    }
+
+    public Skill GetSkillData(int id) {
+        Skill skill = new Skill();
+        skill.level = PersistentData.instance.skillData.skills[id].level;
+        skill.locked= PersistentData.instance.skillData.skills[id].locked;
+        return skill;
+    }
+
+    public SkillData() {
+        skills = new Skill[16];
+
+        // index is skillBarSlot.id
+        equippedSkillIDs = new int[4] { -1, -1, -1, -1 };
+
+        int skillCount = 16;
+        for (int i = 0; i < skillCount; i++) {
+            skills[i].level = 1;
+            skills[i].locked = true;
+        }
     }
 }

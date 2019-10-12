@@ -7,9 +7,10 @@ public class Skill : MonoBehaviour {
     public int coolDownCounter;
     public new string name;
     public bool locked;
-    public int price;
     public int skillLevel;
     public int unlockLevel;
+
+    public int UpgradePrice { get => CalcUpgradePrice(skillLevel); }
 
     public Sprite icon;
     public Sprite iconLocked;
@@ -30,8 +31,17 @@ public class Skill : MonoBehaviour {
     private void Awake() {
         skillMenu = FindObjectOfType<SkillMenu>();
         EventManager.StartListening("WaveCompleted", OnWaveCompleted);
-        locked = true;
-        skillLevel = 0;
+
+        locked = PersistentData.instance.skillData.GetSkillData(id).locked;
+        skillLevel = PersistentData.instance.skillData.GetSkillData(id).level;
+
+        EventManager.StartListening("SaveGame", OnSaveGame);
+    }
+    
+    private int CalcUpgradePrice(int skillLevel) => skillLevel;
+
+    protected void OnSaveGame() {
+        SaveSkillData(id, skillLevel, locked);
     }
 
     public void OnWaveCompleted() {
@@ -39,12 +49,6 @@ public class Skill : MonoBehaviour {
             coolDownCounter--;
             barSlot.UpdateSlot();
         }
-    }
-
-    public void IncSkill() {
-        if (locked)
-            locked = false;
-        skillLevel++;
     }
 
     public virtual void UseSkill() {
@@ -66,5 +70,9 @@ public class Skill : MonoBehaviour {
 
     public void ResetCoolDown() {
         coolDownCounter = coolDown;
+    }
+
+    protected void SaveSkillData(int id, int level, bool locked) {
+        PersistentData.instance.skillData.SetSkillData(id, level, locked);
     }
 }
