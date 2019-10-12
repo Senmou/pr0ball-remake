@@ -11,19 +11,23 @@ public class Ball : MonoBehaviour {
     private float maxVelocity = 50f;
 
     protected BallStats ballStats;
+    protected BallTypes ballTypes;
 
     private new Collider2D collider;
     private AudioSource audioSource;
     private Transform bezierEndPoint;
     private BallController ballController;
     private EnemyController enemyController;
+    private Sound sound;
 
     private Vector2 randomEnemyPos = Vector2.zero;
 
     protected void Awake() {
+        sound = FindObjectOfType<Sound>();
         body = GetComponent<Rigidbody2D>();
         cannon = FindObjectOfType<Cannon>();
         collider = GetComponent<Collider2D>();
+        ballTypes = FindObjectOfType<BallTypes>();
         ballController = FindObjectOfType<BallController>();
         enemyController = FindObjectOfType<EnemyController>();
         audioSource = GameObject.Find("SfxBounce").GetComponent<AudioSource>();
@@ -87,7 +91,12 @@ public class Ball : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D other) {
         body.gravityScale = 5f;
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+        sound.Bounce();
+#else
         audioSource.PlayOneShot(audioSource.clip);
+#endif
         SetNewRandomTarget();
     }
 }

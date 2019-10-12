@@ -42,7 +42,7 @@ public class PauseBackground : MonoBehaviour {
         Interactable(false);
         image.enabled = true;
         Color startColor = image.color;
-        startColor.a = 1f;
+        startColor.a = 0f;
         image.color = startColor;
     }
 

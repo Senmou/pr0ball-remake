@@ -2,18 +2,7 @@
 using UnityEngine;
 
 public class BallTypes : MonoBehaviour {
-
-    #region Singleton
-    public static BallTypes instance;
-
-    private void Awake() {
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
-            Destroy(gameObject);
-    }
-    #endregion
-
+    
     public List<BallStats> balls;
 
     public BallStats GetBall(BallColor ballColor) {

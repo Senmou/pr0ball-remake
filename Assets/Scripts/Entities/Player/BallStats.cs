@@ -16,13 +16,15 @@ public class BallStats {
     public float CritDamageMultiplier { get => CalcCritDamageMultiplier(level); }
 
     public int NextLevel { get => level + 1; }
+    public int Quantity { get => CalcQuantity(level); }
     public int UpgradePrice { get => CalcUpgradePrice(level); }
     public int NextBaseDamage { get => CalcBaseDamage(level + 1); }
     public float NextCritChance { get => CalcCritChance(level + 1); }
     public float NextCritDamageMultiplier { get => CalcCritDamageMultiplier(level + 1); }
 
-    private int CalcBaseDamage(int level) => level * 2;
+    private int CalcQuantity(int level) => level;
     private int CalcUpgradePrice(int level) => level;
+    private int CalcBaseDamage(int level) => level * 2;
     private float CalcCritChance(int level) => level * 0.2f;
     private float CalcCritDamageMultiplier(int level) => 2f + (level - 1) * 0.05f;
 

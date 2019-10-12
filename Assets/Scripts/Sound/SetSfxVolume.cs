@@ -10,6 +10,8 @@ public class SetSfxVolume : MonoBehaviour {
     public TextMeshProUGUI volumeUI;
     public AudioMixer audioMixer;
 
+    public float CurrentVolume { get => currentVolume; }
+
     private float maxVolume = 10f;
     private float currentVolume;
 
@@ -19,7 +21,6 @@ public class SetSfxVolume : MonoBehaviour {
 
     private void Awake() {
         currentVolume = (int)PersistentData.instance.sfxData.volume;
-
         EventManager.StartListening("SaveGame", OnSaveGame);
     }
 

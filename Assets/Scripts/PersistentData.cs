@@ -26,10 +26,10 @@ public class PersistentData : MonoBehaviour {
     }
 
     public void LoadDataFromSaveFile(SaveData saveData) {
-        sfxData = saveData.sfxData;
-        musicData = saveData.musicData;
-        scoreData = saveData.scoreData;
-        ballData = saveData.ballData;
+            sfxData = saveData.sfxData ?? new SfxData();
+            musicData = saveData.musicData ?? new MusicData();
+            scoreData = saveData.scoreData ?? new ScoreData();
+            ballData = saveData.ballData ?? new BallData();
     }
 
     private void OnApplicationFocus(bool focus) {
@@ -53,7 +53,7 @@ public class PersistentData : MonoBehaviour {
 public class SfxData {
     public float volume;
 
-    public SfxData(){
+    public SfxData() {
         volume = 5;
     }
 }

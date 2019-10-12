@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour {
         skillMenu.Hide();
         enemyController.CreateInitialWaves();
     }
-    
+
     private void Update() {
         OnBackButtonPressed();
 

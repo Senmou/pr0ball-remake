@@ -1,6 +1,6 @@
 ﻿public class OrangeBall : Ball {
 
     private void Start() {
-        ballStats = BallTypes.instance.GetBall(BallColor.ORANGE);
+        ballStats = ballTypes.GetBall(BallColor.ORANGE);
     }
 }
