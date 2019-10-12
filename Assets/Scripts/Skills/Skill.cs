@@ -4,7 +4,7 @@ public class Skill : MonoBehaviour {
 
     public int id;
     public int coolDown;
-    public int coolDownCounter;
+    public int remainingCoolDown;
     public new string name;
     public bool locked;
     public int skillLevel;
@@ -28,12 +28,14 @@ public class Skill : MonoBehaviour {
         }
     }
 
-    private void Awake() {
+    protected void Awake() {
         skillMenu = FindObjectOfType<SkillMenu>();
         EventManager.StartListening("WaveCompleted", OnWaveCompleted);
 
-        locked = PersistentData.instance.skillData.GetSkillData(id).locked;
-        skillLevel = PersistentData.instance.skillData.GetSkillData(id).level;
+        SkillData.Skill skillData = PersistentData.instance.skillData.GetSkillData(id);
+        locked = skillData.locked;
+        skillLevel = skillData.level;
+        remainingCoolDown = skillData.remainingCoolDown;
 
         EventManager.StartListening("SaveGame", OnSaveGame);
     }
@@ -41,12 +43,12 @@ public class Skill : MonoBehaviour {
     private int CalcUpgradePrice(int skillLevel) => skillLevel;
 
     protected void OnSaveGame() {
-        SaveSkillData(id, skillLevel, locked);
+        SaveSkillData(id, skillLevel, locked, remainingCoolDown);
     }
 
     public void OnWaveCompleted() {
-        if (coolDownCounter > 0) {
-            coolDownCounter--;
+        if (remainingCoolDown > 0) {
+            remainingCoolDown--;
             barSlot.UpdateSlot();
         }
     }
@@ -56,7 +58,7 @@ public class Skill : MonoBehaviour {
         if (skillMenu.isVisible)
             return;
 
-        if (coolDownCounter == 0) {
+        if (remainingCoolDown == 0) {
             Debug.Log("Used: " + name);
             ResetCoolDown();
             barSlot.UpdateSlot();
@@ -69,10 +71,10 @@ public class Skill : MonoBehaviour {
     }
 
     public void ResetCoolDown() {
-        coolDownCounter = coolDown;
+        remainingCoolDown = coolDown;
     }
 
-    protected void SaveSkillData(int id, int level, bool locked) {
-        PersistentData.instance.skillData.SetSkillData(id, level, locked);
+    protected void SaveSkillData(int id, int level, bool locked, int remainingCoolDown) {
+        PersistentData.instance.skillData.SetSkillData(id, level, locked, remainingCoolDown);
     }
 }

@@ -95,20 +95,23 @@ public class SkillData {
     public struct Skill {
         public int level;
         public bool locked;
+        public int remainingCoolDown;
     }
 
     private Skill[] skills;
     public int[] equippedSkillIDs;
 
-    public void SetSkillData(int id, int level, bool locked) {
+    public void SetSkillData(int id, int level, bool locked, int remainingCoolDown) {
         skills[id].level = level;
         skills[id].locked = locked;
+        skills[id].remainingCoolDown = remainingCoolDown;
     }
 
     public Skill GetSkillData(int id) {
         Skill skill = new Skill();
         skill.level = PersistentData.instance.skillData.skills[id].level;
         skill.locked= PersistentData.instance.skillData.skills[id].locked;
+        skill.remainingCoolDown = PersistentData.instance.skillData.skills[id].remainingCoolDown;
         return skill;
     }
 

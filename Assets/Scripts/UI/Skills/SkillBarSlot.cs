@@ -16,7 +16,7 @@ public class SkillBarSlot : MonoBehaviour {
     }
 
     private void Update() {
-        if (equippedSkill && equippedSkill.coolDownCounter == 0)
+        if (equippedSkill && equippedSkill.remainingCoolDown == 0)
             coolDown.gameObject.SetActive(false);
         else
             coolDown.gameObject.SetActive(true);
@@ -34,6 +34,6 @@ public class SkillBarSlot : MonoBehaviour {
 
     public void UpdateSlot() {
         image.sprite = equippedSkill.Icon;
-        coolDown.text = equippedSkill.coolDownCounter.ToString();
+        coolDown.text = equippedSkill.remainingCoolDown.ToString();
     }
 }
