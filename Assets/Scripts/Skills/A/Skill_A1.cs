@@ -42,13 +42,10 @@ public class Skill_A1 : Skill {
 
             line.SetPositions(new Vector3[] { b1.position, b2.position });
 
-            Vector2 startPoint = b1.position;
-            Vector2 endPoint = b2.position - b1.position;
-
-            int numHits = Physics2D.Raycast(startPoint, endPoint, contactFilter, hits);
+            int numHits = Physics2D.Linecast(b1.position, b2.position, contactFilter, hits);
 
             for (int i = 0; i < numHits; i++) {
-                hits[i].transform.GetComponent<BaseEnemy>().TakeDamage((int)(dps * Time.unscaledDeltaTime));
+                hits[i].transform.GetComponent<BaseEnemy>().TakeDamage((int)(dps * Time.deltaTime));
             }
             yield return null;
         }
