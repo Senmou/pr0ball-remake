@@ -8,6 +8,7 @@ public class SaveData {
     public ScoreData scoreData;
     public BallData ballData;
     public SkillData skillData;
+    public CurrentLevelData currentLevelData;
 
     public SaveData() {
         sfxData = PersistentData.instance.sfxData;
@@ -15,5 +16,6 @@ public class SaveData {
         scoreData = PersistentData.instance.scoreData;
         ballData = PersistentData.instance.ballData;
         skillData = PersistentData.instance.skillData;
+        currentLevelData = PersistentData.instance.currentLevelData;
     }
 }

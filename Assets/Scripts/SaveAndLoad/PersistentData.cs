@@ -10,6 +10,7 @@ public class PersistentData : MonoBehaviour {
     public ScoreData scoreData;
     public BallData ballData;
     public SkillData skillData;
+    public CurrentLevelData currentLevelData;
 
     private void Awake() {
         if (instance == null)
@@ -23,6 +24,7 @@ public class PersistentData : MonoBehaviour {
         scoreData = new ScoreData();
         ballData = new BallData();
         skillData = new SkillData();
+        currentLevelData = new CurrentLevelData();
 
         Serialization.Load();
     }
@@ -33,6 +35,7 @@ public class PersistentData : MonoBehaviour {
         scoreData = saveData.scoreData ?? new ScoreData();
         ballData = saveData.ballData ?? new BallData();
         skillData = saveData.skillData ?? new SkillData();
+        currentLevelData = saveData.currentLevelData ?? new CurrentLevelData();
     }
 
     private void OnApplicationFocus(bool focus) {
@@ -126,5 +129,17 @@ public class SkillData {
             skills[i].level = 1;
             skills[i].locked = true;
         }
+    }
+}
+
+[Serializable]
+public class CurrentLevelData {
+
+    public int wave;
+    public int level;
+
+    public CurrentLevelData() {
+        wave = 1;
+        level = 1;
     }
 }

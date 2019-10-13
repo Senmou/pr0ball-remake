@@ -24,6 +24,15 @@ public class GameController : MonoBehaviour {
         ballMenu = FindObjectOfType<BallMenu>();
         enemyController = FindObjectOfType<EnemyController>();
         gameStateController = FindObjectOfType<GameStateController>();
+
+        LevelData.SetCurrentLevelData(PersistentData.instance.currentLevelData);
+
+        EventManager.StartListening("SaveGame", OnSaveGame);
+    }
+
+    private void OnSaveGame() {
+        PersistentData.instance.currentLevelData.wave = LevelData.Wave;
+        PersistentData.instance.currentLevelData.level = LevelData.Level;
     }
 
     private void Start() {

@@ -9,6 +9,11 @@
 
     public static bool IsBossLevel { get => level % 10 == 0; }
 
+    public static void SetCurrentLevelData(CurrentLevelData currentLevelData) {
+        wave = currentLevelData.wave;
+        level = currentLevelData.level;
+    }
+
     public static void LevelUp() {
         level++;
         wave = 1;

@@ -25,6 +25,12 @@ public class EnemyController : MonoBehaviour {
         playStateController = FindObjectOfType<PlayStateController>();
 
         enemyLDT.ValidateTable();
+
+        EventManager.StartListening("SaveGame", OnSaveGame);
+    }
+
+    private void OnSaveGame() {
+        
     }
 
     public bool EnemyReachedDeadline() {
