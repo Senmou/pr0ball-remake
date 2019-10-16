@@ -40,7 +40,11 @@ public static class Extensions {
 
         Transform objToReturn = parent;
         for (int i = 0; i < childCount; i++) {
-            objToReturn = objToReturn.Find(childrenNames[i]);
+            try {
+                objToReturn = objToReturn.Find(childrenNames[i]);
+            } catch {
+                Debug.LogError("Can't find child at path: " + path);
+            }
         }
 
         return objToReturn.GetComponent<T>();

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System;
-using System.Collections.Generic;
 
 public class PersistentData : MonoBehaviour {
 
@@ -90,17 +89,18 @@ public class ScoreData {
 [Serializable]
 public class BallData {
     public int blueBallLevel;
-    public int extraBallCount;
-    public int extraDamage;
-    public float extraCritChance;
-    public float extraCritDamage;
+
+    public int extraDamageLevel;
+    public int extraBallCountLevel;
+    public int extraCritChanceLevel;
+    public int extraCritDamageLevel;
 
     public BallData() {
         blueBallLevel = 1;
-        extraBallCount = 0;
-        extraDamage = 0;
-        extraCritChance = 0f;
-        extraCritDamage = 0f;
+        extraDamageLevel = 0;
+        extraBallCountLevel = 0;
+        extraCritChanceLevel = 0;
+        extraCritDamageLevel = 0;
     }
 }
 

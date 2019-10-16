@@ -43,7 +43,6 @@ public class Score : MonoBehaviour {
     public bool PurchaseGoldenUpgrade(int upgradePrice) {
         if (goldenPoints >= upgradePrice) {
             goldenPoints -= upgradePrice;
-            UpdateScore();
             return true;
         } else
             return false;

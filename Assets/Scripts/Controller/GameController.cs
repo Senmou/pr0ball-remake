@@ -44,6 +44,9 @@ public class GameController : MonoBehaviour {
     private void Update() {
         OnBackButtonPressed();
 
+        if (Input.GetKey(KeyCode.G))
+            Score.instance.IncReceivableGoldenPoints(1);
+
         if (Input.GetMouseButtonDown(0))
             InputHelper.instance.PrintClickedElementsName();
 
