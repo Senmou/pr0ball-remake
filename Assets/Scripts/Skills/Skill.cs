@@ -92,4 +92,10 @@ public class Skill : MonoBehaviour {
     protected void SaveSkillData(int id, int level, bool locked, int remainingCoolDown) {
         PersistentData.instance.skillData.SetSkillData(id, level, locked, remainingCoolDown);
     }
+
+    public void ResetData() {
+        remainingCoolDown = 0;
+        locked = true;
+        skillLevel = 1;
+    }
 }

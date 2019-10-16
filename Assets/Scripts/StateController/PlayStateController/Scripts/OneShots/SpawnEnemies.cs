@@ -23,6 +23,7 @@ public class SpawnEnemies : OneShot {
             c.reachedBossLevel = false;
             LevelData.LevelUp();
             LevelData.Wave = 1;
+            Score.instance.IncReceivableGoldenPoints(1);
             c.enemyController.CreateInitialWaves();
             return;
         }

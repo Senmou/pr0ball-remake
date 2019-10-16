@@ -1,6 +1,6 @@
 ﻿using MarchingBytes;
-using TMPro;
 using UnityEngine;
+using TMPro;
 
 public class BaseEnemy : MonoBehaviour {
 

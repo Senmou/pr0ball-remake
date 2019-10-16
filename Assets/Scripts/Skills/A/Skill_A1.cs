@@ -2,7 +2,8 @@
 using UnityEngine;
 
 /**
- * This skill creates a laser between two balls 
+ * This skill creates a laser between two balls which
+ * deals dps while in contact with enemies
  **/
 public class Skill_A1 : Skill {
 
@@ -13,7 +14,7 @@ public class Skill_A1 : Skill {
     private LineRenderer line;
 
     private void Start() {
-        coolDown = 0;
+        coolDown = 2;
         unlockLevel = 1;
 
         line = gameObject.AddComponent<LineRenderer>();

@@ -31,13 +31,13 @@ public class GameController : MonoBehaviour {
     }
 
     private void OnSaveGame() {
-        PersistentData.instance.currentLevelData.wave = LevelData.Wave;
         PersistentData.instance.currentLevelData.level = LevelData.Level;
     }
 
     private void Start() {
         ballMenu.Hide();
         skillMenu.Hide();
+
         enemyController.CreateInitialWaves();
     }
 

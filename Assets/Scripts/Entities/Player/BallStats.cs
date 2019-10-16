@@ -11,29 +11,34 @@ public class BallStats {
     public int level;
     public float spawnChance;
 
+    public int extraDamage;
+    public int extraBallCount;
+    public float extraCritChance;
+    public float extraCritDamage;
+
     public int BaseDamage { get => CalcBaseDamage(level); }
     public float CritChance { get => CalcCritChance(level); }
-    public float CritDamageMultiplier { get => CalcCritDamageMultiplier(level); }
+    public float CritDamageModifier { get => CalcCritDamageModifier(level); }
 
     public int NextLevel { get => level + 1; }
     public int Quantity { get => CalcQuantity(level); }
     public int UpgradePrice { get => CalcUpgradePrice(level); }
     public int NextBaseDamage { get => CalcBaseDamage(level + 1); }
     public float NextCritChance { get => CalcCritChance(level + 1); }
-    public float NextCritDamageMultiplier { get => CalcCritDamageMultiplier(level + 1); }
+    public float NextCritDamageModifier { get => CalcCritDamageModifier(level + 1); }
 
-    private int CalcQuantity(int level) => level;
+    private int CalcQuantity(int level) => level + extraBallCount;
     private int CalcUpgradePrice(int level) => level;
-    private int CalcBaseDamage(int level) => (int)(level * 2.3f);
-    private float CalcCritChance(int level) => level * 2f;
-    private float CalcCritDamageMultiplier(int level) => 2f + (level - 1) * 0.05f;
+    private int CalcBaseDamage(int level) => (int)(level * 2.3f) + extraDamage;
+    private float CalcCritChance(int level) => level * 2f + extraCritChance;
+    private float CalcCritDamageModifier(int level) => 2f + (level - 1) * 0.05f + extraCritDamage;
 
     public int ModifiedDamage() {
         float damage = BaseDamage;
 
         float r = Random.Range(0f, 100f);
         if (r < CritChance)
-            damage *= CritDamageMultiplier;
+            damage *= CritDamageModifier;
 
         return (int)damage;
     }

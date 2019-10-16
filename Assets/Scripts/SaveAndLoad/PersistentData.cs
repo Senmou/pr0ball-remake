@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class PersistentData : MonoBehaviour {
 
@@ -76,18 +77,30 @@ public class MusicData {
 [Serializable]
 public class ScoreData {
     public int score;
+    public int goldenPoints;
+    public int receivableGoldenPoints;
 
     public ScoreData() {
         score = 0;
+        goldenPoints = 0;
+        receivableGoldenPoints = 0;
     }
 }
 
 [Serializable]
 public class BallData {
     public int blueBallLevel;
+    public int extraBallCount;
+    public int extraDamage;
+    public float extraCritChance;
+    public float extraCritDamage;
 
     public BallData() {
         blueBallLevel = 1;
+        extraBallCount = 0;
+        extraDamage = 0;
+        extraCritChance = 0f;
+        extraCritDamage = 0f;
     }
 }
 
@@ -113,7 +126,7 @@ public class SkillData {
     public Skill GetSkillData(int id) {
         Skill skill = new Skill();
         skill.level = PersistentData.instance.skillData.skills[id].level;
-        skill.locked= PersistentData.instance.skillData.skills[id].locked;
+        skill.locked = PersistentData.instance.skillData.skills[id].locked;
         skill.remainingCoolDown = PersistentData.instance.skillData.skills[id].remainingCoolDown;
         return skill;
     }
@@ -135,11 +148,9 @@ public class SkillData {
 [Serializable]
 public class CurrentLevelData {
 
-    public int wave;
     public int level;
 
     public CurrentLevelData() {
-        wave = 1;
         level = 1;
     }
 }

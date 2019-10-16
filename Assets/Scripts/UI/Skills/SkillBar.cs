@@ -60,4 +60,11 @@ public class SkillBar : MonoBehaviour {
             skillMenu.Show();
         }
     }
+
+    public void ResetData() {
+        for (int i = 0; i < slots.Length; i++) {
+            slots[i].ResetData();
+            slots[i].UpdateSlot();
+        }
+    }
 }
