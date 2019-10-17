@@ -6,7 +6,6 @@ public enum BallColor { BLUE, GREEN, ORANGE }
 public class BallStats {
 
     public BallColor ballColor;
-    public BallPhysics ballPhysics;
 
     public int level;
     public float spawnChance;
@@ -69,18 +68,5 @@ public class BallStats {
             damage *= CritDamageModifier;
 
         return (int)damage;
-    }
-
-    public void Apply(Ball ball) {
-        ball.body.drag = ballPhysics.drag;
-        ball.body.gravityScale = ballPhysics.gravityScale;
-        ball.body.sharedMaterial.bounciness = ballPhysics.bounciness;
-    }
-
-    [System.Serializable]
-    public class BallPhysics {
-        public float drag = 0.1f;
-        public float gravityScale = 4f;
-        public float bounciness = 0.8f;
     }
 }
