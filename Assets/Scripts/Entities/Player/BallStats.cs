@@ -3,8 +3,8 @@
 [System.Serializable]
 public class BallStats {
 
+    #region Singleton
     private static BallStats instance;
-    
     public static BallStats Instance {
         get {
             if (instance == null)
@@ -12,6 +12,7 @@ public class BallStats {
             return instance;
         }
     }
+    #endregion
 
     public int level;
     public float spawnChance;

@@ -7,6 +7,9 @@ using TMPro;
 
 public class BallController : MonoBehaviour {
 
+    private const string blueBallPoolName = "BlueBallPool";
+    private const string orangeBallPoolName = "OrangeBallPool";
+
     public LootDropTable ballLDT;
 
     [HideInInspector] public bool canShootAgain;
@@ -46,7 +49,7 @@ public class BallController : MonoBehaviour {
         maxBallCount = value;
         UpdateBallCountUI();
     }
-    
+
     private void Start() {
         InitData();
         UpdateBallCountUI();
@@ -102,8 +105,11 @@ public class BallController : MonoBehaviour {
 
     private void ShootBall() {
         if (BallCount < maxBallCount) {
+            if (BallCount < BallStats.Instance.CalcExtraBallCount())
+                CreateBall(orangeBallPoolName);
+            else
+                CreateBall(blueBallPoolName);
 
-            CreateBall("BlueBallPool");
             UpdateBallCountUI();
         } else
             CancelInvoke();

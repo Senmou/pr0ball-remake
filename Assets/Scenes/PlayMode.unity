@@ -2958,7 +2958,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &165697916
 GameObject:
@@ -10519,7 +10519,6 @@ GameObject:
   m_Component:
   - component: {fileID: 893633903}
   - component: {fileID: 893633902}
-  - component: {fileID: 893633904}
   m_Layer: 0
   m_Name: BallController
   m_TagString: Untagged
@@ -10545,23 +10544,16 @@ MonoBehaviour:
         type: 3}
       poolName: BlueBallPool
       probabilityWeight: 1
-      probabilityPercent: 33.333332
+      probabilityPercent: 50
       probabilityRangeFrom: 0
       probabilityRangeTo: 1
-    - item: {fileID: 4691551078425360276, guid: dee40261551988a4b9871df6ef66bc16,
-        type: 3}
-      poolName: GreenBallPool
-      probabilityWeight: 1
-      probabilityPercent: 33.333332
-      probabilityRangeFrom: 1
-      probabilityRangeTo: 2
     - item: {fileID: 4691551078425360276, guid: 960e0001cea24d24c829897806dcd7f6,
         type: 3}
       poolName: OrangeBallPool
       probabilityWeight: 1
-      probabilityPercent: 33.333332
-      probabilityRangeFrom: 2
-      probabilityRangeTo: 3
+      probabilityPercent: 50
+      probabilityRangeFrom: 1
+      probabilityRangeTo: 2
   canShootAgain: 0
 --- !u!4 &893633903
 Transform:
@@ -10577,52 +10569,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &893633904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893633901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1c5a79bac8825a40b3cfcb99b3fd4e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  balls:
-  - ballColor: 0
-    ballPhysics:
-      drag: 0
-      gravityScale: 0
-      bounciness: 0
-    level: 1
-    spawnChance: 0
-    extraDamageLevel: 0
-    extraBallCountLevel: 0
-    extraCritChanceLevel: 0
-    extraCritDamageLevel: 0
-  - ballColor: 1
-    ballPhysics:
-      drag: 0
-      gravityScale: 0
-      bounciness: 0
-    level: 1
-    spawnChance: 0
-    extraDamageLevel: 0
-    extraBallCountLevel: 0
-    extraCritChanceLevel: 0
-    extraCritDamageLevel: 0
-  - ballColor: 2
-    ballPhysics:
-      drag: 0
-      gravityScale: 0
-      bounciness: 0
-    level: 1
-    spawnChance: 0
-    extraDamageLevel: 0
-    extraBallCountLevel: 0
-    extraCritChanceLevel: 0
-    extraCritDamageLevel: 0
 --- !u!1 &895507746
 GameObject:
   m_ObjectHideFlags: 0
@@ -14712,7 +14658,7 @@ Transform:
   m_LocalScale: {x: 24, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1196485161
 GameObject:
@@ -16305,7 +16251,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1269979282
 GameObject:
@@ -17717,59 +17663,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 100469478}
   m_RootOrder: 35
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1410828778
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1410828780}
-  - component: {fileID: 1410828779}
-  m_Layer: 0
-  m_Name: Prefabs
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1410828779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1410828778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bd67a1f19ee193499716e75f1041b06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabs:
-  - prefab: {fileID: 4691551078425360276, guid: 6a6e33a7ed415f846a90e17498144b87,
-      type: 3}
-    ballColor: 0
-  - prefab: {fileID: 4691551078425360276, guid: dee40261551988a4b9871df6ef66bc16,
-      type: 3}
-    ballColor: 0
-  - prefab: {fileID: 4691551078425360276, guid: 960e0001cea24d24c829897806dcd7f6,
-      type: 3}
-    ballColor: 0
---- !u!4 &1410828780
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1410828778}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -56.11012, y: 6.874383, z: -0.20927335}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1412287867
 GameObject:
@@ -21280,11 +21173,6 @@ MonoBehaviour:
     prefab: {fileID: 1688601153306911077, guid: b23cbc6dd2da95a4db5749c236b0ec90,
       type: 3}
     poolSize: 50
-    fixedSize: 0
-  - poolName: GreenBallPool
-    prefab: {fileID: 4691551078425360276, guid: dee40261551988a4b9871df6ef66bc16,
-      type: 3}
-    poolSize: 5
     fixedSize: 0
   - poolName: OrangeBallPool
     prefab: {fileID: 4691551078425360276, guid: 960e0001cea24d24c829897806dcd7f6,
