@@ -3,26 +3,22 @@ using UnityEngine;
 
 public class BallMenu : MonoBehaviour {
 
-    private const string maxValue = " (MAX)";
+    private TextMeshProUGUI upgradePriceUI;
 
-    struct TextFields {
-        public TextMeshProUGUI upgradePriceUI;
+    private TextMeshProUGUI currentQuantity;
+    private TextMeshProUGUI currentDamageUI;
+    private TextMeshProUGUI currentCritChanceUI;
+    private TextMeshProUGUI currentCritMultiplierUI;
 
-        public TextMeshProUGUI currentQuantity;
-        public TextMeshProUGUI currentDamageUI;
-        public TextMeshProUGUI currentCritChanceUI;
-        public TextMeshProUGUI currentCritMultiplierUI;
+    private TextMeshProUGUI nextQuantity;
+    private TextMeshProUGUI nextDamageUI;
+    private TextMeshProUGUI nextCritChanceUI;
+    private TextMeshProUGUI nextCritMultiplierUI;
 
-        public TextMeshProUGUI nextQuantity;
-        public TextMeshProUGUI nextDamageUI;
-        public TextMeshProUGUI nextCritChanceUI;
-        public TextMeshProUGUI nextCritMultiplierUI;
-
-        public TextMeshProUGUI extraBallCountUI;
-        public TextMeshProUGUI extraDamageUI;
-        public TextMeshProUGUI extraCritChanceUI;
-        public TextMeshProUGUI extraCritDamageUI;
-    }
+    private TextMeshProUGUI extraBallCountUI;
+    private TextMeshProUGUI extraDamageUI;
+    private TextMeshProUGUI extraCritChanceUI;
+    private TextMeshProUGUI extraCritDamageUI;
 
     private MoveUI moveUI;
     private BallStats stats;
@@ -32,7 +28,6 @@ public class BallMenu : MonoBehaviour {
 
     private TextMeshProUGUI scoreUI;
     private TextMeshProUGUI goldenPointsUI;
-    private TextFields ui = new TextFields();
 
     private void Awake() {
         moveUI = GetComponent<MoveUI>();
@@ -42,22 +37,22 @@ public class BallMenu : MonoBehaviour {
         scoreUI = transform.FindChild<TextMeshProUGUI>("Score/Value");
         goldenPointsUI = transform.FindChild<TextMeshProUGUI>("GoldenStats/GoldenScore/Value");
 
-        ui.upgradePriceUI = transform.FindChild<TextMeshProUGUI>("BlueBall/Price/Value");
+        upgradePriceUI = transform.FindChild<TextMeshProUGUI>("BlueBall/Price/Value");
 
-        ui.currentDamageUI = transform.FindChild<TextMeshProUGUI>("BlueBall/CurrentStats/Damage/Value");
-        ui.currentQuantity = transform.FindChild<TextMeshProUGUI>("BlueBall/CurrentStats/Quantity/Value");
-        ui.currentCritChanceUI = transform.FindChild<TextMeshProUGUI>("BlueBall/CurrentStats/Crit/Value");
-        ui.currentCritMultiplierUI = transform.FindChild<TextMeshProUGUI>("BlueBall/CurrentStats/CritDamage/Value");
+        currentDamageUI = transform.FindChild<TextMeshProUGUI>("BlueBall/CurrentStats/Damage/Value");
+        currentQuantity = transform.FindChild<TextMeshProUGUI>("BlueBall/CurrentStats/Quantity/Value");
+        currentCritChanceUI = transform.FindChild<TextMeshProUGUI>("BlueBall/CurrentStats/Crit/Value");
+        currentCritMultiplierUI = transform.FindChild<TextMeshProUGUI>("BlueBall/CurrentStats/CritDamage/Value");
 
-        ui.nextDamageUI = transform.FindChild<TextMeshProUGUI>("BlueBall/NextLevelStats/Damage/Value");
-        ui.nextQuantity = transform.FindChild<TextMeshProUGUI>("BlueBall/NextLevelStats/Quantity/Value");
-        ui.nextCritChanceUI = transform.FindChild<TextMeshProUGUI>("BlueBall/NextLevelStats/Crit/Value");
-        ui.nextCritMultiplierUI = transform.FindChild<TextMeshProUGUI>("BlueBall/NextLevelStats/CritDamage/Value");
+        nextDamageUI = transform.FindChild<TextMeshProUGUI>("BlueBall/NextLevelStats/Damage/Value");
+        nextQuantity = transform.FindChild<TextMeshProUGUI>("BlueBall/NextLevelStats/Quantity/Value");
+        nextCritChanceUI = transform.FindChild<TextMeshProUGUI>("BlueBall/NextLevelStats/Crit/Value");
+        nextCritMultiplierUI = transform.FindChild<TextMeshProUGUI>("BlueBall/NextLevelStats/CritDamage/Value");
 
-        ui.extraDamageUI = transform.FindChild<TextMeshProUGUI>("GoldenStats/CurrentValues/Damage/Value");
-        ui.extraBallCountUI = transform.FindChild<TextMeshProUGUI>("GoldenStats/CurrentValues/Quantity/Value");
-        ui.extraCritChanceUI = transform.FindChild<TextMeshProUGUI>("GoldenStats/CurrentValues/CritChance/Value");
-        ui.extraCritDamageUI = transform.FindChild<TextMeshProUGUI>("GoldenStats/CurrentValues/CritDamage/Value");
+        extraDamageUI = transform.FindChild<TextMeshProUGUI>("GoldenStats/CurrentValues/Damage/Value");
+        extraBallCountUI = transform.FindChild<TextMeshProUGUI>("GoldenStats/CurrentValues/Quantity/Value");
+        extraCritChanceUI = transform.FindChild<TextMeshProUGUI>("GoldenStats/CurrentValues/CritChance/Value");
+        extraCritDamageUI = transform.FindChild<TextMeshProUGUI>("GoldenStats/CurrentValues/CritDamage/Value");
 
         ballController = FindObjectOfType<BallController>();
         gameStateController = FindObjectOfType<GameStateController>();
@@ -87,22 +82,22 @@ public class BallMenu : MonoBehaviour {
         scoreUI.text = Score.instance.score.ToString();
         goldenPointsUI.text = Score.instance.goldenPoints.ToString();
 
-        ui.upgradePriceUI.text = stats.UpgradePrice.ToString();
+        upgradePriceUI.text = stats.UpgradePrice.ToString();
 
-        ui.currentQuantity.text = stats.level.ToString();
-        ui.currentDamageUI.text = stats.BaseDamage.ToString();
-        ui.currentCritChanceUI.text = stats.CritChance.ToString() + "%";
-        ui.currentCritMultiplierUI.text = stats.CritDamageModifier.ToString() + "x";
+        currentQuantity.text = stats.level.ToString();
+        currentDamageUI.text = stats.BaseDamage.ToString();
+        currentCritChanceUI.text = stats.CritChance.ToString() + "%";
+        currentCritMultiplierUI.text = stats.CritDamageModifier.ToString() + "x";
 
-        ui.nextQuantity.text = stats.NextQuantity.ToString();
-        ui.nextDamageUI.text = stats.NextBaseDamage.ToString();
-        ui.nextCritChanceUI.text = stats.NextCritChance.ToString() + "%";
-        ui.nextCritMultiplierUI.text = stats.NextCritDamageModifier.ToString() + "x";
+        nextQuantity.text = stats.NextQuantity.ToString();
+        nextDamageUI.text = stats.NextBaseDamage.ToString();
+        nextCritChanceUI.text = stats.NextCritChance.ToString() + "%";
+        nextCritMultiplierUI.text = stats.NextCritDamageModifier.ToString() + "x";
 
-        ui.extraBallCountUI.text = stats.extraBallCountLevel.ToString();
-        ui.extraDamageUI.text = stats.extraDamageLevel.ToString();
-        ui.extraCritChanceUI.text = stats.extraCritChanceLevel.ToString();
-        ui.extraCritDamageUI.text = stats.extraCritDamageLevel.ToString();
+        extraBallCountUI.text = stats.extraBallCountLevel.ToString();
+        extraDamageUI.text = stats.extraDamageLevel.ToString();
+        extraCritChanceUI.text = stats.extraCritChanceLevel.ToString();
+        extraCritDamageUI.text = stats.extraCritDamageLevel.ToString();
     }
 
     public void AddExtraBallOnClick() {
