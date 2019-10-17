@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 
-public enum BallColor { BLUE, ORANGE }
-
 [System.Serializable]
 public class BallStats {
 
-    public BallColor ballColor;
+    private static BallStats instance;
+    
+    public static BallStats Instance {
+        get {
+            if (instance == null)
+                instance = new BallStats();
+            return instance;
+        }
+    }
 
     public int level;
     public float spawnChance;

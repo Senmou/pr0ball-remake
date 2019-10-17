@@ -10,9 +10,6 @@ public class Ball : MonoBehaviour {
     private float startForce = 300f;
     private float maxVelocity = 50f;
 
-    protected BallStats ballStats;
-    protected BallTypes ballTypes;
-
     private new Collider2D collider;
     private AudioSource audioSource;
     private Transform bezierEndPoint;
@@ -27,7 +24,6 @@ public class Ball : MonoBehaviour {
         body = GetComponent<Rigidbody2D>();
         cannon = FindObjectOfType<Cannon>();
         collider = GetComponent<Collider2D>();
-        ballTypes = FindObjectOfType<BallTypes>();
         ballController = FindObjectOfType<BallController>();
         enemyController = FindObjectOfType<EnemyController>();
         audioSource = GameObject.Find("SfxBounce").GetComponent<AudioSource>();
@@ -48,7 +44,7 @@ public class Ball : MonoBehaviour {
         body.velocity = Vector2.ClampMagnitude(body.velocity, maxVelocity);
     }
 
-    public int Damage() => ballStats.ModifiedDamage();
+    public int Damage() => BallStats.Instance.ModifiedDamage();
 
     public void Move(float timeToReachEndPoint, PlayStateController controller) {
         StartCoroutine(MoveToPosition(timeToReachEndPoint, controller));

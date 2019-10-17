@@ -21,8 +21,6 @@ public class BallMenu : MonoBehaviour {
     private TextMeshProUGUI extraCritDamageUI;
 
     private MoveUI moveUI;
-    private BallStats stats;
-    private BallTypes ballTypes;
     private BallController ballController;
     private GameStateController gameStateController;
 
@@ -31,8 +29,6 @@ public class BallMenu : MonoBehaviour {
 
     private void Awake() {
         moveUI = GetComponent<MoveUI>();
-        ballTypes = FindObjectOfType<BallTypes>();
-        stats = ballTypes.GetBall(BallColor.BLUE);
 
         scoreUI = transform.FindChild<TextMeshProUGUI>("Score/Value");
         goldenPointsUI = transform.FindChild<TextMeshProUGUI>("GoldenStats/GoldenScore/Value");
@@ -57,61 +53,61 @@ public class BallMenu : MonoBehaviour {
         ballController = FindObjectOfType<BallController>();
         gameStateController = FindObjectOfType<GameStateController>();
 
-        stats.level = PersistentData.instance.ballData.blueBallLevel;
-        stats.extraBallCountLevel = PersistentData.instance.ballData.extraBallCountLevel;
-        stats.extraDamageLevel = PersistentData.instance.ballData.extraDamageLevel;
-        stats.extraCritChanceLevel = PersistentData.instance.ballData.extraCritChanceLevel;
-        stats.extraCritDamageLevel = PersistentData.instance.ballData.extraCritDamageLevel;
+        BallStats.Instance.level = PersistentData.instance.ballData.blueBallLevel;
+        BallStats.Instance.extraBallCountLevel = PersistentData.instance.ballData.extraBallCountLevel;
+        BallStats.Instance.extraDamageLevel = PersistentData.instance.ballData.extraDamageLevel;
+        BallStats.Instance.extraCritChanceLevel = PersistentData.instance.ballData.extraCritChanceLevel;
+        BallStats.Instance.extraCritDamageLevel = PersistentData.instance.ballData.extraCritDamageLevel;
 
         EventManager.StartListening("SaveGame", OnSaveGame);
     }
 
     private void Start() {
-        ballController.SetMaxBallCount(stats.Quantity);
+        ballController.SetMaxBallCount(BallStats.Instance.Quantity);
     }
 
     private void OnSaveGame() {
-        PersistentData.instance.ballData.blueBallLevel = stats.level;
-        PersistentData.instance.ballData.extraBallCountLevel = stats.extraBallCountLevel;
-        PersistentData.instance.ballData.extraDamageLevel = stats.extraDamageLevel;
-        PersistentData.instance.ballData.extraCritChanceLevel = stats.extraCritChanceLevel;
-        PersistentData.instance.ballData.extraCritDamageLevel = stats.extraCritDamageLevel;
+        PersistentData.instance.ballData.blueBallLevel = BallStats.Instance.level;
+        PersistentData.instance.ballData.extraBallCountLevel = BallStats.Instance.extraBallCountLevel;
+        PersistentData.instance.ballData.extraDamageLevel = BallStats.Instance.extraDamageLevel;
+        PersistentData.instance.ballData.extraCritChanceLevel = BallStats.Instance.extraCritChanceLevel;
+        PersistentData.instance.ballData.extraCritDamageLevel = BallStats.Instance.extraCritDamageLevel;
     }
 
     private void UpdateUI() {
         scoreUI.text = Score.instance.score.ToString();
         goldenPointsUI.text = Score.instance.goldenPoints.ToString();
 
-        upgradePriceUI.text = stats.UpgradePrice.ToString();
+        upgradePriceUI.text = BallStats.Instance.UpgradePrice.ToString();
 
-        currentQuantity.text = stats.level.ToString();
-        currentDamageUI.text = stats.BaseDamage.ToString();
-        currentCritChanceUI.text = stats.CritChance.ToString() + "%";
-        currentCritMultiplierUI.text = stats.CritDamageModifier.ToString() + "x";
+        currentQuantity.text = BallStats.Instance.level.ToString();
+        currentDamageUI.text = BallStats.Instance.BaseDamage.ToString();
+        currentCritChanceUI.text = BallStats.Instance.CritChance.ToString() + "%";
+        currentCritMultiplierUI.text = BallStats.Instance.CritDamageModifier.ToString() + "x";
 
-        nextQuantity.text = stats.NextQuantity.ToString();
-        nextDamageUI.text = stats.NextBaseDamage.ToString();
-        nextCritChanceUI.text = stats.NextCritChance.ToString() + "%";
-        nextCritMultiplierUI.text = stats.NextCritDamageModifier.ToString() + "x";
+        nextQuantity.text = BallStats.Instance.NextQuantity.ToString();
+        nextDamageUI.text = BallStats.Instance.NextBaseDamage.ToString();
+        nextCritChanceUI.text = BallStats.Instance.NextCritChance.ToString() + "%";
+        nextCritMultiplierUI.text = BallStats.Instance.NextCritDamageModifier.ToString() + "x";
 
-        extraBallCountUI.text = stats.extraBallCountLevel.ToString();
-        extraDamageUI.text = stats.extraDamageLevel.ToString();
-        extraCritChanceUI.text = stats.extraCritChanceLevel.ToString();
-        extraCritDamageUI.text = stats.extraCritDamageLevel.ToString();
+        extraBallCountUI.text = BallStats.Instance.extraBallCountLevel.ToString();
+        extraDamageUI.text = BallStats.Instance.extraDamageLevel.ToString();
+        extraCritChanceUI.text = BallStats.Instance.extraCritChanceLevel.ToString();
+        extraCritDamageUI.text = BallStats.Instance.extraCritDamageLevel.ToString();
     }
 
     public void AddExtraBallOnClick() {
-        if (Score.instance.PurchaseGoldenUpgrade(stats.CalcUpgradePriceExtraBallCount())) {
-            stats.extraBallCountLevel++;
-            ballController.SetMaxBallCount(stats.Quantity);
+        if (Score.instance.PurchaseGoldenUpgrade(BallStats.Instance.CalcUpgradePriceExtraBallCount())) {
+            BallStats.Instance.extraBallCountLevel++;
+            ballController.SetMaxBallCount(BallStats.Instance.Quantity);
         }
         UpdateUI();
     }
 
     public void UpgradeBallsOnClick() {
-        if (Score.instance.PurchaseUpgrade(stats.UpgradePrice)) {
-            stats.level++;
-            ballController.SetMaxBallCount(stats.Quantity);
+        if (Score.instance.PurchaseUpgrade(BallStats.Instance.UpgradePrice)) {
+            BallStats.Instance.level++;
+            ballController.SetMaxBallCount(BallStats.Instance.Quantity);
         }
         UpdateUI();
     }

@@ -11,7 +11,6 @@ public class BallController : MonoBehaviour {
 
     [HideInInspector] public bool canShootAgain;
 
-    private BallTypes ballTypes;
     private Transform spawnPoint;
     private Slider lifeTimeSlider;
     private TextMeshProUGUI maxBallCountUI;
@@ -35,7 +34,6 @@ public class BallController : MonoBehaviour {
     }
 
     private void Awake() {
-        ballTypes = GetComponent<BallTypes>();
         spawnPoint = GameObject.Find("BallSpawnPoint").transform;
         lifeTimeSlider = GameObject.Find("LifeTimeSlider").GetComponent<Slider>();
         maxBallCountUI = GameObject.Find("MaxBallCount").GetComponent<TextMeshProUGUI>();
@@ -104,7 +102,8 @@ public class BallController : MonoBehaviour {
 
     private void ShootBall() {
         if (BallCount < maxBallCount) {
-            CreateBall(spawnPoint.position);
+
+            CreateBall("BlueBallPool");
             UpdateBallCountUI();
         } else
             CancelInvoke();
@@ -119,11 +118,8 @@ public class BallController : MonoBehaviour {
         maxBallCountUI.text = "/ " + maxBallCount.ToString();
     }
 
-    private void CreateBall(Vector2 spawnPoint) {
-
-        string sourcePool = ballLDT.PickLootDropItem().poolName;
-        GameObject go = EasyObjectPool.instance.GetObjectFromPool(sourcePool, spawnPoint, Quaternion.identity);
-
+    private void CreateBall(string sourcePool) {
+        GameObject go = EasyObjectPool.instance.GetObjectFromPool(sourcePool, spawnPoint.position, Quaternion.identity);
         if (go != null) {
             Ball ball = go.GetComponent<Ball>();
             balls.Add(ball);
