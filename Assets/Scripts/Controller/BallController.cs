@@ -41,7 +41,6 @@ public class BallController : MonoBehaviour {
         maxBallCountUI = GameObject.Find("MaxBallCount").GetComponent<TextMeshProUGUI>();
         currentBallCountUI = GameObject.Find("CurrentBallCount").GetComponent<TextMeshProUGUI>();
 
-        SetLDIWeights();
         ballLDT.ValidateTable();
     }
 
@@ -49,15 +48,7 @@ public class BallController : MonoBehaviour {
         maxBallCount = value;
         UpdateBallCountUI();
     }
-
-    private void SetLDIWeights() {
-        ballLDT.SetWeight("GreenBallPool", ballTypes.GetBall(BallColor.GREEN).spawnChance);
-        ballLDT.SetWeight("OrangeBallPool", ballTypes.GetBall(BallColor.ORANGE).spawnChance);
-
-        float blueBallSpawnChance = 100f - ballTypes.GetBall(BallColor.GREEN).spawnChance - ballTypes.GetBall(BallColor.ORANGE).spawnChance;
-        ballLDT.SetWeight("BlueBallPool", blueBallSpawnChance);
-    }
-
+    
     private void Start() {
         InitData();
         UpdateBallCountUI();

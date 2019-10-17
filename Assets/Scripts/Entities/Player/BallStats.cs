@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public enum BallColor { BLUE, GREEN, ORANGE }
+public enum BallColor { BLUE, ORANGE }
 
 [System.Serializable]
 public class BallStats {
