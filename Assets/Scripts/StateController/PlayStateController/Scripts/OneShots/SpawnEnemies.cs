@@ -6,6 +6,15 @@ public class SpawnEnemies : OneShot {
     public override void Act(StateController controller) {
         PlayStateController c = controller as PlayStateController;
 
+        // game restarted
+        if (c.gameRestarted) {
+            LevelData.ResetData();
+            c.enemyController.DespawnAllEnemies();
+            c.enemyController.CreateInitialWaves();
+            c.gameRestarted = false;
+            return;
+        }
+
         // failed boss level
         if (c.fightingBoss && c.reachedNextLevel) {
             int remainingEnemies = c.enemyController.activeEnemies.Count;

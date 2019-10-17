@@ -3,13 +3,15 @@ using TMPro;
 
 public class RestartGame : MonoBehaviour {
 
-    public TextMeshProUGUI receivableGoldenPointsUI;
     private SkillBar skillBar;
     private SkillController skillController;
+    private PlayStateController playStateController;
+    private TextMeshProUGUI receivableGoldenPointsUI;
 
     private void Awake() {
         skillBar = FindObjectOfType<SkillBar>();
         skillController = FindObjectOfType<SkillController>();
+        playStateController = FindObjectOfType<PlayStateController>();
         receivableGoldenPointsUI = transform.FindChild<TextMeshProUGUI>("ReceivableGoldenPoints/Value");
     }
 
@@ -20,8 +22,9 @@ public class RestartGame : MonoBehaviour {
     public void ResetGameData() {
         Score.instance.BookReceivableGoldenPoints();
 
+        playStateController.gameRestarted = true;
+
         skillBar.ResetData();
-        LevelData.ResetData();
         Score.instance.ResetData();
         skillController.ResetData();
     }

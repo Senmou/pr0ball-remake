@@ -14133,6 +14133,7 @@ MonoBehaviour:
   lockOneShots: 0
   fightingBoss: 0
   cycleFinished: 0
+  gameRestarted: 0
   hasGameStarted: 0
   nextLevelIsBoss: 0
   reachedNextWave: 0
@@ -21289,8 +21290,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281545523
-  m_fontColor: {r: 0.20000002, g: 0.20000002, b: 0.20000002, a: 1}
+    rgba: 4287137928
+  m_fontColor: {r: 0.53333336, g: 0.53333336, b: 0.53333336, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -21467,7 +21468,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1734379461}
   - component: {fileID: 1734379466}
-  - component: {fileID: 1734379465}
   - component: {fileID: 1734379464}
   - component: {fileID: 1734379463}
   - component: {fileID: 1734379462}
@@ -21589,18 +21589,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1734379460}
   m_CullTransparentMesh: 0
---- !u!114 &1734379465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1734379460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf9348dd5571d8746b61dd864b4bb621, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1734379466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21613,7 +21601,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 616a17bee39c8aa46a602fb3466c26bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  receivableGoldenPointsUI: {fileID: 0}
 --- !u!1 &1748984342
 GameObject:
   m_ObjectHideFlags: 0
@@ -21882,8 +21869,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281545523
-  m_fontColor: {r: 0.20000002, g: 0.20000002, b: 0.20000002, a: 1}
+    rgba: 4287137928
+  m_fontColor: {r: 0.53333336, g: 0.53333336, b: 0.53333336, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -23691,8 +23678,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281545523
-  m_fontColor: {r: 0.20000002, g: 0.20000002, b: 0.20000002, a: 1}
+    rgba: 4287137928
+  m_fontColor: {r: 0.53333336, g: 0.53333336, b: 0.53333336, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
