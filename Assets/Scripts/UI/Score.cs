@@ -8,7 +8,7 @@ public class Score : MonoBehaviour {
     public TextMeshProUGUI scoreUI;
 
     public int score;
-    public int goldenPoints;
+    public int extraScore;
     public int receivableGoldenPoints;
 
     private void Awake() {
@@ -20,14 +20,14 @@ public class Score : MonoBehaviour {
         EventManager.StartListening("SaveGame", OnSaveGame);
 
         score = PersistentData.instance.scoreData.score;
-        goldenPoints = PersistentData.instance.scoreData.goldenPoints;
+        extraScore = PersistentData.instance.scoreData.goldenPoints;
         receivableGoldenPoints = PersistentData.instance.scoreData.receivableGoldenPoints;
         UpdateScore();
     }
 
     private void OnSaveGame() {
         PersistentData.instance.scoreData.score = score;
-        PersistentData.instance.scoreData.goldenPoints = goldenPoints;
+        PersistentData.instance.scoreData.goldenPoints = extraScore;
         PersistentData.instance.scoreData.receivableGoldenPoints = receivableGoldenPoints;
     }
 
@@ -40,9 +40,9 @@ public class Score : MonoBehaviour {
             return false;
     }
 
-    public bool PurchaseGoldenUpgrade(int upgradePrice) {
-        if (goldenPoints >= upgradePrice) {
-            goldenPoints -= upgradePrice;
+    public bool PurchaseExtraUpgrade(int upgradePrice) {
+        if (extraScore >= upgradePrice) {
+            extraScore -= upgradePrice;
             return true;
         } else
             return false;
@@ -54,7 +54,7 @@ public class Score : MonoBehaviour {
     }
 
     public void BookReceivableGoldenPoints() {
-        goldenPoints += receivableGoldenPoints;
+        extraScore += receivableGoldenPoints;
         receivableGoldenPoints = 0;
     }
 

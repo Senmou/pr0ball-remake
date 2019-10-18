@@ -105,7 +105,7 @@ public class BallController : MonoBehaviour {
 
     private void ShootBall() {
         if (BallCount < maxBallCount) {
-            if (BallCount < BallStats.Instance.CalcExtraBallCount())
+            if (BallCount < BallStats.Instance.extraBallCount)
                 CreateBall(orangeBallPoolName);
             else
                 CreateBall(blueBallPoolName);

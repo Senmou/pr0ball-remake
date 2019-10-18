@@ -47,6 +47,9 @@ public static class Extensions {
             }
         }
 
+        if (objToReturn == null)
+            Debug.LogWarning("object at path is null: " + path);
+
         return objToReturn.GetComponent<T>();
     }
 

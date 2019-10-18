@@ -14,65 +14,82 @@ public class BallStats {
     }
     #endregion
 
+    // Stats
     public int level;
-    public float spawnChance;
 
-    /**
-     * Upgrades purchasable with golden points
-     **/
+    public int damage;
+    public float critChance;
+    public float critDamage;
+    public int ballCount;
+
+    public int UpgradeDamage { get => level; }
+    public float UpgradeCritChance { get => level; }
+    public float UpgradeCritDamage { get => level; }
+    public int UpgradeBallCount { get => level; }
+
+    public int UpgradePrice { get => level; }
+
+    // Extra stats
     public int extraDamageLevel;
-    public int extraBallCountLevel;
     public int extraCritChanceLevel;
     public int extraCritDamageLevel;
+    public int extraBallCountLevel;
 
-    // Damage
-    public int CalcExtraDamage() => extraDamageLevel * 100;
-    public int CalcUpgradePriceExtraDamage() => extraDamageLevel + 1;
+    public int extraDamage;
+    public float extraCritChance;
+    public float extraCritDamage;
+    public int extraBallCount;
+    
+    public int UpgradeExtraDamage { get => extraDamageLevel; }
+    public float UpgradeExtraCritChance { get => extraCritChanceLevel; }
+    public float UpgradeExtraCritDamage { get => extraCritDamageLevel; }
+    public int UpgradeExtraBallCount { get => extraBallCountLevel; }
 
-    // Ball count
-    public int CalcExtraBallCount() => extraBallCountLevel;
-    public int CalcUpgradePriceExtraBallCount() => extraBallCountLevel + 1;
+    public int ExtraDamageUpgradePrice { get => extraDamageLevel + 1; }
+    public int ExtraCritChanceUpgradePrice { get => extraCritChanceLevel + 1; }
+    public int ExtraCritDamageUpgradePrice { get => extraCritDamageLevel + 1; }
+    public int ExtraBallCountUpgradePrice { get => extraBallCountLevel + 1; }
 
-    // Crit chance
-    public float CalcExtraCritChance() => extraCritChanceLevel;
-    public int CalcUpgradePriceExtraCritChance() => extraCritChanceLevel + 1;
+    // Total stats
+    public int TotalDamage { get => damage + extraDamage; }
+    public float TotalCritChance { get => critChance + extraCritChance; }
+    public float TotalCritDamage { get => critDamage + extraCritDamage; }
+    public int TotalBallCount { get => ballCount + extraBallCount; }
 
-    // Crit damage
-    public float CalcExtraCritDamage() => 0.25f * extraCritDamageLevel;
-    public int CalcUpgradePriceExtraCritDamage() => extraCritDamageLevel + 1;
+    public void AddStats() {
+        damage += UpgradeDamage;
+        critChance += UpgradeCritChance;
+        critDamage += UpgradeCritDamage;
+        ballCount += UpgradeBallCount;
+        level++;
+    }
 
-    /**
-     * Current ball stats depending on the current upgrade level
-     **/
-    public int Quantity { get => CalcQuantity(level); }
-    public int BaseDamage { get => CalcBaseDamage(level); }
-    public int UpgradePrice { get => CalcUpgradePrice(level); }
-    public float CritChance { get => CalcCritChance(level); }
-    public float CritDamageModifier { get => CalcCritDamageModifier(level); }
+    public void AddExtraDamage() {
+        extraDamage += UpgradeExtraDamage;
+        extraDamageLevel++;
+    }
 
-    /**
-     * Preview for upgraded ball stats
-     **/
-    public int NextQuantity { get => CalcQuantity(level + 1); }
-    public int NextBaseDamage { get => CalcBaseDamage(level + 1); }
-    public float NextCritChance { get => CalcCritChance(level + 1); }
-    public float NextCritDamageModifier { get => CalcCritDamageModifier(level + 1); }
+    public void AddExtraCritChance() {
+        extraCritChance += UpgradeExtraCritChance;
+        extraCritChanceLevel++;
+    }
 
-    /**
-     * Ball stats' formulars
-     **/
-    private int CalcQuantity(int level) => level + CalcExtraBallCount();
-    private int CalcUpgradePrice(int level) => level;
-    private int CalcBaseDamage(int level) => (int)(level * 2.3f) + CalcExtraDamage();
-    private float CalcCritChance(int level) => level * 2f + CalcExtraCritChance();
-    private float CalcCritDamageModifier(int level) => 2f + (level - 1) * 0.05f + CalcExtraCritDamage();
+    public void AddExtraCritDamage() {
+        extraCritDamage += UpgradeExtraCritDamage;
+        extraCritDamageLevel++;
+    }
+
+    public void AddExtraBallCount() {
+        extraBallCount += UpgradeExtraBallCount;
+        extraBallCountLevel++;
+    }
 
     public int ModifiedDamage() {
-        float damage = BaseDamage;
+        float damage = TotalDamage;
 
         float r = Random.Range(0f, 100f);
-        if (r < CritChance)
-            damage *= CritDamageModifier;
+        if (r < TotalCritChance)
+            damage *= TotalCritDamage;
 
         return (int)damage;
     }
