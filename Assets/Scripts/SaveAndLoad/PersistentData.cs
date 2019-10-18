@@ -88,19 +88,39 @@ public class ScoreData {
 
 [Serializable]
 public class BallData {
-    public int blueBallLevel;
+    public int level;
 
     public int extraDamageLevel;
     public int extraBallCountLevel;
     public int extraCritChanceLevel;
     public int extraCritDamageLevel;
 
+    public int damage;
+    public float critChance;
+    public float critDamage;
+    public int ballCount;
+
+    public int extraDamage;
+    public float extraCritChance;
+    public float extraCritDamage;
+    public int extraBallCount;
+
     public BallData() {
-        blueBallLevel = 1;
-        extraDamageLevel = 0;
-        extraBallCountLevel = 0;
-        extraCritChanceLevel = 0;
-        extraCritDamageLevel = 0;
+        level = 1;
+        extraDamageLevel = 1;
+        extraBallCountLevel = 1;
+        extraCritChanceLevel = 1;
+        extraCritDamageLevel = 1;
+
+        damage = 1;
+        critChance = 0f;
+        critDamage = 2f;
+        ballCount = 1;
+
+        extraDamage = 0;
+        extraCritChance = 0f;
+        extraCritDamage = 0f;
+        extraBallCount = 0;
     }
 }
 

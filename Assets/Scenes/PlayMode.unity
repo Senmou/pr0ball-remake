@@ -1144,7 +1144,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 398380690}
-        m_MethodName: AddExtraBallOnClick
+        m_MethodName: AddExtraCritChanceOnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10561,7 +10561,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 398380690}
-        m_MethodName: AddExtraBallOnClick
+        m_MethodName: AddExtraCritDamageOnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14308,7 +14308,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 398380690}
-        m_MethodName: AddExtraBallOnClick
+        m_MethodName: AddExtraBallCountOnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -24653,7 +24653,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 398380690}
-        m_MethodName: AddExtraBallOnClick
+        m_MethodName: AddExtraDamageOnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

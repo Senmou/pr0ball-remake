@@ -84,6 +84,14 @@ public class BallStats {
         extraBallCountLevel++;
     }
 
+    public void ResetStats() {
+        level = 1;
+        damage = 1;
+        critChance = 0f;
+        critDamage = 2f;
+        ballCount = 1;
+    }
+
     public int ModifiedDamage() {
         float damage = TotalDamage;
 
