@@ -1,5 +1,5 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
+using TMPro;
 
 public class BallMenu : MonoBehaviour {
 
@@ -125,31 +125,31 @@ public class BallMenu : MonoBehaviour {
     }
 
     private void UpdateUI() {
-        scoreUI.text = Score.instance.score.ToString();
-        extraScoreUI.text = Score.instance.extraScore.ToString();
+        scoreUI.text = Score.instance.score.ToStringFormatted();
+        extraScoreUI.text = Score.instance.extraScore.ToStringFormatted();
 
         // Stats
         upgradePriceUI.text = BallStats.Instance.UpgradePrice.ToString();
 
         damageUI.text = BallStats.Instance.damage.ToString();
-        critChanceUI.text = BallStats.Instance.critChance.ToString() + "%";
-        critDamageUI.text = BallStats.Instance.critDamage.ToString() + "x";
+        critChanceUI.text = BallStats.Instance.critChance.ToString("0.00") + "%";
+        critDamageUI.text = BallStats.Instance.critDamage.ToString("0.00") + "x";
         ballCountUI.text = BallStats.Instance.ballCount.ToString();
 
         upgradeDamageUI.text = "(+" + BallStats.Instance.UpgradeDamage.ToString() + ")";
-        upgradeCritChanceUI.text = "(+" + BallStats.Instance.UpgradeCritChance.ToString() + "%)";
-        upgradeCritDamageUI.text = "(+" + BallStats.Instance.UpgradeCritDamage.ToString() + "x)";
+        upgradeCritChanceUI.text = "(+" + BallStats.Instance.UpgradeCritChance.ToString("0.00") + "%)";
+        upgradeCritDamageUI.text = "(+" + BallStats.Instance.UpgradeCritDamage.ToString("0.00") + "x)";
         upgradeBallCountUI.text = "(+" + BallStats.Instance.UpgradeBallCount.ToString() + ")";
 
         // Extra stats
         extraDamageUI.text = BallStats.Instance.extraDamage.ToString();
-        extraCritChanceUI.text = BallStats.Instance.extraCritChance.ToString() + "%";
-        extraCritDamageUI.text = BallStats.Instance.extraCritDamage.ToString() + "x";
+        extraCritChanceUI.text = BallStats.Instance.extraCritChance.ToString("0.00") + "%";
+        extraCritDamageUI.text = BallStats.Instance.extraCritDamage.ToString("0.00") + "x";
         extraBallCountUI.text = BallStats.Instance.extraBallCount.ToString();
 
         upgradeExtraDamageUI.text = "(+" + BallStats.Instance.UpgradeExtraDamage.ToString() + ")";
-        upgradeExtraCritChanceUI.text = "(+" + BallStats.Instance.UpgradeExtraCritChance.ToString() + "%)";
-        upgradeExtraCritDamageUI.text = "(+" + BallStats.Instance.UpgradeExtraCritDamage.ToString() + "x)";
+        upgradeExtraCritChanceUI.text = "(+" + BallStats.Instance.UpgradeExtraCritChance.ToString("0.00") + "%)";
+        upgradeExtraCritDamageUI.text = "(+" + BallStats.Instance.UpgradeExtraCritDamage.ToString("0.00") + "x)";
         upgradeExtraBallCountUI.text = "(+" + BallStats.Instance.UpgradeExtraBallCount.ToString() + ")";
 
         upgradeExtraDamagePriceUI.text = BallStats.Instance.ExtraDamageUpgradePrice.ToString();
@@ -159,8 +159,8 @@ public class BallMenu : MonoBehaviour {
 
         // Total stats
         totalDamageUI.text = BallStats.Instance.TotalDamage.ToString();
-        totalCritChanceUI.text = BallStats.Instance.TotalCritChance.ToString() + "%";
-        totalCritDamageUI.text = BallStats.Instance.TotalCritDamage.ToString() + "x";
+        totalCritChanceUI.text = BallStats.Instance.TotalCritChance.ToString("0.00") + "%";
+        totalCritDamageUI.text = BallStats.Instance.TotalCritDamage.ToString("0.00") + "x";
         totalBallCountUI.text = BallStats.Instance.TotalBallCount.ToString();
     }
 
@@ -205,6 +205,11 @@ public class BallMenu : MonoBehaviour {
 
     public void CloseButtonOnClick() {
         gameStateController.ballMenuCloseButtonPressed = true;
+    }
+
+    public void ResetData() {
+        BallStats.Instance.ResetStats();
+        UpdateUI();
     }
 
     public void Show() {

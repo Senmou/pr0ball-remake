@@ -78,7 +78,7 @@ public class BallController : MonoBehaviour {
 
     private IEnumerator CollectBalls(PlayStateController controller) {
 
-        Ball[] temp = new Ball[maxBallCount];
+        Ball[] temp = new Ball[MaxBallCount];
         balls.CopyTo(temp);
 
         foreach (Ball ball in temp) {
@@ -87,6 +87,9 @@ public class BallController : MonoBehaviour {
             ball.Move(Random.Range(0.2f, 0.5f), controller);
             yield return null;
         }
+
+        // If the ballCount has changed (game reset), it will be updated after all balls are collected to prevent errors
+        SetMaxBallCount(BallStats.Instance.TotalBallCount);
         yield return null;
     }
 

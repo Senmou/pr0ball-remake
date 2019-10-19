@@ -26,19 +26,10 @@ public class GameController : MonoBehaviour {
         gameStateController = FindObjectOfType<GameStateController>();
 
         LevelData.SetCurrentLevelData(PersistentData.instance.currentLevelData);
-
-        Test();
-
+        
         EventManager.StartListening("SaveGame", OnSaveGame);
     }
-
-    private void Test() {
-        Debug.Log("Warning: Test method");
-
-        Score.instance.score = 1000;
-        Score.instance.extraScore = 1000;
-    }
-
+    
     private void OnSaveGame() {
         PersistentData.instance.currentLevelData.level = LevelData.Level;
     }

@@ -63,7 +63,7 @@ public class Score : MonoBehaviour {
     }
 
     private void UpdateScore() {
-        scoreUI.text = score.ToString();
+        scoreUI.text = score.ToStringFormatted();
     }
 
     public void ResetData() {
