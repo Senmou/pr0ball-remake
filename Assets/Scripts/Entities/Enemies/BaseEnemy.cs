@@ -4,15 +4,19 @@ using TMPro;
 
 public class BaseEnemy : MonoBehaviour {
 
+    [SerializeField] private GameObject particleSystem;
+
     [HideInInspector] public long maxHP;
     [HideInInspector] public long currentHP;
     [HideInInspector] public int benisValue;
     [HideInInspector] public Rigidbody2D body;
 
+    private Animator animator;
     private TextMeshProUGUI healthPointUI;
     private EnemyController enemyController;
 
     protected void Awake() {
+        animator = GetComponent<Animator>();
         body = GetComponentInChildren<Rigidbody2D>();
         enemyController = FindObjectOfType<EnemyController>();
         healthPointUI = GetComponentInChildren<TextMeshProUGUI>();
@@ -21,7 +25,7 @@ public class BaseEnemy : MonoBehaviour {
     private void Start() {
         UpdateUI();
     }
-    
+
     // Helper function for adding healthPoints to enemies after "step" levels
     protected long HP(long hp, int step) {
         return (LevelData.Level / step) * hp;
@@ -39,10 +43,25 @@ public class BaseEnemy : MonoBehaviour {
             EasyObjectPool.instance.ReturnObjectToPool(gameObject);
     }
 
+    public void TakeDamage(Ball ball) {
+        int amount = ball.Damage();
+        currentHP -= amount;
+        UpdateUI();
+        if (currentHP <= 0) {
+            ParticleSystem deathParticles = Instantiate(particleSystem, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+            var particleVelocity = deathParticles.velocityOverLifetime;
+            particleVelocity.x = (ball.transform.position.x < transform.position.x) ? 10f : -10f;
+
+            ReturnToPool(this);
+            Score.instance.IncScore(benisValue);
+        }
+    }
+
     public void TakeDamage(int amount) {
         currentHP -= amount;
         UpdateUI();
         if (currentHP <= 0) {
+            Instantiate(particleSystem, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
             ReturnToPool(this);
             Score.instance.IncScore(benisValue);
         }
@@ -53,11 +72,13 @@ public class BaseEnemy : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
+        animator.SetTrigger("hit");
+
         Ball ball = other.gameObject.GetComponent<Ball>();
 
         if (ball == null)
             return;
 
-        TakeDamage(ball.Damage());
+        TakeDamage(ball);
     }
 }

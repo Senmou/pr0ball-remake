@@ -79,7 +79,7 @@ public class SpawnEnemies : OneShot {
         void StartBossLevel() {
             c.fightingBoss = true;
             c.enemyController.DespawnAllEnemies();
-            c.enemyController.CreateBossWave();
+            c.enemyController.CreateInitialWaves(isBossWave: true);
         }
     }
 }

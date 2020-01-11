@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5279948440799495116}
   - component: {fileID: 6710760174124373147}
   - component: {fileID: 5121368376329097066}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HPText
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -63,12 +63,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_text: 5555
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -97,11 +95,10 @@ MonoBehaviour:
   m_fontSizeBase: 0.64
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 0.15
+  m_fontSizeMin: 0.05
   m_fontSizeMax: 0.3
   m_fontStyle: 0
   m_textAlignment: 514
-  m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -128,6 +125,7 @@ MonoBehaviour:
   m_verticalMapping: 0
   m_uvLineOffset: 0
   m_geometrySortingOrder: 0
+  m_VertexBufferAutoSizeReduction: 1
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
@@ -142,12 +140,9 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
-  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
@@ -169,7 +164,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7543558348265891238}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HealthPoints
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -203,8 +198,9 @@ GameObject:
   - component: {fileID: 5866903713678535617}
   - component: {fileID: 338860152524876274}
   - component: {fileID: 2383270617393594537}
-  m_Layer: 0
-  m_Name: Fliese
+  - component: {fileID: 7483077504274362780}
+  m_Layer: 10
+  m_Name: Enemy_0
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -238,6 +234,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64268c052f05fa349a67f96cd3fba2bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleSystem: {fileID: 7199096499088925637, guid: cc61f3667670b7e469667e44d8c5714d,
+    type: 3}
   maxHP: 0
   currentHP: 0
   benisValue: 1
@@ -279,8 +277,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 78dbbf2b8223f1c45b042fb18c1de5d1, type: 3}
-  m_Color: {r: 0.8235295, g: 0.23529413, b: 0.13333334, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 34f7f3f1e7fcceb48a201b019d6cecb0, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -311,6 +309,25 @@ Rigidbody2D:
   m_SleepingMode: 2
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!95 &7483077504274362780
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688601153306911077}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b3efafc36eb48f54a95bfcf58751449d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2023580359810677400
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +387,7 @@ GameObject:
   - component: {fileID: 8224099181650568582}
   - component: {fileID: 1870987403402872015}
   - component: {fileID: 1956543942965017710}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Enemy
   m_Icon: {fileID: 0}

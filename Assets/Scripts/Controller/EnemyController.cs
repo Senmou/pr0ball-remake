@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
 
-    private const string poolName = "EnemyPool";
-
     public LootDropTable enemyLDT;
     public List<BaseEnemy> activeEnemies;
     public PlayStateController playStateController;
@@ -62,16 +60,24 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    public void CreateInitialWaves() {
-        StartCoroutine(CreateInitalWavesDelayed());
+    public void CreateInitialWaves(bool isBossWave = false) {
+        StartCoroutine(CreateInitalWavesDelayed(isBossWave));
     }
 
-    private IEnumerator CreateInitalWavesDelayed() {
+    private IEnumerator CreateInitalWavesDelayed(bool isBossWave) {
         yield return new WaitForEndOfFrame();
         List<Transform> spawnPoints = SpawnPoints.instance.GetInitialSpawnPoints();
 
         for (int i = 0; i < spawnPoints.Count; i++) {
             string sourcePool = enemyLDT.PickLootDropItem().poolName;
+
+            if (isBossWave) {
+                if (i % 2 == 0)
+                    sourcePool = "Enemy_2_pool";
+                else
+                    sourcePool = "Enemy_1_pool";
+            }
+
             BaseEnemy newEnemy = EasyObjectPool.instance.GetObjectFromPool(sourcePool, spawnPoints[i].position, Quaternion.identity).GetComponent<BaseEnemy>();
             newEnemy.SetData();
             activeEnemies.Add(newEnemy);
@@ -101,18 +107,6 @@ public class EnemyController : MonoBehaviour {
             yield return null;
         }
         yield return null;
-    }
-
-    public void CreateBossWave() {
-        List<Transform> spawnPoints = SpawnPoints.instance.GetRandomBossSpawnPoints();
-
-        for (int i = 0; i < spawnPoints.Count; i++) {
-            string sourcePool = enemyLDT.PickLootDropItem().poolName;
-            BaseEnemy newEnemy = EasyObjectPool.instance.GetObjectFromPool(sourcePool, spawnPoints[i].position, Quaternion.identity).GetComponent<BaseEnemy>();
-            newEnemy.SetData();
-            activeEnemies.Add(newEnemy);
-            MoveEnemy(newEnemy);
-        }
     }
 
     public Vector2 GetRandomTarget() {

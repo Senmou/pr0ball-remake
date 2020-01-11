@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Skill : MonoBehaviour {
 
@@ -59,8 +58,10 @@ public class Skill : MonoBehaviour {
     }
 
     protected void Action() {
-        pending = true;
-        StartCoroutine(ActionCoroutine());
+        if (!pending) {
+            pending = true;
+            StartCoroutine(ActionCoroutine());
+        }
     }
 
     protected virtual IEnumerator ActionCoroutine() {
