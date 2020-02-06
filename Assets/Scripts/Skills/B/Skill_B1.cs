@@ -1,7 +1,10 @@
-﻿using System.Collections;
+﻿using MarchingBytes;
+using System.Collections;
 using UnityEngine;
 
 public class Skill_B1 : Skill {
+
+    private const string orangeBallPoolName = "OrangeBallPool";
 
     [SerializeField] private GameObject b1_cannon;
     [SerializeField] private GameObject orangeBall;
@@ -36,7 +39,7 @@ public class Skill_B1 : Skill {
 
     private void ShootBall() {
         Vector3 spawnPoint = b1_cannon.transform.position;
-        OrangeBall ball = Instantiate(orangeBall, spawnPoint, Quaternion.identity).GetComponent<OrangeBall>();
+        OrangeBall ball = EasyObjectPool.instance.GetObjectFromPool(orangeBallPoolName, spawnPoint, Quaternion.identity).GetComponent<OrangeBall>();
         ball.body.AddForce(b1_cannon.transform.up * 200f, ForceMode2D.Impulse);
     }
 }

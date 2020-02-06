@@ -9,12 +9,16 @@ public class OrangeBall : MonoBehaviour {
     [HideInInspector] public Rigidbody2D body;
     private float maxVelocity = 80f;
 
+    private TrailRenderer trailRenderer;
+
     private void OnEnable() {
         body.gravityScale = 0f;
     }
 
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
+        trailRenderer = GetComponent<TrailRenderer>();
+        trailRenderer.material.color = new Color(1, 0.4829951f, 0f, 1f); // orange
         audioSource = GameObject.Find("SfxOrangeBallHit").GetComponent<AudioSource>();
         EventManager.StartListening("WaveCompleted", OnWaveCompleted);
     }

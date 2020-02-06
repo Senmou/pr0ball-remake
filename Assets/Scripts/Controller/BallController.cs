@@ -7,8 +7,7 @@ using TMPro;
 
 public class BallController : MonoBehaviour {
 
-    private const string blueBallPoolName = "BlueBallPool";
-    private const string orangeBallPoolName = "OrangeBallPool";
+    private const string ballPoolName = "BallPool";
 
     public LootDropTable ballLDT;
 
@@ -109,9 +108,9 @@ public class BallController : MonoBehaviour {
     private void ShootBall() {
         if (BallCount < maxBallCount) {
             if (BallCount < BallStats.Instance.extraBallCount)
-                CreateBall(blueBallPoolName, new Color(1, 0.4829951f, 0f, 1f));
+                CreateBall(ballPoolName, new Color(1, 0.4829951f, 0f, 1f)); // orange
             else
-                CreateBall(blueBallPoolName, new Color(0f, 0.5607843f, 1f, 1f));
+                CreateBall(ballPoolName, new Color(0f, 0.5607843f, 1f, 1f)); // blue
 
             UpdateBallCountUI();
         } else
