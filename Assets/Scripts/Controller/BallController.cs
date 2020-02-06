@@ -109,9 +109,9 @@ public class BallController : MonoBehaviour {
     private void ShootBall() {
         if (BallCount < maxBallCount) {
             if (BallCount < BallStats.Instance.extraBallCount)
-                CreateBall(orangeBallPoolName);
+                CreateBall(blueBallPoolName, new Color(1, 0.4829951f, 0f, 1f));
             else
-                CreateBall(blueBallPoolName);
+                CreateBall(blueBallPoolName, new Color(0f, 0.5607843f, 1f, 1f));
 
             UpdateBallCountUI();
         } else
@@ -127,10 +127,11 @@ public class BallController : MonoBehaviour {
         maxBallCountUI.text = "/ " + maxBallCount.ToString();
     }
 
-    private void CreateBall(string sourcePool) {
+    private void CreateBall(string sourcePool, Color color) {
         GameObject go = EasyObjectPool.instance.GetObjectFromPool(sourcePool, spawnPoint.position, Quaternion.identity);
         if (go != null) {
             Ball ball = go.GetComponent<Ball>();
+            ball.SetColor(color);
             balls.Add(ball);
         }
     }

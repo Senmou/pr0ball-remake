@@ -13,6 +13,8 @@ public class Ball : MonoBehaviour {
     private new Collider2D collider;
     private AudioSource audioSource;
     private Transform bezierEndPoint;
+    private TrailRenderer trailRenderer;
+    private SpriteRenderer spriteRenderer;
     private BallController ballController;
     private EnemyController enemyController;
     private Sound sound;
@@ -24,6 +26,8 @@ public class Ball : MonoBehaviour {
         body = GetComponent<Rigidbody2D>();
         cannon = FindObjectOfType<Cannon>();
         collider = GetComponent<Collider2D>();
+        trailRenderer = GetComponent<TrailRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         ballController = FindObjectOfType<BallController>();
         enemyController = FindObjectOfType<EnemyController>();
         audioSource = GameObject.Find("SfxBounce").GetComponent<AudioSource>();
@@ -34,6 +38,11 @@ public class Ball : MonoBehaviour {
         body.gravityScale = 0f;
         collider.enabled = true;
         body.AddForce(cannon.transform.up * startForce, ForceMode2D.Impulse);
+    }
+
+    public void SetColor(Color color) {
+        spriteRenderer.color = color;
+        trailRenderer.material.color = color;
     }
 
     public void DisableCollider() {
