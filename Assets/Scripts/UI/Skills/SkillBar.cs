@@ -28,9 +28,7 @@ public class SkillBar : MonoBehaviour {
             int id = PersistentData.instance.skillData.equippedSkillIDs[i];
             if (id == -1 || slots[i] == null)
                 continue;
-            // every slot holds 4 skills
-            // the skill id's are 0-15, therefore mod 4
-            slots[i].EquipSkill(slots[i].skills[id % 4]);
+            slots[i].EquipSkill(slots[i].skill);
             slots[i].UpdateSlot();
         }
     }
@@ -46,7 +44,7 @@ public class SkillBar : MonoBehaviour {
     // Used when a long press on the SkillBarSlot is detected
     public void ShowMenuOnLongClick(SkillBarSlot slot) {
         if (!skillMenu.isVisible) {
-            skillMenu.DisplaySkills(slot.skills);
+            skillMenu.DisplaySkills(slot.skill);
             skillMenu.lastSkillBarSlotClicked = slot;
             gameStateController.skillBarLongClick = true;
         }
@@ -56,7 +54,7 @@ public class SkillBar : MonoBehaviour {
     public void SwitchMenuOnClick(SkillBarSlot slot) {
         if (skillMenu.isVisible) {
             skillMenu.lastSkillBarSlotClicked = slot;
-            skillMenu.DisplaySkills(slot.skills);
+            skillMenu.DisplaySkills(slot.skill);
             skillMenu.Show();
         }
     }

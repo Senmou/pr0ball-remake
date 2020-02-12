@@ -5,7 +5,7 @@ using UnityEngine;
  * This skill creates a laser between two balls which
  * deals dps while in contact with enemies
  **/
-public class Skill_A1 : Skill {
+public class Skill_A : Skill {
 
     public float dps;
     public Material laserMat;

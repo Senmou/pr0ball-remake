@@ -240,6 +240,9 @@ MonoBehaviour:
   currentHP: 0
   benisValue: 1
   body: {fileID: 0}
+  canTakeDamageFromSkill: 0
+  particleColorMaterial: {fileID: 2100000, guid: 4ab286839eeb17342b76f7f147d9802c,
+    type: 2}
 --- !u!212 &338860152524876274
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -286,7 +289,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 2
+  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &2383270617393594537
 Rigidbody2D:

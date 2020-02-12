@@ -2,7 +2,7 @@
 
 public class SkillMenu : MonoBehaviour {
 
-    public SkillMenuSlot[] slots;
+    public SkillMenuSlot slot;
 
     // This skillBarSlot opened the current menu
     public SkillBarSlot lastSkillBarSlotClicked;
@@ -20,19 +20,10 @@ public class SkillMenu : MonoBehaviour {
         gameStateController = FindObjectOfType<GameStateController>();
         errorSfx = GameObject.Find("SfxError").GetComponent<AudioSource>();
     }
-    
-    public void EquipSkillOnClick(SkillMenuSlot slot) {
-        if (!slot.skill.locked)
-            lastSkillBarSlotClicked.EquipSkill(slot.skill);
-        else
-            errorSfx.Play();
-    }
 
-    public void DisplaySkills(Skill[] newSkillsToDisplay) {
-        for (int i = 0; i < 4; i++) {
-            slots[i].skill = newSkillsToDisplay[i];
-            slots[i].UpdateSlot();
-        }
+    public void DisplaySkills(Skill newSkillToDisplay) {
+        slot.skill = newSkillToDisplay;
+        slot.UpdateSlot();
     }
 
     public void CloseButtonOnClick() {

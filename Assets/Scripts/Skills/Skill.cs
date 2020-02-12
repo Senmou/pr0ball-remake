@@ -65,7 +65,7 @@ public class Skill : MonoBehaviour {
     }
 
     protected virtual IEnumerator ActionCoroutine() {
-        Debug.Log("Skill used: " + name);
+        //Debug.Log("Skill used: " + name);
         yield return null;
     }
 

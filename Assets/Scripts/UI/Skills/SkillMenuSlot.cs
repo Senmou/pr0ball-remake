@@ -4,7 +4,7 @@ using TMPro;
 
 public class SkillMenuSlot : MonoBehaviour {
 
-    public Skill skill;
+    [HideInInspector] public Skill skill;
 
     private Image image;
     private SkillMenu skillMenu;
@@ -15,9 +15,9 @@ public class SkillMenuSlot : MonoBehaviour {
     private AudioSource errorSfx;
 
     private void Awake() {
-        image = GetComponent<Image>();
         skillMenu = FindObjectOfType<SkillMenu>();
-        upgradePriceUI = transform.FindChild<TextMeshProUGUI>("SkillData/UpgradePrice/Value");
+        image = transform.FindChild<Image>("Icon");
+        upgradePriceUI = transform.FindChild<TextMeshProUGUI>("UpgradeButton/Price");
         unlockButton = GetComponentInChildren<SkillMenuUnlockButton>();
 
         purchaseSfx = GameObject.Find("SfxUnlockSkill").GetComponent<AudioSource>();
@@ -37,6 +37,7 @@ public class SkillMenuSlot : MonoBehaviour {
             purchaseSfx.Play();
             unlockButton.Hide();
             UpdateSlot();
+            skillMenu.lastSkillBarSlotClicked.EquipSkill(skill);
         } else
             errorSfx.Play();
     }

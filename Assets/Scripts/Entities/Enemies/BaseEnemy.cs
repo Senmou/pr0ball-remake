@@ -10,6 +10,7 @@ public class BaseEnemy : MonoBehaviour {
     [HideInInspector] public long currentHP;
     [HideInInspector] public int benisValue;
     [HideInInspector] public Rigidbody2D body;
+    [HideInInspector] public bool canTakeDamageFromSkill;
 
     private Animator animator;
     private TextMeshProUGUI healthPointUI;
@@ -20,6 +21,7 @@ public class BaseEnemy : MonoBehaviour {
         body = GetComponentInChildren<Rigidbody2D>();
         enemyController = FindObjectOfType<EnemyController>();
         healthPointUI = GetComponentInChildren<TextMeshProUGUI>();
+        canTakeDamageFromSkill = true;
     }
 
     private void Start() {

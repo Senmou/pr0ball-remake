@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class SkillBarSlot : MonoBehaviour {
 
-    public Skill[] skills;
-    public Skill equippedSkill;
+    public Skill skill;
+    [HideInInspector] public Skill equippedSkill;
     public Sprite defaultSprite;
 
     private Image image;

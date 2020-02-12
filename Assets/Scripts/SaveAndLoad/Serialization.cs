@@ -25,7 +25,7 @@ public static class Serialization {
             Stream file = new FileStream(filePath, FileMode.Create);
             formatter.Serialize(file, saveData);
             file.Close();
-            Debug.Log("Saved Data to: " + directory.Replace("/", "\\"));
+            //Debug.Log("Saved Data to: " + directory.Replace("/", "\\"));
         } catch (Exception e) {
             Debug.LogWarning("Failed to save data to: " + filePath);
             Debug.LogWarning("Error: " + e.Message);
