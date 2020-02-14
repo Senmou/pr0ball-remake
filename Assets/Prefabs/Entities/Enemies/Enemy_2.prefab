@@ -236,13 +236,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 7199096499088925637, guid: c06b40e4de4b28d47925d08d29fa83b1,
     type: 3}
+  particleColor: {r: 0.10980393, g: 0.7254902, b: 0.57254905, a: 1}
   maxHP: 0
   currentHP: 0
   benisValue: 0
   body: {fileID: 0}
   canTakeDamageFromSkill: 0
-  particleColorMaterial: {fileID: 2100000, guid: d3ea27d955894614596c558b77f8d986,
-    type: 2}
 --- !u!212 &338860152524876274
 SpriteRenderer:
   m_ObjectHideFlags: 0

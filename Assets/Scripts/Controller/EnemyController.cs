@@ -6,8 +6,9 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour {
 
     public LootDropTable enemyLDT;
-    public List<BaseEnemy> activeEnemies;
-    public PlayStateController playStateController;
+
+    [HideInInspector] public List<BaseEnemy> activeEnemies;
+    [HideInInspector] public PlayStateController playStateController;
 
     private Transform deadline;
     private Transform dottedLine;

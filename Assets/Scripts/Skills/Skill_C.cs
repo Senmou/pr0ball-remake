@@ -60,7 +60,8 @@ public class Skill_C : Skill {
                     int randomHitAudioClip = Random.Range(0, hitAudioClips.Length - 1);
                     audioSource.PlayOneShot(hitAudioClips[randomHitAudioClip]);
 
-                    Instantiate(onHitParticleSystem, hitEnemy.transform.position, Quaternion.identity);
+                    ParticleSystemRenderer psr = Instantiate(onHitParticleSystem, hitEnemy.transform.position, Quaternion.identity).GetComponent<ParticleSystemRenderer>();
+                    psr.material.color = hitEnemy.particleColor;
 
                     hitEnemy.TakeDamage(damage);
                     hitEnemy.canTakeDamageFromSkill = false;

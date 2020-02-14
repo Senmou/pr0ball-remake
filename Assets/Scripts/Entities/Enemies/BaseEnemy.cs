@@ -4,6 +4,7 @@ using TMPro;
 
 public class BaseEnemy : MonoBehaviour {
 
+    public Color particleColor;
     [SerializeField] private GameObject particleSystem;
 
     [HideInInspector] public long maxHP;
