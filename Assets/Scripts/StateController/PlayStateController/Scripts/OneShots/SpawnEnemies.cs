@@ -40,18 +40,20 @@ public class SpawnEnemies : OneShot {
             return;
 
         if (c.reachedBossLevel) {
+            Score.instance.IncSkillPoints(1);
             StartBossLevel();
             return;
         }
 
         if (c.reachedNextLevel) {
+            Score.instance.IncSkillPoints(1);
             c.enemyController.DespawnAllEnemies();
             c.enemyController.CreateInitialWaves();
             return;
         }
 
         if (c.reachedNextWave) {
-
+            
             // cleared level before wave 20 is over OR all enemies are below the dotted line
             if (c.enemyController.activeEnemies.Count == 0 || c.enemyController.AllEnemiesBelowDottedLine()) {
                 if (c.nextLevelIsBoss)
@@ -64,15 +66,10 @@ public class SpawnEnemies : OneShot {
             } else {
                 c.enemyController.CreateWave();
                 c.enemyController.CheckForEnemiesWhichReachedDeadline();
-                // at least one enemy reached the deadline; level restart
-                //if (c.enemyController.EnemyReachedDeadline()) {
-                //c.enemyController.DespawnAllEnemies();
-                //c.enemyController.CreateInitialWaves();
-                //LevelData.Wave = 1;
-                //}
-
                 return;
             }
+
+            c.enemyController.CheckForEnemiesWhichReachedDeadline();
         }
 
         void StartBossLevel() {

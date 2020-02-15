@@ -58,6 +58,7 @@ public class BaseEnemy : MonoBehaviour {
 
             ReturnToPool(this);
             Score.instance.IncScore(benisValue);
+            OnDeath();
         }
     }
 
@@ -68,7 +69,12 @@ public class BaseEnemy : MonoBehaviour {
             Instantiate(particleSystem, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
             ReturnToPool(this);
             Score.instance.IncScore(benisValue);
+            OnDeath();
         }
+    }
+
+    protected virtual void OnDeath() {
+
     }
 
     public void UpdateUI() {
