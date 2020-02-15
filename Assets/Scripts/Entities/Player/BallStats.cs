@@ -22,39 +22,12 @@ public class BallStats {
     public float critDamage;
     public int ballCount;
 
-    public int UpgradeDamage { get => VPS(level, (1, 1), (5, 5), (10, 100)); }
-    public float UpgradeCritChance { get => 0.25f; }
-    public float UpgradeCritDamage { get => 0.05f; }
-    public int UpgradeBallCount { get => VES(level, (5, ballCount)); }
+    public int UpgradeDamage { get => VPS(level, (1, 1), (10, 9)); }
+    public float UpgradeCritChance { get => 5f; }
+    public float UpgradeCritDamage { get => 0.5f; }
+    public int UpgradeBallCount { get => VES(level, (2, 1)); }
 
-    public int UpgradePrice { get => level; }
-
-    // Extra stats
-    public int extraDamageLevel;
-    public int extraCritChanceLevel;
-    public int extraCritDamageLevel;
-    public int extraBallCountLevel;
-
-    public int extraDamage;
-    public float extraCritChance;
-    public float extraCritDamage;
-    public int extraBallCount;
-
-    public int UpgradeExtraDamage { get => extraDamageLevel; }
-    public float UpgradeExtraCritChance { get => extraCritChanceLevel; }
-    public float UpgradeExtraCritDamage { get => extraCritDamageLevel; }
-    public int UpgradeExtraBallCount { get => extraBallCountLevel; }
-
-    public int ExtraDamageUpgradePrice { get => extraDamageLevel + 1; }
-    public int ExtraCritChanceUpgradePrice { get => extraCritChanceLevel + 1; }
-    public int ExtraCritDamageUpgradePrice { get => extraCritDamageLevel + 1; }
-    public int ExtraBallCountUpgradePrice { get => extraBallCountLevel + 1; }
-
-    // Total stats
-    public int TotalDamage { get => damage + extraDamage; }
-    public float TotalCritChance { get => critChance + extraCritChance; }
-    public float TotalCritDamage { get => critDamage + extraCritDamage; }
-    public int TotalBallCount { get => ballCount + extraBallCount; }
+    public int UpgradePrice { get => 1 + VPS(level, (5, 1)); }
 
     public void AddStats() {
         damage += UpgradeDamage;
@@ -62,26 +35,6 @@ public class BallStats {
         critDamage += UpgradeCritDamage;
         ballCount += UpgradeBallCount;
         level++;
-    }
-
-    public void AddExtraDamage() {
-        extraDamage += UpgradeExtraDamage;
-        extraDamageLevel++;
-    }
-
-    public void AddExtraCritChance() {
-        extraCritChance += UpgradeExtraCritChance;
-        extraCritChanceLevel++;
-    }
-
-    public void AddExtraCritDamage() {
-        extraCritDamage += UpgradeExtraCritDamage;
-        extraCritDamageLevel++;
-    }
-
-    public void AddExtraBallCount() {
-        extraBallCount += UpgradeExtraBallCount;
-        extraBallCountLevel++;
     }
 
     public void ResetStats() {
@@ -93,13 +46,14 @@ public class BallStats {
     }
 
     public int ModifiedDamage() {
-        float damage = TotalDamage;
+
+        float dmg = damage;
 
         float r = UnityEngine.Random.Range(0f, 100f);
-        if (r < TotalCritChance)
-            damage *= TotalCritDamage;
+        if (r < critChance)
+            dmg *= critDamage;
 
-        return (int)damage;
+        return (int)dmg;
     }
 
     // Helper function (VPS = ValuePerStep)

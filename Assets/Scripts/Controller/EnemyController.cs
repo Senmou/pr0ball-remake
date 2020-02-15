@@ -26,12 +26,20 @@ public class EnemyController : MonoBehaviour {
         enemyLDT.ValidateTable();
     }
     
-    public bool EnemyReachedDeadline() {
+    public void CheckForEnemiesWhichReachedDeadline() {
+
+        List<BaseEnemy> enemiesToRemove = new List<BaseEnemy>();
         foreach (var enemy in activeEnemies) {
-            if (enemy.transform.position.y >= deadline.position.y)
-                return true;
+            if (enemy.transform.position.y >= deadline.position.y) {
+                enemiesToRemove.Add(enemy);
+                Score.instance.IncScore(-enemy.currentHP);
+                EasyObjectPool.instance.ReturnObjectToPool(enemy.gameObject);
+            }
         }
-        return false;
+
+        foreach (var enemyToRemove in enemiesToRemove) {
+            activeEnemies.Remove(enemyToRemove);
+        }
     }
 
     public bool AllEnemiesBelowDottedLine() {

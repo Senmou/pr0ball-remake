@@ -1,6 +1,6 @@
 ﻿public class Enemy_2 : BaseEnemy {
 
     private void OnEnable() {
-        maxHP = 10 * HP(1, 1) + HP(20, 2) + HP(100, 5);
+        maxHP = HP(10, 1) + HP(40, 5) + HP(70, 10);
     }
 }

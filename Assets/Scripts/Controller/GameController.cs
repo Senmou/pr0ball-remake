@@ -44,25 +44,12 @@ public class GameController : MonoBehaviour {
     private void Update() {
         OnBackButtonPressed();
 
-        if (Input.GetKey(KeyCode.G))
-            Score.instance.IncReceivableGoldenPoints(1);
-
-        if (Input.GetMouseButtonDown(0))
-            InputHelper.instance.PrintClickedElementsName();
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-            LevelData.Wave++;
-
-        if (Input.GetKey(KeyCode.UpArrow))
-            LevelData.Wave++;
-
         if (Input.GetKeyDown(KeyCode.Escape))
             gameStateController.backButtonPressed = true;
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            Time.timeScale = 0.2f;
-
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
+            Time.timeScale = 5f;
+        else
             Time.timeScale = 1f;
     }
 

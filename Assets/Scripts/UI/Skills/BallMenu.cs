@@ -57,26 +57,17 @@ public class BallMenu : MonoBehaviour {
         gameStateController = FindObjectOfType<GameStateController>();
 
         BallStats.Instance.level = PersistentData.instance.ballData.level;
-        BallStats.Instance.extraBallCountLevel = PersistentData.instance.ballData.extraBallCountLevel;
-        BallStats.Instance.extraDamageLevel = PersistentData.instance.ballData.extraDamageLevel;
-        BallStats.Instance.extraCritChanceLevel = PersistentData.instance.ballData.extraCritChanceLevel;
-        BallStats.Instance.extraCritDamageLevel = PersistentData.instance.ballData.extraCritDamageLevel;
 
         BallStats.Instance.damage = PersistentData.instance.ballData.damage;
         BallStats.Instance.critChance = PersistentData.instance.ballData.critChance;
         BallStats.Instance.critDamage = PersistentData.instance.ballData.critDamage;
         BallStats.Instance.ballCount = PersistentData.instance.ballData.ballCount;
 
-        BallStats.Instance.extraDamage = PersistentData.instance.ballData.extraDamage;
-        BallStats.Instance.extraCritChance = PersistentData.instance.ballData.extraCritChance;
-        BallStats.Instance.extraCritDamage = PersistentData.instance.ballData.extraCritDamage;
-        BallStats.Instance.extraBallCount = PersistentData.instance.ballData.extraBallCount;
-
         EventManager.StartListening("SaveGame", OnSaveGame);
     }
 
     private void Start() {
-        ballController.SetMaxBallCount(BallStats.Instance.TotalBallCount);
+        ballController.SetMaxBallCount(BallStats.Instance.ballCount);
     }
 
     private void Update() {
@@ -119,24 +110,15 @@ public class BallMenu : MonoBehaviour {
 
     private void OnSaveGame() {
         PersistentData.instance.ballData.level = BallStats.Instance.level;
-        PersistentData.instance.ballData.extraBallCountLevel = BallStats.Instance.extraBallCountLevel;
-        PersistentData.instance.ballData.extraDamageLevel = BallStats.Instance.extraDamageLevel;
-        PersistentData.instance.ballData.extraCritChanceLevel = BallStats.Instance.extraCritChanceLevel;
-        PersistentData.instance.ballData.extraCritDamageLevel = BallStats.Instance.extraCritDamageLevel;
 
         PersistentData.instance.ballData.damage = BallStats.Instance.damage;
         PersistentData.instance.ballData.critChance = BallStats.Instance.critChance;
         PersistentData.instance.ballData.critDamage = BallStats.Instance.critDamage;
         PersistentData.instance.ballData.ballCount = BallStats.Instance.ballCount;
-
-        PersistentData.instance.ballData.extraDamage = BallStats.Instance.extraDamage;
-        PersistentData.instance.ballData.extraCritChance = BallStats.Instance.extraCritChance;
-        PersistentData.instance.ballData.extraCritDamage = BallStats.Instance.extraCritDamage;
-        PersistentData.instance.ballData.extraBallCount = BallStats.Instance.extraBallCount;
     }
 
     private void UpdateUI() {
-        scoreUI.text = Score.instance.score.ToStringFormatted();
+        scoreUI.text = "Skillpunkte: " + Score.instance.skillPoints.ToString();
 
         // Stats
         upgradePriceUI.text = BallStats.Instance.UpgradePrice.ToString();
@@ -151,37 +133,11 @@ public class BallMenu : MonoBehaviour {
         upgradeCritDamageUI.text = "(+" + BallStats.Instance.UpgradeCritDamage.ToString("0.00") + "x)";
         upgradeBallCountUI.text = "(+" + BallStats.Instance.UpgradeBallCount.ToString() + ")";
     }
-
-    public void AddExtraDamageOnClick() {
-        if (Score.instance.PurchaseExtraUpgrade(BallStats.Instance.ExtraDamageUpgradePrice))
-            BallStats.Instance.AddExtraDamage();
-        UpdateUI();
-    }
-
-    public void AddExtraCritChanceOnClick() {
-        if (Score.instance.PurchaseExtraUpgrade(BallStats.Instance.ExtraCritChanceUpgradePrice))
-            BallStats.Instance.AddExtraCritChance();
-        UpdateUI();
-    }
-
-    public void AddExtraCritDamageOnClick() {
-        if (Score.instance.PurchaseExtraUpgrade(BallStats.Instance.ExtraCritDamageUpgradePrice))
-            BallStats.Instance.AddExtraCritDamage();
-        UpdateUI();
-    }
-
-    public void AddExtraBallCountOnClick() {
-        if (Score.instance.PurchaseExtraUpgrade(BallStats.Instance.ExtraBallCountUpgradePrice)) {
-            BallStats.Instance.AddExtraBallCount();
-            ballController.SetMaxBallCount(BallStats.Instance.TotalBallCount);
-        }
-        UpdateUI();
-    }
-
+    
     public void UpgradeBallsOnClick() {
-        if (Score.instance.PurchaseUpgrade(BallStats.Instance.UpgradePrice)) {
+        if (Score.instance.PaySkillPoints(BallStats.Instance.UpgradePrice)) {
             BallStats.Instance.AddStats();
-            ballController.SetMaxBallCount(BallStats.Instance.TotalBallCount);
+            ballController.SetMaxBallCount(BallStats.Instance.ballCount);
         }
         UpdateUI();
     }

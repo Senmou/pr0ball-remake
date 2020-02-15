@@ -76,13 +76,13 @@ public class MusicData {
 [Serializable]
 public class ScoreData {
     public int score;
-    public int goldenPoints;
-    public int receivableGoldenPoints;
+    public int highscore;
+    public int skillPoints;
 
     public ScoreData() {
         score = 0;
-        goldenPoints = 0;
-        receivableGoldenPoints = 0;
+        highscore = 0;
+        skillPoints = 0;
     }
 }
 
@@ -90,37 +90,18 @@ public class ScoreData {
 public class BallData {
     public int level;
 
-    public int extraDamageLevel;
-    public int extraBallCountLevel;
-    public int extraCritChanceLevel;
-    public int extraCritDamageLevel;
-
     public int damage;
     public float critChance;
     public float critDamage;
     public int ballCount;
 
-    public int extraDamage;
-    public float extraCritChance;
-    public float extraCritDamage;
-    public int extraBallCount;
-
     public BallData() {
         level = 1;
-        extraDamageLevel = 1;
-        extraBallCountLevel = 1;
-        extraCritChanceLevel = 1;
-        extraCritDamageLevel = 1;
 
         damage = 1;
         critChance = 0f;
         critDamage = 2f;
         ballCount = 1;
-
-        extraDamage = 0;
-        extraCritChance = 0f;
-        extraCritDamage = 0f;
-        extraBallCount = 0;
     }
 }
 

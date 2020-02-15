@@ -88,7 +88,7 @@ public class BallController : MonoBehaviour {
         }
 
         // If the ballCount has changed (game reset), it will be updated after all balls are collected to prevent errors
-        SetMaxBallCount(BallStats.Instance.TotalBallCount);
+        SetMaxBallCount(BallStats.Instance.ballCount);
         yield return null;
     }
 
@@ -107,11 +107,7 @@ public class BallController : MonoBehaviour {
 
     private void ShootBall() {
         if (BallCount < maxBallCount) {
-            if (BallCount < BallStats.Instance.extraBallCount)
-                CreateBall(ballPoolName, new Color(1, 0.4829951f, 0f, 1f)); // orange
-            else
-                CreateBall(ballPoolName, new Color(0f, 0.5607843f, 1f, 1f)); // blue
-
+            CreateBall(ballPoolName, new Color(0f, 0.5607843f, 1f, 1f)); // blue
             UpdateBallCountUI();
         } else
             CancelInvoke();

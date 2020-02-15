@@ -32,7 +32,6 @@ public class SpawnEnemies : OneShot {
             c.reachedBossLevel = false;
             LevelData.LevelUp();
             LevelData.Wave = 1;
-            Score.instance.IncReceivableGoldenPoints(1);
             c.enemyController.CreateInitialWaves();
             return;
         }
@@ -64,13 +63,13 @@ public class SpawnEnemies : OneShot {
                 LevelData.LevelUp();
             } else {
                 c.enemyController.CreateWave();
-
+                c.enemyController.CheckForEnemiesWhichReachedDeadline();
                 // at least one enemy reached the deadline; level restart
-                if (c.enemyController.EnemyReachedDeadline()) {
-                    c.enemyController.DespawnAllEnemies();
-                    c.enemyController.CreateInitialWaves();
-                    LevelData.Wave = 1;
-                }
+                //if (c.enemyController.EnemyReachedDeadline()) {
+                //c.enemyController.DespawnAllEnemies();
+                //c.enemyController.CreateInitialWaves();
+                //LevelData.Wave = 1;
+                //}
 
                 return;
             }

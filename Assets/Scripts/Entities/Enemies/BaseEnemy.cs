@@ -7,15 +7,16 @@ public class BaseEnemy : MonoBehaviour {
     public Color particleColor;
     [SerializeField] private GameObject particleSystem;
 
-    [HideInInspector] public long maxHP;
-    [HideInInspector] public long currentHP;
-    [HideInInspector] public int benisValue;
+    [HideInInspector] public int maxHP;
+    [HideInInspector] public int currentHP;
     [HideInInspector] public Rigidbody2D body;
     [HideInInspector] public bool canTakeDamageFromSkill;
 
     private Animator animator;
     private TextMeshProUGUI healthPointUI;
     private EnemyController enemyController;
+
+    private int benisValue = 1;
 
     protected void Awake() {
         animator = GetComponent<Animator>();
@@ -30,7 +31,7 @@ public class BaseEnemy : MonoBehaviour {
     }
 
     // Helper function for adding healthPoints to enemies after "step" levels
-    protected long HP(long hp, int step) {
+    protected int HP(int hp, int step) {
         return (LevelData.Level / step) * hp;
     }
 

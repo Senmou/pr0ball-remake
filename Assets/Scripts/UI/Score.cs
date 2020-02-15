@@ -8,8 +8,8 @@ public class Score : MonoBehaviour {
     public TextMeshProUGUI scoreUI;
 
     public int score;
-    public int extraScore;
-    public int receivableGoldenPoints;
+    public int highscore;
+    public int skillPoints;
 
     private void Awake() {
         if (instance == null)
@@ -20,29 +20,20 @@ public class Score : MonoBehaviour {
         EventManager.StartListening("SaveGame", OnSaveGame);
 
         score = PersistentData.instance.scoreData.score;
-        extraScore = PersistentData.instance.scoreData.goldenPoints;
-        receivableGoldenPoints = PersistentData.instance.scoreData.receivableGoldenPoints;
+        highscore = PersistentData.instance.scoreData.highscore;
+        skillPoints = PersistentData.instance.scoreData.skillPoints;
         UpdateScore();
     }
 
     private void OnSaveGame() {
         PersistentData.instance.scoreData.score = score;
-        PersistentData.instance.scoreData.goldenPoints = extraScore;
-        PersistentData.instance.scoreData.receivableGoldenPoints = receivableGoldenPoints;
+        PersistentData.instance.scoreData.highscore = highscore;
+        PersistentData.instance.scoreData.skillPoints = skillPoints;
     }
 
-    public bool PurchaseUpgrade(int upgradePrice) {
-        if (score >= upgradePrice) {
-            score -= upgradePrice;
-            UpdateScore();
-            return true;
-        } else
-            return false;
-    }
-
-    public bool PurchaseExtraUpgrade(int upgradePrice) {
-        if (extraScore >= upgradePrice) {
-            extraScore -= upgradePrice;
+    public bool PaySkillPoints(int upgradePrice) {
+        if (skillPoints >= upgradePrice) {
+            skillPoints -= upgradePrice;
             return true;
         } else
             return false;
@@ -50,24 +41,22 @@ public class Score : MonoBehaviour {
 
     public void IncScore(int amount) {
         score += amount;
+        if (score > highscore)
+            highscore = score;
         UpdateScore();
     }
-
-    public void BookReceivableGoldenPoints() {
-        extraScore += receivableGoldenPoints;
-        receivableGoldenPoints = 0;
-    }
-
-    public void IncReceivableGoldenPoints(int amount) {
-        receivableGoldenPoints += amount;
+    
+    public void IncSkillPoints(int amount) {
+        skillPoints += amount;
     }
 
     private void UpdateScore() {
-        scoreUI.text = score.ToStringFormatted();
+        scoreUI.text = score.ToString();
     }
 
     public void ResetData() {
         score = 0;
+        highscore = 0;
         UpdateScore();
     }
 }
