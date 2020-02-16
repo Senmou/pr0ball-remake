@@ -20,6 +20,7 @@
     public static void LevelUp() {
         level++;
         wave = 1;
+        EventManager.TriggerEvent("ReachedNextLevel");
     }
 
     public static void BossLevelFailed() {
@@ -34,6 +35,7 @@
             if (wave > wavesPerLevel) {
                 wave = 1;
                 level++;
+                EventManager.TriggerEvent("ReachedNextLevel");
             }
         }
     }

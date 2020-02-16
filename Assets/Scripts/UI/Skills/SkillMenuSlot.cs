@@ -23,7 +23,7 @@ public class SkillMenuSlot : MonoBehaviour {
         purchaseSfx = GameObject.Find("SfxUnlockSkill").GetComponent<AudioSource>();
         errorSfx = GameObject.Find("SfxError").GetComponent<AudioSource>();
     }
-    
+
     private void Update() {
         if (skill && skill.locked)
             unlockButton.Show();
@@ -43,7 +43,11 @@ public class SkillMenuSlot : MonoBehaviour {
     }
 
     public void UpgradeSkill() {
-        skill.skillLevel++;
+        if (Score.instance.PaySkillPoints(skill.UpgradePrice)) {
+            skill.skillLevel++;
+            purchaseSfx.Play();
+        } else
+            errorSfx.Play();
         UpdateSlot();
     }
 

@@ -18,11 +18,16 @@ public class Score : MonoBehaviour {
             Destroy(gameObject);
 
         EventManager.StartListening("SaveGame", OnSaveGame);
+        EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
 
         score = PersistentData.instance.scoreData.score;
         highscore = PersistentData.instance.scoreData.highscore;
         skillPoints = PersistentData.instance.scoreData.skillPoints;
         UpdateScore();
+    }
+
+    private void OnReachedNextLevel() {
+        IncSkillPoints(1);
     }
 
     private void OnSaveGame() {

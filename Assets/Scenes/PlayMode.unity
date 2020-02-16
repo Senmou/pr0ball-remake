@@ -3957,6 +3957,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 349739540}
+  - component: {fileID: 349739541}
   m_Layer: 5
   m_Name: UpgradeButton
   m_TagString: Untagged
@@ -3986,6 +3987,57 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0.15}
   m_SizeDelta: {x: 4.67, y: 1}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &349739541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349739539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 463601757}
+        m_MethodName: UpgradeSkill
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &369283554
 GameObject:
   m_ObjectHideFlags: 0
@@ -4521,7 +4573,7 @@ RectTransform:
   - {fileID: 1187988266}
   - {fileID: 349739540}
   - {fileID: 1467835404}
-  - {fileID: 1956508670}
+  - {fileID: 697598163}
   m_Father: {fileID: 816369978}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5698,6 +5750,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 683906106}
   m_CullTransparentMesh: 0
+--- !u!1 &697598162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 697598163}
+  m_Layer: 5
+  m_Name: SkillData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &697598163
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697598162}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_Children:
+  - {fileID: 1956508670}
+  m_Father: {fileID: 463601754}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.37, y: 0.52}
+  m_SizeDelta: {x: 4, y: 3}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &700605766
 GameObject:
   m_ObjectHideFlags: 0
@@ -6956,24 +7044,24 @@ MonoBehaviour:
     - item: {fileID: 1688601153306911077, guid: f7dfc4e3f460f9e4a89262c4b4b69737,
         type: 3}
       poolName: Enemy_0_pool
-      probabilityWeight: 5
-      probabilityPercent: 60.975613
+      probabilityWeight: 40
+      probabilityPercent: 49.382717
       probabilityRangeFrom: 0
-      probabilityRangeTo: 5
+      probabilityRangeTo: 40
     - item: {fileID: 1688601153306911077, guid: b23cbc6dd2da95a4db5749c236b0ec90,
         type: 3}
       poolName: Enemy_1_pool
-      probabilityWeight: 3
-      probabilityPercent: 36.585365
-      probabilityRangeFrom: 5
-      probabilityRangeTo: 8
+      probabilityWeight: 40
+      probabilityPercent: 49.382717
+      probabilityRangeFrom: 40
+      probabilityRangeTo: 80
     - item: {fileID: 1688601153306911077, guid: ea3d98fa5f5610341af9c37e1a2e2081,
         type: 3}
       poolName: Enemy_2_pool
-      probabilityWeight: 0.2
-      probabilityPercent: 2.4390244
-      probabilityRangeFrom: 8
-      probabilityRangeTo: 8.2
+      probabilityWeight: 1
+      probabilityPercent: 1.2345679
+      probabilityRangeFrom: 80
+      probabilityRangeTo: 81
   activeEnemies: []
   playStateController: {fileID: 0}
 --- !u!4 &803502885
@@ -13419,7 +13507,7 @@ MonoBehaviour:
   skillLevel: 0
   unlockLevel: 0
   icon: {fileID: 21300000, guid: 122a96a037f3fc84e878c9cbee0a28f2, type: 3}
-  iconLocked: {fileID: 0}
+  iconLocked: {fileID: 21300000, guid: 6548719487816444b8d3b8e09fdea2cd, type: 3}
   barSlot: {fileID: 1416314980}
   menuSlot: {fileID: 463601757}
   damage: 1
@@ -14958,7 +15046,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 2e3bf0fd2d01a71428c219ae421281a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14979,8 +15067,9 @@ LineRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Positions:
+  - {x: 0, y: 20, z: 0}
+  - {x: 12, y: 16.055515, z: 0}
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -14989,20 +15078,29 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.20370954
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.94509923
+        value: 0.06481169
+        inSlope: -0.07871659
+        outSlope: -0.07871659
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.25862163
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 0, g: 0, b: 0, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -15028,10 +15126,10 @@ LineRenderer:
       m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    numCornerVertices: 0
-    numCapVertices: 0
+    numCornerVertices: 5
+    numCapVertices: 5
     alignment: 0
-    textureMode: 0
+    textureMode: 3
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1
@@ -15048,8 +15146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d28ddc681ad21c4caca04694fe062af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxIterations: 2
-  cannon: {fileID: 2103097379}
+  cannon: {fileID: 734778858}
+  reflectionLength: 3
   contactFilter:
     useTriggers: 0
     useLayerMask: 1
@@ -15059,7 +15157,7 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 512
+      m_Bits: 1536
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
@@ -16348,7 +16446,7 @@ MonoBehaviour:
   skillLevel: 0
   unlockLevel: 0
   icon: {fileID: 21300000, guid: 8cb83d26ce6d0a24a8ab548b78c86b85, type: 3}
-  iconLocked: {fileID: 0}
+  iconLocked: {fileID: 21300000, guid: 6548719487816444b8d3b8e09fdea2cd, type: 3}
   barSlot: {fileID: 2057200484}
   menuSlot: {fileID: 463601757}
   frogCount: 3
@@ -17148,7 +17246,7 @@ GameObject:
   - component: {fileID: 1956508672}
   - component: {fileID: 1956508671}
   m_Layer: 5
-  m_Name: Description
+  m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17165,14 +17263,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
-  m_Father: {fileID: 463601754}
-  m_RootOrder: 3
+  m_Father: {fileID: 697598163}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 2.75, y: -0.11}
-  m_SizeDelta: {x: 4.5, y: 1}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1.3, y: 1}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &1956508671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17191,7 +17289,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Voll Laser wie der abgeht.
+  m_text: 'Level: 5'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -17226,14 +17324,14 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_textAlignment: 257
+  m_textAlignment: 514
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_firstOverflowCharacterIndex: -1
@@ -17260,10 +17358,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1956508671}
-    characterCount: 26
+    characterCount: 8
     spriteCount: 0
-    spaceCount: 4
-    wordCount: 5
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1

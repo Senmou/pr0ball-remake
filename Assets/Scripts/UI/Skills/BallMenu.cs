@@ -26,7 +26,13 @@ public class BallMenu : MonoBehaviour {
 
     private TextMeshProUGUI scoreUI;
 
+    private AudioSource errorSfx;
+    private AudioSource purchaseSfx;
+
     private void Awake() {
+        errorSfx = GameObject.Find("SfxError").GetComponent<AudioSource>();
+        purchaseSfx = GameObject.Find("SfxUnlockSkill").GetComponent<AudioSource>();
+
         moveUI = GetComponent<MoveUI>();
 
         scoreUI = transform.FindChild<TextMeshProUGUI>("Score/Value");
@@ -138,7 +144,9 @@ public class BallMenu : MonoBehaviour {
         if (Score.instance.PaySkillPoints(BallStats.Instance.UpgradePrice)) {
             BallStats.Instance.AddStats();
             ballController.SetMaxBallCount(BallStats.Instance.ballCount);
-        }
+            purchaseSfx.Play();
+        } else
+            errorSfx.Play();
         UpdateUI();
     }
 

@@ -40,13 +40,11 @@ public class SpawnEnemies : OneShot {
             return;
 
         if (c.reachedBossLevel) {
-            Score.instance.IncSkillPoints(1);
             StartBossLevel();
             return;
         }
 
         if (c.reachedNextLevel) {
-            Score.instance.IncSkillPoints(1);
             c.enemyController.DespawnAllEnemies();
             c.enemyController.CreateInitialWaves();
             return;

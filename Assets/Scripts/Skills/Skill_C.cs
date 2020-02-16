@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 
 public class Skill_C : Skill {
 
@@ -13,6 +12,7 @@ public class Skill_C : Skill {
 
     public GameObject hammer;
     public ContactFilter2D contactFilter;
+
     private BoxCollider2D hammerCollider;
     private AudioSource audioSource;
 

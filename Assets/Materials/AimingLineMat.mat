@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ParticleMat_orange
+  m_Name: AimingLineMat
   m_Shader: {fileID: 4800000, guid: 650dd9526735d5b46b79224bc6e94025, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
@@ -41,4 +41,4 @@ Material:
     - _Surface: 1
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 1, g: 0.48627454, b: 0, a: 1}
+    - _Color: {r: 0.79215693, g: 0.23137257, b: 0.13333334, a: 0.24313726}

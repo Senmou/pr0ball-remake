@@ -48,7 +48,7 @@ public class GameController : MonoBehaviour {
             gameStateController.backButtonPressed = true;
 
         if (Input.GetKey(KeyCode.Space))
-            Time.timeScale = 5f;
+            Time.timeScale = 15f;
         else
             Time.timeScale = 1f;
     }
