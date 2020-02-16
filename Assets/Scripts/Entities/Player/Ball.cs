@@ -85,7 +85,7 @@ public class Ball : MonoBehaviour {
 
     private void MoveToEnemy() {
         Vector2 direction = (randomEnemyPos - (Vector2)transform.position).normalized;
-        body.AddForce(direction * 20, ForceMode2D.Impulse);
+        body.AddForce(direction * 600, ForceMode2D.Impulse);
     }
 
     public Vector2 Bezier(Vector2 a, Vector2 b, Vector2 c, float t) {

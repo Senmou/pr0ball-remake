@@ -39,4 +39,4 @@ Material:
     - _Surface: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 0.48627454, b: 0, a: 1}
+    - _Color: {r: 0.7294118, g: 0.5294118, b: 0.36862746, a: 1}
