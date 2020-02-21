@@ -74,7 +74,7 @@ public class BaseEnemy : MonoBehaviour {
     }
 
     protected virtual void OnDeath() {
-
+        EventManager.TriggerEvent("EnemyDied");
     }
 
     public void UpdateUI() {
