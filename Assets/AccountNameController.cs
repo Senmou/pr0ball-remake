@@ -25,7 +25,7 @@ public class AccountNameController : MonoBehaviour {
     private void Update() {
         string accountName = "undefined";
         Color dotColor = Color.white;
-        int benis = Score.instance.score;
+        int benis = Score.instance.highscore;
 
         int index = 1;
         if (benis < 0) {

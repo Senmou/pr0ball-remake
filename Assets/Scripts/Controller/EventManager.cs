@@ -22,6 +22,10 @@ public class EventManager : MonoBehaviour {
         }
     }
 
+    private void Awake() {
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Init() {
         if (eventDictionary == null)
             eventDictionary = new Dictionary<string, UnityEvent>();

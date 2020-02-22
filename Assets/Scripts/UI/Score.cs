@@ -1,5 +1,5 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
+using TMPro;
 
 public class Score : MonoBehaviour {
 
@@ -11,6 +11,8 @@ public class Score : MonoBehaviour {
     public int highscore;
     public int skillPoints;
 
+    private GameStateController gameStateController;
+
     private void Awake() {
         if (instance == null)
             instance = this;
@@ -19,6 +21,8 @@ public class Score : MonoBehaviour {
 
         EventManager.StartListening("SaveGame", OnSaveGame);
         EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
+
+        gameStateController = FindObjectOfType<GameStateController>();
 
         score = PersistentData.instance.scoreData.score;
         highscore = PersistentData.instance.scoreData.highscore;
@@ -57,6 +61,9 @@ public class Score : MonoBehaviour {
 
     private void UpdateScore() {
         scoreUI.text = score.ToString();
+
+        if (score < 0)
+            gameStateController.isGameOver = true;
     }
 
     public void ResetData() {

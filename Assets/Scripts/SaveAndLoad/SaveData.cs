@@ -9,6 +9,9 @@ public class SaveData {
     public BallData ballData;
     public SkillData skillData;
     public CurrentLevelData currentLevelData;
+    public Highscores highscores;
+
+    public float elapsedTimeSinceRestart;
 
     public SaveData() {
         sfxData = PersistentData.instance.sfxData;
@@ -17,5 +20,7 @@ public class SaveData {
         ballData = PersistentData.instance.ballData;
         skillData = PersistentData.instance.skillData;
         currentLevelData = PersistentData.instance.currentLevelData;
+        elapsedTimeSinceRestart = PersistentData.instance.elapsedTimeSinceRestart;
+        highscores = PersistentData.instance.highscores;
     }
 }

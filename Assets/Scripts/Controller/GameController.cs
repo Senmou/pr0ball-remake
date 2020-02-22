@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour {
     private EnemyController enemyController;
     private GameStateController gameStateController;
 
+    private float elapsedTimeSinceRestart;
+
     private void Awake() {
         if (instance == null)
             instance = this;
@@ -26,12 +28,20 @@ public class GameController : MonoBehaviour {
         gameStateController = FindObjectOfType<GameStateController>();
 
         LevelData.SetCurrentLevelData(PersistentData.instance.currentLevelData);
-        
+
         EventManager.StartListening("SaveGame", OnSaveGame);
+        EventManager.StartListening("GameRestarted", OnGameRestarted);
     }
-    
+
+    public int GetPlaytimeMinutes() => (int)elapsedTimeSinceRestart / 60;
+
     private void OnSaveGame() {
         PersistentData.instance.currentLevelData.level = LevelData.Level;
+        PersistentData.instance.elapsedTimeSinceRestart = elapsedTimeSinceRestart;
+    }
+
+    private void OnGameRestarted() {
+        elapsedTimeSinceRestart = 0f;
     }
 
     private void Start() {
@@ -43,6 +53,8 @@ public class GameController : MonoBehaviour {
 
     private void Update() {
         OnBackButtonPressed();
+
+        elapsedTimeSinceRestart += Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.Escape))
             gameStateController.backButtonPressed = true;

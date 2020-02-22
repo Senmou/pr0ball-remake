@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class PersistentData : MonoBehaviour {
 
@@ -11,6 +12,9 @@ public class PersistentData : MonoBehaviour {
     public BallData ballData;
     public SkillData skillData;
     public CurrentLevelData currentLevelData;
+    public Highscores highscores;
+
+    public float elapsedTimeSinceRestart;
 
     private void Awake() {
         if (instance == null)
@@ -25,6 +29,7 @@ public class PersistentData : MonoBehaviour {
         ballData = new BallData();
         skillData = new SkillData();
         currentLevelData = new CurrentLevelData();
+        highscores = new Highscores();
 
         Serialization.Load();
     }
@@ -36,6 +41,8 @@ public class PersistentData : MonoBehaviour {
         ballData = saveData.ballData ?? new BallData();
         skillData = saveData.skillData ?? new SkillData();
         currentLevelData = saveData.currentLevelData ?? new CurrentLevelData();
+        highscores = saveData.highscores ?? new Highscores();
+        elapsedTimeSinceRestart = saveData.elapsedTimeSinceRestart;
     }
 
     private void OnApplicationFocus(bool focus) {
@@ -153,5 +160,26 @@ public class CurrentLevelData {
 
     public CurrentLevelData() {
         level = 1;
+    }
+}
+
+[Serializable]
+public class Highscores {
+
+    [Serializable]
+    public struct HighscoreEntry {
+        public int highscore;
+        public string timestamp;
+    }
+
+    public List<HighscoreEntry> entries;
+
+    public Highscores() {
+        entries = new List<HighscoreEntry>();
+    }
+
+    public void AddHighscore(int _highscore, string _timestamp) {
+        HighscoreEntry entry = new HighscoreEntry { highscore = _highscore, timestamp = _timestamp };
+        entries.Add(entry);
     }
 }
