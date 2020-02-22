@@ -73,6 +73,10 @@ public class BaseEnemy : MonoBehaviour {
         }
     }
 
+    public void Kill() {
+        TakeDamage(currentHP);
+    }
+
     protected virtual void OnDeath() {
         EventManager.TriggerEvent("EnemyDied");
     }

@@ -352,22 +352,7 @@ MonoBehaviour:
   iconLocked: {fileID: 21300000, guid: 6548719487816444b8d3b8e09fdea2cd, type: 3}
   barSlot: {fileID: 52059374}
   menuSlot: {fileID: 463601757}
-  dps: 100
-  laserMat: {fileID: 2100000, guid: dbc89f71765824a4cbf28b70c1f3e341, type: 2}
-  contactFilter:
-    useTriggers: 0
-    useLayerMask: 1
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 1024
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
+  bigBall: {fileID: 9207958251624405959, guid: 5eae0584f6845454097c53787dd9320c, type: 3}
 --- !u!1 &23454790
 GameObject:
   m_ObjectHideFlags: 0
@@ -7550,6 +7535,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7158d4e068edf824aa61cb56fe71e47d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floatingText: {fileID: 114874566402201868, guid: dd9425d840c92364e9cd330f1db7b5c4,
+    type: 3}
   enemyLDT:
     lootDropItems:
     - item: {fileID: 1688601153306911077, guid: f7dfc4e3f460f9e4a89262c4b4b69737,

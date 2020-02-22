@@ -23,7 +23,7 @@ public class SkillPointSlider : MonoBehaviour {
             Score.instance.IncSkillPoints(1);
             GameObject go = Instantiate(floatingText, new Vector2(4.3f, 22f), Quaternion.identity).gameObject;
             go.GetComponent<FloatingText>().SetText("+1 Skillpunkt");
-            go.transform.parent = canvas.transform;
+            go.transform.SetParent(canvas.transform);
         }
     }
 }

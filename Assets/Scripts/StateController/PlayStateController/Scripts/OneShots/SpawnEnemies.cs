@@ -5,7 +5,7 @@ public class SpawnEnemies : OneShot {
 
     public override void Act(StateController controller) {
         PlayStateController c = controller as PlayStateController;
-
+        
         // game restarted
         if (c.gameRestarted) {
             LevelData.ResetData();

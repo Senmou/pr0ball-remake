@@ -51,7 +51,7 @@ public class EnemyController : MonoBehaviour {
         }
 
         foreach (var enemyToRemove in enemiesToRemove) {
-            activeEnemies.Remove(enemyToRemove);
+            enemyToRemove.Kill();
         }
     }
 
