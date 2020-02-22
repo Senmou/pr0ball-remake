@@ -23,6 +23,8 @@ public class Skill_A : Skill {
         line.endWidth = 0.1f;
         line.material = laserMat;
         line.enabled = false;
+
+        description = "Verbindet zwei Bälle mit einem Laser. Voll Laser wie der abgeht!";
     }
 
     protected override IEnumerator ActionCoroutine() {

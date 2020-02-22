@@ -11,14 +11,29 @@ public class SkillMenuSlot : MonoBehaviour {
     private TextMeshProUGUI upgradePriceUI;
     private SkillMenuUnlockButton unlockButton;
 
+    private TextMeshProUGUI damageUI;
+    private TextMeshProUGUI skillLevelUI;
+    private TextMeshProUGUI skillpointsUI;
+    private TextMeshProUGUI descriptionUI;
+
+    private Transform infoLevel;
+    private Transform infoDamage;
+
     private AudioSource purchaseSfx;
     private AudioSource errorSfx;
 
     private void Awake() {
         skillMenu = FindObjectOfType<SkillMenu>();
         image = transform.FindChild<Image>("Icon");
-        upgradePriceUI = transform.FindChild<TextMeshProUGUI>("UpgradeButton/Price");
         unlockButton = GetComponentInChildren<SkillMenuUnlockButton>();
+
+        infoDamage = transform.FindChild<Transform>("InfoPopups/Damage");
+        infoLevel = transform.FindChild<Transform>("InfoPopups/SkillLevel");
+        damageUI = transform.FindChild<TextMeshProUGUI>("SkillData/Damage/Value");
+        skillpointsUI = transform.FindChild<TextMeshProUGUI>("Skillpoints/Value");
+        upgradePriceUI = transform.FindChild<TextMeshProUGUI>("UpgradeButton/Price");
+        skillLevelUI = transform.FindChild<TextMeshProUGUI>("SkillData/SkillLevel/Value");
+        descriptionUI = transform.FindChild<TextMeshProUGUI>("Description/Value");
 
         purchaseSfx = GameObject.Find("SfxUnlockSkill").GetComponent<AudioSource>();
         errorSfx = GameObject.Find("SfxError").GetComponent<AudioSource>();
@@ -29,6 +44,20 @@ public class SkillMenuSlot : MonoBehaviour {
             unlockButton.Show();
         else
             unlockButton.Hide();
+
+        if (Input.GetMouseButton(0)) {
+            if (InputHelper.instance.ClickedOnTag("InfoLevel")) {
+                infoLevel.gameObject.SetActive(true);
+                infoDamage.gameObject.SetActive(false);
+            }
+            if (InputHelper.instance.ClickedOnTag("InfoDamage")) {
+                infoLevel.gameObject.SetActive(false);
+                infoDamage.gameObject.SetActive(true);
+            }
+        } else {
+            infoLevel.gameObject.SetActive(false);
+            infoDamage.gameObject.SetActive(false);
+        }
     }
 
     public void UnlockSkill() {
@@ -55,5 +84,9 @@ public class SkillMenuSlot : MonoBehaviour {
         image.sprite = skill.Icon;
         unlockButton?.SetText(skill.unlockLevel);
         upgradePriceUI.text = skill.UpgradePrice.ToString();
+        damageUI.text = skill.Damage.ToString();
+        skillLevelUI.text = skill.skillLevel.ToString();
+        skillpointsUI.text = "Skillpunkte: " + Score.instance.skillPoints.ToString();
+        descriptionUI.text = skill.description;
     }
 }

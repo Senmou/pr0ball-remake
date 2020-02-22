@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Skill_C : Skill {
 
-    [SerializeField] private int damage;
     [SerializeField] private AudioClip[] audioClips;
     [SerializeField] private AudioClip[] hitAudioClips;
     [SerializeField] private GameObject hammerTimeLogo;
@@ -24,7 +23,10 @@ public class Skill_C : Skill {
         hammer.SetActive(false);
 
         hammerTimeLogo = Instantiate(hammerTimeLogo, new Vector3(-30f, 9f), Quaternion.identity);
+        description = "pr0-chan schwingt den Bannhammer. Trifft alles in einer geraden Linie.";
     }
+
+    protected override int CalcDamage(int skillLevel) => 10 * skillLevel;
 
     protected override IEnumerator ActionCoroutine() {
 
@@ -63,7 +65,7 @@ public class Skill_C : Skill {
                     ParticleSystemRenderer psr = Instantiate(onHitParticleSystem, hitEnemy.transform.position, Quaternion.identity).GetComponent<ParticleSystemRenderer>();
                     psr.material.color = hitEnemy.particleColor;
 
-                    hitEnemy.TakeDamage(damage);
+                    hitEnemy.TakeDamage(Damage);
                     hitEnemy.canTakeDamageFromSkill = false;
                     hitEnemies.Add(hitEnemy);
                 }

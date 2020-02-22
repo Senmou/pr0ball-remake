@@ -10,9 +10,12 @@ public class Skill : MonoBehaviour {
     public bool locked;
     public int skillLevel;
     public int unlockLevel;
+    public string description;
+
     protected bool pending;
 
     public int UpgradePrice { get => CalcUpgradePrice(skillLevel); }
+    public int Damage { get => CalcDamage(skillLevel); }
 
     public Sprite icon;
     public Sprite iconLocked;
@@ -45,6 +48,7 @@ public class Skill : MonoBehaviour {
     }
 
     private int CalcUpgradePrice(int skillLevel) => skillLevel;
+    protected virtual int CalcDamage(int skillLevel) => skillLevel * 10;
 
     protected void OnSaveGame() {
         SaveSkillData(id, skillLevel, locked, remainingCoolDown);

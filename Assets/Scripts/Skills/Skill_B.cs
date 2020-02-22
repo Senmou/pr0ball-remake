@@ -15,6 +15,7 @@ public class Skill_B : Skill {
     private new void Awake() {
         base.Awake();
         audioSource = GameObject.Find("SfxSpawn").GetComponent<AudioSource>();
+        description = "Spawnt eine Kanone die Bälle schießt.";
     }
 
     protected override IEnumerator ActionCoroutine() {

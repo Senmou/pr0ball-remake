@@ -10,6 +10,12 @@ public class Frog : MonoBehaviour {
     private AudioSource audioSource;
     private EnemyController enemyController;
 
+    private int explosionDamage = 0;
+
+    public void SetDamage(int damage) {
+        explosionDamage = damage;
+    }
+
     private void Awake() {
         audioSource = GetComponent<AudioSource>();
         audioSource.pitch = Random.Range(1f, 1.3f);
@@ -34,7 +40,7 @@ public class Frog : MonoBehaviour {
             foreach (var enemy in activeEnemiesCopy) {
                 float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
                 if (distanceToEnemy < detonationRadius)
-                    enemy.TakeDamage(1);
+                    enemy.TakeDamage(explosionDamage);
             }
 
             Instantiate(particleSystem, transform.position, Quaternion.identity);
