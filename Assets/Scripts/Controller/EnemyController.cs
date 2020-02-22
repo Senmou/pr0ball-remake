@@ -5,11 +5,14 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
 
+    [SerializeField] private FloatingText floatingText;
+
     public LootDropTable enemyLDT;
 
     [HideInInspector] public List<BaseEnemy> activeEnemies;
     [HideInInspector] public PlayStateController playStateController;
 
+    private Canvas canvas;
     private Transform deadline;
     private Transform dottedLine;
 
@@ -18,6 +21,7 @@ public class EnemyController : MonoBehaviour {
     }
 
     private void Awake() {
+        canvas = FindObjectOfType<Canvas>();
         activeEnemies = new List<BaseEnemy>();
         deadline = GameObject.Find("Deadline").transform;
         dottedLine = GameObject.Find("DottedLine").transform;
@@ -31,8 +35,17 @@ public class EnemyController : MonoBehaviour {
         List<BaseEnemy> enemiesToRemove = new List<BaseEnemy>();
         foreach (var enemy in activeEnemies) {
             if (enemy.transform.position.y >= deadline.position.y) {
+
+                int inflictedDamage = enemy.currentHP * 10;
+
                 enemiesToRemove.Add(enemy);
-                Score.instance.IncScore(-enemy.currentHP);
+                Score.instance.IncScore(-inflictedDamage);
+
+                // Spawn floating text
+                GameObject go = Instantiate(floatingText, enemy.transform.position, Quaternion.identity).gameObject;
+                go.GetComponent<FloatingText>().SetText("-" + inflictedDamage.ToString());
+                go.transform.parent = canvas.transform;
+
                 EasyObjectPool.instance.ReturnObjectToPool(enemy.gameObject);
             }
         }
