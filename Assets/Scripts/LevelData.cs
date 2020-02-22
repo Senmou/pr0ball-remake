@@ -7,8 +7,6 @@
 
     public static int Level { get => level; }
 
-    public static bool IsBossLevel { get => level % 10 == 0; }
-
     public static void SetCurrentLevelData(CurrentLevelData currentLevelData) {
 
         if (currentLevelData.level % 10 == 0)
@@ -22,12 +20,7 @@
         wave = 1;
         EventManager.TriggerEvent("ReachedNextLevel");
     }
-
-    public static void BossLevelFailed() {
-        level -= 2;
-        wave = 1;
-    }
-
+    
     public static int Wave {
         get => wave;
         set {

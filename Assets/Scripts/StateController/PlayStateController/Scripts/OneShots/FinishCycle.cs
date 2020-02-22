@@ -10,11 +10,7 @@ public class FinishCycle : OneShot {
 
         LevelData.Wave++;
 
-        c.nextLevelIsBoss = LevelData.Level % 10 == 9;
-
-        if (LevelData.IsBossLevel && !c.fightingBoss)
-            c.reachedBossLevel = true;
-        else if (LevelData.Wave == 1)
+        if (LevelData.Wave == 1)
             c.reachedNextLevel = true;
         else
             c.reachedNextWave = true;

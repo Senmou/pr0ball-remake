@@ -10,7 +10,6 @@ public class SpawnPoints : MonoBehaviour {
 
     public static SpawnPoints instance;
     public List<Setups> spawnPoints;
-    public List<Setups> bossSpawnPoints;
     public Setups initialSpawnPoints;
 
     private static int index = 0;
@@ -38,10 +37,5 @@ public class SpawnPoints : MonoBehaviour {
     public List<Transform> GetInitialSpawnPoints() {
         index = 0;
         return initialSpawnPoints.transforms;
-    }
-
-    public List<Transform> GetRandomBossSpawnPoints() {
-        int index = Random.Range(0, bossSpawnPoints.Count);
-        return bossSpawnPoints[index].transforms;
     }
 }
