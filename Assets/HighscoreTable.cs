@@ -1,16 +1,10 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
+using TMPro;
 
 public class HighscoreTable : MonoBehaviour {
 
-    private Transform container;
     private Transform template;
-
-    private void Awake() {
-        
-
-        
-    }
+    private Transform container;
 
     private void Start() {
         container = transform.FindChild<Transform>("EntryContainer");

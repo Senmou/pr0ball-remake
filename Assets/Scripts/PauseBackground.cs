@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine;
 
 public class PauseBackground : MonoBehaviour {
 
@@ -9,13 +9,11 @@ public class PauseBackground : MonoBehaviour {
     private float maxAlpha = 0.99f;
     private Button clickableBackground;
     private RectTransform rect;
-    private GameStateController gameStateController;
 
     private void Awake() {
         image = GetComponent<Image>();
         rect = GetComponent<RectTransform>();
         clickableBackground = GetComponent<Button>();
-        gameStateController = FindObjectOfType<GameStateController>();
 
         EventManager.StartListening("GamePaused", OnGamePaused);
         EventManager.StartListening("GameResumed", OnGameResumed);
@@ -23,10 +21,6 @@ public class PauseBackground : MonoBehaviour {
 
     private void Start() {
         OnAppStart();
-    }
-
-    public void TappedOnPauseBackground() {
-        gameStateController.tappedOnPauseBackground = true;
     }
 
     public void Interactable(bool state) {

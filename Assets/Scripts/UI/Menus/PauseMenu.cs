@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PauseMenu : MonoBehaviour {
+public class PauseMenu : CanvasController {
 
     [HideInInspector] public bool visible;
 
@@ -14,19 +14,15 @@ public class PauseMenu : MonoBehaviour {
         visible = false;
     }
 
-    public void Hide() {
+    public override void Hide() {
         if (visible) {
-            //Debug.Log("HIDE");
-            GameController.instance.ResumeGame();
             visible = false;
             moveUI.FadeTo(new Vector2(30f, 0f), 0.5f);
         }
     }
 
-    public void Show() {
+    public override void Show() {
         if (!visible) {
-            //Debug.Log("SHOW");
-            GameController.instance.PauseGame();
             pauseBackground.Interactable(false);
             visible = true;
             moveUI.FadeTo(Vector2.zero, 0.5f);

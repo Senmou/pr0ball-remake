@@ -46,7 +46,7 @@ public static class Serialization {
 
             PersistentData.instance.LoadDataFromSaveFile(saveData);
 
-            Debug.Log("Loaded data from: " + filePath);
+            //Debug.Log("Loaded data from: " + filePath);
             stream.Close();
             return true;
         } catch (Exception e) {

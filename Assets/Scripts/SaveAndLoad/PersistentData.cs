@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using System;
-using System.Collections.Generic;
 
 public class PersistentData : MonoBehaviour {
 
@@ -181,5 +182,12 @@ public class Highscores {
     public void AddHighscore(int _highscore, string _timestamp) {
         HighscoreEntry entry = new HighscoreEntry { highscore = _highscore, timestamp = _timestamp };
         entries.Add(entry);
+
+        entries = entries.OrderByDescending(e => e.highscore).ToList();
+
+        for (int i = 0; i < entries.Count; i++) {
+            if (i > 10)
+                entries.RemoveAt(i);
+        }
     }
 }

@@ -10,7 +10,6 @@ public class GameController : MonoBehaviour {
     private SkillMenu skillMenu;
     private BallMenu ballMenu;
     private EnemyController enemyController;
-    private GameStateController gameStateController;
 
     private float elapsedTimeSinceRestart;
 
@@ -25,7 +24,6 @@ public class GameController : MonoBehaviour {
         skillMenu = FindObjectOfType<SkillMenu>();
         ballMenu = FindObjectOfType<BallMenu>();
         enemyController = FindObjectOfType<EnemyController>();
-        gameStateController = FindObjectOfType<GameStateController>();
 
         LevelData.SetCurrentLevelData(PersistentData.instance.currentLevelData);
 
@@ -45,24 +43,15 @@ public class GameController : MonoBehaviour {
     }
 
     private void Start() {
-        ballMenu.Hide();
-        skillMenu.Hide();
-
         enemyController.CreateInitialWaves();
     }
 
     private void Update() {
         OnBackButtonPressed();
-
         elapsedTimeSinceRestart += Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.Escape))
-            gameStateController.backButtonPressed = true;
-
-        if (Input.GetKey(KeyCode.Space))
-            Time.timeScale = 15f;
-        else
-            Time.timeScale = 1f;
+            CanvasManager.instance.SwitchCanvas(CanvasType.PAUSE);
     }
 
     private void OnBackButtonPressed() {

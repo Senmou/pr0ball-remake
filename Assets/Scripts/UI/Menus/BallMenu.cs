@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 
-public class BallMenu : MonoBehaviour {
+public class BallMenu : CanvasController {
 
     private TextMeshProUGUI upgradePriceUI;
 
@@ -22,7 +22,6 @@ public class BallMenu : MonoBehaviour {
 
     private MoveUI moveUI;
     private BallController ballController;
-    private GameStateController gameStateController;
 
     private TextMeshProUGUI scoreUI;
 
@@ -60,7 +59,6 @@ public class BallMenu : MonoBehaviour {
         infoBallCount.gameObject.SetActive(false);
 
         ballController = FindObjectOfType<BallController>();
-        gameStateController = FindObjectOfType<GameStateController>();
 
         BallStats.Instance.level = PersistentData.instance.ballData.level;
 
@@ -150,28 +148,17 @@ public class BallMenu : MonoBehaviour {
         UpdateUI();
     }
 
-    public void BallMenuButtonOnClick() {
-        gameStateController.ballMenuButtonPressed = true;
-        UpdateUI();
-    }
-
-    public void CloseButtonOnClick() {
-        gameStateController.ballMenuCloseButtonPressed = true;
-    }
-
     public void ResetData() {
         BallStats.Instance.ResetStats();
         UpdateUI();
     }
 
-    public void Show() {
-        GameController.instance.PauseGame();
+    public override void Show() {
+        UpdateUI();
         moveUI.FadeTo(new Vector2(0f, 0f), 0.5f);
     }
 
-    public void Hide() {
-        GameController.instance.ResumeGame();
+    public override void Hide() {
         moveUI.FadeTo(new Vector2(-30f, 0f), 0.5f);
-        gameStateController.optionsButtonPressed = false;
     }
 }

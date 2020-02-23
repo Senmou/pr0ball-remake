@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class SkillMenu : MonoBehaviour {
+public class SkillMenu : CanvasController {
 
     public SkillMenuSlot slot;
 
@@ -11,14 +11,12 @@ public class SkillMenu : MonoBehaviour {
     private MoveUI moveUI;
     private AudioSource errorSfx;
     private PauseBackground pauseBackground;
-    private GameStateController gameStateController;
 
     public bool isVisible;
 
     private void Awake() {
         moveUI = GetComponent<MoveUI>();
         pauseBackground = FindObjectOfType<PauseBackground>();
-        gameStateController = FindObjectOfType<GameStateController>();
         errorSfx = GameObject.Find("SfxError").GetComponent<AudioSource>();
     }
 
@@ -27,20 +25,14 @@ public class SkillMenu : MonoBehaviour {
         slot.UpdateSlot();
     }
 
-    public void CloseButtonOnClick() {
-        gameStateController.skillMenuCloseButtonPressed = true;
-    }
-
-    public void Show() {
+    public override void Show() {
         isVisible = true;
-        GameController.instance.PauseGame();
         pauseBackground.SetBottomMargin(4f);
         moveUI.FadeTo(new Vector2(0f, 0f), 0.5f);
     }
 
-    public void Hide() {
+    public override void Hide() {
         isVisible = false;
-        GameController.instance.ResumeGame();
         pauseBackground.SetBottomMargin(0f);
         moveUI.FadeTo(new Vector2(0f, -50f), 0.5f);
     }

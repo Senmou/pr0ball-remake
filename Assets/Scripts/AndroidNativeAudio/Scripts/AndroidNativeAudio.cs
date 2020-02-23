@@ -216,7 +216,7 @@ public static class AndroidNativeAudio
 	/// <returns>The file ID if successful, -1 if the load fails.</returns>
 	public static int load(string audioFile, bool usePersistentDataPath = false, Action<int> callback = null)
 	{
-		Debug.Log(_logPrefix + "load(\"" + audioFile + "\", " + usePersistentDataPath + "\", " + callback + ")");
+		//Debug.Log(_logPrefix + "load(\"" + audioFile + "\", " + usePersistentDataPath + "\", " + callback + ")");
 		return 1;
 	}
 
@@ -227,7 +227,7 @@ public static class AndroidNativeAudio
 	/// <param name="maxStreams">The maximum number of streams. (The maximum number of simultaneously playing files.)</param>
 	public static void makePool(int maxStreams = 16)
 	{
-		Debug.Log(_logPrefix + "makePool(" + maxStreams + ")");
+		//Debug.Log(_logPrefix + "makePool(" + maxStreams + ")");
 	}
 
 

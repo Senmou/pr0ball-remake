@@ -5,10 +5,8 @@ public class SkillBar : MonoBehaviour {
     public SkillMenu skillMenu;
 
     private SkillBarSlot[] slots;
-    private GameStateController gameStateController;
 
     private void Awake() {
-        gameStateController = FindObjectOfType<GameStateController>();
 
         slots = new SkillBarSlot[4];
         slots[0] = transform.FindChild<SkillBarSlot>("Slot_1");
@@ -46,7 +44,7 @@ public class SkillBar : MonoBehaviour {
         if (!skillMenu.isVisible) {
             skillMenu.DisplaySkills(slot.skill);
             skillMenu.lastSkillBarSlotClicked = slot;
-            gameStateController.skillBarLongClick = true;
+            CanvasManager.instance.SwitchCanvas(CanvasType.SKILLS);
         }
     }
 

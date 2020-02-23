@@ -11,8 +11,6 @@ public class Score : MonoBehaviour {
     public int highscore;
     public int skillPoints;
 
-    private GameStateController gameStateController;
-
     private void Awake() {
         if (instance == null)
             instance = this;
@@ -21,8 +19,6 @@ public class Score : MonoBehaviour {
 
         EventManager.StartListening("SaveGame", OnSaveGame);
         EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
-
-        gameStateController = FindObjectOfType<GameStateController>();
 
         score = PersistentData.instance.scoreData.score;
         highscore = PersistentData.instance.scoreData.highscore;
@@ -63,7 +59,7 @@ public class Score : MonoBehaviour {
         scoreUI.text = score.ToString();
 
         if (score < 0)
-            gameStateController.isGameOver = true;
+            CanvasManager.instance.SwitchCanvas(CanvasType.GAMEOVER);
     }
 
     public void ResetData() {
