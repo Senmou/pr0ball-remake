@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using TMPro;
 
 public class RestartGame : MonoBehaviour {
 
@@ -18,7 +17,8 @@ public class RestartGame : MonoBehaviour {
     public void StartNewGame() {
 
         playStateController.gameRestarted = true;
-        CanvasManager.instance.SwitchCanvas(CanvasType.NONE);
+        playStateController.isGameOver = false;
+        PersistentData.instance.isGameOver = false;
 
         skillBar.ResetData();
         ballMenu.ResetData();

@@ -55,12 +55,5 @@ public class AccountNameController : MonoBehaviour {
 
         accountNameUI.text = accountInfoList[index].accountName;
         dot.color = accountInfoList[index].dotColor;
-
-        if (Input.GetKey(KeyCode.UpArrow)) {
-            Score.instance.IncScore(10);
-        }
-        if (Input.GetKey(KeyCode.DownArrow)) {
-            Score.instance.IncScore(-10);
-        }
     }
 }

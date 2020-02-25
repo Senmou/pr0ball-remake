@@ -11,7 +11,7 @@ public class HighscoreTable : MonoBehaviour {
         template = transform.FindChild<Transform>("EntryContainer/EntryTemplate");
         template.gameObject.SetActive(false);
 
-        float templateHeight = 210f;
+        float templateHeight = 5.2f;
 
         int highscoreCount = PersistentData.instance.highscores.entries.Count;
 

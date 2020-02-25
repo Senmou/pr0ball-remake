@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36b3ea6688167084287106c26ef5f63c, type: 3}
+  m_Name: GameOverState
+  m_EditorClassIdentifier: 
+  oneShots:
+  - {fileID: 11400000, guid: ac06b2adcc6bdbc41805bab467119b6a, type: 2}
+  actions: []
+  transitions:
+  - decision: {fileID: 11400000, guid: 57771f836daa2c84d992e4b30d54cd83, type: 2}
+    trueState: {fileID: 11400000, guid: 263da600bc7e3614d897191d25189b99, type: 2}
+    falseState: {fileID: 11400000, guid: f8f6ed59bdf2e8c4280ca3ba4205f594, type: 2}
+    alwaysTrue: 0

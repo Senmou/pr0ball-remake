@@ -11,6 +11,8 @@ public class Score : MonoBehaviour {
     public int highscore;
     public int skillPoints;
 
+    private PlayStateController playStateController;
+
     private void Awake() {
         if (instance == null)
             instance = this;
@@ -20,10 +22,12 @@ public class Score : MonoBehaviour {
         EventManager.StartListening("SaveGame", OnSaveGame);
         EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
 
+        playStateController = FindObjectOfType<PlayStateController>();
+
         score = PersistentData.instance.scoreData.score;
         highscore = PersistentData.instance.scoreData.highscore;
         skillPoints = PersistentData.instance.scoreData.skillPoints;
-        UpdateScore();
+        UpdateUI();
     }
 
     private void OnReachedNextLevel() {
@@ -48,23 +52,36 @@ public class Score : MonoBehaviour {
         score += amount;
         if (score > highscore)
             highscore = score;
-        UpdateScore();
+
+        UpdateUI();
     }
-    
+
+    public void DecScore(int amount) {
+
+        if (score < 0)
+            return;
+
+        score -= amount;
+
+        if(score < 0) {
+            playStateController.isGameOver = true;
+            PersistentData.instance.isGameOver = true;
+        }
+
+        UpdateUI();
+    }
+
     public void IncSkillPoints(int amount) {
         skillPoints += amount;
     }
 
-    private void UpdateScore() {
+    private void UpdateUI() {
         scoreUI.text = score.ToString();
-
-        if (score < 0)
-            CanvasManager.instance.SwitchCanvas(CanvasType.GAMEOVER);
     }
 
     public void ResetData() {
         score = 0;
         highscore = 0;
-        UpdateScore();
+        UpdateUI();
     }
 }

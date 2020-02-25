@@ -11,6 +11,7 @@ public class SaveData {
     public CurrentLevelData currentLevelData;
     public Highscores highscores;
 
+    public bool isGameOver;
     public float elapsedTimeSinceRestart;
 
     public SaveData() {
@@ -20,7 +21,9 @@ public class SaveData {
         ballData = PersistentData.instance.ballData;
         skillData = PersistentData.instance.skillData;
         currentLevelData = PersistentData.instance.currentLevelData;
-        elapsedTimeSinceRestart = PersistentData.instance.elapsedTimeSinceRestart;
         highscores = PersistentData.instance.highscores;
+
+        isGameOver = PersistentData.instance.isGameOver;
+        elapsedTimeSinceRestart = PersistentData.instance.elapsedTimeSinceRestart;
     }
 }

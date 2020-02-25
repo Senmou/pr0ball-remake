@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PauseBackground : MonoBehaviour {
 
+    public bool disableInteractability;
+
     private Image image;
     private float fadeTime = 0.5f;
     private float maxAlpha = 0.99f;
@@ -23,17 +25,13 @@ public class PauseBackground : MonoBehaviour {
         OnAppStart();
     }
 
-    public void Interactable(bool state) {
-        clickableBackground.interactable = state;
-    }
-
     // Used when showing the skillMenu, so the skillBar is not covered by the pauseBackground
     public void SetBottomMargin(float value) {
         rect.offsetMin = new Vector2(rect.offsetMin.x, value);
     }
 
     public void OnAppStart() {
-        Interactable(false);
+        clickableBackground.interactable = false;
         image.enabled = true;
         Color startColor = image.color;
         startColor.a = 0f;
@@ -51,7 +49,11 @@ public class PauseBackground : MonoBehaviour {
     }
 
     private IEnumerator FadeIn() {
-        Interactable(true);
+        clickableBackground.interactable = true;
+
+        if(disableInteractability)
+            clickableBackground.interactable = false;
+
         image.enabled = true;
 
         Color color = image.color;
@@ -77,7 +79,7 @@ public class PauseBackground : MonoBehaviour {
             t += Time.unscaledDeltaTime / fadeTime;
             yield return null;
         }
-        Interactable(false);
+        clickableBackground.interactable = false;
         image.enabled = false;
         yield return null;
     }

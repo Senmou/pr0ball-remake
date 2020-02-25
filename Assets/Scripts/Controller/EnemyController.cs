@@ -39,12 +39,12 @@ public class EnemyController : MonoBehaviour {
                 int inflictedDamage = enemy.currentHP * 10;
 
                 enemiesToRemove.Add(enemy);
-                Score.instance.IncScore(-inflictedDamage);
+                Score.instance.DecScore(inflictedDamage);
 
                 // Spawn floating text
                 GameObject go = Instantiate(floatingText, enemy.transform.position, Quaternion.identity).gameObject;
                 go.GetComponent<FloatingText>().SetText("-" + inflictedDamage.ToString());
-                go.transform.parent = canvas.transform;
+                go.transform.SetParent(canvas.transform);
 
                 EasyObjectPool.instance.ReturnObjectToPool(enemy.gameObject);
             }

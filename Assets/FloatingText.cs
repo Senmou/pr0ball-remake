@@ -15,6 +15,11 @@ public class FloatingText : MonoBehaviour {
         Destroy(gameObject, 0.9f);
     }
 
+    private void Update() {
+        if (PersistentData.instance.isGameOver == true)
+            Destroy(gameObject);
+    }
+
     public void SetText(string text) {
         value.text = text;
     }

@@ -15,6 +15,7 @@ public class PersistentData : MonoBehaviour {
     public CurrentLevelData currentLevelData;
     public Highscores highscores;
 
+    public bool isGameOver;
     public float elapsedTimeSinceRestart;
 
     private void Awake() {
@@ -44,6 +45,7 @@ public class PersistentData : MonoBehaviour {
         currentLevelData = saveData.currentLevelData ?? new CurrentLevelData();
         highscores = saveData.highscores ?? new Highscores();
         elapsedTimeSinceRestart = saveData.elapsedTimeSinceRestart;
+        isGameOver = saveData.isGameOver;
     }
 
     private void OnApplicationFocus(bool focus) {

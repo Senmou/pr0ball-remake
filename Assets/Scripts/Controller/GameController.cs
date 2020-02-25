@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
     private SkillMenu skillMenu;
     private BallMenu ballMenu;
     private EnemyController enemyController;
+    private RestartGame restartGame;
 
     private float elapsedTimeSinceRestart;
 
@@ -24,6 +25,7 @@ public class GameController : MonoBehaviour {
         skillMenu = FindObjectOfType<SkillMenu>();
         ballMenu = FindObjectOfType<BallMenu>();
         enemyController = FindObjectOfType<EnemyController>();
+        restartGame = FindObjectOfType<RestartGame>();
 
         LevelData.SetCurrentLevelData(PersistentData.instance.currentLevelData);
 
@@ -43,7 +45,10 @@ public class GameController : MonoBehaviour {
     }
 
     private void Start() {
-        enemyController.CreateInitialWaves();
+        if (PersistentData.instance.isGameOver) {
+            restartGame.StartNewGame();
+        } else
+            enemyController.CreateInitialWaves();
     }
 
     private void Update() {
@@ -52,6 +57,12 @@ public class GameController : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Escape))
             CanvasManager.instance.SwitchCanvas(CanvasType.PAUSE);
+
+        if (Input.GetKeyDown(KeyCode.F)) {
+            foreach (var item in PersistentData.instance.highscores.entries) {
+                Debug.Log(item.highscore);
+            }
+        }
     }
 
     private void OnBackButtonPressed() {
@@ -60,7 +71,8 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    public void PauseGame() {
+    public void PauseGame(string debugText = "none") {
+        Debug.Log(debugText);
         Time.timeScale = 0f;
         isGamePaused = true;
         EventManager.TriggerEvent("GamePaused");

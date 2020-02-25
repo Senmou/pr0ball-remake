@@ -39,15 +39,16 @@ public class CanvasManager : MonoBehaviour {
             return;
         }
 
-        if (lastActiveCanvas != null)
+        if (lastActiveCanvas != null) {
             lastActiveCanvas.Hide();
+        }
 
         CanvasController desiredCanvas = canvasControllerList.Find(x => x.canvasType == type);
 
         if (desiredCanvas != null) {
             desiredCanvas.Show();
             lastActiveCanvas = desiredCanvas;
-            GameController.instance.PauseGame();
+            GameController.instance.PauseGame(type.ToString());
         } else Debug.LogWarning("The desired canvas " + "[" + type.ToString() + "] " + "was not found!");
     }
 }

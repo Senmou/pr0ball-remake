@@ -16,6 +16,7 @@ public class PauseMenu : CanvasController {
 
     public override void Hide() {
         if (visible) {
+            pauseBackground.disableInteractability = false;
             visible = false;
             moveUI.FadeTo(new Vector2(30f, 0f), 0.5f);
         }
@@ -23,7 +24,7 @@ public class PauseMenu : CanvasController {
 
     public override void Show() {
         if (!visible) {
-            pauseBackground.Interactable(false);
+            pauseBackground.disableInteractability = true;
             visible = true;
             moveUI.FadeTo(Vector2.zero, 0.5f);
         }
