@@ -234,12 +234,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a897d500e7895124da8853e744e978a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleColor: {r: 0.10980393, g: 0.7254902, b: 0.57254905, a: 1}
+  hp: {fileID: 11400000, guid: aa24dfe8191c3964dbfb83b92acc4f8a, type: 2}
   particleSystem: {fileID: 7199096499088925637, guid: c06b40e4de4b28d47925d08d29fa83b1,
     type: 3}
-  particleColor: {r: 0.10980393, g: 0.7254902, b: 0.57254905, a: 1}
   maxHP: 0
   currentHP: 0
-  benisValue: 0
   body: {fileID: 0}
   canTakeDamageFromSkill: 0
 --- !u!212 &338860152524876274

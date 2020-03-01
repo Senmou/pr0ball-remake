@@ -22,11 +22,12 @@ public class Skill_C : Skill {
         audioSource = GetComponent<AudioSource>();
         hammer.SetActive(false);
 
+        coolDown = 20;
         hammerTimeLogo = Instantiate(hammerTimeLogo, new Vector3(-30f, 9f), Quaternion.identity);
         description = "pr0-chan schwingt den Bannhammer. Trifft alles in einer geraden Linie.";
     }
 
-    protected override int CalcDamage(int skillLevel) => 10 * skillLevel;
+    protected override int CalcDamage(int skillLevel) => 5 * skillLevel;
 
     protected override IEnumerator ActionCoroutine() {
 

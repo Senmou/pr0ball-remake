@@ -1,17 +1,21 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Skill_A : Skill {
 
-    [SerializeField] private BigBall bigBall;
+    [SerializeField] private BigBall bigBallPrefab;
+    [SerializeField] private GameObject triggeredText;
+
+    private Canvas canvas;
 
     private new void Awake() {
         base.Awake();
-        bigBall.SetDamage(Damage);
+        canvas = FindObjectOfType<Canvas>();
     }
 
     private void Start() {
-        coolDown = 2;
+        coolDown = 0;
         unlockLevel = 1;
 
         description = "Der Chef räumt auf.";
@@ -21,8 +25,29 @@ public class Skill_A : Skill {
 
     protected override IEnumerator ActionCoroutine() {
 
-        pending = false;
+        List<BigBall> bigBalls = new List<BigBall>();
 
-        yield return null;
+        pending = true;
+
+        while (pending) {
+            if (ballController.BallCount > 0)
+                pending = false;
+            yield return null;
+        }
+
+        GameObject text = Instantiate(triggeredText, new Vector2(0, -22f), Quaternion.identity, canvas.transform);
+
+        for (int i = 0; i < 1; i++) {
+            BigBall bigBall = Instantiate(bigBallPrefab);
+            bigBall.SetDamage(Damage);
+            bigBalls.Add(bigBall);
+        }
+
+        while (ballController.BallCount > 0) {
+            foreach (var item in bigBalls) {
+                item?.MoveToTopMostEnemy();
+            }
+            yield return new WaitForSeconds(0.05f);
+        }
     }
 }

@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3317043405471346669}
   - component: {fileID: 2603739272314104664}
   - component: {fileID: 2147208075993791555}
-  - component: {fileID: 5141820942187167492}
   m_Layer: 8
   m_Name: BigBall
   m_TagString: Ball
@@ -31,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4691551078425360276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -48,6 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1da8cc67bcae74b96b213fcc1dc8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onHitParticleSystem: {fileID: 7199096499088925637, guid: 1bc6374432f6ab24291b30bfa51b4f9d,
+    type: 3}
+  body: {fileID: 0}
 --- !u!50 &4788159331868298045
 Rigidbody2D:
   serializedVersion: 4
@@ -171,10 +173,10 @@ TrailRenderer:
   m_SortingLayerID: 1410852521
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Time: 0.2
+  m_Time: 0.05
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1.4
+    widthMultiplier: 0.2
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -243,18 +245,6 @@ TrailRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.05
+  m_MinVertexDistance: 0.01
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &5141820942187167492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4691551078425360276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af1da8cc67bcae74b96b213fcc1dc8fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

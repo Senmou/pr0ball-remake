@@ -5,6 +5,7 @@ using TMPro;
 public class BaseEnemy : MonoBehaviour {
 
     public Color particleColor;
+    [SerializeField] protected EnemyHP hp;
     [SerializeField] private new GameObject particleSystem;
 
     [HideInInspector] public int maxHP;
@@ -12,11 +13,16 @@ public class BaseEnemy : MonoBehaviour {
     [HideInInspector] public Rigidbody2D body;
     [HideInInspector] public bool canTakeDamageFromSkill;
 
+
     private Animator animator;
     private TextMeshProUGUI healthPointUI;
     private EnemyController enemyController;
 
     private int benisValue = 1;
+
+    protected void OnEnable() {
+        maxHP = hp.MaxHP;
+    }
 
     protected void Awake() {
         animator = GetComponent<Animator>();
@@ -28,11 +34,6 @@ public class BaseEnemy : MonoBehaviour {
 
     private void Start() {
         UpdateUI();
-    }
-
-    // Helper function for adding healthPoints to enemies after "step" levels
-    protected int HP(int hp, int step) {
-        return (LevelData.Level / step) * hp;
     }
 
     public void SetData() {

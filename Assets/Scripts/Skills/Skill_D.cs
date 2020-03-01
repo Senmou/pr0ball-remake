@@ -1,17 +1,18 @@
-﻿using MarchingBytes;
-using System.Collections;
+﻿using System.Collections;
+using MarchingBytes;
 using UnityEngine;
 
 public class Skill_D : Skill {
 
-    [SerializeField] private int frogCount;
+    private int frogCount = 3;
 
     private const string frogPoolName = "Frog_pool";
 
-    protected override int CalcDamage(int skillLevel) => 30 * skillLevel;
+    protected override int CalcDamage(int skillLevel) => 15 * skillLevel;
 
     private new void Awake() {
         base.Awake();
+        coolDown = 20;
         description = "Es regnet hochexplosive Bergfestzelebrierungsfrösche. Verursachen Bereichsschaden.";
     }
 

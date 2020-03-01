@@ -22,12 +22,12 @@ public class BallStats {
     public float critDamage;
     public int ballCount;
 
-    public int UpgradeDamage { get => VPS(level, (1, 1), (10, 9)); }
-    public float UpgradeCritChance { get => 5f; }
+    public int UpgradeDamage { get => VES(level, (1, 1)); }
+    public float UpgradeCritChance { get => (critChance < 100f) ? 5f : 0f; }
     public float UpgradeCritDamage { get => 0.5f; }
-    public int UpgradeBallCount { get => VES(level, (2, 1)); }
+    public int UpgradeBallCount { get => VES(level, (1, 1)); }
 
-    public int UpgradePrice { get => 1 + VPS(level, (5, 1)); }
+    public int UpgradePrice { get => 2 * level; }
 
     public void AddStats() {
         damage += UpgradeDamage;

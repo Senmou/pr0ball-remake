@@ -507,7 +507,10 @@ MonoBehaviour:
   iconLocked: {fileID: 21300000, guid: 6548719487816444b8d3b8e09fdea2cd, type: 3}
   barSlot: {fileID: 52059374}
   menuSlot: {fileID: 463601757}
-  bigBall: {fileID: 9207958251624405959, guid: 5eae0584f6845454097c53787dd9320c, type: 3}
+  bigBallPrefab: {fileID: 9207958251624405959, guid: 5eae0584f6845454097c53787dd9320c,
+    type: 3}
+  triggeredText: {fileID: 2631264260168674181, guid: dda40edb05c229f468630dc794b458bc,
+    type: 3}
 --- !u!1 &23454790
 GameObject:
   m_ObjectHideFlags: 0
@@ -3477,8 +3480,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 1.24
-  m_fontSizeBase: 1.24
+  m_fontSize: 1
+  m_fontSizeBase: 1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4529,7 +4532,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -55.15, y: 0}
+  m_AnchoredPosition: {x: -65.4, y: -0.0735}
   m_SizeDelta: {x: 22, y: 24.147}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &398380690
@@ -7703,6 +7706,7 @@ MonoBehaviour:
     level: 1
   highscores:
     entries: []
+  isGameOver: 0
   elapsedTimeSinceRestart: 0
 --- !u!4 &789605114
 Transform:
@@ -11789,6 +11793,7 @@ MonoBehaviour:
   hasGameStarted: 0
   reachedNextWave: 0
   reachedNextLevel: 0
+  isGameOver: 0
   levelScale: {fileID: 1830602774}
   ballController: {fileID: 893633902}
   enemyController: {fileID: 0}
@@ -18944,7 +18949,6 @@ MonoBehaviour:
   iconLocked: {fileID: 21300000, guid: 6548719487816444b8d3b8e09fdea2cd, type: 3}
   barSlot: {fileID: 2057200484}
   menuSlot: {fileID: 463601757}
-  frogCount: 3
 --- !u!1 &1869435021
 GameObject:
   m_ObjectHideFlags: 0
@@ -21269,7 +21273,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 85
   m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:
