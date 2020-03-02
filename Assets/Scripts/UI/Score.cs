@@ -21,7 +21,6 @@ public class Score : MonoBehaviour {
             Destroy(gameObject);
 
         EventManager.StartListening("SaveGame", OnSaveGame);
-        EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
 
         playStateController = FindObjectOfType<PlayStateController>();
 
@@ -29,10 +28,6 @@ public class Score : MonoBehaviour {
         highscore = PersistentData.instance.scoreData.highscore;
         skillPoints = PersistentData.instance.scoreData.skillPoints;
         UpdateUI();
-    }
-
-    private void OnReachedNextLevel() {
-        IncSkillPoints(1);
     }
 
     private void OnSaveGame() {
