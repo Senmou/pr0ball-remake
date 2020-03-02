@@ -6,10 +6,13 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour {
 
     [SerializeField] private FloatingText floatingText;
+    [SerializeField] private GameObject itemAddBall;
+    [SerializeField] private GameObject itemAddSkillPoint;
 
     public LootDropTable enemyLDT;
 
     [HideInInspector] public List<BaseEnemy> activeEnemies;
+    [HideInInspector] public List<GameObject> activeItems;
     [HideInInspector] public PlayStateController playStateController;
 
     private Canvas canvas;
@@ -71,14 +74,32 @@ public class EnemyController : MonoBehaviour {
     }
 
     public void CreateWave() {
-        MoveEnemies();
+        MoveEnemiesAndItems();
         List<Transform> spawnPoints = SpawnPoints.instance.GetNextSpawnPoints();
 
         for (int i = 0; i < spawnPoints.Count; i++) {
-            string sourcePool = enemyLDT.PickLootDropItem().poolName;
-            BaseEnemy newEnemy = EasyObjectPool.instance.GetObjectFromPool(sourcePool, spawnPoints[i].position, Quaternion.identity).GetComponent<BaseEnemy>();
-            newEnemy.SetData();
-            activeEnemies.Add(newEnemy);
+
+            int random = Random.Range(1, 100);
+
+            // Spawn item
+            if (random < 10) {
+                random = Random.Range(1, 100);
+
+                // Decide which item to spawn
+                if (random > 50) {
+                    GameObject item = Instantiate(itemAddBall, spawnPoints[i].position, Quaternion.identity, canvas.transform);
+                    activeItems.Add(item);
+                } else {
+                    GameObject item = Instantiate(itemAddSkillPoint, spawnPoints[i].position, Quaternion.identity, canvas.transform);
+                    activeItems.Add(item);
+                }
+            } else {
+                // Spawn enemy
+                string sourcePool = enemyLDT.PickLootDropItem().poolName;
+                BaseEnemy newEnemy = EasyObjectPool.instance.GetObjectFromPool(sourcePool, spawnPoints[i].position, Quaternion.identity).GetComponent<BaseEnemy>();
+                newEnemy.SetData();
+                activeEnemies.Add(newEnemy);
+            }
         }
     }
 
@@ -99,9 +120,16 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    private void MoveEnemies() {
+    private void MoveEnemiesAndItems() {
+
+        Vector3 moveY = new Vector3(0f, 2f);
+
         foreach (var enemy in activeEnemies) {
-            enemy.transform.position += new Vector3(0f, 2f);
+            enemy.transform.position += moveY;
+        }
+
+        foreach (var item in activeItems) {
+            item.transform.position += moveY;
         }
     }
 

@@ -8,7 +8,6 @@ public class SkillMenuSlot : MonoBehaviour {
 
     private Image image;
     private SkillMenu skillMenu;
-    private TextMeshProUGUI upgradePriceUI;
     private SkillMenuUnlockButton unlockButton;
 
     private TextMeshProUGUI damageUI;
@@ -31,7 +30,6 @@ public class SkillMenuSlot : MonoBehaviour {
         infoLevel = transform.FindChild<Transform>("InfoPopups/SkillLevel");
         damageUI = transform.FindChild<TextMeshProUGUI>("SkillData/Damage/Value");
         skillpointsUI = transform.FindChild<TextMeshProUGUI>("Skillpoints/Value");
-        upgradePriceUI = transform.FindChild<TextMeshProUGUI>("UpgradeButton/Price");
         skillLevelUI = transform.FindChild<TextMeshProUGUI>("SkillData/SkillLevel/Value");
         descriptionUI = transform.FindChild<TextMeshProUGUI>("Description/Value");
 
@@ -83,7 +81,6 @@ public class SkillMenuSlot : MonoBehaviour {
     public void UpdateSlot() {
         image.sprite = skill.Icon;
         unlockButton?.SetText(skill.unlockLevel);
-        upgradePriceUI.text = skill.UpgradePrice.ToString();
         damageUI.text = skill.Damage.ToString();
         skillLevelUI.text = skill.skillLevel.ToString();
         skillpointsUI.text = "Skillpunkte: " + Score.instance.skillPoints.ToString();

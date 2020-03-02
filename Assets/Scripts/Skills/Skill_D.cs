@@ -12,7 +12,7 @@ public class Skill_D : Skill {
 
     private new void Awake() {
         base.Awake();
-        coolDown = 20;
+        coolDown = 0;
         description = "Es regnet hochexplosive Bergfestzelebrierungsfrösche. Verursachen Bereichsschaden.";
     }
 
@@ -23,6 +23,7 @@ public class Skill_D : Skill {
             float posX = Random.Range(-9.36f, 9.36f);
             Frog frog = EasyObjectPool.instance.GetObjectFromPool(frogPoolName, new Vector3(posX, posY), Quaternion.identity).GetComponent<Frog>();
             frog.SetDamage(Damage);
+            CameraEffect.instance.Shake(0.1f, 0.15f);
             yield return new WaitForSeconds(0.3f);
         }
 

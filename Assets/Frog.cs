@@ -45,6 +45,7 @@ public class Frog : MonoBehaviour {
 
             Instantiate(particleSystem, transform.position, Quaternion.identity);
             EasyObjectPool.instance.ReturnObjectToPool(gameObject);
+            CameraEffect.instance.Shake(0.2f, 1f);
         }
     }
 }

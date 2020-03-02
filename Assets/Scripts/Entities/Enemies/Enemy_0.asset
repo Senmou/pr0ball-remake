@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stepValueList:
   - step: 1
-    value: 2
-  - step: 5
-    value: 5
-  - step: 80
-    value: 500
-  - step: 90
+    value: 3
+  - step: 3
+    value: 10
+  - step: 10
+    value: 250
+  - step: 20
     value: 1500
   - step: 100
     value: 5000
-  maxHP: 2
+  maxHP: 3
   testLevel: 1

@@ -10,6 +10,7 @@ public class Score : MonoBehaviour {
     public int score;
     public int highscore;
     public int skillPoints;
+    public int maxSkillPoints = 3;
 
     private PlayStateController playStateController;
 
@@ -73,6 +74,7 @@ public class Score : MonoBehaviour {
 
     public void IncSkillPoints(int amount) {
         skillPoints += amount;
+        skillPoints = (skillPoints > maxSkillPoints) ? maxSkillPoints : skillPoints;
     }
 
     private void UpdateUI() {

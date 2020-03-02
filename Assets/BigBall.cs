@@ -31,7 +31,7 @@ public class BigBall : MonoBehaviour {
 
     private void Start() {
         transform.position = new Vector2(0f, 16f);
-        body.AddForce(new Vector2(Random.value, Random.value) * 300f, ForceMode2D.Impulse);
+        //body.AddForce(new Vector2(Random.value, Random.value) * 300f, ForceMode2D.Impulse);
     }
 
     private void FixedUpdate() {
@@ -68,11 +68,10 @@ public class BigBall : MonoBehaviour {
         body.gravityScale = 5f;
 
         if (other.gameObject.CompareTag("Enemy")) {
-            audioSource.PlayOneShot(audioSource.clip);
+            //audioSource.PlayOneShot(audioSource.clip);
             BaseEnemy enemy = other.gameObject.GetComponent<BaseEnemy>();
             enemy.TakeDamage(damage);
-            //Instantiate(onHitParticleSystem, transform.position, Quaternion.identity);
-            EasyObjectPool.instance.GetObjectFromPool(particleSystemPoolName, transform.position, Quaternion.identity);
+            EasyObjectPool.instance.GetObjectFromPool(particleSystemPoolName, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
         }
     }
 }

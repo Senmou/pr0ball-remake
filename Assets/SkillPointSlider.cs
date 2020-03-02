@@ -24,6 +24,7 @@ public class SkillPointSlider : MonoBehaviour {
             GameObject go = Instantiate(floatingText, new Vector2(4.3f, 22f), Quaternion.identity).gameObject;
             go.GetComponent<FloatingText>().SetText("+1 Skillpunkt");
             go.transform.SetParent(canvas.transform);
+            EventManager.TriggerEvent("SkillPointGained");
         }
     }
 }

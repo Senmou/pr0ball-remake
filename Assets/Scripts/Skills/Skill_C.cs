@@ -22,7 +22,7 @@ public class Skill_C : Skill {
         audioSource = GetComponent<AudioSource>();
         hammer.SetActive(false);
 
-        coolDown = 20;
+        coolDown = 0;
         hammerTimeLogo = Instantiate(hammerTimeLogo, new Vector3(-30f, 9f), Quaternion.identity);
         description = "pr0-chan schwingt den Bannhammer. Trifft alles in einer geraden Linie.";
     }
@@ -69,6 +69,8 @@ public class Skill_C : Skill {
                     hitEnemy.TakeDamage(Damage);
                     hitEnemy.canTakeDamageFromSkill = false;
                     hitEnemies.Add(hitEnemy);
+
+                    CameraEffect.instance.Shake(0.05f, 0.5f);
                 }
             }
 

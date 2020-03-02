@@ -46,7 +46,6 @@ public class Skill : MonoBehaviour {
         EventManager.StartListening("SaveGame", OnSaveGame);
         EventManager.StartListening("WaveCompleted", OnWaveCompleted);
     }
-
     private int CalcUpgradePrice(int skillLevel) => skillLevel;
     protected virtual int CalcDamage(int skillLevel) => skillLevel * 10;
 
@@ -62,7 +61,7 @@ public class Skill : MonoBehaviour {
     }
 
     protected void Action() {
-        if (!pending) {
+        if (!pending && Score.instance.PaySkillPoints(1)) {
             pending = true;
             StartCoroutine(ActionCoroutine());
         }

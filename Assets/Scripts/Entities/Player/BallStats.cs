@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 [System.Serializable]
 public class BallStats {
@@ -23,11 +24,13 @@ public class BallStats {
     public int ballCount;
 
     public int UpgradeDamage { get => VES(level, (1, 1)); }
-    public float UpgradeCritChance { get => (critChance < 100f) ? 5f : 0f; }
-    public float UpgradeCritDamage { get => 0.5f; }
+    public float UpgradeCritChance { get => (critChance < 100f) ? 3f : 0f; }
+    public float UpgradeCritDamage { get => 0.25f; }
     public int UpgradeBallCount { get => VES(level, (1, 1)); }
 
-    public int UpgradePrice { get => 2 * level; }
+    public int UpgradePrice { get => 1; }
+
+    private BallController ballController;
 
     public void AddStats() {
         damage += UpgradeDamage;
@@ -43,6 +46,12 @@ public class BallStats {
         critChance = 0f;
         critDamage = 2f;
         ballCount = 1;
+    }
+
+    public void OnItemCollected_AddBall() {
+        ballCount++;
+        ballController = GameObject.FindObjectOfType<BallController>();
+        ballController.SetMaxBallCount(ballCount);
     }
 
     public int ModifiedDamage() {

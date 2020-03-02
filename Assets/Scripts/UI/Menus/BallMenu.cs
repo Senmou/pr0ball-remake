@@ -122,7 +122,7 @@ public class BallMenu : CanvasController {
     }
 
     private void UpdateUI() {
-        scoreUI.text = "Skillpunkte: " + Score.instance.skillPoints.ToString();
+        scoreUI.text = "Skillpunkte: " + Score.instance.skillPoints.ToString() + "/" + Score.instance.maxSkillPoints.ToString();
 
         // Stats
         upgradePriceUI.text = BallStats.Instance.UpgradePrice.ToString();

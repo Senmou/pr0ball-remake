@@ -8,9 +8,11 @@ public class Skill_A : Skill {
     [SerializeField] private GameObject triggeredText;
 
     private Canvas canvas;
+    private AudioSource triggeredAudio;
 
     private new void Awake() {
         base.Awake();
+        triggeredAudio = GameObject.Find("SfxTriggered").GetComponent<AudioSource>();
         canvas = FindObjectOfType<Canvas>();
     }
 
@@ -35,7 +37,8 @@ public class Skill_A : Skill {
             yield return null;
         }
 
-        GameObject text = Instantiate(triggeredText, new Vector2(0, -22f), Quaternion.identity, canvas.transform);
+        GameObject text = Instantiate(triggeredText, new Vector2(0f, 0f), Quaternion.identity);
+        triggeredAudio.Play();
 
         for (int i = 0; i < 1; i++) {
             BigBall bigBall = Instantiate(bigBallPrefab);
@@ -47,7 +50,11 @@ public class Skill_A : Skill {
             foreach (var item in bigBalls) {
                 item?.MoveToTopMostEnemy();
             }
+            CameraEffect.instance.Shake(0.05f, 0.7f, true);
             yield return new WaitForSeconds(0.05f);
         }
+
+        Destroy(text);
+        triggeredAudio.Stop();
     }
 }
