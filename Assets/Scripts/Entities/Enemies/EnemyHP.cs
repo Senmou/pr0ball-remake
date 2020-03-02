@@ -27,6 +27,11 @@ public class EnemyHP : ScriptableObject {
         for (int i = 0; i < stepValueList.Length; i++) {
             maxHP += HP(level, stepValueList[i].value, stepValueList[i].step);
         }
+
+        // a little randomness
+        float bonusPercantage = UnityEngine.Random.Range(1f, 1.2f);
+        maxHP = (int)(maxHP * bonusPercantage);
+
         return maxHP;
     }
 

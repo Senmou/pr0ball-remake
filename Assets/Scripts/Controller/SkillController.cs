@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SkillController : MonoBehaviour {
-    public List<Skill> skills;
+
+    [HideInInspector] public Skill[] skills;
+
+    private void Awake() {
+        skills = GetComponentsInChildren<Skill>();
+    }
 
     public void ResetData() {
         foreach (var skill in skills) {

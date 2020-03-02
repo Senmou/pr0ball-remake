@@ -8,11 +8,10 @@ public class Skill_Frogs : Skill {
 
     private const string frogPoolName = "Frog_pool";
 
-    protected override int CalcDamage(int skillLevel) => 15 * skillLevel;
+    protected override int CalcDamage(int level) => ((enemyHP.MaxHP + level) / 10) * 10 + 10;
 
     private new void Awake() {
         base.Awake();
-        coolDown = 0;
         description = "Es regnet hochexplosive Bergfestzelebrierungsfrösche. Verursachen Bereichsschaden.";
     }
 

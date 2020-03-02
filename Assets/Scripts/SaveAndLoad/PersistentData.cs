@@ -15,6 +15,7 @@ public class PersistentData : MonoBehaviour {
     public CurrentLevelData currentLevelData;
     public Highscores highscores;
 
+    public bool uniColor;
     public bool isGameOver;
     public float elapsedTimeSinceRestart;
 
@@ -46,6 +47,7 @@ public class PersistentData : MonoBehaviour {
         highscores = saveData.highscores ?? new Highscores();
         elapsedTimeSinceRestart = saveData.elapsedTimeSinceRestart;
         isGameOver = saveData.isGameOver;
+        uniColor = saveData.uniColor;
     }
 
     private void OnApplicationFocus(bool focus) {
@@ -120,7 +122,6 @@ public class SkillData {
 
     [Serializable]
     public struct Skill {
-        public int level;
         public bool locked;
         public int remainingCoolDown;
     }
@@ -128,29 +129,26 @@ public class SkillData {
     private Skill[] skills;
     public int[] equippedSkillIDs;
 
-    public void SetSkillData(int id, int level, bool locked, int remainingCoolDown) {
-        skills[id].level = level;
+    public void SetSkillData(int id, bool locked, int remainingCoolDown) {
         skills[id].locked = locked;
         skills[id].remainingCoolDown = remainingCoolDown;
     }
 
     public Skill GetSkillData(int id) {
         Skill skill = new Skill();
-        skill.level = PersistentData.instance.skillData.skills[id].level;
         skill.locked = PersistentData.instance.skillData.skills[id].locked;
         skill.remainingCoolDown = PersistentData.instance.skillData.skills[id].remainingCoolDown;
         return skill;
     }
 
     public SkillData() {
-        skills = new Skill[16];
+        skills = new Skill[3];
 
         // index is skillBarSlot.id
-        equippedSkillIDs = new int[4] { -1, -1, -1, -1 };
+        equippedSkillIDs = new int[3] { -1, -1, -1 };
 
-        int skillCount = 16;
+        int skillCount = 3;
         for (int i = 0; i < skillCount; i++) {
-            skills[i].level = 1;
             skills[i].locked = true;
         }
     }

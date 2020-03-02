@@ -3,19 +3,19 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour {
 
+    public EnemyHP enemyHP;
     public int id;
     public int coolDown;
     public int remainingCoolDown;
     public new string name;
     public bool locked;
-    public int skillLevel;
     public int unlockLevel;
     public string description;
+    public Sprite pendingIcon;
 
     protected bool pending;
 
-    public int UpgradePrice { get => CalcUpgradePrice(skillLevel); }
-    public int Damage { get => CalcDamage(skillLevel); }
+    public int Damage { get => CalcDamage(LevelData.Level); }
 
     public Sprite icon;
     public Sprite iconLocked;
@@ -26,13 +26,18 @@ public class Skill : MonoBehaviour {
 
     private SkillMenu skillMenu;
     private AudioSource sfxError;
+    private AudioSource sfxSuccess;
 
     public Sprite Icon {
         get {
             if (locked)
                 return iconLocked;
-            else
-                return icon;
+            else {
+                if (pendingIcon && pending)
+                    return pendingIcon;
+                else
+                    return icon;
+            }
         }
     }
 
@@ -42,19 +47,19 @@ public class Skill : MonoBehaviour {
 
         SkillData.Skill skillData = PersistentData.instance.skillData.GetSkillData(id);
         locked = skillData.locked;
-        skillLevel = skillData.level;
         remainingCoolDown = skillData.remainingCoolDown;
 
         sfxError = GameObject.Find("SfxError").GetComponent<AudioSource>();
+        sfxSuccess = GameObject.Find("SfxSpawn").GetComponent<AudioSource>();
 
         EventManager.StartListening("SaveGame", OnSaveGame);
         EventManager.StartListening("WaveCompleted", OnWaveCompleted);
     }
-    private int CalcUpgradePrice(int skillLevel) => skillLevel;
-    protected virtual int CalcDamage(int skillLevel) => skillLevel * 10;
+    
+    protected virtual int CalcDamage(int level) => level * 10;
 
     protected void OnSaveGame() {
-        SaveSkillData(id, skillLevel, locked, remainingCoolDown);
+        SaveSkillData(id, locked, remainingCoolDown);
     }
 
     public void OnWaveCompleted() {
@@ -68,11 +73,17 @@ public class Skill : MonoBehaviour {
 
         if (Score.instance.skillPoints == 0) {
             sfxError.Play();
-            ErrorMessage.instance.Show(1f);
+            ErrorMessage.instance.Show(1f, "Nicht genug Skillpunkte!");
+        }
+
+        if (pending) {
+            sfxError.Play();
+            ErrorMessage.instance.Show(1f, "Skill im vollen Gange!");
         }
 
         if (!pending && Score.instance.PaySkillPoints(1)) {
             pending = true;
+            sfxSuccess.Play();
             StartCoroutine(ActionCoroutine());
         }
     }
@@ -103,13 +114,12 @@ public class Skill : MonoBehaviour {
         remainingCoolDown = coolDown;
     }
 
-    protected void SaveSkillData(int id, int level, bool locked, int remainingCoolDown) {
-        PersistentData.instance.skillData.SetSkillData(id, level, locked, remainingCoolDown);
+    protected void SaveSkillData(int id, bool locked, int remainingCoolDown) {
+        PersistentData.instance.skillData.SetSkillData(id, locked, remainingCoolDown);
     }
 
     public void ResetData() {
         remainingCoolDown = 0;
         locked = true;
-        skillLevel = 1;
     }
 }

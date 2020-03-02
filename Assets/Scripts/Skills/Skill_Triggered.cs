@@ -18,13 +18,10 @@ public class Skill_Triggered : Skill {
     }
 
     private void Start() {
-        coolDown = 0;
-        unlockLevel = 1;
-
-        description = "Der Chef räumt auf.";
+        description = "Listen here, you little shit";
     }
 
-    protected override int CalcDamage(int skillLevel) => skillLevel * 2;
+    protected override int CalcDamage(int level) => (int)(enemyHP.MaxHP / 20) + 5;
 
     protected override IEnumerator ActionCoroutine() {
 
@@ -33,8 +30,10 @@ public class Skill_Triggered : Skill {
         pending = true;
 
         while (pending) {
-            if (ballController.BallCount > 0)
+            if (ballController.BallCount > 0) {
                 pending = false;
+                barSlot.UpdateSlot();
+            }
             yield return null;
         }
 

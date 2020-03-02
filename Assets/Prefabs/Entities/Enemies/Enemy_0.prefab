@@ -234,7 +234,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64268c052f05fa349a67f96cd3fba2bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleColor: {r: 0.8196079, g: 0.2392157, b: 0.14117648, a: 1}
+  enemyColor: {r: 0.42352945, g: 0.2627451, b: 0.16862746, a: 1}
+  uniColor: {r: 0.8235295, g: 0.23529413, b: 0.13333334, a: 1}
   hp: {fileID: 11400000, guid: 0b619df4c108ac84f9dc98c888091ce2, type: 2}
   particleSystem: {fileID: 7199096499088925637, guid: cc61f3667670b7e469667e44d8c5714d,
     type: 3}
@@ -279,8 +280,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 34f7f3f1e7fcceb48a201b019d6cecb0, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 78dbbf2b8223f1c45b042fb18c1de5d1, type: 3}
+  m_Color: {r: 0.42352945, g: 0.2627451, b: 0.16862746, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

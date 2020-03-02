@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour {
     }
 
     private void Awake() {
-        canvas = FindObjectOfType<Canvas>();
+        canvas = GameObject.Find("MainCanvas").GetComponent<Canvas>();
         activeEnemies = new List<BaseEnemy>();
         deadline = GameObject.Find("Deadline").transform;
         dottedLine = GameObject.Find("DottedLine").transform;
@@ -82,11 +82,11 @@ public class EnemyController : MonoBehaviour {
             int random = Random.Range(1, 100);
 
             // Spawn item
-            if (random < 10) {
+            if (random < 7) {
                 random = Random.Range(1, 100);
 
                 // Decide which item to spawn
-                if (random > 50) {
+                if (random > 70) {
                     GameObject item = Instantiate(itemAddBall, spawnPoints[i].position, Quaternion.identity, canvas.transform);
                     activeItems.Add(item);
                 } else {

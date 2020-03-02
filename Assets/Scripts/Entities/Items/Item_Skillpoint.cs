@@ -6,6 +6,12 @@ public class Item_Skillpoint : MonoBehaviour {
 
     private void Awake() {
         enemyController = FindObjectOfType<EnemyController>();
+        EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
+    }
+
+    private void OnReachedNextLevel() {
+        enemyController.activeItems.Remove(gameObject);
+        Destroy(gameObject);
     }
 
     public void OnItemCollect() {

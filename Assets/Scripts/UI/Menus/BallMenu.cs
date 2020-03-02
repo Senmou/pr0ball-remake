@@ -135,9 +135,9 @@ public class BallMenu : CanvasController {
         upgradeBallCountUI.text = "(+" + BallStats.Instance.UpgradeBallCount.ToString() + ")";
 
         if (Score.instance.skillPoints < BallStats.Instance.UpgradePrice)
-            upgradeButtonBackground.color = new Color(0.35f, 0.35f, 0.35f, 1f);
+            upgradeButtonBackground.color = new Color(0.35f, 0.35f, 0.35f, 1f); // grey
         else
-            upgradeButtonBackground.color = new Color(0.8235295f, 0.2352941f, 0.1333333f, 1f);
+            upgradeButtonBackground.color = new Color(0.8235295f, 0.2352941f, 0.1333333f, 1f); // red
     }
 
     public void UpgradeBallsOnClick() {

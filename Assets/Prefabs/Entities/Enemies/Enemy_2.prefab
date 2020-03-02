@@ -234,9 +234,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a897d500e7895124da8853e744e978a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleColor: {r: 0.10980393, g: 0.7254902, b: 0.57254905, a: 1}
+  enemyColor: {r: 0.10980393, g: 0.7254902, b: 0.57254905, a: 1}
+  uniColor: {r: 0.8235295, g: 0.23529413, b: 0.13333334, a: 1}
   hp: {fileID: 11400000, guid: aa24dfe8191c3964dbfb83b92acc4f8a, type: 2}
-  particleSystem: {fileID: 7199096499088925637, guid: c06b40e4de4b28d47925d08d29fa83b1,
+  particleSystem: {fileID: 7199096499088925637, guid: cc61f3667670b7e469667e44d8c5714d,
     type: 3}
   maxHP: 0
   currentHP: 0
@@ -377,11 +378,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.28704768, y: 0}
-  - {x: 0.0042941887, y: 0.29016006}
-  - {x: 0.28331217, y: 0.0015628691}
-  - {x: 0.0018221139, y: -0.28565487}
-  - {x: -0.2881908, y: -0.004923016}
+  - {x: -0.27891886, y: -0.000090156915}
+  - {x: -0.0005190838, y: 0.27881446}
+  - {x: 0.27807644, y: 0.00025390822}
+  - {x: -0.0007957668, y: -0.2791102}
+  - {x: -0.27898645, y: -0.00024877954}
 --- !u!1 &2073535222297523622
 GameObject:
   m_ObjectHideFlags: 0

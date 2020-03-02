@@ -22,12 +22,11 @@ public class Skill_Hammertime : Skill {
         audioSource = GetComponent<AudioSource>();
         hammer.SetActive(false);
 
-        coolDown = 0;
         hammerTimeLogo = Instantiate(hammerTimeLogo, new Vector3(-30f, 9f), Quaternion.identity);
         description = "pr0-chan schwingt den Bannhammer. Trifft alles in einer geraden Linie.";
     }
 
-    protected override int CalcDamage(int skillLevel) => 5 * skillLevel;
+    protected override int CalcDamage(int level) => ((enemyHP.MaxHP + level) / 10) * 20 + 10;
 
     protected override IEnumerator ActionCoroutine() {
 
@@ -64,7 +63,7 @@ public class Skill_Hammertime : Skill {
                     audioSource.PlayOneShot(hitAudioClips[randomHitAudioClip], 0.4f);
 
                     ParticleSystemRenderer psr = Instantiate(onHitParticleSystem, hitEnemy.transform.position, Quaternion.identity).GetComponent<ParticleSystemRenderer>();
-                    psr.material.color = hitEnemy.particleColor;
+                    psr.material.color = hitEnemy.enemyColor;
 
                     hitEnemy.TakeDamage(Damage);
                     hitEnemy.canTakeDamageFromSkill = false;

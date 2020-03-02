@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using UnityEngine;
+using TMPro;
 
 public class ErrorMessage : MonoBehaviour {
 
     public static ErrorMessage instance;
 
     private MoveUI moveUI;
+    private TextMeshProUGUI messageUI;
 
     private void Awake() {
         instance = this;
         moveUI = GetComponent<MoveUI>();
+        messageUI = transform.FindChild<TextMeshProUGUI>("Canvas/TextBackground/Text");
     }
 
-    public void Show(float duration) {
+    public void Show(float duration, string text) {
+        messageUI.text = text;
         StopAllCoroutines();
         StartCoroutine(FadeInOut(duration));
     }

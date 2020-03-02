@@ -57,19 +57,11 @@ public class SkillMenuSlot : MonoBehaviour {
             errorSfx.Play();
     }
 
-    public void UpgradeSkill() {
-        if (Score.instance.PaySkillPoints(skill.UpgradePrice)) {
-            skill.skillLevel++;
-            purchaseSfx.Play();
-        } else
-            errorSfx.Play();
-        UpdateSlot();
-    }
-
     public void UpdateSlot() {
         image.sprite = skill.Icon;
         unlockButton?.SetText(skill.unlockLevel);
+        unlockButton?.SetColor(skill.unlockLevel);
         damageUI.text = skill.Damage.ToString();
-        descriptionUI.text = skill.description;
+        descriptionUI.text = (skill.locked) ? "" : skill.description;
     }
 }

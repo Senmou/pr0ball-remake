@@ -4,7 +4,8 @@ using TMPro;
 
 public class BaseEnemy : MonoBehaviour {
 
-    public Color particleColor;
+    public Color enemyColor;
+    [SerializeField] private Color uniColor;
     [SerializeField] protected EnemyHP hp;
     [SerializeField] private new GameObject particleSystem;
 
@@ -13,8 +14,8 @@ public class BaseEnemy : MonoBehaviour {
     [HideInInspector] public Rigidbody2D body;
     [HideInInspector] public bool canTakeDamageFromSkill;
 
-
     private Animator animator;
+    private SpriteRenderer spriteRenderer;
     private TextMeshProUGUI healthPointUI;
     private EnemyController enemyController;
 
@@ -27,13 +28,28 @@ public class BaseEnemy : MonoBehaviour {
     protected void Awake() {
         animator = GetComponent<Animator>();
         body = GetComponentInChildren<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         enemyController = FindObjectOfType<EnemyController>();
         healthPointUI = GetComponentInChildren<TextMeshProUGUI>();
         canTakeDamageFromSkill = true;
+
+        EventManager.StartListening("ToggleUniColor", OnToggleUniColor);
     }
 
-    private void Start() {
+    protected void Start() {
         UpdateUI();
+        ApplyColor();
+    }
+
+    protected void OnToggleUniColor() {
+        ApplyColor();
+    }
+
+    protected void ApplyColor() {
+        if (PersistentData.instance.uniColor)
+            spriteRenderer.color = uniColor;
+        else
+            spriteRenderer.color = enemyColor;
     }
 
     public void SetData() {
@@ -56,6 +72,11 @@ public class BaseEnemy : MonoBehaviour {
             ParticleSystem deathParticles = Instantiate(particleSystem, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
             var particleVelocity = deathParticles.velocityOverLifetime;
             particleVelocity.x = (ball.transform.position.x < transform.position.x) ? 10f : -10f;
+
+            if (PersistentData.instance.uniColor)
+                deathParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.SetColor(Shader.PropertyToID("Color_65DE3E46"), uniColor);
+            else
+                deathParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.SetColor(Shader.PropertyToID("Color_65DE3E46"), enemyColor);
 
             ReturnToPool(this);
             Score.instance.IncScore(benisValue);

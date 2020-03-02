@@ -25,16 +25,18 @@ public class BallStats {
 
     public int UpgradeDamage { get => VES(level, (1, 1)); }
     public float UpgradeCritChance { get => (critChance < 100f) ? 3f : 0f; }
-    public float UpgradeCritDamage { get => 0.25f; }
-    public int UpgradeBallCount { get => VES(level, (1, 1)); }
+    public float UpgradeCritDamage { get => 0f; }
+    public int UpgradeBallCount { get => 0; }
 
-    public int UpgradePrice { get => 1; }
+    public int UpgradePrice { get => 2; }
 
     private BallController ballController;
 
     public void AddStats() {
         damage += UpgradeDamage;
         critChance += UpgradeCritChance;
+        if (critChance > 100f)
+            critChance = 100f;
         critDamage += UpgradeCritDamage;
         ballCount += UpgradeBallCount;
         level++;

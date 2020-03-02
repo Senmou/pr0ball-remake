@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 984284923583439271}
   - component: {fileID: 5879759913712808068}
   - component: {fileID: 4359355325352425985}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Item_Skillpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2.5, y: 2.5}
+  m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2741609689891713629
 MonoBehaviour:
@@ -125,7 +125,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.25
+  m_Radius: 1
 --- !u!198 &5879759913712808068
 ParticleSystem:
   m_ObjectHideFlags: 0

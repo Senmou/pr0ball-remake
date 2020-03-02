@@ -11,6 +11,7 @@ public class SaveData {
     public CurrentLevelData currentLevelData;
     public Highscores highscores;
 
+    public bool uniColor;
     public bool isGameOver;
     public float elapsedTimeSinceRestart;
 
@@ -23,6 +24,7 @@ public class SaveData {
         currentLevelData = PersistentData.instance.currentLevelData;
         highscores = PersistentData.instance.highscores;
 
+        uniColor = PersistentData.instance.uniColor;
         isGameOver = PersistentData.instance.isGameOver;
         elapsedTimeSinceRestart = PersistentData.instance.elapsedTimeSinceRestart;
     }

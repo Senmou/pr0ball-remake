@@ -6,6 +6,12 @@ public class Item_AddBall : MonoBehaviour {
 
     private void Awake() {
         enemyController = FindObjectOfType<EnemyController>();
+        EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
+    }
+
+    private void OnReachedNextLevel() {
+        enemyController.activeItems.Remove(gameObject);
+        Destroy(gameObject);
     }
 
     public void OnItemCollect() {

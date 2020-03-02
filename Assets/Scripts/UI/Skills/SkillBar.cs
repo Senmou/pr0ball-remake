@@ -8,7 +8,7 @@ public class SkillBar : MonoBehaviour {
 
     private void Awake() {
 
-        slots = new SkillBarSlot[4];
+        slots = new SkillBarSlot[3];
         slots[0] = transform.FindChild<SkillBarSlot>("Slot_1");
         slots[1] = transform.FindChild<SkillBarSlot>("Slot_2");
         slots[2] = transform.FindChild<SkillBarSlot>("Slot_3");
