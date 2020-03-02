@@ -11,7 +11,6 @@ public class SkillMenuSlot : MonoBehaviour {
     private SkillMenuUnlockButton unlockButton;
 
     private TextMeshProUGUI damageUI;
-    private TextMeshProUGUI skillpointsUI;
     private TextMeshProUGUI descriptionUI;
 
     private Transform infoDamage;
@@ -26,7 +25,6 @@ public class SkillMenuSlot : MonoBehaviour {
 
         infoDamage = transform.FindChild<Transform>("InfoPopups/Damage");
         damageUI = transform.FindChild<TextMeshProUGUI>("SkillData/Damage/Value");
-        skillpointsUI = transform.FindChild<TextMeshProUGUI>("Skillpoints/Value");
         descriptionUI = transform.FindChild<TextMeshProUGUI>("Description/Value");
 
         purchaseSfx = GameObject.Find("SfxUnlockSkill").GetComponent<AudioSource>();
@@ -72,7 +70,6 @@ public class SkillMenuSlot : MonoBehaviour {
         image.sprite = skill.Icon;
         unlockButton?.SetText(skill.unlockLevel);
         damageUI.text = skill.Damage.ToString();
-        skillpointsUI.text = "Skillpunkte: " + Score.instance.skillPoints.ToString();
         descriptionUI.text = skill.description;
     }
 }

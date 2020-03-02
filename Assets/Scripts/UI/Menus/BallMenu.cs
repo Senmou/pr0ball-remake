@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class BallMenu : CanvasController {
 
@@ -19,11 +20,10 @@ public class BallMenu : CanvasController {
     private Transform infoCritChance;
     private Transform infoCritDamage;
     private Transform infoBallCount;
+    private Image upgradeButtonBackground;
 
     private MoveUI moveUI;
     private BallController ballController;
-
-    private TextMeshProUGUI scoreUI;
 
     private AudioSource errorSfx;
     private AudioSource purchaseSfx;
@@ -33,8 +33,6 @@ public class BallMenu : CanvasController {
         purchaseSfx = GameObject.Find("SfxUnlockSkill").GetComponent<AudioSource>();
 
         moveUI = GetComponent<MoveUI>();
-
-        scoreUI = transform.FindChild<TextMeshProUGUI>("Score/Value");
 
         upgradePriceUI = transform.FindChild<TextMeshProUGUI>("UpgradeButton/Price");
 
@@ -52,11 +50,13 @@ public class BallMenu : CanvasController {
         infoCritChance = transform.FindChild<Transform>("Stats/InfoPopups/CritChance");
         infoCritDamage = transform.FindChild<Transform>("Stats/InfoPopups/CritDamage");
         infoBallCount = transform.FindChild<Transform>("Stats/InfoPopups/BallCount");
+        upgradeButtonBackground = transform.FindChild<Image>("UpgradeButton/Background");
 
         infoDamage.gameObject.SetActive(false);
         infoCritChance.gameObject.SetActive(false);
         infoCritDamage.gameObject.SetActive(false);
         infoBallCount.gameObject.SetActive(false);
+
 
         ballController = FindObjectOfType<BallController>();
 
@@ -114,7 +114,6 @@ public class BallMenu : CanvasController {
 
     private void OnSaveGame() {
         PersistentData.instance.ballData.level = BallStats.Instance.level;
-
         PersistentData.instance.ballData.damage = BallStats.Instance.damage;
         PersistentData.instance.ballData.critChance = BallStats.Instance.critChance;
         PersistentData.instance.ballData.critDamage = BallStats.Instance.critDamage;
@@ -122,8 +121,6 @@ public class BallMenu : CanvasController {
     }
 
     private void UpdateUI() {
-        scoreUI.text = "Skillpunkte: " + Score.instance.skillPoints.ToString() + "/" + Score.instance.maxSkillPoints.ToString();
-
         // Stats
         upgradePriceUI.text = BallStats.Instance.UpgradePrice.ToString();
 
@@ -136,15 +133,21 @@ public class BallMenu : CanvasController {
         upgradeCritChanceUI.text = "(+" + BallStats.Instance.UpgradeCritChance.ToString("0.00") + "%)";
         upgradeCritDamageUI.text = "(+" + BallStats.Instance.UpgradeCritDamage.ToString("0.00") + "x)";
         upgradeBallCountUI.text = "(+" + BallStats.Instance.UpgradeBallCount.ToString() + ")";
+
+        if (Score.instance.skillPoints < BallStats.Instance.UpgradePrice)
+            upgradeButtonBackground.color = new Color(0.35f, 0.35f, 0.35f, 1f);
+        else
+            upgradeButtonBackground.color = new Color(0.8235295f, 0.2352941f, 0.1333333f, 1f);
     }
-    
+
     public void UpgradeBallsOnClick() {
         if (Score.instance.PaySkillPoints(BallStats.Instance.UpgradePrice)) {
             BallStats.Instance.AddStats();
             ballController.SetMaxBallCount(BallStats.Instance.ballCount);
             purchaseSfx.Play();
-        } else
+        } else {
             errorSfx.Play();
+        }
         UpdateUI();
     }
 
