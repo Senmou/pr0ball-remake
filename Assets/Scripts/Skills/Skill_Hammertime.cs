@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Skill_C : Skill {
+public class Skill_Hammertime : Skill {
 
     [SerializeField] private AudioClip[] audioClips;
     [SerializeField] private AudioClip[] hitAudioClips;

@@ -22,8 +22,10 @@ public class Skill : MonoBehaviour {
     public SkillBarSlot barSlot;
     public SkillMenuSlot menuSlot;
 
-    private SkillMenu skillMenu;
     protected BallController ballController;
+
+    private SkillMenu skillMenu;
+    private AudioSource sfxError;
 
     public Sprite Icon {
         get {
@@ -43,6 +45,8 @@ public class Skill : MonoBehaviour {
         skillLevel = skillData.level;
         remainingCoolDown = skillData.remainingCoolDown;
 
+        sfxError = GameObject.Find("SfxError").GetComponent<AudioSource>();
+
         EventManager.StartListening("SaveGame", OnSaveGame);
         EventManager.StartListening("WaveCompleted", OnWaveCompleted);
     }
@@ -61,6 +65,12 @@ public class Skill : MonoBehaviour {
     }
 
     protected void Action() {
+
+        if (Score.instance.skillPoints == 0) {
+            sfxError.Play();
+            ErrorMessage.instance.Show(1f);
+        }
+
         if (!pending && Score.instance.PaySkillPoints(1)) {
             pending = true;
             StartCoroutine(ActionCoroutine());

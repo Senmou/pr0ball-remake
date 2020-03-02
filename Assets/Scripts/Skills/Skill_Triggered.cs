@@ -1,19 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
-public class Skill_A : Skill {
+public class Skill_Triggered : Skill {
 
     [SerializeField] private BigBall bigBallPrefab;
     [SerializeField] private GameObject triggeredText;
+    [SerializeField] private AudioClip triggeredMusic;
 
     private Canvas canvas;
     private AudioSource triggeredAudio;
 
     private new void Awake() {
         base.Awake();
-        triggeredAudio = GameObject.Find("SfxTriggered").GetComponent<AudioSource>();
         canvas = FindObjectOfType<Canvas>();
+        triggeredAudio = GameObject.Find("SfxTriggered").GetComponent<AudioSource>();
     }
 
     private void Start() {
@@ -39,6 +40,7 @@ public class Skill_A : Skill {
 
         GameObject text = Instantiate(triggeredText, new Vector2(0f, 0f), Quaternion.identity);
         triggeredAudio.Play();
+        MusicController.instance.SetMusic(triggeredMusic);
 
         for (int i = 0; i < 1; i++) {
             BigBall bigBall = Instantiate(bigBallPrefab);
@@ -56,5 +58,6 @@ public class Skill_A : Skill {
 
         Destroy(text);
         triggeredAudio.Stop();
+        MusicController.instance.RestoreLastMusicClip();
     }
 }

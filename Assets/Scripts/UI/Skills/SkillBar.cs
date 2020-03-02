@@ -12,7 +12,6 @@ public class SkillBar : MonoBehaviour {
         slots[0] = transform.FindChild<SkillBarSlot>("Slot_1");
         slots[1] = transform.FindChild<SkillBarSlot>("Slot_2");
         slots[2] = transform.FindChild<SkillBarSlot>("Slot_3");
-        slots[3] = transform.FindChild<SkillBarSlot>("Slot_4");
 
         EventManager.StartListening("SaveGame", OnSaveGame);
     }

@@ -2,7 +2,7 @@
 using MarchingBytes;
 using UnityEngine;
 
-public class Skill_D : Skill {
+public class Skill_Frogs : Skill {
 
     private int frogCount = 3;
 

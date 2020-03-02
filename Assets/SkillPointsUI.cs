@@ -12,6 +12,7 @@ public class SkillPointsUI : MonoBehaviour {
 
     private void Start() {
         oldSkillPointCount = Score.instance.skillPoints;
+        UpdateUI();
     }
 
     private void Update() {

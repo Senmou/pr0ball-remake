@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Skill_B : Skill {
+public class Skill_Cannon : Skill {
 
     private const string orangeBallPoolName = "OrangeBallPool";
 

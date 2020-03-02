@@ -22,7 +22,7 @@ public class Sound : MonoBehaviour {
 
         soundLock = false;
         soundLockDuration = 0.07f;
-        soundLockTimer = 0.07f;
+        soundLockTimer = soundLockDuration;
 
         bounce = new SoundFile();
         bounce.path = "Sound/Sfx/Bounce.wav";
