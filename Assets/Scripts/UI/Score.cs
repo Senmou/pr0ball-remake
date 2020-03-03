@@ -37,8 +37,10 @@ public class Score : MonoBehaviour {
     }
 
     public bool PaySkillPoints(int upgradePrice) {
+        Debug.Log("cost: " + upgradePrice);
         if (skillPoints >= upgradePrice) {
             skillPoints -= upgradePrice;
+            UpdateUI();
             return true;
         } else
             return false;
@@ -72,7 +74,7 @@ public class Score : MonoBehaviour {
         skillPoints = (skillPoints > maxSkillPoints) ? maxSkillPoints : skillPoints;
     }
 
-    private void UpdateUI() {
+    public void UpdateUI() {
         scoreUI.text = score.ToString();
     }
 

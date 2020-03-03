@@ -15,7 +15,7 @@ public class Item_AddBall : MonoBehaviour {
     }
 
     public void OnItemCollect() {
-        BallStats.Instance.OnItemCollected_AddBall();
+        BallStats.Instance.AddBalls();
         enemyController.activeItems.Remove(gameObject);
         Destroy(gameObject);
     }

@@ -72,7 +72,7 @@ public class GameController : MonoBehaviour {
     }
 
     public void PauseGame(string debugText = "none") {
-        Debug.Log(debugText);
+        //Debug.Log(debugText);
         Time.timeScale = 0f;
         isGamePaused = true;
         EventManager.TriggerEvent("GamePaused");

@@ -15,43 +15,22 @@ public class BallStats {
     }
     #endregion
 
-    // Stats
-    public int level;
-
     public int damage;
     public float critChance;
     public float critDamage;
     public int ballCount;
 
-    public int UpgradeDamage { get => VES(level, (1, 1)); }
-    public float UpgradeCritChance { get => (critChance < 100f) ? 3f : 0f; }
-    public float UpgradeCritDamage { get => 0f; }
-    public int UpgradeBallCount { get => 0; }
-
-    public int UpgradePrice { get => 2; }
-
     private BallController ballController;
 
-    public void AddStats() {
-        damage += UpgradeDamage;
-        critChance += UpgradeCritChance;
-        if (critChance > 100f)
-            critChance = 100f;
-        critDamage += UpgradeCritDamage;
-        ballCount += UpgradeBallCount;
-        level++;
-    }
-
     public void ResetStats() {
-        level = 1;
         damage = 1;
         critChance = 0f;
         critDamage = 2f;
         ballCount = 1;
     }
 
-    public void OnItemCollected_AddBall() {
-        ballCount++;
+    public void AddBalls(int amount = 1) {
+        ballCount += amount;
         ballController = GameObject.FindObjectOfType<BallController>();
         ballController.SetMaxBallCount(ballCount);
     }

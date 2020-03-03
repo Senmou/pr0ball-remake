@@ -60,8 +60,6 @@ public class BallMenu : CanvasController {
 
         ballController = FindObjectOfType<BallController>();
 
-        BallStats.Instance.level = PersistentData.instance.ballData.level;
-
         BallStats.Instance.damage = PersistentData.instance.ballData.damage;
         BallStats.Instance.critChance = PersistentData.instance.ballData.critChance;
         BallStats.Instance.critDamage = PersistentData.instance.ballData.critDamage;
@@ -113,42 +111,23 @@ public class BallMenu : CanvasController {
     }
 
     private void OnSaveGame() {
-        PersistentData.instance.ballData.level = BallStats.Instance.level;
         PersistentData.instance.ballData.damage = BallStats.Instance.damage;
         PersistentData.instance.ballData.critChance = BallStats.Instance.critChance;
         PersistentData.instance.ballData.critDamage = BallStats.Instance.critDamage;
         PersistentData.instance.ballData.ballCount = BallStats.Instance.ballCount;
     }
 
-    private void UpdateUI() {
-        // Stats
-        upgradePriceUI.text = BallStats.Instance.UpgradePrice.ToString();
+    public void UpdateUI() {
 
         damageUI.text = BallStats.Instance.damage.ToString();
         critChanceUI.text = BallStats.Instance.critChance.ToString("0.00") + "%";
         critDamageUI.text = BallStats.Instance.critDamage.ToString("0.00") + "x";
         ballCountUI.text = BallStats.Instance.ballCount.ToString();
 
-        upgradeDamageUI.text = "(+" + BallStats.Instance.UpgradeDamage.ToString() + ")";
-        upgradeCritChanceUI.text = "(+" + BallStats.Instance.UpgradeCritChance.ToString("0.00") + "%)";
-        upgradeCritDamageUI.text = "(+" + BallStats.Instance.UpgradeCritDamage.ToString("0.00") + "x)";
-        upgradeBallCountUI.text = "(+" + BallStats.Instance.UpgradeBallCount.ToString() + ")";
-
-        if (Score.instance.skillPoints < BallStats.Instance.UpgradePrice)
-            upgradeButtonBackground.color = new Color(0.35f, 0.35f, 0.35f, 1f); // grey
-        else
-            upgradeButtonBackground.color = new Color(0.8235295f, 0.2352941f, 0.1333333f, 1f); // red
-    }
-
-    public void UpgradeBallsOnClick() {
-        if (Score.instance.PaySkillPoints(BallStats.Instance.UpgradePrice)) {
-            BallStats.Instance.AddStats();
-            ballController.SetMaxBallCount(BallStats.Instance.ballCount);
-            purchaseSfx.Play();
-        } else {
-            errorSfx.Play();
-        }
-        UpdateUI();
+        //if (Score.instance.skillPoints < BallStats.Instance.UpgradePrice)
+        //    upgradeButtonBackground.color = new Color(0.35f, 0.35f, 0.35f, 1f); // grey
+        //else
+        //    upgradeButtonBackground.color = new Color(0.8235295f, 0.2352941f, 0.1333333f, 1f); // red
     }
 
     public void ResetData() {

@@ -100,7 +100,6 @@ public class ScoreData {
 
 [Serializable]
 public class BallData {
-    public int level;
 
     public int damage;
     public float critChance;
@@ -108,8 +107,6 @@ public class BallData {
     public int ballCount;
 
     public BallData() {
-        level = 1;
-
         damage = 1;
         critChance = 0f;
         critDamage = 2f;
