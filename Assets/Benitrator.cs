@@ -45,9 +45,11 @@ public class Benitrator : MonoBehaviour {
 
     public void StartBenitrator() {
         if (!isNewRoundStarted && bet > 0 && Score.instance.PaySkillPoints(bet)) {
+            ballMenu.PlaySuccessSound();
             isNewRoundStarted = true;
             StartCoroutine(RotateWheels());
-        }
+        } else
+            ballMenu.PlayErrorSound();
     }
 
     public void IncBet() {
@@ -55,7 +57,8 @@ public class Benitrator : MonoBehaviour {
         if (bet < 3 && Score.instance.skillPoints >= bet + 1) {
             bet++;
             UpdateUI();
-        }
+        } else
+            ballMenu.PlayErrorSound();
     }
 
     public void DecBet() {
@@ -63,7 +66,8 @@ public class Benitrator : MonoBehaviour {
         if (bet > 0) {
             bet--;
             UpdateUI();
-        }
+        } else
+            ballMenu.PlayErrorSound();
     }
 
     private void UpdateUI() {
@@ -108,8 +112,8 @@ public class Benitrator : MonoBehaviour {
         if (scoreSymbolCount > 1)
             Score.instance.IncScore(GetRewardScore(scoreSymbolCount));
 
-        if (rewardedSkillPointCount != 0 || damageSymbolCount != 0 || critChanceSymbolCount != 0 ||
-            critDamageSymbolCount != 0 || ballSymbolCount != 0 || scoreSymbolCount != 0)
+        if (rewardedSkillPointCount > 1 || damageSymbolCount > 1 || critChanceSymbolCount > 1 ||
+            critDamageSymbolCount > 1 || ballSymbolCount > 1 || scoreSymbolCount > 1)
             resultUI.text = "GEWONNEN";
         else
             resultUI.text = "VERLOREN";
@@ -205,7 +209,7 @@ public class Benitrator : MonoBehaviour {
         }
 
         int currentScore = Score.instance.score;
-        int rewardScore = (int)(currentScore * rewardScoreMultiplier);
+        int rewardScore = (int)((currentScore + 250) * rewardScoreMultiplier);
 
         Debug.Log("You won: " + rewardScore + " Benis");
         return rewardScore;

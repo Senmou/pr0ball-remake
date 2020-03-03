@@ -37,7 +37,6 @@ public class Score : MonoBehaviour {
     }
 
     public bool PaySkillPoints(int upgradePrice) {
-        Debug.Log("cost: " + upgradePrice);
         if (skillPoints >= upgradePrice) {
             skillPoints -= upgradePrice;
             UpdateUI();

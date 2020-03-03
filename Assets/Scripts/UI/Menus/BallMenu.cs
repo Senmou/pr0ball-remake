@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class BallMenu : CanvasController {
 
-    private TextMeshProUGUI upgradePriceUI;
-
     private TextMeshProUGUI damageUI;
     private TextMeshProUGUI critChanceUI;
     private TextMeshProUGUI critDamageUI;
@@ -20,7 +18,7 @@ public class BallMenu : CanvasController {
     private Transform infoCritChance;
     private Transform infoCritDamage;
     private Transform infoBallCount;
-    private Image upgradeButtonBackground;
+    private Image startButtonBackground;
 
     private MoveUI moveUI;
     private BallController ballController;
@@ -33,8 +31,6 @@ public class BallMenu : CanvasController {
         purchaseSfx = GameObject.Find("SfxUnlockSkill").GetComponent<AudioSource>();
 
         moveUI = GetComponent<MoveUI>();
-
-        upgradePriceUI = transform.FindChild<TextMeshProUGUI>("UpgradeButton/Price");
 
         damageUI = transform.FindChild<TextMeshProUGUI>("Stats/CurrentStats/Damage/Value");
         critChanceUI = transform.FindChild<TextMeshProUGUI>("Stats/CurrentStats/CritChance/Value");
@@ -50,7 +46,7 @@ public class BallMenu : CanvasController {
         infoCritChance = transform.FindChild<Transform>("Stats/InfoPopups/CritChance");
         infoCritDamage = transform.FindChild<Transform>("Stats/InfoPopups/CritDamage");
         infoBallCount = transform.FindChild<Transform>("Stats/InfoPopups/BallCount");
-        upgradeButtonBackground = transform.FindChild<Image>("UpgradeButton/Background");
+        startButtonBackground = transform.FindChild<Image>("StartButton/Background");
 
         infoDamage.gameObject.SetActive(false);
         infoCritChance.gameObject.SetActive(false);
@@ -110,6 +106,14 @@ public class BallMenu : CanvasController {
         }
     }
 
+    public void PlayErrorSound() {
+        errorSfx.Play();
+    }
+
+    public void PlaySuccessSound() {
+        purchaseSfx.Play();
+    }
+
     private void OnSaveGame() {
         PersistentData.instance.ballData.damage = BallStats.Instance.damage;
         PersistentData.instance.ballData.critChance = BallStats.Instance.critChance;
@@ -124,10 +128,10 @@ public class BallMenu : CanvasController {
         critDamageUI.text = BallStats.Instance.critDamage.ToString("0.00") + "x";
         ballCountUI.text = BallStats.Instance.ballCount.ToString();
 
-        //if (Score.instance.skillPoints < BallStats.Instance.UpgradePrice)
-        //    upgradeButtonBackground.color = new Color(0.35f, 0.35f, 0.35f, 1f); // grey
-        //else
-        //    upgradeButtonBackground.color = new Color(0.8235295f, 0.2352941f, 0.1333333f, 1f); // red
+        if (Score.instance.skillPoints == 0)
+            startButtonBackground.color = new Color(0.35f, 0.35f, 0.35f, 1f); // grey
+        else
+            startButtonBackground.color = new Color(0.8235295f, 0.2352941f, 0.1333333f, 1f); // red
     }
 
     public void ResetData() {
