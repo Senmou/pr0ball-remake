@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour {
     public int GetPlaytimeMinutes() => (int)elapsedTimeSinceRestart / 60;
 
     private void OnSaveGame() {
+        PersistentData.instance.currentLevelData.wave = LevelData.Wave;
         PersistentData.instance.currentLevelData.level = LevelData.Level;
         PersistentData.instance.elapsedTimeSinceRestart = elapsedTimeSinceRestart;
     }

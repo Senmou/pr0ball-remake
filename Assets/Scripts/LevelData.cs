@@ -8,11 +8,8 @@
     public static int Level { get => level; }
 
     public static void SetCurrentLevelData(CurrentLevelData currentLevelData) {
-
-        if (currentLevelData.level % 10 == 0)
-            level = currentLevelData.level - 1;
-        else
-            level = currentLevelData.level;
+        wave = currentLevelData.wave;
+        level = currentLevelData.level;
     }
 
     public static void LevelUp() {

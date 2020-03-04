@@ -170,6 +170,7 @@ public class CurrentLevelData {
         public int currentHP;
     }
 
+    public int wave;
     public int level;
     public int spawnPointIndex;
     public List<EntityData> activeEntities;
@@ -180,6 +181,7 @@ public class CurrentLevelData {
     }
 
     public CurrentLevelData() {
+        wave = 1;
         level = 1;
         spawnPointIndex = 0;
         activeEntities = new List<EntityData>();
