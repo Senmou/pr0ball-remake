@@ -2,9 +2,11 @@
 
 public class Item_Skillpoint : MonoBehaviour {
 
+    private RectTransform rect;
     private EnemyController enemyController;
 
     private void Awake() {
+        rect = GetComponent<RectTransform>();
         enemyController = FindObjectOfType<EnemyController>();
         EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
     }

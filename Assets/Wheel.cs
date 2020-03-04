@@ -13,16 +13,18 @@ public enum SlotType {
 public class Wheel : MonoBehaviour {
 
     // How long should the wheel rotate?
-    [SerializeField] int fullTurnsBeforeStop;
+    [SerializeField] private int fullTurnsBeforeStop;
 
     [HideInInspector] public bool isRotating;
 
     private Transform[] slots;
     private RectTransform rect;
+    private Benitrator benitrator;
 
     private void Awake() {
 
         rect = GetComponent<RectTransform>();
+        benitrator = FindObjectOfType<Benitrator>();
 
         int childCount = transform.childCount;
         slots = new Transform[transform.childCount * 2];
@@ -64,6 +66,12 @@ public class Wheel : MonoBehaviour {
         int posY = 0;
         for (int i = 0; i < stepCountTotal; i++) {
 
+            if (i >= stepCountTotal - (slotHeight / deltaY))
+                yield return new WaitForSecondsRealtime(0.005f);
+
+            if (i % (slotHeight / deltaY) == 0)
+                benitrator.PlayClickSfx();
+
             rect.anchoredPosition += new Vector2(0f, deltaY);
 
             // int cast to avoid floating point errors
@@ -86,6 +94,7 @@ public class Wheel : MonoBehaviour {
         **/
 
         isRotating = false;
+        benitrator.PlayWheelStopSfx();
 
         SlotType result = new SlotType();
 

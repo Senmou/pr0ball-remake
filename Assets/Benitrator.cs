@@ -6,6 +6,10 @@ using TMPro;
 
 public class Benitrator : MonoBehaviour {
 
+    [SerializeField] private AudioSource click;
+    [SerializeField] private AudioSource coins;
+    [SerializeField] private AudioSource wheelStop;
+
     private Wheel[] wheels;
 
     private int bet;
@@ -15,21 +19,27 @@ public class Benitrator : MonoBehaviour {
     public delegate void ResultDelegate(SlotType resultSlotType, string name);
     private ResultDelegate onStoppedRotating;
 
-    private BallMenu ballMenu;
     private TextMeshProUGUI betUI;
     private TextMeshProUGUI winUI;
     private TextMeshProUGUI benisUI;
     private TextMeshProUGUI resultUI;
+    private TextMeshProUGUI blussiUI;
+
+    private BallMenu ballMenu;
+    private AudioSource audioSource;
     private Image startButtonBackground;
+
     private Dictionary<SlotType, int> totalResults = new Dictionary<SlotType, int>();
 
     private void Awake() {
         ballMenu = FindObjectOfType<BallMenu>();
         wheels = GetComponentsInChildren<Wheel>();
+        audioSource = GetComponent<AudioSource>();
         betUI = transform.FindChild<TextMeshProUGUI>("Bet/Value");
         winUI = transform.FindChild<TextMeshProUGUI>("Win/Value");
         benisUI = transform.FindChild<TextMeshProUGUI>("Benis/Value");
         resultUI = transform.FindChild<TextMeshProUGUI>("Result/Text");
+        blussiUI = transform.FindChild<TextMeshProUGUI>("Blussis/Value");
         startButtonBackground = transform.FindChild<Image>("Start_Button/Background");
         resultUI.gameObject.SetActive(false);
         onStoppedRotating += OnStoppedRotating;
@@ -58,6 +68,7 @@ public class Benitrator : MonoBehaviour {
 
         if (CanvasManager.instance.CurrentActiveCanvasType == CanvasType.BALLS) {
             benisUI.text = Score.instance.score.ToString();
+            blussiUI.text = Score.instance.skillPoints.ToString();
         }
     }
 
@@ -93,8 +104,15 @@ public class Benitrator : MonoBehaviour {
 
     public void IncBet() {
 
+        if (bet == 3) {
+            ballMenu.PlayErrorSound();
+            ErrorMessage.instance.Show(1f, "Three, take it or leave it!");
+            return;
+        }
+
         if (bet < 3 && Score.instance.skillPoints >= bet + 1) {
             bet++;
+            PlayCoinSfx();
             UpdateUI();
         } else {
             ballMenu.PlayErrorSound();
@@ -106,10 +124,11 @@ public class Benitrator : MonoBehaviour {
 
         if (bet > 0) {
             bet--;
+            PlayCoinSfx();
             UpdateUI();
         } else {
             ballMenu.PlayErrorSound();
-            ErrorMessage.instance.Show(1f, "Nicht genug Blussis!");
+            ErrorMessage.instance.Show(1f, "Das geht nicht! B-Baka!");
         }
     }
 
@@ -298,4 +317,8 @@ public class Benitrator : MonoBehaviour {
         else
             totalResults.Add(resultSlotType, 1);
     }
+
+    public void PlayClickSfx() => click.Play();
+    public void PlayCoinSfx() => coins.Play();
+    public void PlayWheelStopSfx() => wheelStop.Play();
 }

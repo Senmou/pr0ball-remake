@@ -81,26 +81,30 @@ public class EnemyController : MonoBehaviour {
 
             int random = Random.Range(1, 100);
 
-            // Spawn item
-            if (random < 7) {
-                random = Random.Range(1, 100);
-
-                // Decide which item to spawn
-                if (random > 70) {
-                    GameObject item = Instantiate(itemAddBall, spawnPoints[i].position, Quaternion.identity, canvas.transform);
-                    activeItems.Add(item);
-                } else {
-                    GameObject item = Instantiate(itemAddSkillPoint, spawnPoints[i].position, Quaternion.identity, canvas.transform);
-                    activeItems.Add(item);
-                }
+            if (random <= 5) {
+                SpawnItem(spawnPoints[i].position);
             } else {
-                // Spawn enemy
-                string sourcePool = enemyLDT.PickLootDropItem().poolName;
-                BaseEnemy newEnemy = EasyObjectPool.instance.GetObjectFromPool(sourcePool, spawnPoints[i].position, Quaternion.identity).GetComponent<BaseEnemy>();
-                newEnemy.SetData();
-                activeEnemies.Add(newEnemy);
+                SpawnEnemy(spawnPoints[i].position);
             }
         }
+    }
+
+    private void SpawnItem(Vector3 position, bool isInitialWave = false) {
+        GameObject item = Instantiate(itemAddSkillPoint, position, Quaternion.identity, canvas.transform);
+        activeItems.Add(item);
+
+        if (isInitialWave)
+            MoveToStartPosition(item.transform);
+    }
+
+    private void SpawnEnemy(Vector3 position, bool isInitialWave = false) {
+        string sourcePool = enemyLDT.PickLootDropItem().poolName;
+        BaseEnemy newEnemy = EasyObjectPool.instance.GetObjectFromPool(sourcePool, position, Quaternion.identity).GetComponent<BaseEnemy>();
+        newEnemy.SetData();
+        activeEnemies.Add(newEnemy);
+
+        if (isInitialWave)
+            MoveToStartPosition(newEnemy.transform);
     }
 
     public void CreateInitialWaves() {
@@ -112,11 +116,14 @@ public class EnemyController : MonoBehaviour {
         List<Transform> spawnPoints = SpawnPoints.instance.GetInitialSpawnPoints();
 
         for (int i = 0; i < spawnPoints.Count; i++) {
-            string sourcePool = enemyLDT.PickLootDropItem().poolName;
-            BaseEnemy newEnemy = EasyObjectPool.instance.GetObjectFromPool(sourcePool, spawnPoints[i].position, Quaternion.identity).GetComponent<BaseEnemy>();
-            newEnemy.SetData();
-            activeEnemies.Add(newEnemy);
-            MoveEnemy(newEnemy);
+
+            int random = Random.Range(1, 100);
+
+            if (random <= 5) {
+                SpawnItem(spawnPoints[i].position, isInitialWave: true);
+            } else {
+                SpawnEnemy(spawnPoints[i].position, isInitialWave: true);
+            }
         }
     }
 
@@ -133,18 +140,18 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    private void MoveEnemy(BaseEnemy enemy) {
-        StartCoroutine(MoveEnemyToStartPosition(enemy));
+    private void MoveToStartPosition(Transform entity) {
+        StartCoroutine(MoveEnemyToStartPosition(entity));
     }
 
-    private IEnumerator MoveEnemyToStartPosition(BaseEnemy enemy) {
+    private IEnumerator MoveEnemyToStartPosition(Transform entity) {
 
-        Vector2 startPos = enemy.transform.position;
+        Vector2 startPos = entity.position;
         Vector2 endPos = startPos + new Vector2(0f, 30f);
         float t = 0;
         float duration = Random.Range(0.4f, 1.2f);
         while (t < 1f) {
-            enemy.transform.position = Vector2.Lerp(enemy.transform.position, endPos, t);
+            entity.position = Vector2.Lerp(entity.position, endPos, t);
             t += Time.deltaTime / duration;
             yield return null;
         }
