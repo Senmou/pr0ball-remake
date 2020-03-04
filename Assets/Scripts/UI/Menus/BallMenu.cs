@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 
 public class BallMenu : CanvasController {
 
@@ -9,16 +8,10 @@ public class BallMenu : CanvasController {
     private TextMeshProUGUI critDamageUI;
     private TextMeshProUGUI ballCountUI;
 
-    private TextMeshProUGUI upgradeDamageUI;
-    private TextMeshProUGUI upgradeCritChanceUI;
-    private TextMeshProUGUI upgradeCritDamageUI;
-    private TextMeshProUGUI upgradeBallCountUI;
-
     private Transform infoDamage;
     private Transform infoCritChance;
     private Transform infoCritDamage;
     private Transform infoBallCount;
-    private Image startButtonBackground;
 
     private MoveUI moveUI;
     private BallController ballController;
@@ -26,33 +19,29 @@ public class BallMenu : CanvasController {
     private AudioSource errorSfx;
     private AudioSource purchaseSfx;
 
+    private Benitrator benitrator;
+
     private void Awake() {
         errorSfx = GameObject.Find("SfxError").GetComponent<AudioSource>();
         purchaseSfx = GameObject.Find("SfxUnlockSkill").GetComponent<AudioSource>();
 
         moveUI = GetComponent<MoveUI>();
+        benitrator = FindObjectOfType<Benitrator>();
 
         damageUI = transform.FindChild<TextMeshProUGUI>("Stats/CurrentStats/Damage/Value");
         critChanceUI = transform.FindChild<TextMeshProUGUI>("Stats/CurrentStats/CritChance/Value");
         critDamageUI = transform.FindChild<TextMeshProUGUI>("Stats/CurrentStats/CritDamage/Value");
         ballCountUI = transform.FindChild<TextMeshProUGUI>("Stats/CurrentStats/BallCount/Value");
 
-        upgradeDamageUI = transform.FindChild<TextMeshProUGUI>("Stats/UpgradeStats/Damage/Value");
-        upgradeCritChanceUI = transform.FindChild<TextMeshProUGUI>("Stats/UpgradeStats/CritChance/Value");
-        upgradeCritDamageUI = transform.FindChild<TextMeshProUGUI>("Stats/UpgradeStats/CritDamage/Value");
-        upgradeBallCountUI = transform.FindChild<TextMeshProUGUI>("Stats/UpgradeStats/BallCount/Value");
-
         infoDamage = transform.FindChild<Transform>("Stats/InfoPopups/Damage");
         infoCritChance = transform.FindChild<Transform>("Stats/InfoPopups/CritChance");
         infoCritDamage = transform.FindChild<Transform>("Stats/InfoPopups/CritDamage");
         infoBallCount = transform.FindChild<Transform>("Stats/InfoPopups/BallCount");
-        startButtonBackground = transform.FindChild<Image>("StartButton/Background");
 
         infoDamage.gameObject.SetActive(false);
         infoCritChance.gameObject.SetActive(false);
         infoCritDamage.gameObject.SetActive(false);
         infoBallCount.gameObject.SetActive(false);
-
 
         ballController = FindObjectOfType<BallController>();
 
@@ -127,11 +116,6 @@ public class BallMenu : CanvasController {
         critChanceUI.text = BallStats.Instance.critChance.ToString("0.00") + "%";
         critDamageUI.text = BallStats.Instance.critDamage.ToString("0.00") + "x";
         ballCountUI.text = BallStats.Instance.ballCount.ToString();
-
-        if (Score.instance.skillPoints == 0)
-            startButtonBackground.color = new Color(0.35f, 0.35f, 0.35f, 1f); // grey
-        else
-            startButtonBackground.color = new Color(0.8235295f, 0.2352941f, 0.1333333f, 1f); // red
     }
 
     public void ResetData() {
@@ -140,6 +124,7 @@ public class BallMenu : CanvasController {
     }
 
     public override void Show() {
+        benitrator.SetInitialBetIfEnoughSkillPoints();
         UpdateUI();
         moveUI.FadeTo(new Vector2(0f, 0f), 0.5f);
     }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
@@ -16,16 +17,24 @@ public class Benitrator : MonoBehaviour {
 
     private BallMenu ballMenu;
     private TextMeshProUGUI betUI;
+    private TextMeshProUGUI winUI;
+    private TextMeshProUGUI benisUI;
     private TextMeshProUGUI resultUI;
+    private Image startButtonBackground;
     private Dictionary<SlotType, int> totalResults = new Dictionary<SlotType, int>();
 
     private void Awake() {
         ballMenu = FindObjectOfType<BallMenu>();
         wheels = GetComponentsInChildren<Wheel>();
-        betUI = transform.FindChild<TextMeshProUGUI>("Bet");
-        resultUI = transform.FindChild<TextMeshProUGUI>("Result");
-        resultUI.text = "";
+        betUI = transform.FindChild<TextMeshProUGUI>("Bet/Value");
+        winUI = transform.FindChild<TextMeshProUGUI>("Win/Value");
+        benisUI = transform.FindChild<TextMeshProUGUI>("Benis/Value");
+        resultUI = transform.FindChild<TextMeshProUGUI>("Result/Text");
+        startButtonBackground = transform.FindChild<Image>("Start_Button/Background");
+        resultUI.gameObject.SetActive(false);
         onStoppedRotating += OnStoppedRotating;
+
+        winUI.text = "";
 
         UpdateUI();
     }
@@ -41,15 +50,45 @@ public class Benitrator : MonoBehaviour {
                 UpdateUI();
             }
         }
+
+        if (CanvasManager.instance.CurrentActiveCanvasType == CanvasType.BALLS && Score.instance.skillPoints == 0)
+            startButtonBackground.color = new Color(0.35f, 0.35f, 0.35f, 1f); // grey
+        else
+            startButtonBackground.color = new Color(0.8235295f, 0.2352941f, 0.1333333f, 1f); // red
+
+        if (CanvasManager.instance.CurrentActiveCanvasType == CanvasType.BALLS) {
+            benisUI.text = Score.instance.score.ToString();
+        }
+    }
+
+    public void SetInitialBetIfEnoughSkillPoints() {
+        if (Score.instance.skillPoints >= 1) {
+            bet = 1;
+            UpdateUI();
+        }
     }
 
     public void StartBenitrator() {
-        if (!isNewRoundStarted && bet > 0 && Score.instance.PaySkillPoints(bet)) {
+
+        if (bet == 0) {
+            ErrorMessage.instance.Show(1f, "Dein Einsatz bitte!");
+            return;
+        }
+
+        if (isNewRoundStarted) {
+            ErrorMessage.instance.Show(1f, "Die Runde läuft bereits!");
+            return;
+        }
+
+        if (Score.instance.PaySkillPoints(bet)) {
             ballMenu.PlaySuccessSound();
             isNewRoundStarted = true;
+            winUI.text = "";
             StartCoroutine(RotateWheels());
-        } else
+        } else {
             ballMenu.PlayErrorSound();
+            ErrorMessage.instance.Show(1f, "Nicht genug Blussis!");
+        }
     }
 
     public void IncBet() {
@@ -57,8 +96,10 @@ public class Benitrator : MonoBehaviour {
         if (bet < 3 && Score.instance.skillPoints >= bet + 1) {
             bet++;
             UpdateUI();
-        } else
+        } else {
             ballMenu.PlayErrorSound();
+            ErrorMessage.instance.Show(1f, "Nicht genug Blussis!");
+        }
     }
 
     public void DecBet() {
@@ -66,8 +107,10 @@ public class Benitrator : MonoBehaviour {
         if (bet > 0) {
             bet--;
             UpdateUI();
-        } else
+        } else {
             ballMenu.PlayErrorSound();
+            ErrorMessage.instance.Show(1f, "Nicht genug Blussis!");
+        }
     }
 
     private void UpdateUI() {
@@ -76,51 +119,79 @@ public class Benitrator : MonoBehaviour {
 
     private void EvaluateResult() {
 
-        // Gain one skill point for every skill point symbol
+        // Skill points
         int rewardedSkillPointCount = -1;
         totalResults.TryGetValue(SlotType.SkillPoint, out rewardedSkillPointCount);
-        if (rewardedSkillPointCount > 1)
+        if (rewardedSkillPointCount > 1) {
             Score.instance.IncSkillPoints(rewardedSkillPointCount);
+            winUI.text = rewardedSkillPointCount.ToString() + " Blussis";
+        }
 
         // Damage
         int damageSymbolCount = -1;
         totalResults.TryGetValue(SlotType.Damage, out damageSymbolCount);
-        if (damageSymbolCount > 1)
-            BallStats.Instance.damage += GetRewardDamage(damageSymbolCount);
+        if (damageSymbolCount > 1) {
+            int rewardDamage = GetRewardDamage(damageSymbolCount);
+            BallStats.Instance.damage += rewardDamage;
+            winUI.text = rewardDamage.ToString() + " Schaden";
+        }
 
         // Crit chance
         int critChanceSymbolCount = -1;
         totalResults.TryGetValue(SlotType.CritChance, out critChanceSymbolCount);
-        if (critChanceSymbolCount > 1)
-            BallStats.Instance.critChance += GetRewardCritChance(critChanceSymbolCount);
+        if (critChanceSymbolCount > 1) {
+            float rewardCritChance = GetRewardCritChance(critChanceSymbolCount);
+            BallStats.Instance.critChance += rewardCritChance;
+            winUI.text = rewardCritChance.ToString() + "% Kritische Trefferchance";
+        }
 
         // Crit damage
         int critDamageSymbolCount = -1;
         totalResults.TryGetValue(SlotType.CritDamage, out critDamageSymbolCount);
-        if (critDamageSymbolCount > 1)
-            BallStats.Instance.critDamage += GetRewardDamage(critDamageSymbolCount);
+        if (critDamageSymbolCount > 1) {
+            float rewardCritDamage = GetRewardDamage(critDamageSymbolCount);
+            BallStats.Instance.critDamage += rewardCritDamage;
+            winUI.text = rewardCritDamage.ToString() + "x Kritischer Schaden";
+        }
 
         // Balls
         int ballSymbolCount = -1;
         totalResults.TryGetValue(SlotType.Ball, out ballSymbolCount);
-        if (ballSymbolCount > 1)
-            BallStats.Instance.AddBalls(GetRewardBalls(ballSymbolCount));
+        if (ballSymbolCount > 1) {
+            int rewardBalls = GetRewardBalls(ballSymbolCount);
+            BallStats.Instance.AddBalls(rewardBalls);
+
+            if (rewardBalls == 1)
+                winUI.text = rewardBalls.ToString() + " Ball";
+            else
+                winUI.text = rewardBalls.ToString() + " Bälle";
+        }
 
         // Score
         int scoreSymbolCount = -1;
         totalResults.TryGetValue(SlotType.Score, out scoreSymbolCount);
-        if (scoreSymbolCount > 1)
-            Score.instance.IncScore(GetRewardScore(scoreSymbolCount));
+        if (scoreSymbolCount > 1) {
+            int rewardScore = GetRewardScore(scoreSymbolCount);
+            Score.instance.IncScore(rewardScore);
+            winUI.text = rewardScore.ToString() + " Benis";
+        }
 
         if (rewardedSkillPointCount > 1 || damageSymbolCount > 1 || critChanceSymbolCount > 1 ||
             critDamageSymbolCount > 1 || ballSymbolCount > 1 || scoreSymbolCount > 1)
-            resultUI.text = "GEWONNEN";
+            StartCoroutine(ShowResultText("GEWONNEN"));
         else
-            resultUI.text = "VERLOREN";
+            StartCoroutine(ShowResultText("VERLOREN"));
 
         ballMenu.UpdateUI();
         Score.instance.UpdateUI();
         totalResults.Clear();
+    }
+
+    private IEnumerator ShowResultText(string text) {
+        resultUI.gameObject.SetActive(true);
+        resultUI.text = text;
+        yield return new WaitForSecondsRealtime(3f);
+        resultUI.gameObject.SetActive(false);
     }
 
     private int GetRewardDamage(int symbolCount) {
@@ -136,7 +207,7 @@ public class Benitrator : MonoBehaviour {
         if (symbolCount == 3) {
             rewardDamage += bet;
         }
-        Debug.Log("You won: " + rewardDamage + " Damage");
+
         return rewardDamage;
     }
 
@@ -154,7 +225,6 @@ public class Benitrator : MonoBehaviour {
             rewardCritChance += 2 * bet;
         }
 
-        Debug.Log("You won: " + rewardCritChance + " CritChance");
         return rewardCritChance;
     }
 
@@ -172,7 +242,6 @@ public class Benitrator : MonoBehaviour {
             rewardCritDamage += 0.25f * bet;
         }
 
-        Debug.Log("You won: " + rewardCritDamage + " CritDamage");
         return rewardCritDamage;
     }
 
@@ -190,7 +259,6 @@ public class Benitrator : MonoBehaviour {
             rewardBalls += 2 * bet;
         }
 
-        Debug.Log("You won: " + rewardBalls + " Balls");
         return rewardBalls;
     }
 

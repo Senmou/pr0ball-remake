@@ -19,6 +19,9 @@ public class CanvasManager : MonoBehaviour {
     private List<CanvasController> canvasControllerList;
     private CanvasController lastActiveCanvas;
 
+    private CanvasType currentActiveCanvasType;
+    public CanvasType CurrentActiveCanvasType { get => currentActiveCanvasType; }
+
     private void Awake() {
         if (instance == null)
             instance = this;
@@ -32,6 +35,8 @@ public class CanvasManager : MonoBehaviour {
     }
 
     public void SwitchCanvas(CanvasType type) {
+
+        currentActiveCanvasType = type;
 
         if (type == CanvasType.NONE) {
             canvasControllerList.ForEach(x => x.Hide());
