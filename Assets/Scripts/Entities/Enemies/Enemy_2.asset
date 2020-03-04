@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfe736667e3865d40841f649a5f8d56f, type: 3}
   m_Name: Enemy_2
   m_EditorClassIdentifier: 
+  randomize: 1
+  maxBonusHPPercentage: 0.15
   stepValueList:
   - step: 1
     value: 5
@@ -23,5 +25,5 @@ MonoBehaviour:
     value: 50
   - step: 12
     value: 100
-  maxHP: 75
+  maxHP: 5
   testLevel: 1

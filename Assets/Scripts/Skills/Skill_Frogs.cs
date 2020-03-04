@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class Skill_Frogs : Skill {
 
-    private int frogCount = 3;
+    private int frogCount = 5;
 
     private const string frogPoolName = "Frog_pool";
 
-    protected override int CalcDamage(int level) => ((enemyHP.MaxHP + level) / 10) * 10 + 10;
+    protected override int CalcDamage(int level) => enemyHPReference.MaxHP + (enemyHPReference.MaxHP % 10);
 
     private new void Awake() {
         base.Awake();
+    }
+
+    private void Start() {
+        cost = 2;
         description = "Es regnet hochexplosive Bergfestzelebrierungsfrösche. Verursachen Bereichsschaden.";
     }
 

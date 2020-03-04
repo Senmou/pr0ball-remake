@@ -23,10 +23,14 @@ public class Skill_Hammertime : Skill {
         hammer.SetActive(false);
 
         hammerTimeLogo = Instantiate(hammerTimeLogo, new Vector3(-30f, 9f), Quaternion.identity);
+    }
+
+    private void Start() {
+        cost = 1;
         description = "pr0-chan schwingt den Bannhammer. Trifft alles in einer geraden Linie.";
     }
 
-    protected override int CalcDamage(int level) => ((enemyHP.MaxHP + level) / 10) * 20 + 10;
+    protected override int CalcDamage(int level) => enemyHPReference.MaxHP;
 
     protected override IEnumerator ActionCoroutine() {
 

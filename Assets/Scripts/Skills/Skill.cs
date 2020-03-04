@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour {
 
-    public EnemyHP enemyHP;
+    // Used for skill damage calculation
+    public EnemyHP enemyHPReference;
+
     public int id;
     public int coolDown;
     public int remainingCoolDown;
@@ -13,6 +15,7 @@ public class Skill : MonoBehaviour {
     public string description;
     public Sprite pendingIcon;
 
+    protected int cost;
     protected bool pending;
 
     public int Damage { get => CalcDamage(LevelData.Level); }
