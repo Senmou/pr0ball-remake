@@ -53,7 +53,7 @@ public class CanvasManager : MonoBehaviour {
         if (desiredCanvas != null) {
             desiredCanvas.Show();
             lastActiveCanvas = desiredCanvas;
-            GameController.instance.PauseGame(type.ToString());
+            GameController.instance.PauseGame();
         } else Debug.LogWarning("The desired canvas " + "[" + type.ToString() + "] " + "was not found!");
     }
 }

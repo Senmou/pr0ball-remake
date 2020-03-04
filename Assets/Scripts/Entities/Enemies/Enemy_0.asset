@@ -13,17 +13,27 @@ MonoBehaviour:
   m_Name: Enemy_0
   m_EditorClassIdentifier: 
   randomize: 1
-  maxBonusHPPercentage: 0.5
+  maxBonusHPPercentage: 0.25
   stepValueList:
   - step: 1
     value: 2
   - step: 2
+    value: 4
+  - step: 4
     value: 5
-  - step: 3
-    value: 5
-  - step: 10
-    value: 20
-  - step: 12
-    value: 30
-  maxHP: 10
-  testLevel: 1
+  - step: 8
+    value: 10
+  - step: 16
+    value: 50
+  - step: 32
+    value: 200
+  - step: 64
+    value: 500
+  - step: 80
+    value: 2500
+  - step: 90
+    value: 5000
+  - step: 100
+    value: 10000
+  maxHP: 253
+  testLevel: 21

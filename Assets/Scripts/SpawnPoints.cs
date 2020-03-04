@@ -20,7 +20,14 @@ public class SpawnPoints : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
+        EventManager.StartListening("SaveGame", OnSaveGame);
         EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
+
+        index = PersistentData.instance.currentLevelData.spawnPointIndex;
+    }
+
+    private void OnSaveGame() {
+        PersistentData.instance.currentLevelData.spawnPointIndex = index;
     }
 
     private void OnReachedNextLevel() {

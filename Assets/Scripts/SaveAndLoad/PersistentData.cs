@@ -154,10 +154,35 @@ public class SkillData {
 [Serializable]
 public class CurrentLevelData {
 
+    [Serializable]
+    public enum EntityType {
+        Enemy_0,
+        Enemy_1,
+        Enemy_2,
+        Item
+    }
+
+    [Serializable]
+    public struct EntityData {
+        public EntityType entityType;
+        public float posX;
+        public float posY;
+        public int currentHP;
+    }
+
     public int level;
+    public int spawnPointIndex;
+    public List<EntityData> activeEntities;
+
+    public void AddEntity(EntityType _entityType, float _posX, float _posY, int _currentHP = -1) {
+        EntityData entityData = new EntityData { entityType = _entityType, posX = _posX, posY = _posY, currentHP = _currentHP };
+        activeEntities.Add(entityData);
+    }
 
     public CurrentLevelData() {
         level = 1;
+        spawnPointIndex = 0;
+        activeEntities = new List<EntityData>();
     }
 }
 

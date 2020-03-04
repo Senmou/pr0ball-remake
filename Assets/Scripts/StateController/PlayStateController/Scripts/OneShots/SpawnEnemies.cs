@@ -11,14 +11,14 @@ public class SpawnEnemies : OneShot {
         // game restarted
         if (c.gameRestarted) {
             LevelData.ResetData();
-            c.enemyController.DespawnAllEnemies();
+            c.enemyController.DespawnAllEntities();
             c.enemyController.CreateInitialWaves();
             c.gameRestarted = false;
             return;
         }
 
         if (c.reachedNextLevel) {
-            c.enemyController.DespawnAllEnemies();
+            c.enemyController.DespawnAllEntities();
             c.enemyController.CreateInitialWaves();
             return;
         }
@@ -27,7 +27,7 @@ public class SpawnEnemies : OneShot {
 
             // cleared level before wave 20 is over OR all enemies are below the dotted line
             if (c.enemyController.activeEnemies.Count == 0 || c.enemyController.AllEnemiesBelowDottedLine()) {
-                c.enemyController.DespawnAllEnemies();
+                c.enemyController.DespawnAllEntities();
                 c.enemyController.CreateInitialWaves();
                 LevelData.LevelUp();
             } else {

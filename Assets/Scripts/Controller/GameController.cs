@@ -48,7 +48,7 @@ public class GameController : MonoBehaviour {
         if (PersistentData.instance.isGameOver) {
             restartGame.StartNewGame();
         } else
-            enemyController.CreateInitialWaves();
+            enemyController.LoadEntities();
     }
 
     private void Update() {
@@ -57,12 +57,6 @@ public class GameController : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Escape))
             CanvasManager.instance.SwitchCanvas(CanvasType.PAUSE);
-
-        if (Input.GetKeyDown(KeyCode.F)) {
-            foreach (var item in PersistentData.instance.highscores.entries) {
-                Debug.Log(item.highscore);
-            }
-        }
     }
 
     private void OnBackButtonPressed() {
@@ -71,8 +65,7 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    public void PauseGame(string debugText = "none") {
-        //Debug.Log(debugText);
+    public void PauseGame() {
         Time.timeScale = 0f;
         isGamePaused = true;
         EventManager.TriggerEvent("GamePaused");

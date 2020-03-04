@@ -13,6 +13,8 @@ public class BaseEnemy : MonoBehaviour {
     [HideInInspector] public int currentHP;
     [HideInInspector] public Rigidbody2D body;
     [HideInInspector] public bool canTakeDamageFromSkill;
+    [HideInInspector] public CurrentLevelData.EntityType entityType;
+
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -52,8 +54,11 @@ public class BaseEnemy : MonoBehaviour {
             spriteRenderer.color = enemyColor;
     }
 
-    public void SetData() {
-        currentHP = maxHP;
+    public void SetData(int? hp = null) {
+        if (hp != null)
+            currentHP = (int)hp;
+        else
+            currentHP = maxHP;
         UpdateUI();
     }
 

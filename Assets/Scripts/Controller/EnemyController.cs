@@ -6,13 +6,12 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour {
 
     [SerializeField] private FloatingText floatingText;
-    [SerializeField] private GameObject itemAddBall;
     [SerializeField] private GameObject itemAddSkillPoint;
 
     public LootDropTable enemyLDT;
 
     [HideInInspector] public List<BaseEnemy> activeEnemies;
-    [HideInInspector] public List<GameObject> activeItems;
+    [HideInInspector] public List<Item_Skillpoint> activeItems;
     [HideInInspector] public PlayStateController playStateController;
 
     private Canvas canvas;
@@ -31,6 +30,45 @@ public class EnemyController : MonoBehaviour {
         playStateController = FindObjectOfType<PlayStateController>();
 
         enemyLDT.ValidateTable();
+
+        EventManager.StartListening("SaveGame", OnSaveGame);
+    }
+
+    private void OnSaveGame() {
+
+        PersistentData.instance.currentLevelData.activeEntities.Clear();
+
+        foreach (var entity in activeEnemies) {
+            PersistentData.instance.currentLevelData.AddEntity(entity.entityType, entity.transform.position.x, entity.transform.position.y, entity.currentHP);
+        }
+
+        foreach (var entity in activeItems) {
+            PersistentData.instance.currentLevelData.AddEntity(entity.entityType, entity.transform.position.x, entity.transform.position.y);
+        }
+    }
+
+    public void LoadEntities() {
+
+        if (PersistentData.instance.currentLevelData.activeEntities != null && PersistentData.instance.currentLevelData.activeEntities.Count > 0) {
+
+            DespawnAllEntities();
+
+            List<CurrentLevelData.EntityData> data = PersistentData.instance.currentLevelData.activeEntities;
+
+            foreach (CurrentLevelData.EntityData item in data) {
+                if (item.entityType == CurrentLevelData.EntityType.Item)
+                    SpawnItem(new Vector3(item.posX, item.posY));
+                else {
+                    SpawnEnemy(new Vector3(item.posX, item.posY), item.entityType, item.currentHP);
+                }
+            }
+
+            PersistentData.instance.currentLevelData.activeEntities.Clear();
+
+        } else {
+            // No saved entites found
+            CreateInitialWaves();
+        }
     }
 
     public void CheckForEnemiesWhichReachedDeadline() {
@@ -53,6 +91,17 @@ public class EnemyController : MonoBehaviour {
             }
         }
 
+        List<Item_Skillpoint> itemsToRemove = new List<Item_Skillpoint>();
+        foreach (var item in activeItems) {
+            if (item.transform.position.y >= deadline.position.y) {
+                itemsToRemove.Add(item);
+            }
+        }
+
+        foreach (var item in itemsToRemove) {
+            Destroy(item);
+        }
+
         foreach (var enemyToRemove in enemiesToRemove) {
             enemyToRemove.Kill();
         }
@@ -66,10 +115,14 @@ public class EnemyController : MonoBehaviour {
         return true;
     }
 
-    public void DespawnAllEnemies() {
+    public void DespawnAllEntities() {
         foreach (var enemy in activeEnemies) {
             EasyObjectPool.instance.ReturnObjectToPool(enemy.gameObject);
         }
+        foreach (var item in activeItems) {
+            Destroy(item.gameObject);
+        }
+        activeItems.Clear();
         activeEnemies.Clear();
     }
 
@@ -90,17 +143,34 @@ public class EnemyController : MonoBehaviour {
     }
 
     private void SpawnItem(Vector3 position, bool isInitialWave = false) {
-        GameObject item = Instantiate(itemAddSkillPoint, position, Quaternion.identity, canvas.transform);
+        Item_Skillpoint item = Instantiate(itemAddSkillPoint, position, Quaternion.identity, canvas.transform).GetComponent<Item_Skillpoint>();
         activeItems.Add(item);
 
         if (isInitialWave)
             MoveToStartPosition(item.transform);
     }
 
-    private void SpawnEnemy(Vector3 position, bool isInitialWave = false) {
-        string sourcePool = enemyLDT.PickLootDropItem().poolName;
+    private void SpawnEnemy(Vector3 position, CurrentLevelData.EntityType? entityType = null, int? hp = null, bool isInitialWave = false) {
+
+        string sourcePool = "";
+        if (entityType == null)
+            sourcePool = enemyLDT.PickLootDropItem().poolName;
+        else {
+            switch (entityType) {
+                case CurrentLevelData.EntityType.Enemy_0:
+                    sourcePool = "Enemy_0_pool";
+                    break;
+                case CurrentLevelData.EntityType.Enemy_1:
+                    sourcePool = "Enemy_1_pool";
+                    break;
+                case CurrentLevelData.EntityType.Enemy_2:
+                    sourcePool = "Enemy_2_pool";
+                    break;
+            }
+        }
+
         BaseEnemy newEnemy = EasyObjectPool.instance.GetObjectFromPool(sourcePool, position, Quaternion.identity).GetComponent<BaseEnemy>();
-        newEnemy.SetData();
+        newEnemy.SetData(hp);
         activeEnemies.Add(newEnemy);
 
         if (isInitialWave)
