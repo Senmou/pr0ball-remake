@@ -61,7 +61,7 @@ public class GameController : MonoBehaviour {
             if (CanvasManager.instance.CurrentActiveCanvasType == CanvasType.NONE)
                 CanvasManager.instance.SwitchCanvas(CanvasType.PAUSE);
             else if (CanvasManager.instance.CurrentActiveCanvasType != CanvasType.GAMEOVER)
-                CanvasManager.instance.SwitchToLastCanvas();
+                CanvasManager.instance.GoOneCanvasBack();
         }
     }
 

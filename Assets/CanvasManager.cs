@@ -16,17 +16,19 @@ public class CanvasManager : MonoBehaviour {
 
     public static CanvasManager instance;
 
-    private List<CanvasController> canvasControllerList;
     private CanvasController lastActiveCanvas;
+    private List<CanvasController> canvasControllerList;
 
-    private CanvasType lastActiveCanvasType;
     private CanvasType currentActiveCanvasType;
     public CanvasType CurrentActiveCanvasType { get => currentActiveCanvasType; }
+
+    public Stack<CanvasType> canvasHistory;
 
     private void Awake() {
         if (instance == null)
             instance = this;
 
+        canvasHistory = new Stack<CanvasType>();
         canvasControllerList = GetComponentsInChildren<CanvasController>().ToList();
         canvasControllerList.ForEach(x => x.Hide());
     }
@@ -35,13 +37,18 @@ public class CanvasManager : MonoBehaviour {
         SwitchCanvas(CanvasType.NONE);
     }
 
-    public void SwitchToLastCanvas() {
-        SwitchCanvas(lastActiveCanvasType);
+    public void GoOneCanvasBack() {
+        if (canvasHistory.Count == 0) {
+            return;
+        } else {
+            canvasHistory.Pop();
+            SwitchCanvas(canvasHistory.Pop());
+        }
     }
 
     public void SwitchCanvas(CanvasType type) {
 
-        lastActiveCanvasType = currentActiveCanvasType;
+        canvasHistory.Push(type);
         currentActiveCanvasType = type;
 
         if (type == CanvasType.NONE) {
