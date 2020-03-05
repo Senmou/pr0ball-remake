@@ -53,16 +53,15 @@ public class GameController : MonoBehaviour {
     }
 
     private void Update() {
-        OnBackButtonPressed();
+
         elapsedTimeSinceRestart += Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-            CanvasManager.instance.SwitchCanvas(CanvasType.PAUSE);
-    }
-
-    private void OnBackButtonPressed() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            EventManager.TriggerEvent("BackButtonPressed");
+
+            if (CanvasManager.instance.CurrentActiveCanvasType == CanvasType.NONE)
+                CanvasManager.instance.SwitchCanvas(CanvasType.PAUSE);
+            else if (CanvasManager.instance.CurrentActiveCanvasType != CanvasType.GAMEOVER)
+                CanvasManager.instance.SwitchToLastCanvas();
         }
     }
 

@@ -19,6 +19,7 @@ public class CanvasManager : MonoBehaviour {
     private List<CanvasController> canvasControllerList;
     private CanvasController lastActiveCanvas;
 
+    private CanvasType lastActiveCanvasType;
     private CanvasType currentActiveCanvasType;
     public CanvasType CurrentActiveCanvasType { get => currentActiveCanvasType; }
 
@@ -34,8 +35,13 @@ public class CanvasManager : MonoBehaviour {
         SwitchCanvas(CanvasType.NONE);
     }
 
+    public void SwitchToLastCanvas() {
+        SwitchCanvas(lastActiveCanvasType);
+    }
+
     public void SwitchCanvas(CanvasType type) {
 
+        lastActiveCanvasType = currentActiveCanvasType;
         currentActiveCanvasType = type;
 
         if (type == CanvasType.NONE) {

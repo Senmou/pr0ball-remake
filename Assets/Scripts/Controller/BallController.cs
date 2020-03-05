@@ -130,4 +130,8 @@ public class BallController : MonoBehaviour {
             balls.Add(ball);
         }
     }
+
+    public void ResetData() {
+        SetMaxBallCount(1);
+    }
 }

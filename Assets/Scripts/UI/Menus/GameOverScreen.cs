@@ -20,9 +20,9 @@ public class GameOverScreen : CanvasController {
     }
 
     public override void Show() {
+        SaveHighscore();
         pauseBackground.disableInteractability = true;
         moveUI.FadeTo(new Vector2(0f, 0f), 0.5f);
-        UpdateUI();
     }
 
     public override void Hide() {
@@ -30,11 +30,10 @@ public class GameOverScreen : CanvasController {
         moveUI.FadeTo(new Vector2(0f, 40f), 0.5f);
     }
 
-    private void UpdateUI() {
-        highscoreUI.text = Score.instance.highscore.ToString();
+    private void SaveHighscore() {
         string timestamp = "Gewachsen seit " + DateTime.Now.ToString("dd. MMMM yyyy") + " (" + gameController.GetPlaytimeMinutes() + " Minuten)";
         playtimeUI.text = timestamp;
-
+        highscoreUI.text = Score.instance.highscore.ToString();
         PersistentData.instance.highscores.AddHighscore(Score.instance.highscore, timestamp);
         EventManager.TriggerEvent("HighscoreEntryAdded");
     }

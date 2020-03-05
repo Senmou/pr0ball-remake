@@ -4,12 +4,14 @@ public class RestartGame : MonoBehaviour {
 
     private BallMenu ballMenu;
     private SkillBar skillBar;
+    private BallController ballController;
     private SkillController skillController;
     private PlayStateController playStateController;
 
     private void Awake() {
         ballMenu = FindObjectOfType<BallMenu>();
         skillBar = FindObjectOfType<SkillBar>();
+        ballController = FindObjectOfType<BallController>();
         skillController = FindObjectOfType<SkillController>();
         playStateController = FindObjectOfType<PlayStateController>();
     }
@@ -24,5 +26,6 @@ public class RestartGame : MonoBehaviour {
         ballMenu.ResetData();
         Score.instance.ResetData();
         skillController.ResetData();
+        ballController.ResetData();
     }
 }

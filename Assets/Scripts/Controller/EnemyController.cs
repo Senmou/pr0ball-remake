@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour {
     private Canvas canvas;
     private Transform deadline;
     private Transform dottedLine;
+    private Transform itemSkillPointContainer;
 
     private void OnValidate() {
         enemyLDT.ValidateTable();
@@ -27,6 +28,7 @@ public class EnemyController : MonoBehaviour {
         activeEnemies = new List<BaseEnemy>();
         deadline = GameObject.Find("Deadline").transform;
         dottedLine = GameObject.Find("DottedLine").transform;
+        itemSkillPointContainer = GameObject.Find("ItemSkillPointContainer").transform;
         playStateController = FindObjectOfType<PlayStateController>();
 
         enemyLDT.ValidateTable();
@@ -144,6 +146,7 @@ public class EnemyController : MonoBehaviour {
 
     private void SpawnItem(Vector3 position, bool isInitialWave = false) {
         Item_Skillpoint item = Instantiate(itemAddSkillPoint, position, Quaternion.identity, canvas.transform).GetComponent<Item_Skillpoint>();
+        item.transform.SetParent(itemSkillPointContainer);
         activeItems.Add(item);
 
         if (isInitialWave)

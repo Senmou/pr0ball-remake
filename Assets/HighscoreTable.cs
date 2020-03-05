@@ -17,22 +17,26 @@ public class HighscoreTable : MonoBehaviour {
     }
 
     private void UpdateUI() {
-        float templateHeight = 5.2f;
 
         int highscoreCount = PersistentData.instance.highscores.entries.Count;
 
-        for (int i = 0; i < highscoreCount; i++) {
-            Transform entryTemplate = Instantiate(template, container);
-            RectTransform rect = entryTemplate.GetComponent<RectTransform>();
-            rect.anchoredPosition = new Vector2(0f, -templateHeight * i);
+        // Clear all entries
+        foreach (Transform item in container) {
+            if (item.gameObject.activeSelf)
+                Destroy(item.gameObject);
+        }
 
-            TextMeshProUGUI highscoreUI = entryTemplate.FindChild<TextMeshProUGUI>("Value");
-            TextMeshProUGUI timestampUI = entryTemplate.FindChild<TextMeshProUGUI>("Playtime");
+        // Recreate all entries
+        for (int i = 0; i < highscoreCount; i++) {
+            Transform newEntry = Instantiate(template, container);
+
+            TextMeshProUGUI highscoreUI = newEntry.FindChild<TextMeshProUGUI>("Value");
+            TextMeshProUGUI timestampUI = newEntry.FindChild<TextMeshProUGUI>("Playtime");
 
             timestampUI.text = PersistentData.instance.highscores.entries[i].timestamp;
             highscoreUI.text = PersistentData.instance.highscores.entries[i].highscore.ToString();
 
-            entryTemplate.gameObject.SetActive(true);
+            newEntry.gameObject.SetActive(true);
         }
     }
 }

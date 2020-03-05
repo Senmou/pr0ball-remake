@@ -67,7 +67,7 @@ public class Skill_Hammertime : Skill {
                     audioSource.PlayOneShot(hitAudioClips[randomHitAudioClip], 0.4f);
 
                     ParticleSystemRenderer psr = Instantiate(onHitParticleSystem, hitEnemy.transform.position, Quaternion.identity).GetComponent<ParticleSystemRenderer>();
-                    psr.material.color = hitEnemy.enemyColor;
+                    psr.material.color = hitEnemy.GetColor();
 
                     hitEnemy.TakeDamage(Damage);
                     hitEnemy.canTakeDamageFromSkill = false;

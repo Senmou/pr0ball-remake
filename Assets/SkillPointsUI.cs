@@ -1,13 +1,13 @@
-﻿using UnityEngine.UI;
-using UnityEngine;
+﻿using UnityEngine;
+using TMPro;
 
 public class SkillPointsUI : MonoBehaviour {
 
-    private Image[] images;
     private int oldSkillPointCount;
+    private TextMeshProUGUI skillPointCountUI;
 
     private void Awake() {
-        images = GetComponentsInChildren<Image>();
+        skillPointCountUI = transform.FindChild<TextMeshProUGUI>("Value");
     }
 
     private void Start() {
@@ -27,14 +27,6 @@ public class SkillPointsUI : MonoBehaviour {
     }
 
     private void UpdateUI() {
-        int skillPointCount = Score.instance.skillPoints;
-
-        for (int i = 0; i < skillPointCount; i++) {
-            images[i].color = new Color(0.8f, 0.8f, 0.8f, 1f);
-        }
-
-        for (int i = 2; i >= skillPointCount; i--) {
-            images[i].color = new Color(0.2f, 0.2f, 0.2f, 1f);
-        }
+        skillPointCountUI.text = Score.instance.skillPoints.ToString();
     }
 }

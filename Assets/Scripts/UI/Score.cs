@@ -10,7 +10,6 @@ public class Score : MonoBehaviour {
     public int score;
     public int highscore;
     public int skillPoints;
-    public int maxSkillPoints = 3;
 
     private PlayStateController playStateController;
 
@@ -28,6 +27,11 @@ public class Score : MonoBehaviour {
         highscore = PersistentData.instance.scoreData.highscore;
         skillPoints = PersistentData.instance.scoreData.skillPoints;
         UpdateUI();
+    }
+
+    private void Update() {
+        if (Input.GetKey(KeyCode.H))
+            DecScore(10);
     }
 
     private void OnSaveGame() {
@@ -70,7 +74,6 @@ public class Score : MonoBehaviour {
 
     public void IncSkillPoints(int amount) {
         skillPoints += amount;
-        skillPoints = (skillPoints > maxSkillPoints) ? maxSkillPoints : skillPoints;
     }
 
     public void UpdateUI() {
@@ -80,6 +83,7 @@ public class Score : MonoBehaviour {
     public void ResetData() {
         score = 0;
         highscore = 0;
+        skillPoints = 0;
         UpdateUI();
     }
 }

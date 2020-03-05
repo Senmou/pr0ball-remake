@@ -15,7 +15,6 @@ public class BaseEnemy : MonoBehaviour {
     [HideInInspector] public bool canTakeDamageFromSkill;
     [HideInInspector] public CurrentLevelData.EntityType entityType;
 
-
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private TextMeshProUGUI healthPointUI;
@@ -42,6 +41,8 @@ public class BaseEnemy : MonoBehaviour {
         UpdateUI();
         ApplyColor();
     }
+
+    public Color GetColor() => spriteRenderer.color;
 
     protected void OnToggleUniColor() {
         ApplyColor();
