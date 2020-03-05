@@ -7,7 +7,6 @@ public class Skill : MonoBehaviour {
     public EnemyHP enemyHPReference;
 
     public int id;
-    public int coolDown;
     public int remainingCoolDown;
     public new string name;
     public bool locked;
@@ -58,7 +57,7 @@ public class Skill : MonoBehaviour {
         EventManager.StartListening("SaveGame", OnSaveGame);
         EventManager.StartListening("WaveCompleted", OnWaveCompleted);
     }
-    
+
     protected virtual int CalcDamage(int level) => level * 10;
 
     protected void OnSaveGame() {
@@ -101,20 +100,12 @@ public class Skill : MonoBehaviour {
         if (skillMenu.isVisible)
             return;
 
-        if (remainingCoolDown == 0) {
-            Action();
-            ResetCoolDown();
-            barSlot.UpdateSlot();
-        } else
-            Debug.Log("skill is on CD");
+        Action();
+        barSlot.UpdateSlot();
     }
 
     public void Unlock() {
         locked = false;
-    }
-
-    public void ResetCoolDown() {
-        remainingCoolDown = coolDown;
     }
 
     protected void SaveSkillData(int id, bool locked, int remainingCoolDown) {
