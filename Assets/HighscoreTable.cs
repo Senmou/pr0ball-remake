@@ -15,7 +15,7 @@ public class HighscoreTable : MonoBehaviour {
 
         UpdateUI();
     }
-
+    
     private void UpdateUI() {
 
         int highscoreCount = PersistentData.instance.highscores.entries.Count;
@@ -37,6 +37,9 @@ public class HighscoreTable : MonoBehaviour {
             highscoreUI.text = PersistentData.instance.highscores.entries[i].highscore.ToString();
 
             newEntry.gameObject.SetActive(true);
+
+            DotColorController dotColorController = newEntry.FindChild<DotColorController>("Dot").GetComponent<DotColorController>();
+            dotColorController.UpdateDotColor(PersistentData.instance.highscores.entries[i].highscore);
         }
     }
 }

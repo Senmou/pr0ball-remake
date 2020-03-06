@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class MusicController : MonoBehaviour {
 
@@ -21,5 +22,16 @@ public class MusicController : MonoBehaviour {
     public void RestoreLastMusicClip() {
         musicAudioSource.clip = lastAudioClip;
         musicAudioSource.Play();
+    }
+
+    public void ChangeVolumeForSeconds(float volume, float seconds) {
+        StartCoroutine(ChangeVolume(volume, seconds));
+    }
+
+    private IEnumerator ChangeVolume(float volume, float seconds) {
+        float oldVolume = musicAudioSource.volume;
+        musicAudioSource.volume = volume;
+        yield return new WaitForSecondsRealtime(seconds);
+        musicAudioSource.volume = oldVolume;
     }
 }

@@ -8,6 +8,8 @@ public class Benitrator : MonoBehaviour {
 
     [SerializeField] private AudioSource click;
     [SerializeField] private AudioSource coins;
+    [SerializeField] private AudioSource winBig;
+    [SerializeField] private AudioSource winSmall;
     [SerializeField] private AudioSource wheelStop;
 
     private Wheel[] wheels;
@@ -195,10 +197,19 @@ public class Benitrator : MonoBehaviour {
             winUI.text = rewardScore.ToString() + " Benis";
         }
 
-        if (skillPointSymbolCount > 1 || damageSymbolCount > 1 || critChanceSymbolCount > 1 ||
-            critDamageSymbolCount > 1 || ballSymbolCount > 1 || scoreSymbolCount > 1)
+        // Three identical symbols
+        if (skillPointSymbolCount > 2 || damageSymbolCount > 2 || critChanceSymbolCount > 2 ||
+            critDamageSymbolCount > 2 || ballSymbolCount > 2 || scoreSymbolCount > 2) {
+            MusicController.instance.ChangeVolumeForSeconds(0.2f, 1.5f);
+            winBig.Play();
             StartCoroutine(ShowResultText("GEWONNEN"));
-        else
+            // Two identical symbols
+        } else if (skillPointSymbolCount > 1 || damageSymbolCount > 1 || critChanceSymbolCount > 1 ||
+           critDamageSymbolCount > 1 || ballSymbolCount > 1 || scoreSymbolCount > 1) {
+            MusicController.instance.ChangeVolumeForSeconds(0.2f, 1.5f);
+            winSmall.Play();
+            StartCoroutine(ShowResultText("GEWONNEN"));
+        } else
             StartCoroutine(ShowResultText("VERLOREN"));
 
         ballMenu.UpdateUI();
@@ -315,7 +326,6 @@ public class Benitrator : MonoBehaviour {
         int currentScore = Score.instance.score;
         int rewardScore = (int)((currentScore + 250) * rewardScoreMultiplier);
 
-        Debug.Log("You won: " + rewardScore + " Benis");
         return rewardScore;
     }
 
