@@ -106,6 +106,12 @@ public class Benitrator : MonoBehaviour {
 
     public void IncBet() {
 
+        if (IsRotating) {
+            ballMenu.PlayErrorSound();
+            ErrorMessage.instance.Show(1f, "Jetzt nicht!");
+            return;
+        }
+
         if (bet == 3) {
             ballMenu.PlayErrorSound();
             ErrorMessage.instance.Show(1f, "Three, take it or leave it!");
@@ -123,6 +129,12 @@ public class Benitrator : MonoBehaviour {
     }
 
     public void DecBet() {
+
+        if (IsRotating) {
+            ballMenu.PlayErrorSound();
+            ErrorMessage.instance.Show(1f, "Jetzt nicht!");
+            return;
+        }
 
         if (bet > 0) {
             bet--;

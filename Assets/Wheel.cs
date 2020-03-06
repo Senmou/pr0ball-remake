@@ -66,9 +66,6 @@ public class Wheel : MonoBehaviour {
         int posY = 0;
         for (int i = 0; i < stepCountTotal; i++) {
 
-            if (i >= stepCountTotal - (slotHeight / deltaY))
-                yield return new WaitForSecondsRealtime(0.005f);
-
             if (i % (slotHeight / deltaY) == 0)
                 benitrator.PlayClickSfx();
 
@@ -84,12 +81,12 @@ public class Wheel : MonoBehaviour {
 
         /**
         * posY
+        * -75 Benis
         * -35 Damage
         * 5 Crit
         * 45 CritDamage
         * 85 Balls
         * 125 SkillPoint
-        * -75 Benis
         * 
         **/
 
