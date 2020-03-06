@@ -30,7 +30,7 @@ public class Skill_Hammertime : Skill {
         description = "pr0-chan schwingt den Bannhammer. Trifft alles in einer geraden Linie.";
     }
 
-    protected override int CalcDamage(int level) => enemyHPReference.MaxHP;
+    protected override int CalcDamage() => enemyHPReference.MaxHP;
 
     protected override IEnumerator ActionCoroutine() {
 
@@ -69,7 +69,7 @@ public class Skill_Hammertime : Skill {
                     ParticleSystemRenderer psr = Instantiate(onHitParticleSystem, hitEnemy.transform.position, Quaternion.identity).GetComponent<ParticleSystemRenderer>();
                     psr.material.color = hitEnemy.GetColor();
 
-                    hitEnemy.TakeDamage(Damage);
+                    hitEnemy.TakeDamage(TotalDamage);
                     hitEnemy.canTakeDamageFromSkill = false;
                     hitEnemies.Add(hitEnemy);
 

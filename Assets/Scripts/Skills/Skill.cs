@@ -9,8 +9,8 @@ public class Skill : MonoBehaviour {
     public int id;
     public int cost;
     public bool locked;
-    public int usedCounter;
     public int unlockLevel;
+    public int usedCounter;
     public new string name;
     public string description;
 
@@ -19,7 +19,9 @@ public class Skill : MonoBehaviour {
     public Sprite pendingIcon;
     public SkillBarSlot barSlot;
     public SkillMenuSlot menuSlot;
-    public int Damage { get => CalcDamage(LevelData.Level); }
+    public int Damage { get => CalcDamage(); }
+    public int BonusDamage { get => CalcBonusDamage(); }
+    public int TotalDamage { get => Damage + BonusDamage; }
 
     protected bool pending;
     protected BallController ballController;
@@ -54,7 +56,8 @@ public class Skill : MonoBehaviour {
         EventManager.StartListening("SaveGame", OnSaveGame);
     }
 
-    protected virtual int CalcDamage(int level) => level * 10;
+    protected virtual int CalcDamage() => LevelData.Level * 10;
+    protected int CalcBonusDamage() => (int)(Damage * usedCounter * 0.05f);
 
     protected void OnSaveGame() {
         SaveSkillData(id, locked, usedCounter);

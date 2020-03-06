@@ -8,7 +8,7 @@ public class Skill_Frogs : Skill {
 
     private const string frogPoolName = "Frog_pool";
 
-    protected override int CalcDamage(int level) => enemyHPReference.MaxHP + (enemyHPReference.MaxHP % 10);
+    protected override int CalcDamage() => enemyHPReference.MaxHP + (enemyHPReference.MaxHP % 10);
 
     private new void Awake() {
         base.Awake();
@@ -25,7 +25,7 @@ public class Skill_Frogs : Skill {
             float posY = 23f;
             float posX = Random.Range(-9.36f, 9.36f);
             Frog frog = EasyObjectPool.instance.GetObjectFromPool(frogPoolName, new Vector3(posX, posY), Quaternion.identity).GetComponent<Frog>();
-            frog.SetDamage(Damage);
+            frog.SetDamage(TotalDamage);
             CameraEffect.instance.Shake(0.1f, 0.15f);
             yield return new WaitForSeconds(0.3f);
         }

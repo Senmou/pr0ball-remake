@@ -22,7 +22,7 @@ public class Skill_Triggered : Skill {
         description = "Listen here, you little shit";
     }
 
-    protected override int CalcDamage(int level) => (int)(enemyHPReference.MaxHP / 20) + 5;
+    protected override int CalcDamage() => (int)(enemyHPReference.MaxHP / 20) + 5;
 
     protected override IEnumerator ActionCoroutine() {
 
@@ -44,7 +44,7 @@ public class Skill_Triggered : Skill {
 
         for (int i = 0; i < 1; i++) {
             BigBall bigBall = Instantiate(bigBallPrefab);
-            bigBall.SetDamage(Damage);
+            bigBall.SetDamage(TotalDamage);
             bigBalls.Add(bigBall);
         }
 

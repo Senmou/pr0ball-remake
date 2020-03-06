@@ -13,9 +13,12 @@ public class SkillMenuSlot : MonoBehaviour {
     private TextMeshProUGUI costUI;
     private TextMeshProUGUI damageUI;
     private TextMeshProUGUI descriptionUI;
+    private TextMeshProUGUI usedCounterUI;
+    private TextMeshProUGUI bonusDamageUI;
 
     private Transform infoCost;
     private Transform infoDamage;
+    private Transform infoUsedCounter;
 
     private AudioSource purchaseSfx;
     private AudioSource errorSfx;
@@ -27,9 +30,13 @@ public class SkillMenuSlot : MonoBehaviour {
 
         infoCost = transform.FindChild<Transform>("InfoPopups/Cost");
         infoDamage = transform.FindChild<Transform>("InfoPopups/Damage");
+        infoUsedCounter = transform.FindChild<Transform>("InfoPopups/UsedCounter");
+
         costUI = transform.FindChild<TextMeshProUGUI>("SkillData/Cost/Value");
         damageUI = transform.FindChild<TextMeshProUGUI>("SkillData/Damage/Value");
         descriptionUI = transform.FindChild<TextMeshProUGUI>("Description/Value");
+        usedCounterUI = transform.FindChild<TextMeshProUGUI>("SkillData/UsedCounter/Value");
+        bonusDamageUI = transform.FindChild<TextMeshProUGUI>("SkillData/Damage/BonusDamageValue");
 
         purchaseSfx = GameObject.Find("SfxUnlockSkill").GetComponent<AudioSource>();
         errorSfx = GameObject.Find("SfxError").GetComponent<AudioSource>();
@@ -45,13 +52,20 @@ public class SkillMenuSlot : MonoBehaviour {
             if (InputHelper.instance.ClickedOnTag("InfoDamage")) {
                 infoCost.gameObject.SetActive(false);
                 infoDamage.gameObject.SetActive(true);
+                infoUsedCounter.gameObject.SetActive(false);
             } else if (InputHelper.instance.ClickedOnTag("InfoCost")) {
                 infoCost.gameObject.SetActive(true);
                 infoDamage.gameObject.SetActive(false);
+                infoUsedCounter.gameObject.SetActive(false);
+            } else if (InputHelper.instance.ClickedOnTag("InfoUsedCounter")) {
+                infoCost.gameObject.SetActive(false);
+                infoDamage.gameObject.SetActive(false);
+                infoUsedCounter.gameObject.SetActive(true);
             }
         } else {
             infoCost.gameObject.SetActive(false);
             infoDamage.gameObject.SetActive(false);
+            infoUsedCounter.gameObject.SetActive(false);
         }
     }
 
@@ -69,7 +83,9 @@ public class SkillMenuSlot : MonoBehaviour {
     public void UpdateSlot() {
         image.sprite = skill.Icon;
         costUI.text = skill.cost.ToString();
-        damageUI.text = skill.Damage.ToString();
+        damageUI.text = skill.TotalDamage.ToString();
+        usedCounterUI.text = skill.usedCounter.ToString() + "x";
+        bonusDamageUI.text = "(+" + skill.BonusDamage.ToString() + ")";
         unlockButton?.SetText(skill.unlockLevel);
         unlockButton?.SetColor(skill.unlockLevel);
         descriptionUI.text = (skill.locked) ? "" : skill.description;
