@@ -96,7 +96,7 @@ public class Ball : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D other) {
         body.gravityScale = 5f;
-
+        Statistics.balls.collisions++;
 #if UNITY_ANDROID && !UNITY_EDITOR
         sound.Bounce();
 #else

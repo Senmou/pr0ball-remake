@@ -40,8 +40,10 @@ public class BallStats {
         float dmg = damage;
 
         float r = UnityEngine.Random.Range(0f, 100f);
-        if (r < critChance)
+        if (r < critChance) {
             dmg *= critDamage;
+            Statistics.balls.crits++;
+        }
 
         return (int)dmg;
     }

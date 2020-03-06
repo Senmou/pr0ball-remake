@@ -122,5 +122,6 @@ public class BaseEnemy : MonoBehaviour {
             return;
 
         TakeDamage(ball);
+        Statistics.balls.damageDealt += ball.Damage();
     }
 }
