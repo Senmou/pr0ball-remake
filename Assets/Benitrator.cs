@@ -139,11 +139,11 @@ public class Benitrator : MonoBehaviour {
     private void EvaluateResult() {
 
         // Skill points
-        int rewardedSkillPointCount = -1;
-        totalResults.TryGetValue(SlotType.SkillPoint, out rewardedSkillPointCount);
-        if (rewardedSkillPointCount > 1) {
-            Score.instance.IncSkillPoints(rewardedSkillPointCount);
-            winUI.text = rewardedSkillPointCount.ToString() + " Blussis";
+        int skillPointSymbolCount = -1;
+        totalResults.TryGetValue(SlotType.SkillPoint, out skillPointSymbolCount);
+        if (skillPointSymbolCount > 1) {
+            Score.instance.IncSkillPoints(GetRewardSkillPoints(skillPointSymbolCount));
+            winUI.text = skillPointSymbolCount.ToString() + " Blussis";
         }
 
         // Damage
@@ -195,7 +195,7 @@ public class Benitrator : MonoBehaviour {
             winUI.text = rewardScore.ToString() + " Benis";
         }
 
-        if (rewardedSkillPointCount > 1 || damageSymbolCount > 1 || critChanceSymbolCount > 1 ||
+        if (skillPointSymbolCount > 1 || damageSymbolCount > 1 || critChanceSymbolCount > 1 ||
             critDamageSymbolCount > 1 || ballSymbolCount > 1 || scoreSymbolCount > 1)
             StartCoroutine(ShowResultText("GEWONNEN"));
         else
@@ -211,6 +211,23 @@ public class Benitrator : MonoBehaviour {
         resultUI.text = text;
         yield return new WaitForSecondsRealtime(3f);
         resultUI.gameObject.SetActive(false);
+    }
+
+    private int GetRewardSkillPoints(int symbolCount) {
+        int rewardSkillPoints = 0;
+
+        if (bet == 1)
+            rewardSkillPoints = 2;
+        else if (bet == 2)
+            rewardSkillPoints = 5;
+        else if (bet == 3)
+            rewardSkillPoints = 10;
+
+        if (symbolCount == 3) {
+            rewardSkillPoints += 2 * bet;
+        }
+
+        return rewardSkillPoints;
     }
 
     private int GetRewardDamage(int symbolCount) {
