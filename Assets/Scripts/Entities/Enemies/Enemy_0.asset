@@ -16,24 +16,24 @@ MonoBehaviour:
   maxBonusHPPercentage: 0.25
   stepValueList:
   - step: 1
-    value: 2
+    value: 1
   - step: 2
     value: 4
-  - step: 4
+  - step: 3
     value: 5
-  - step: 8
+  - step: 5
     value: 10
-  - step: 16
+  - step: 10
     value: 50
-  - step: 32
+  - step: 15
     value: 200
-  - step: 64
+  - step: 18
     value: 500
-  - step: 80
+  - step: 22
     value: 2500
-  - step: 90
+  - step: 25
     value: 5000
-  - step: 100
+  - step: 30
     value: 10000
   maxHP: 253
   testLevel: 21

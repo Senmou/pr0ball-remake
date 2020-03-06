@@ -344,7 +344,7 @@ MonoBehaviour:
   id: 2
   cost: 0
   locked: 0
-  unlockLevel: 20
+  unlockLevel: 10
   usedCounter: 0
   name: A1
   description: 
@@ -24184,7 +24184,7 @@ MonoBehaviour:
   id: 1
   cost: 0
   locked: 0
-  unlockLevel: 10
+  unlockLevel: 5
   usedCounter: 0
   name: D1
   description: 

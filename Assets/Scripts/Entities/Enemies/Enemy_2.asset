@@ -19,21 +19,21 @@ MonoBehaviour:
     value: 5
   - step: 2
     value: 10
-  - step: 4
+  - step: 3
     value: 20
-  - step: 8
+  - step: 5
     value: 25
-  - step: 16
+  - step: 10
     value: 100
-  - step: 32
+  - step: 15
     value: 600
-  - step: 64
+  - step: 18
     value: 1500
-  - step: 80
+  - step: 22
     value: 6000
-  - step: 90
+  - step: 25
     value: 12000
-  - step: 100
+  - step: 30
     value: 20000
   maxHP: 5
   testLevel: 1
