@@ -106,6 +106,7 @@ public class BaseEnemy : MonoBehaviour {
     }
 
     protected virtual void OnDeath() {
+        Statistics.enemies.killed++;
         EventManager.TriggerEvent("EnemyDied");
     }
 

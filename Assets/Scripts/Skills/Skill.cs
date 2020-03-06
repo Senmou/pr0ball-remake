@@ -79,6 +79,7 @@ public class Skill : MonoBehaviour {
             pending = true;
             sfxSuccess.Play();
             usedCounter++;
+            Statistics.skills.skillPointsSpend += cost;
             StartCoroutine(ActionCoroutine());
         }
     }

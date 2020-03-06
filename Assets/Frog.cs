@@ -39,8 +39,10 @@ public class Frog : MonoBehaviour {
 
             foreach (var enemy in activeEnemiesCopy) {
                 float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
-                if (distanceToEnemy < detonationRadius)
+                if (distanceToEnemy < detonationRadius) {
                     enemy.TakeDamage(explosionDamage);
+                    Statistics.skills.skill_2.damageDealt += explosionDamage;
+                }
             }
 
             Instantiate(particleSystem, transform.position, Quaternion.identity);

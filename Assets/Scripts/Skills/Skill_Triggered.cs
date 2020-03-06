@@ -26,6 +26,8 @@ public class Skill_Triggered : Skill {
 
     protected override IEnumerator ActionCoroutine() {
 
+        Statistics.skills.skill_3.used++;
+
         List<BigBall> bigBalls = new List<BigBall>();
 
         pending = true;

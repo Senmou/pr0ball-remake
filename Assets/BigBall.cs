@@ -31,7 +31,6 @@ public class BigBall : MonoBehaviour {
 
     private void Start() {
         transform.position = new Vector2(0f, 16f);
-        //body.AddForce(new Vector2(Random.value, Random.value) * 300f, ForceMode2D.Impulse);
     }
 
     private void FixedUpdate() {
@@ -71,6 +70,7 @@ public class BigBall : MonoBehaviour {
             //audioSource.PlayOneShot(audioSource.clip);
             BaseEnemy enemy = other.gameObject.GetComponent<BaseEnemy>();
             enemy.TakeDamage(damage);
+            Statistics.skills.skill_3.damageDealt += damage;
             EasyObjectPool.instance.GetObjectFromPool(particleSystemPoolName, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
         }
     }

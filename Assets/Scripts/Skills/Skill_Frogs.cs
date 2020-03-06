@@ -21,6 +21,8 @@ public class Skill_Frogs : Skill {
 
     protected override IEnumerator ActionCoroutine() {
 
+        Statistics.skills.skill_2.used++;
+
         for (int i = 0; i < frogCount; i++) {
             float posY = 23f;
             float posX = Random.Range(-9.36f, 9.36f);

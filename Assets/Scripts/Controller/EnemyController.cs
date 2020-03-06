@@ -176,6 +176,8 @@ public class EnemyController : MonoBehaviour {
         newEnemy.SetData(hp);
         activeEnemies.Add(newEnemy);
 
+        Statistics.enemies.spawned++;
+
         if (isInitialWave)
             MoveToStartPosition(newEnemy.transform);
     }
