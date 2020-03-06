@@ -10,9 +10,11 @@ public class SkillMenuSlot : MonoBehaviour {
     private SkillMenu skillMenu;
     private SkillMenuUnlockButton unlockButton;
 
+    private TextMeshProUGUI costUI;
     private TextMeshProUGUI damageUI;
     private TextMeshProUGUI descriptionUI;
 
+    private Transform infoCost;
     private Transform infoDamage;
 
     private AudioSource purchaseSfx;
@@ -23,7 +25,9 @@ public class SkillMenuSlot : MonoBehaviour {
         image = transform.FindChild<Image>("Icon");
         unlockButton = GetComponentInChildren<SkillMenuUnlockButton>();
 
+        infoCost = transform.FindChild<Transform>("InfoPopups/Cost");
         infoDamage = transform.FindChild<Transform>("InfoPopups/Damage");
+        costUI = transform.FindChild<TextMeshProUGUI>("SkillData/Cost/Value");
         damageUI = transform.FindChild<TextMeshProUGUI>("SkillData/Damage/Value");
         descriptionUI = transform.FindChild<TextMeshProUGUI>("Description/Value");
 
@@ -39,9 +43,14 @@ public class SkillMenuSlot : MonoBehaviour {
 
         if (Input.GetMouseButton(0)) {
             if (InputHelper.instance.ClickedOnTag("InfoDamage")) {
+                infoCost.gameObject.SetActive(false);
                 infoDamage.gameObject.SetActive(true);
+            } else if (InputHelper.instance.ClickedOnTag("InfoCost")) {
+                infoCost.gameObject.SetActive(true);
+                infoDamage.gameObject.SetActive(false);
             }
         } else {
+            infoCost.gameObject.SetActive(false);
             infoDamage.gameObject.SetActive(false);
         }
     }
@@ -59,9 +68,10 @@ public class SkillMenuSlot : MonoBehaviour {
 
     public void UpdateSlot() {
         image.sprite = skill.Icon;
+        costUI.text = skill.cost.ToString();
+        damageUI.text = skill.Damage.ToString();
         unlockButton?.SetText(skill.unlockLevel);
         unlockButton?.SetColor(skill.unlockLevel);
-        damageUI.text = skill.Damage.ToString();
         descriptionUI.text = (skill.locked) ? "" : skill.description;
     }
 }

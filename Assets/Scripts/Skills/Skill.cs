@@ -7,23 +7,21 @@ public class Skill : MonoBehaviour {
     public EnemyHP enemyHPReference;
 
     public int id;
-    public int remainingCoolDown;
-    public new string name;
+    public int cost;
     public bool locked;
+    public int usedCounter;
     public int unlockLevel;
+    public new string name;
     public string description;
-    public Sprite pendingIcon;
-
-    protected int cost;
-    protected bool pending;
-
-    public int Damage { get => CalcDamage(LevelData.Level); }
 
     public Sprite icon;
     public Sprite iconLocked;
+    public Sprite pendingIcon;
     public SkillBarSlot barSlot;
     public SkillMenuSlot menuSlot;
+    public int Damage { get => CalcDamage(LevelData.Level); }
 
+    protected bool pending;
     protected BallController ballController;
 
     private SkillMenu skillMenu;
@@ -49,26 +47,17 @@ public class Skill : MonoBehaviour {
 
         SkillData.Skill skillData = PersistentData.instance.skillData.GetSkillData(id);
         locked = skillData.locked;
-        remainingCoolDown = skillData.remainingCoolDown;
 
         sfxError = GameObject.Find("SfxError").GetComponent<AudioSource>();
         sfxSuccess = GameObject.Find("SfxSpawn").GetComponent<AudioSource>();
 
         EventManager.StartListening("SaveGame", OnSaveGame);
-        EventManager.StartListening("WaveCompleted", OnWaveCompleted);
     }
 
     protected virtual int CalcDamage(int level) => level * 10;
 
     protected void OnSaveGame() {
-        SaveSkillData(id, locked, remainingCoolDown);
-    }
-
-    public void OnWaveCompleted() {
-        if (remainingCoolDown > 0 && !pending) {
-            remainingCoolDown--;
-            barSlot.UpdateSlot();
-        }
+        SaveSkillData(id, locked, usedCounter);
     }
 
     protected void Action() {
@@ -83,9 +72,10 @@ public class Skill : MonoBehaviour {
             ErrorMessage.instance.Show(1f, "Skill im vollen Gange!");
         }
 
-        if (!pending && Score.instance.PaySkillPoints(1)) {
+        if (!pending && Score.instance.PaySkillPoints(cost)) {
             pending = true;
             sfxSuccess.Play();
+            usedCounter++;
             StartCoroutine(ActionCoroutine());
         }
     }
@@ -108,12 +98,12 @@ public class Skill : MonoBehaviour {
         locked = false;
     }
 
-    protected void SaveSkillData(int id, bool locked, int remainingCoolDown) {
-        PersistentData.instance.skillData.SetSkillData(id, locked, remainingCoolDown);
+    protected void SaveSkillData(int id, bool locked, int usedCounter) {
+        PersistentData.instance.skillData.SetSkillData(id, locked, usedCounter);
     }
 
     public void ResetData() {
-        remainingCoolDown = 0;
         locked = true;
+        usedCounter = 0;
     }
 }

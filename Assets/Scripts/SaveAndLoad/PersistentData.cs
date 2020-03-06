@@ -120,21 +120,20 @@ public class SkillData {
     [Serializable]
     public struct Skill {
         public bool locked;
-        public int remainingCoolDown;
+        public int usedCounter;
     }
 
     private Skill[] skills;
     public int[] equippedSkillIDs;
 
-    public void SetSkillData(int id, bool locked, int remainingCoolDown) {
+    public void SetSkillData(int id, bool locked, int usedCounter) {
         skills[id].locked = locked;
-        skills[id].remainingCoolDown = remainingCoolDown;
+        skills[id].usedCounter = usedCounter;
     }
 
     public Skill GetSkillData(int id) {
         Skill skill = new Skill();
         skill.locked = PersistentData.instance.skillData.skills[id].locked;
-        skill.remainingCoolDown = PersistentData.instance.skillData.skills[id].remainingCoolDown;
         return skill;
     }
 
@@ -147,6 +146,7 @@ public class SkillData {
         int skillCount = 3;
         for (int i = 0; i < skillCount; i++) {
             skills[i].locked = true;
+            skills[i].usedCounter = 0;
         }
     }
 }
