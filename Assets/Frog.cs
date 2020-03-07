@@ -41,7 +41,7 @@ public class Frog : MonoBehaviour {
                 float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
                 if (distanceToEnemy < detonationRadius) {
                     enemy.TakeDamage(explosionDamage);
-                    Statistics.skills.skill_2.damageDealt += explosionDamage;
+                    Statistics.Instance.skills.skill_2.damageDealt += explosionDamage;
                 }
             }
 

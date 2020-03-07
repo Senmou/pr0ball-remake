@@ -97,8 +97,8 @@ public class Benitrator : MonoBehaviour {
             ballMenu.PlaySuccessSound();
             isNewRoundStarted = true;
             winUI.text = "";
-            Statistics.benitrator.plays++;
-            Statistics.benitrator.totalBets += bet;
+            Statistics.Instance.benitrator.plays++;
+            Statistics.Instance.benitrator.totalBets += bet;
             StartCoroutine(RotateWheels());
         } else {
             ballMenu.PlayErrorSound();
@@ -216,17 +216,17 @@ public class Benitrator : MonoBehaviour {
             critDamageSymbolCount > 2 || ballSymbolCount > 2 || scoreSymbolCount > 2) {
             MusicController.instance.ChangeVolumeForSeconds(0.2f, 1.5f);
             winBig.Play();
-            Statistics.benitrator.wins++;
+            Statistics.Instance.benitrator.wins++;
             StartCoroutine(ShowResultText("GEWONNEN"));
             // Two identical symbols
         } else if (skillPointSymbolCount > 1 || damageSymbolCount > 1 || critChanceSymbolCount > 1 ||
            critDamageSymbolCount > 1 || ballSymbolCount > 1 || scoreSymbolCount > 1) {
             MusicController.instance.ChangeVolumeForSeconds(0.2f, 1.5f);
             winSmall.Play();
-            Statistics.benitrator.wins++;
+            Statistics.Instance.benitrator.wins++;
             StartCoroutine(ShowResultText("GEWONNEN"));
         } else {
-            Statistics.benitrator.loses++;
+            Statistics.Instance.benitrator.loses++;
             StartCoroutine(ShowResultText("VERLOREN"));
         }
 

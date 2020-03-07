@@ -70,7 +70,7 @@ public class BigBall : MonoBehaviour {
             //audioSource.PlayOneShot(audioSource.clip);
             BaseEnemy enemy = other.gameObject.GetComponent<BaseEnemy>();
             enemy.TakeDamage(damage);
-            Statistics.skills.skill_3.damageDealt += damage;
+            Statistics.Instance.skills.skill_3.damageDealt += damage;
             EasyObjectPool.instance.GetObjectFromPool(particleSystemPoolName, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
         }
     }

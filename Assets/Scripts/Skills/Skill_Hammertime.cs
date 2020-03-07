@@ -34,7 +34,7 @@ public class Skill_Hammertime : Skill {
 
     protected override IEnumerator ActionCoroutine() {
 
-        Statistics.skills.skill_1.used++;
+        Statistics.Instance.skills.skill_1.used++;
 
         float xPos = Random.Range(-8f, 7.4f);
         hammer.transform.position = new Vector3(xPos, 26f);
@@ -76,7 +76,7 @@ public class Skill_Hammertime : Skill {
                     hitEnemies.Add(hitEnemy);
 
                     CameraEffect.instance.Shake(0.05f, 0.5f);
-                    Statistics.skills.skill_1.damageDealt += TotalDamage;
+                    Statistics.Instance.skills.skill_1.damageDealt += TotalDamage;
                 }
             }
 

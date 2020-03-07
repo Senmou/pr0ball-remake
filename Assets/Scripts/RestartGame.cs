@@ -27,5 +27,6 @@ public class RestartGame : MonoBehaviour {
         Score.instance.ResetData();
         skillController.ResetData();
         ballController.ResetData();
+        Statistics.Instance.ResetData();
     }
 }

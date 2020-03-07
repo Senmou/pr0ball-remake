@@ -10,6 +10,7 @@ public class SaveData {
     public SkillData skillData;
     public CurrentLevelData currentLevelData;
     public Highscores highscores;
+    public Statistics statistics;
 
     public bool uniColor;
     public bool isGameOver;
@@ -23,6 +24,7 @@ public class SaveData {
         skillData = PersistentData.instance.skillData;
         currentLevelData = PersistentData.instance.currentLevelData;
         highscores = PersistentData.instance.highscores;
+        statistics = PersistentData.instance.statistics;
 
         uniColor = PersistentData.instance.uniColor;
         isGameOver = PersistentData.instance.isGameOver;

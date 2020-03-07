@@ -1,23 +1,36 @@
-﻿public static class Statistics {
+﻿using System;
 
-    public static GameStatistics game;
-    public static BallStatistics balls;
-    public static SkillStatistics skills;
-    public static EnemyStatistics enemies;
-    public static BenitratorStatistics benitrator;
+[Serializable]
+public class Statistics {
 
-    public static void OnLoadGame() {
-
+    private static Statistics instance;
+    public static Statistics Instance {
+        get {
+            if (instance == null)
+                instance = new Statistics();
+            return instance;
+        }
     }
 
-    public static void OnSaveGame() {
+    public GameStatistics game;
+    public BallStatistics balls;
+    public SkillStatistics skills;
+    public EnemyStatistics enemies;
+    public BenitratorStatistics benitrator;
 
+    public void OnLoadGame() {
+        instance = PersistentData.instance.statistics;
     }
 
-    public static void ResetData() {
-
+    public void OnSaveGame() {
+        PersistentData.instance.statistics = Instance;
     }
 
+    public void ResetData() {
+        instance = new Statistics();
+    }
+
+    [Serializable]
     public struct BallStatistics {
         public int fired;
         public int crits;
@@ -25,11 +38,13 @@
         public int damageDealt;
     }
 
+    [Serializable]
     public struct EnemyStatistics {
         public int killed;
         public int spawned;
     }
 
+    [Serializable]
     public struct SkillStatistics {
 
         public Skill skill_1;
@@ -38,12 +53,14 @@
 
         public int skillPointsSpend;
 
+        [Serializable]
         public struct Skill {
             public int used;
             public int damageDealt;
         }
     }
 
+    [Serializable]
     public struct BenitratorStatistics {
         public int plays;
         public int wins;
@@ -52,7 +69,8 @@
         public float AverageBet { get => (float)totalBets / plays; }
     }
 
+    [Serializable]
     public struct GameStatistics {
-        public int TotalSkillPointsSpend { get => skills.skillPointsSpend + benitrator.totalBets; }
+        public int TotalSkillPointsSpend { get => Instance.skills.skillPointsSpend + Instance.benitrator.totalBets; }
     }
 }

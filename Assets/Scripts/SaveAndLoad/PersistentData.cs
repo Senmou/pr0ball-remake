@@ -14,6 +14,7 @@ public class PersistentData : MonoBehaviour {
     public SkillData skillData;
     public CurrentLevelData currentLevelData;
     public Highscores highscores;
+    public Statistics statistics;
 
     public bool uniColor;
     public bool isGameOver;
@@ -33,6 +34,7 @@ public class PersistentData : MonoBehaviour {
         skillData = new SkillData();
         currentLevelData = new CurrentLevelData();
         highscores = new Highscores();
+        statistics = new Statistics();
 
         Serialization.Load();
     }
@@ -45,6 +47,7 @@ public class PersistentData : MonoBehaviour {
         skillData = saveData.skillData ?? new SkillData();
         currentLevelData = saveData.currentLevelData ?? new CurrentLevelData();
         highscores = saveData.highscores ?? new Highscores();
+        statistics = saveData.statistics;
         elapsedTimeSinceRestart = saveData.elapsedTimeSinceRestart;
         isGameOver = saveData.isGameOver;
         uniColor = saveData.uniColor;

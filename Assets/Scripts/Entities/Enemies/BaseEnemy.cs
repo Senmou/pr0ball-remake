@@ -106,7 +106,7 @@ public class BaseEnemy : MonoBehaviour {
     }
 
     protected virtual void OnDeath() {
-        Statistics.enemies.killed++;
+        Statistics.Instance.enemies.killed++;
         EventManager.TriggerEvent("EnemyDied");
     }
 
@@ -123,6 +123,6 @@ public class BaseEnemy : MonoBehaviour {
             return;
 
         TakeDamage(ball);
-        Statistics.balls.damageDealt += ball.Damage();
+        Statistics.Instance.balls.damageDealt += ball.Damage();
     }
 }

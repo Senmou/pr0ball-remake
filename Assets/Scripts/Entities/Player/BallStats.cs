@@ -42,7 +42,7 @@ public class BallStats {
         float r = UnityEngine.Random.Range(0f, 100f);
         if (r < critChance) {
             dmg *= critDamage;
-            Statistics.balls.crits++;
+            Statistics.Instance.balls.crits++;
         }
 
         return (int)dmg;

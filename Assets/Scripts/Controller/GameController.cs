@@ -39,6 +39,7 @@ public class GameController : MonoBehaviour {
         PersistentData.instance.currentLevelData.wave = LevelData.Wave;
         PersistentData.instance.currentLevelData.level = LevelData.Level;
         PersistentData.instance.elapsedTimeSinceRestart = elapsedTimeSinceRestart;
+        Statistics.Instance.OnSaveGame();
     }
 
     private void OnGameRestarted() {
@@ -48,8 +49,10 @@ public class GameController : MonoBehaviour {
     private void Start() {
         if (PersistentData.instance.isGameOver) {
             restartGame.StartNewGame();
-        } else
+        } else {
             enemyController.LoadEntities();
+            Statistics.Instance.OnLoadGame();
+        }
     }
 
     private void Update() {

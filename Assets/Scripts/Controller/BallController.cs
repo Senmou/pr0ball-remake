@@ -107,7 +107,7 @@ public class BallController : MonoBehaviour {
 
     private void ShootBall() {
         if (BallCount < maxBallCount) {
-            Statistics.balls.fired++;
+            Statistics.Instance.balls.fired++;
             CreateBall(ballPoolName, new Color(0f, 0.5607843f, 1f, 1f)); // blue
             UpdateBallCountUI();
         } else
