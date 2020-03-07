@@ -78,16 +78,7 @@ public class Ball : MonoBehaviour {
 
         yield return null;
     }
-
-    private void SetNewRandomTarget() {
-        randomEnemyPos = enemyController.GetRandomTarget();
-    }
-
-    private void MoveToEnemy() {
-        Vector2 direction = (randomEnemyPos - (Vector2)transform.position).normalized;
-        body.AddForce(direction * 600, ForceMode2D.Impulse);
-    }
-
+    
     public Vector2 Bezier(Vector2 a, Vector2 b, Vector2 c, float t) {
         Vector2 ab = Vector2.Lerp(a, b, t);
         Vector2 bc = Vector2.Lerp(b, c, t);
@@ -102,6 +93,5 @@ public class Ball : MonoBehaviour {
 #else
         audioSource.PlayOneShot(audioSource.clip);
 #endif
-        SetNewRandomTarget();
     }
 }

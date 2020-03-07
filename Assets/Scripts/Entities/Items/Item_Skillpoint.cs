@@ -21,9 +21,9 @@ public class Item_Skillpoint : MonoBehaviour {
 
         int random = Random.Range(0, 100);
         if (random < 10)
-            value = Random.Range(15, 20);
+            value = Random.Range(5, 10);
         else
-            value = Random.Range(1, 10);
+            value = Random.Range(1, 3);
 
         valueUI.text = value.ToString();
     }

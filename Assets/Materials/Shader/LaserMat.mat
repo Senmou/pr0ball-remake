@@ -8,14 +8,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LaserMat
-  m_Shader: {fileID: 4800000, guid: 650dd9526735d5b46b79224bc6e94025, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 10750, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses:
   - SHADOWCASTER
   - ALWAYS
@@ -76,7 +75,7 @@ Material:
     - _CameraNearFadeDistance: 1
     - _ColorMode: 0
     - _Cull: 2
-    - _Cutoff: 0.5
+    - _Cutoff: 0
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
     - _EmissionEnabled: 0
