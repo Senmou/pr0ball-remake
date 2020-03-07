@@ -40,12 +40,12 @@ public class EnemyController : MonoBehaviour {
 
         PersistentData.instance.currentLevelData.activeEntities.Clear();
 
-        foreach (var entity in activeEnemies) {
-            PersistentData.instance.currentLevelData.AddEntity(entity.entityType, entity.transform.position.x, entity.transform.position.y, entity.currentHP);
+        foreach (var enemy in activeEnemies) {
+            PersistentData.instance.currentLevelData.AddEntity(enemy.entityType, enemy.transform.position.x, enemy.transform.position.y, enemy.currentHP);
         }
 
-        foreach (var entity in activeItems) {
-            PersistentData.instance.currentLevelData.AddEntity(entity.entityType, entity.transform.position.x, entity.transform.position.y);
+        foreach (var item in activeItems) {
+            PersistentData.instance.currentLevelData.AddEntity(item.entityType, item.transform.position.x, item.transform.position.y, item.value);
         }
     }
 
@@ -57,11 +57,11 @@ public class EnemyController : MonoBehaviour {
 
             List<CurrentLevelData.EntityData> data = PersistentData.instance.currentLevelData.activeEntities;
 
-            foreach (CurrentLevelData.EntityData item in data) {
-                if (item.entityType == CurrentLevelData.EntityType.Item)
-                    SpawnItem(new Vector3(item.posX, item.posY));
+            foreach (CurrentLevelData.EntityData entity in data) {
+                if (entity.entityType == CurrentLevelData.EntityType.Item)
+                    SpawnItem(new Vector3(entity.posX, entity.posY), entity.value);
                 else {
-                    SpawnEnemy(new Vector3(item.posX, item.posY), item.entityType, item.currentHP);
+                    SpawnEnemy(new Vector3(entity.posX, entity.posY), entity.entityType, entity.value);
                 }
             }
 
@@ -75,37 +75,30 @@ public class EnemyController : MonoBehaviour {
 
     public void CheckForEnemiesWhichReachedDeadline() {
 
-        List<BaseEnemy> enemiesToRemove = new List<BaseEnemy>();
-        foreach (var enemy in activeEnemies) {
-            if (enemy.transform.position.y >= deadline.position.y) {
+        for (int i = 0; i< activeEnemies.Count;i++) {
+            if (activeEnemies[i].transform.position.y >= deadline.position.y) {
 
-                int inflictedDamage = enemy.currentHP * 10;
+                int inflictedDamage = activeEnemies[i].currentHP * 10;
 
-                enemiesToRemove.Add(enemy);
+                activeEnemies[i].Kill();
                 Score.instance.DecScore(inflictedDamage);
 
                 // Spawn floating text
-                GameObject go = Instantiate(floatingText, enemy.transform.position, Quaternion.identity).gameObject;
+                GameObject go = Instantiate(floatingText, activeEnemies[i].transform.position, Quaternion.identity).gameObject;
                 go.GetComponent<FloatingText>().SetText("-" + inflictedDamage.ToString());
                 go.transform.SetParent(canvas.transform);
 
-                EasyObjectPool.instance.ReturnObjectToPool(enemy.gameObject);
+                EasyObjectPool.instance.ReturnObjectToPool(activeEnemies[i].gameObject);
+
+                activeEnemies.Remove(activeEnemies[i]);
             }
         }
 
-        List<Item_Skillpoint> itemsToRemove = new List<Item_Skillpoint>();
-        foreach (var item in activeItems) {
-            if (item.transform.position.y >= deadline.position.y) {
-                itemsToRemove.Add(item);
+        for (int i = 0; i < activeItems.Count; i++) {
+            if (activeItems[i].transform.position.y >= deadline.position.y) {
+                Destroy(activeItems[i].gameObject);
+                activeItems.Remove(activeItems[i]);
             }
-        }
-
-        foreach (var item in itemsToRemove) {
-            Destroy(item);
-        }
-
-        foreach (var enemyToRemove in enemiesToRemove) {
-            enemyToRemove.Kill();
         }
     }
 
@@ -121,8 +114,9 @@ public class EnemyController : MonoBehaviour {
         foreach (var enemy in activeEnemies) {
             EasyObjectPool.instance.ReturnObjectToPool(enemy.gameObject);
         }
-        foreach (var item in activeItems) {
-            Destroy(item.gameObject);
+
+        for (int i = 0; i < activeItems.Count; i++) {
+            Destroy(activeItems[i].gameObject);
         }
         activeItems.Clear();
         activeEnemies.Clear();
@@ -144,9 +138,11 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    private void SpawnItem(Vector3 position, bool isInitialWave = false) {
+    private void SpawnItem(Vector3 position, int value = -1, bool isInitialWave = false) {
         Item_Skillpoint item = Instantiate(itemAddSkillPoint, position, Quaternion.identity, canvas.transform).GetComponent<Item_Skillpoint>();
         item.transform.SetParent(itemSkillPointContainer);
+        if (value != -1)
+            item.SetValue(value);
         activeItems.Add(item);
 
         if (isInitialWave)

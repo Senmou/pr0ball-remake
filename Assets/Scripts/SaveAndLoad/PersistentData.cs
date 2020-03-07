@@ -170,7 +170,9 @@ public class CurrentLevelData {
         public EntityType entityType;
         public float posX;
         public float posY;
-        public int currentHP;
+
+        // hp for enemies, skillPointValue for items
+        public int value;
     }
 
     public int wave;
@@ -178,8 +180,8 @@ public class CurrentLevelData {
     public int spawnPointIndex;
     public List<EntityData> activeEntities;
 
-    public void AddEntity(EntityType _entityType, float _posX, float _posY, int _currentHP = -1) {
-        EntityData entityData = new EntityData { entityType = _entityType, posX = _posX, posY = _posY, currentHP = _currentHP };
+    public void AddEntity(EntityType _entityType, float _posX, float _posY, int _value = -1) {
+        EntityData entityData = new EntityData { entityType = _entityType, posX = _posX, posY = _posY, value = _value };
         activeEntities.Add(entityData);
     }
 
