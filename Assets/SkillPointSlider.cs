@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class SkillPointSlider : MonoBehaviour {
 
+    public int killsNeeded;
+    public int skillPointsEarned;
+
     [SerializeField] private FloatingText floatingText;
 
     private Slider slider;
@@ -11,6 +14,9 @@ public class SkillPointSlider : MonoBehaviour {
     private void Awake() {
         slider = GetComponent<Slider>();
         canvas = FindObjectOfType<Canvas>();
+
+        slider.maxValue = killsNeeded;
+
         EventManager.StartListening("EnemyDied", OnEnemyDied);
     }
 
@@ -20,7 +26,7 @@ public class SkillPointSlider : MonoBehaviour {
 
         if(slider.value == slider.maxValue) {
             slider.value = 0;
-            Score.instance.IncSkillPoints(1);
+            Score.instance.IncSkillPoints(skillPointsEarned);
             GameObject go = Instantiate(floatingText, new Vector2(4.3f, 22f), Quaternion.identity).gameObject;
             go.GetComponent<FloatingText>().SetText("+1 Skillpunkt");
             go.transform.SetParent(canvas.transform);

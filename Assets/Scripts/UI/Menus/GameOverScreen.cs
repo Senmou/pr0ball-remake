@@ -35,6 +35,5 @@ public class GameOverScreen : CanvasController {
         playtimeUI.text = timestamp;
         highscoreUI.text = Score.instance.highscore.ToString();
         PersistentData.instance.highscores.AddHighscore(Score.instance.highscore, timestamp);
-        EventManager.TriggerEvent("HighscoreEntryAdded");
     }
 }

@@ -96,7 +96,11 @@ public class BaseEnemy : MonoBehaviour {
         currentHP -= amount;
         UpdateUI();
         if (currentHP <= 0) {
-            Instantiate(particleSystem, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+            ParticleSystem deathParticles = Instantiate(particleSystem, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+            if (PersistentData.instance.uniColor)
+                deathParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.SetColor(Shader.PropertyToID("Color_65DE3E46"), uniColor);
+            else
+                deathParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.SetColor(Shader.PropertyToID("Color_65DE3E46"), enemyColor);
             ReturnToPool(this);
             Score.instance.IncScore(benisValue);
             OnDeath();

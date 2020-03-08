@@ -10,20 +10,17 @@ public class HighscoreTable : MonoBehaviour {
         container = transform.FindChild<Transform>("EntryContainer");
         template = transform.FindChild<Transform>("EntryContainer/EntryTemplate");
         template.gameObject.SetActive(false);
-
-        EventManager.StartListening("HighscoreEntryAdded", UpdateUI);
-
-        UpdateUI();
     }
-    
-    private void UpdateUI() {
+
+    public void UpdateUI() {
 
         int highscoreCount = PersistentData.instance.highscores.entries.Count;
 
-        // Clear all entries
-        foreach (Transform item in container) {
-            if (item.gameObject.activeSelf)
-                Destroy(item.gameObject);
+        // Clear all entries except the template
+        for (int i = 0; i < container.childCount; i++) {
+            Transform child = container.GetChild(0);
+            if (child != null && child != template)
+                Destroy(child.gameObject);
         }
 
         // Recreate all entries

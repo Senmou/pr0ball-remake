@@ -27993,6 +27993,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f0d1a96b6894c43abdfd7d89286d5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killsNeeded: 100
+  skillPointsEarned: 5
   floatingText: {fileID: 114874566402201868, guid: dd9425d840c92364e9cd330f1db7b5c4,
     type: 3}
 --- !u!223 &2104156198
