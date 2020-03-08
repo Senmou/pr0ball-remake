@@ -18,11 +18,11 @@ public class Skill_Triggered : Skill {
     }
 
     private void Start() {
-        cost = 3;
+        cost = 5;
         description = "Listen here, you little shit";
     }
 
-    protected override int CalcDamage() => (int)(enemyHPReference.MaxHP / 20) + 5;
+    protected override int CalcDamage() => enemyHPReference.MaxHP;
 
     protected override IEnumerator ActionCoroutine() {
 

@@ -7,8 +7,7 @@ public class PersistentData : MonoBehaviour {
 
     public static PersistentData instance;
 
-    public SfxData sfxData;
-    public MusicData musicData;
+    public SoundData soundData;
     public ScoreData scoreData;
     public BallData ballData;
     public SkillData skillData;
@@ -27,8 +26,7 @@ public class PersistentData : MonoBehaviour {
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
 
-        sfxData = new SfxData();
-        musicData = new MusicData();
+        soundData = new SoundData();
         scoreData = new ScoreData();
         ballData = new BallData();
         skillData = new SkillData();
@@ -40,8 +38,7 @@ public class PersistentData : MonoBehaviour {
     }
 
     public void LoadDataFromSaveFile(SaveData saveData) {
-        sfxData = saveData.sfxData ?? new SfxData();
-        musicData = saveData.musicData ?? new MusicData();
+        soundData = saveData.soundData ?? new SoundData();
         scoreData = saveData.scoreData ?? new ScoreData();
         ballData = saveData.ballData ?? new BallData();
         skillData = saveData.skillData ?? new SkillData();
@@ -71,20 +68,18 @@ public class PersistentData : MonoBehaviour {
 }
 
 [Serializable]
-public class SfxData {
-    public float volume;
+public class SoundData {
 
-    public SfxData() {
-        volume = 5;
-    }
-}
+    public float musicVolume;
+    public float masterVolume;
+    public float sfxBallVolume;
+    public float sfxSkillVolume;
 
-[Serializable]
-public class MusicData {
-    public float volume;
-
-    public MusicData() {
-        volume = 5;
+    public SoundData() {
+        musicVolume = 5f;
+        masterVolume = 10f;
+        sfxBallVolume = 5f;
+        sfxSkillVolume = 5f;
     }
 }
 
@@ -163,7 +158,9 @@ public class CurrentLevelData {
         Enemy_1,
         Enemy_2,
         Item,
-        Enemy_3
+        Enemy_3,
+        Enemy_4,
+        Enemy_5
     }
 
     [Serializable]

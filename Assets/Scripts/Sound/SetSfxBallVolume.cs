@@ -1,16 +1,14 @@
-﻿using TMPro;
-using UnityEngine;
-using UnityEngine.Audio;
+﻿using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEngine;
+using TMPro;
 
-public class SetSfxVolume : MonoBehaviour {
+public class SetSfxBallVolume : MonoBehaviour {
 
     public Button plus;
     public Button minus;
-    public TextMeshProUGUI volumeUI;
     public AudioMixer audioMixer;
-
-    public float CurrentVolume { get => currentVolume; }
+    public TextMeshProUGUI volumeUI;
 
     private float maxVolume = 10f;
     private float currentVolume;
@@ -20,18 +18,20 @@ public class SetSfxVolume : MonoBehaviour {
     }
 
     private void Awake() {
-        currentVolume = (int)PersistentData.instance.sfxData.volume;
+        currentVolume = (int)PersistentData.instance.soundData.sfxBallVolume;
         EventManager.StartListening("SaveGame", OnSaveGame);
     }
 
     private void OnSaveGame() {
-        PersistentData.instance.sfxData.volume = currentVolume;
+        PersistentData.instance.soundData.sfxBallVolume = currentVolume;
     }
 
     private void Start() {
         SetVolume(currentVolume);
         CheckButtonInteractability();
     }
+
+    public float GetCurrentVolume() => currentVolume;
 
     public void OnClickPlus() {
 
@@ -59,7 +59,7 @@ public class SetSfxVolume : MonoBehaviour {
     public void SetVolume(float volume) {
         float value = volume.Map(0f, maxVolume, -40f, 0f);
         value = currentVolume <= 0f ? -80f : value;
-        audioMixer.SetFloat("SfxVolume", value);
+        audioMixer.SetFloat("sfxBallVolume", value);
         volumeUI.text = volume.ToString();
     }
 }

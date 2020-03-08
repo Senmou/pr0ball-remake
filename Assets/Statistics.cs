@@ -66,7 +66,14 @@ public class Statistics {
         public int wins;
         public int loses;
         public int totalBets;
-        public float AverageBet { get => (float)totalBets / plays; }
+        public float AverageBet {
+            get {
+                if (plays > 0)
+                    return (float)totalBets / plays;
+                else
+                    return 0;
+            }
+        }
     }
 
     [Serializable]

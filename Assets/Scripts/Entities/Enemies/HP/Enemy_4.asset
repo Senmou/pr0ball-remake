@@ -10,30 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfe736667e3865d40841f649a5f8d56f, type: 3}
-  m_Name: ReferenceForSkillDamage
+  m_Name: Enemy_4
   m_EditorClassIdentifier: 
-  randomize: 0
-  maxBonusHPPercentage: 0
+  randomize: 1
+  maxBonusHPPercentage: 0.25
   stepValueList:
   - step: 1
     value: 2
   - step: 2
-    value: 2
-  - step: 4
-    value: 2
-  - step: 8
-    value: 4
+    value: 3
+  - step: 5
+    value: 12
   - step: 10
-    value: 10
-  - step: 12
-    value: 20
-  - step: 64
-    value: 400
-  - step: 80
-    value: 1500
-  - step: 90
+    value: 70
+  - step: 20
+    value: 1000
+  - step: 30
     value: 2500
+  - step: 40
+    value: 10000
+  - step: 50
+    value: 100000
+  - step: 60
+    value: 250000
+  - step: 70
+    value: 1000000
+  - step: 80
+    value: 25000000
+  - step: 90
+    value: 100000000
   - step: 100
-    value: 5000
+    value: 1000000000
   maxHP: 2
   testLevel: 1

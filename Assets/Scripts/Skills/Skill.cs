@@ -22,6 +22,7 @@ public class Skill : MonoBehaviour {
     public int Damage { get => CalcDamage(); }
     public int BonusDamage { get => CalcBonusDamage(); }
     public int TotalDamage { get => Damage + BonusDamage; }
+    public int BonusPercentage { get => usedCounter * 10; }
 
     protected bool pending;
     protected BallController ballController;
@@ -57,7 +58,7 @@ public class Skill : MonoBehaviour {
     }
 
     protected virtual int CalcDamage() => LevelData.Level * 10;
-    protected int CalcBonusDamage() => (int)(Damage * usedCounter * 0.05f);
+    protected int CalcBonusDamage() => (int)(Damage * usedCounter * 0.1f);
 
     protected void OnSaveGame() {
         SaveSkillData(id, locked, usedCounter);
@@ -65,17 +66,19 @@ public class Skill : MonoBehaviour {
 
     protected void Action() {
 
-        if (Score.instance.skillPoints == 0) {
+        if (Score.instance.skillPoints < cost) {
             sfxError.Play();
             ErrorMessage.instance.Show(1f, "Nicht genug Skillpunkte!");
+            return;
         }
 
         if (pending) {
             sfxError.Play();
             ErrorMessage.instance.Show(1f, "Skill im vollen Gange!");
+            return;
         }
 
-        if (!pending && Score.instance.PaySkillPoints(cost)) {
+        if (Score.instance.PaySkillPoints(cost)) {
             pending = true;
             sfxSuccess.Play();
             usedCounter++;

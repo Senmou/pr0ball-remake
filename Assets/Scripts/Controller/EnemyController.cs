@@ -10,8 +10,8 @@ public class EnemyController : MonoBehaviour {
 
     public LootDropTable enemyLDT;
 
-    public List<BaseEnemy> activeEnemies;
-    public List<Item_Skillpoint> activeItems;
+    [HideInInspector] public List<BaseEnemy> activeEnemies;
+    [HideInInspector] public List<Item_Skillpoint> activeItems;
     [HideInInspector] public PlayStateController playStateController;
 
     private Canvas canvas;
@@ -174,6 +174,12 @@ public class EnemyController : MonoBehaviour {
                     break;
                 case CurrentLevelData.EntityType.Enemy_3:
                     sourcePool = "Enemy_3_pool";
+                    break;
+                case CurrentLevelData.EntityType.Enemy_4:
+                    sourcePool = "Enemy_4_pool";
+                    break;
+                case CurrentLevelData.EntityType.Enemy_5:
+                    sourcePool = "Enemy_5_pool";
                     break;
             }
         }

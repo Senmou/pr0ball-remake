@@ -14,11 +14,11 @@ public class Sound : MonoBehaviour {
     private float soundLockTimer;
     private float soundLockDuration;
 
-    private SetSfxVolume sfxVolume;
+    private SetSfxBallVolume sfxBallVolume;
 
     private void Awake() {
 
-        sfxVolume = FindObjectOfType<SetSfxVolume>();
+        sfxBallVolume = FindObjectOfType<SetSfxBallVolume>();
 
         soundLock = false;
         soundLockDuration = 0.07f;
@@ -44,7 +44,7 @@ public class Sound : MonoBehaviour {
 
     public void Bounce() {
         if (!soundLock) {
-            AndroidNativeAudio.play(bounce.fileID, sfxVolume.CurrentVolume / 10f);
+            AndroidNativeAudio.play(bounce.fileID, sfxBallVolume.GetCurrentVolume() / 10f);
             soundLockTimer = soundLockDuration;
             soundLock = true;
         }

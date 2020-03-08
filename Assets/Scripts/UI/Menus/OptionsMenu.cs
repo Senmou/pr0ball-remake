@@ -8,7 +8,7 @@ public class OptionsMenu : CanvasController {
 
     private void Awake() {
         moveUI = GetComponent<MoveUI>();
-        toggle = transform.FindChild<Toggle>("Toggle_UniColor");
+        toggle = transform.FindChild<Toggle>("MiscOptions/Toggle_UniColor");
         toggle.isOn = PersistentData.instance.uniColor;
     }
 

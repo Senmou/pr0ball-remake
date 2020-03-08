@@ -1,7 +1,6 @@
-﻿using System;
+﻿using UnityEngine;
 using System.IO;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+using System;
 
 public class ResetGameButton : MonoBehaviour {
 
@@ -14,10 +13,13 @@ public class ResetGameButton : MonoBehaviour {
         try {
             File.Delete(filePath);
 
-            PersistentData.instance.sfxData = null;
-            PersistentData.instance.musicData = null;
+            PersistentData.instance.soundData = null;
             PersistentData.instance.scoreData = null;
             PersistentData.instance.ballData = null;
+            PersistentData.instance.skillData = null;
+            PersistentData.instance.currentLevelData = null;
+            PersistentData.instance.highscores = null;
+            PersistentData.instance.statistics = null;
 
             Application.Quit();
         } catch (Exception ex) {

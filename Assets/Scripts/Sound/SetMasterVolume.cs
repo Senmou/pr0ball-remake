@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
-public class SetMusicVolume : MonoBehaviour {
+public class SetMasterVolume : MonoBehaviour {
 
     public Button plus;
     public Button minus;
@@ -18,13 +18,13 @@ public class SetMusicVolume : MonoBehaviour {
     }
 
     private void Awake() {
-        currentVolume = (int)PersistentData.instance.soundData.musicVolume;
+        currentVolume = (int)PersistentData.instance.soundData.masterVolume;
 
         EventManager.StartListening("SaveGame", OnSaveGame);
     }
 
     private void OnSaveGame() {
-        PersistentData.instance.soundData.musicVolume = currentVolume;
+        PersistentData.instance.soundData.masterVolume = currentVolume;
     }
 
     private void Start() {
@@ -58,7 +58,7 @@ public class SetMusicVolume : MonoBehaviour {
     private void SetVolume(float volume) {
         float value = volume.Map(0f, maxVolume, -40f, 0f);
         value = currentVolume <= 0f ? -80f : value;
-        audioMixer.SetFloat("musicVolume", value);
+        audioMixer.SetFloat("masterVolume", value);
         volumeUI.text = volume.ToString();
     }
 }

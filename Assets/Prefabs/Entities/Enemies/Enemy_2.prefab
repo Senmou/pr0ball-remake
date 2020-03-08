@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyColor: {r: 0.10980393, g: 0.7254902, b: 0.57254905, a: 1}
-  uniColor: {r: 0.8235295, g: 0.23529413, b: 0.13333334, a: 1}
+  uniColor: {r: 0.5, g: 0.14379084, b: 0.08169934, a: 1}
   hp: {fileID: 11400000, guid: aa24dfe8191c3964dbfb83b92acc4f8a, type: 2}
   particleSystem: {fileID: 7199096499088925637, guid: cc61f3667670b7e469667e44d8c5714d,
     type: 3}

@@ -84,7 +84,7 @@ public class SkillMenuSlot : MonoBehaviour {
         image.sprite = skill.Icon;
         costUI.text = skill.cost.ToString();
         damageUI.text = skill.TotalDamage.ToString();
-        usedCounterUI.text = skill.usedCounter.ToString() + "x";
+        usedCounterUI.text = skill.BonusPercentage.ToString() + "%";
         bonusDamageUI.text = "(+" + skill.BonusDamage.ToString() + ")";
         unlockButton?.SetText(skill.unlockLevel);
         unlockButton?.SetColor(skill.unlockLevel);
