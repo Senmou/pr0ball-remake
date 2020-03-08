@@ -10,8 +10,8 @@ public class EnemyController : MonoBehaviour {
 
     public LootDropTable enemyLDT;
 
-     public List<BaseEnemy> activeEnemies;
-     public List<Item_Skillpoint> activeItems;
+    public List<BaseEnemy> activeEnemies;
+    public List<Item_Skillpoint> activeItems;
     [HideInInspector] public PlayStateController playStateController;
 
     private Canvas canvas;
@@ -97,7 +97,6 @@ public class EnemyController : MonoBehaviour {
         for (int i = 0; i < activeItems.Count; i++) {
             if (activeItems[i].transform.position.y >= deadline.position.y) {
                 itemsToRemove.Add(activeItems[i]);
-                Destroy(activeItems[i].gameObject);
             }
         }
 
@@ -106,7 +105,7 @@ public class EnemyController : MonoBehaviour {
         }
 
         for (int i = 0; i < itemsToRemove.Count; i++) {
-            activeItems.Remove(activeItems[i]);
+            activeItems[i].DestroyAndRemoveItem();
         }
     }
 

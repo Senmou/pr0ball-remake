@@ -33,4 +33,8 @@ public class SkillPointSlider : MonoBehaviour {
             EventManager.TriggerEvent("SkillPointGained");
         }
     }
+
+    public void ResetData() {
+        slider.value = 0;
+    }
 }

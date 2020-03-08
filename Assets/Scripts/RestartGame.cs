@@ -6,6 +6,7 @@ public class RestartGame : MonoBehaviour {
     private SkillBar skillBar;
     private BallController ballController;
     private SkillController skillController;
+    private SkillPointSlider skillPointSlider;
     private PlayStateController playStateController;
 
     private void Awake() {
@@ -13,6 +14,7 @@ public class RestartGame : MonoBehaviour {
         skillBar = FindObjectOfType<SkillBar>();
         ballController = FindObjectOfType<BallController>();
         skillController = FindObjectOfType<SkillController>();
+        skillPointSlider = FindObjectOfType<SkillPointSlider>();
         playStateController = FindObjectOfType<PlayStateController>();
     }
 
@@ -28,5 +30,6 @@ public class RestartGame : MonoBehaviour {
         skillController.ResetData();
         ballController.ResetData();
         Statistics.Instance.ResetData();
+        skillPointSlider.ResetData();
     }
 }

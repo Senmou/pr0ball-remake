@@ -39,8 +39,12 @@ public class Item_Skillpoint : MonoBehaviour {
 
     public void OnItemCollect() {
         Score.instance.IncSkillPoints(value);
-        enemyController.activeItems.Remove(this);
         sfxCoins.Play();
+        DestroyAndRemoveItem();
+    }
+
+    public void DestroyAndRemoveItem() {
+        enemyController.activeItems.Remove(this);
         Destroy(gameObject);
     }
 
