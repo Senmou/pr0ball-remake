@@ -28,11 +28,11 @@ public class Skill_Hammertime : Skill {
     }
 
     private void Start() {
-        cost = 2;
+        cost = 0;
         description = "pr0-chan";
     }
 
-    protected override int CalcDamage() => (int)(1.5f * enemyHPReference.MaxHP);
+    protected override int CalcDamage() => enemyHPReference.MaxHP;
 
     protected override IEnumerator ActionCoroutine() {
 

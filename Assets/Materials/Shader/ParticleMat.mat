@@ -21,5 +21,5 @@ Material:
     m_TexEnvs: []
     m_Floats: []
     m_Colors:
-    - Color_65DE3E46: {r: 1, g: 0, b: 0.7322521, a: 1}
+    - Color_65DE3E46: {r: 0.42352945, g: 0.2627451, b: 0.16862746, a: 1}
     - _Color: {r: 0.8235295, g: 0.23529407, b: 0.13333327, a: 1}
