@@ -5,8 +5,9 @@ public class MusicController : MonoBehaviour {
 
     public static MusicController instance;
 
-    private AudioSource musicAudioSource;
+    private float lastVolume;
     private AudioClip lastAudioClip;
+    private AudioSource musicAudioSource;
 
     private void Awake() {
         instance = this;
@@ -19,9 +20,18 @@ public class MusicController : MonoBehaviour {
         musicAudioSource.Play();
     }
 
-    public void RestoreLastMusicClip() {
-        musicAudioSource.clip = lastAudioClip;
-        musicAudioSource.Play();
+    //public void RestoreLastMusicClip() {
+    //    musicAudioSource.clip = lastAudioClip;
+    //    musicAudioSource.Play();
+    //}
+
+    public void SetVolume(float volume) {
+        lastVolume = musicAudioSource.volume;
+        musicAudioSource.volume = volume;
+    }
+
+    public void RestoreLastVolume() {
+        musicAudioSource.volume = lastVolume;
     }
 
     public void ChangeVolumeForSeconds(float volume, float seconds) {

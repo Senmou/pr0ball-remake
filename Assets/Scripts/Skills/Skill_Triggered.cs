@@ -6,14 +6,15 @@ public class Skill_Triggered : Skill {
 
     [SerializeField] private BigBall bigBallPrefab;
     [SerializeField] private GameObject triggeredText;
-    [SerializeField] private AudioClip triggeredMusic;
 
     private Canvas canvas;
+    private AudioSource audioSource;
     private AudioSource triggeredAudio;
 
     private new void Awake() {
         base.Awake();
         canvas = FindObjectOfType<Canvas>();
+        audioSource = GetComponent<AudioSource>();
         triggeredAudio = GameObject.Find("SfxTriggered").GetComponent<AudioSource>();
     }
 
@@ -42,7 +43,8 @@ public class Skill_Triggered : Skill {
 
         GameObject text = Instantiate(triggeredText, new Vector2(0f, 0f), Quaternion.identity);
         triggeredAudio.Play();
-        MusicController.instance.SetMusic(triggeredMusic);
+        MusicController.instance.SetVolume(0f);
+        audioSource.Play();
 
         for (int i = 0; i < 1; i++) {
             BigBall bigBall = Instantiate(bigBallPrefab);
@@ -59,7 +61,8 @@ public class Skill_Triggered : Skill {
         }
 
         Destroy(text);
+        audioSource.Stop();
         triggeredAudio.Stop();
-        MusicController.instance.RestoreLastMusicClip();
+        MusicController.instance.RestoreLastVolume();
     }
 }
