@@ -23,11 +23,12 @@ public class Skill_Hammertime : Skill {
         hammer.SetActive(false);
 
         hammerTimeLogo = Instantiate(hammerTimeLogo, new Vector3(-30f, 9f), Quaternion.identity);
+        hammerTimeLogo.gameObject.SetActive(false);
     }
 
     private void Start() {
         cost = 1;
-        description = "pr0-chan schwingt den Bannhammer. Trifft alles in einer geraden Linie.";
+        description = "pr0-chan";
     }
 
     protected override int CalcDamage() => enemyHPReference.MaxHP;
@@ -50,7 +51,6 @@ public class Skill_Hammertime : Skill {
         audioSource.clip = audioClips[randomAudioClip];
         audioSource.Play();
 
-        StopCoroutine("ShowHammerTimeLogo");
         StartCoroutine(ShowHammerTimeLogo());
 
         while (Vector2.Distance(hammer.transform.position, targetPos) > 0.1f) {
@@ -89,14 +89,18 @@ public class Skill_Hammertime : Skill {
 
         pending = false;
 
+        StopAllCoroutines();
+        hammerTimeLogo.gameObject.SetActive(false);
+
         yield return null;
     }
 
     private IEnumerator ShowHammerTimeLogo() {
 
+        hammerTimeLogo.gameObject.SetActive(true);
+
         Vector3 startPos = new Vector3(-30f, 9f);
         Vector3 midPos = new Vector3(0f, 9f);
-        Vector3 endPos = new Vector3(30f, 9f);
 
         hammerTimeLogo.transform.position = startPos;
         while (Vector2.Distance(hammerTimeLogo.transform.position, midPos) > 0.1f) {
@@ -104,11 +108,19 @@ public class Skill_Hammertime : Skill {
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSecondsRealtime(0.5f);
+        StartCoroutine(HideHammerTimeLogo());
+    }
+
+    private IEnumerator HideHammerTimeLogo() {
+
+        Vector3 endPos = new Vector3(30f, 9f);
 
         while (Vector2.Distance(hammerTimeLogo.transform.position, endPos) > 0.1f) {
             hammerTimeLogo.transform.position = Vector2.Lerp(hammerTimeLogo.transform.position, endPos, 12f * Time.deltaTime);
             yield return null;
         }
+
+        hammerTimeLogo.gameObject.SetActive(false);
     }
 }
