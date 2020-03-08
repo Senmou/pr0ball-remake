@@ -75,7 +75,8 @@ public class EnemyController : MonoBehaviour {
 
     public void CheckForEnemiesWhichReachedDeadline() {
 
-        for (int i = 0; i< activeEnemies.Count;i++) {
+        List<BaseEnemy> enemiesToRemove = new List<BaseEnemy>();
+        for (int i = 0; i < activeEnemies.Count; i++) {
             if (activeEnemies[i].transform.position.y >= deadline.position.y) {
 
                 int inflictedDamage = activeEnemies[i].currentHP * 10;
@@ -88,17 +89,24 @@ public class EnemyController : MonoBehaviour {
                 go.GetComponent<FloatingText>().SetText("-" + inflictedDamage.ToString());
                 go.transform.SetParent(canvas.transform);
 
-                EasyObjectPool.instance.ReturnObjectToPool(activeEnemies[i].gameObject);
-
-                activeEnemies.Remove(activeEnemies[i]);
+                enemiesToRemove.Add(activeEnemies[i]);
             }
         }
 
+        List<Item_Skillpoint> itemsToRemove = new List<Item_Skillpoint>();
         for (int i = 0; i < activeItems.Count; i++) {
             if (activeItems[i].transform.position.y >= deadline.position.y) {
                 Destroy(activeItems[i].gameObject);
-                activeItems.Remove(activeItems[i]);
+                itemsToRemove.Add(activeItems[i]);
             }
+        }
+
+        for (int i = 0; i < enemiesToRemove.Count; i++) {
+            activeEnemies.Remove(enemiesToRemove[i]);
+        }
+
+        for (int i = 0; i < itemsToRemove.Count; i++) {
+            activeItems.Remove(activeItems[i]);
         }
     }
 

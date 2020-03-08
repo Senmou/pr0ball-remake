@@ -34,7 +34,6 @@ public class Item_Skillpoint : MonoBehaviour {
     }
 
     private void OnReachedNextLevel() {
-        enemyController.activeItems.Remove(this);
         Destroy(gameObject);
     }
 

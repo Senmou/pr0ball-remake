@@ -64,7 +64,7 @@ public class BaseEnemy : MonoBehaviour {
     }
 
     private void ReturnToPool(BaseEnemy enemy) {
-        enemyController.activeEnemies.Remove(enemy);
+        //enemyController.activeEnemies.Remove(enemy);
 
         if (gameObject.activeSelf)
             EasyObjectPool.instance.ReturnObjectToPool(gameObject);
