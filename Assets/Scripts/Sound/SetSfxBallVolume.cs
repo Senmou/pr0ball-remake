@@ -12,12 +12,14 @@ public class SetSfxBallVolume : MonoBehaviour {
 
     private float maxVolume = 10f;
     private float currentVolume;
+    private Sound ballSound;
 
     private void OnValidate() {
         currentVolume = Mathf.Clamp(currentVolume, 0f, maxVolume);
     }
 
     private void Awake() {
+        ballSound = FindObjectOfType<Sound>();
         currentVolume = (int)PersistentData.instance.soundData.sfxBallVolume;
         EventManager.StartListening("SaveGame", OnSaveGame);
     }
@@ -35,8 +37,10 @@ public class SetSfxBallVolume : MonoBehaviour {
 
     public void OnClickPlus() {
 
-        if (currentVolume < 10)
+        if (currentVolume < 10) {
             currentVolume++;
+            ballSound.Bounce();
+        }
 
         SetVolume(currentVolume);
         CheckButtonInteractability();
@@ -44,8 +48,10 @@ public class SetSfxBallVolume : MonoBehaviour {
 
     public void OnClickMinus() {
 
-        if (currentVolume > 0)
+        if (currentVolume > 0) {
             currentVolume--;
+            ballSound.Bounce();
+        }
 
         SetVolume(currentVolume);
         CheckButtonInteractability();

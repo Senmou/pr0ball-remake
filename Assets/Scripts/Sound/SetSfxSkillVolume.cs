@@ -12,12 +12,14 @@ public class SetSfxSkillVolume : MonoBehaviour {
 
     private float maxVolume = 10f;
     private float currentVolume;
+    private AudioSource audioSourceSkill_1;
 
     private void OnValidate() {
         currentVolume = Mathf.Clamp(currentVolume, 0f, maxVolume);
     }
 
     private void Awake() {
+        audioSourceSkill_1 = GameObject.Find("Skill_Hammertime").GetComponent<AudioSource>();
         currentVolume = (int)PersistentData.instance.soundData.sfxSkillVolume;
         EventManager.StartListening("SaveGame", OnSaveGame);
     }
@@ -33,8 +35,10 @@ public class SetSfxSkillVolume : MonoBehaviour {
 
     public void OnClickPlus() {
 
-        if (currentVolume < 10)
+        if (currentVolume < 10) {
             currentVolume++;
+            audioSourceSkill_1.Play();
+        }
 
         SetVolume(currentVolume);
         CheckButtonInteractability();
@@ -42,8 +46,10 @@ public class SetSfxSkillVolume : MonoBehaviour {
 
     public void OnClickMinus() {
 
-        if (currentVolume > 0)
+        if (currentVolume > 0) {
             currentVolume--;
+            audioSourceSkill_1.Play();
+        }
 
         SetVolume(currentVolume);
         CheckButtonInteractability();

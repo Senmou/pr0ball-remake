@@ -20,6 +20,7 @@ public class Skill_Hammertime : Skill {
         hammer = Instantiate(hammer);
         hammerCollider = hammer.GetComponent<BoxCollider2D>();
         audioSource = GetComponent<AudioSource>();
+        audioSource.clip = audioClips[0];
         hammer.SetActive(false);
 
         hammerTimeLogo = Instantiate(hammerTimeLogo, new Vector3(-30f, 9f), Quaternion.identity);

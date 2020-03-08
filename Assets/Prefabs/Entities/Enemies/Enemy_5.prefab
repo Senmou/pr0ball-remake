@@ -341,7 +341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7667022799862184163}
-  - component: {fileID: 3254664429088329417}
+  - component: {fileID: 5220039650389472284}
   m_Layer: 10
   m_Name: Body
   m_TagString: Enemy
@@ -363,8 +363,8 @@ Transform:
   m_Father: {fileID: 2713614721940319874}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &3254664429088329417
-EdgeCollider2D:
+--- !u!58 &5220039650389472284
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -377,13 +377,8 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.27891886, y: -0.000090156915}
-  - {x: -0.0005190838, y: 0.27881446}
-  - {x: 0.27807644, y: 0.00025390822}
-  - {x: -0.0007957668, y: -0.2791102}
-  - {x: -0.27898645, y: -0.00024877954}
+  serializedVersion: 2
+  m_Radius: 0.25
 --- !u!1 &2073535222297523622
 GameObject:
   m_ObjectHideFlags: 0
