@@ -10,8 +10,8 @@ public class EnemyController : MonoBehaviour {
 
     public LootDropTable enemyLDT;
 
-    [HideInInspector] public List<BaseEnemy> activeEnemies;
-    [HideInInspector] public List<Item_Skillpoint> activeItems;
+     public List<BaseEnemy> activeEnemies;
+     public List<Item_Skillpoint> activeItems;
     [HideInInspector] public PlayStateController playStateController;
 
     private Canvas canvas;
@@ -79,6 +79,8 @@ public class EnemyController : MonoBehaviour {
         for (int i = 0; i < activeEnemies.Count; i++) {
             if (activeEnemies[i].transform.position.y >= deadline.position.y) {
 
+                enemiesToRemove.Add(activeEnemies[i]);
+
                 int inflictedDamage = activeEnemies[i].currentHP * 10;
 
                 activeEnemies[i].Kill();
@@ -88,16 +90,14 @@ public class EnemyController : MonoBehaviour {
                 GameObject go = Instantiate(floatingText, activeEnemies[i].transform.position, Quaternion.identity).gameObject;
                 go.GetComponent<FloatingText>().SetText("-" + inflictedDamage.ToString());
                 go.transform.SetParent(canvas.transform);
-
-                enemiesToRemove.Add(activeEnemies[i]);
             }
         }
 
         List<Item_Skillpoint> itemsToRemove = new List<Item_Skillpoint>();
         for (int i = 0; i < activeItems.Count; i++) {
             if (activeItems[i].transform.position.y >= deadline.position.y) {
-                Destroy(activeItems[i].gameObject);
                 itemsToRemove.Add(activeItems[i]);
+                Destroy(activeItems[i].gameObject);
             }
         }
 
@@ -172,6 +172,9 @@ public class EnemyController : MonoBehaviour {
                     break;
                 case CurrentLevelData.EntityType.Enemy_2:
                     sourcePool = "Enemy_2_pool";
+                    break;
+                case CurrentLevelData.EntityType.Enemy_3:
+                    sourcePool = "Enemy_3_pool";
                     break;
             }
         }

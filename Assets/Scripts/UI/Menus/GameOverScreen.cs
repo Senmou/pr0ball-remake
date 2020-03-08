@@ -27,7 +27,7 @@ public class GameOverScreen : CanvasController {
 
     public override void Hide() {
         pauseBackground.disableInteractability = false;
-        moveUI.FadeTo(new Vector2(0f, 40f), 0.5f);
+        moveUI.FadeTo(new Vector2(0f, 40f), 0.5f, true);
     }
 
     private void SaveHighscore() {

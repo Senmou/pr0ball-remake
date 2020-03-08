@@ -34,6 +34,8 @@ public class BaseEnemy : MonoBehaviour {
         healthPointUI = GetComponentInChildren<TextMeshProUGUI>();
         canTakeDamageFromSkill = true;
 
+        transform.FindChild<Canvas>("HealthPoints/Canvas").worldCamera = Camera.main;
+
         EventManager.StartListening("ToggleUniColor", OnToggleUniColor);
     }
 

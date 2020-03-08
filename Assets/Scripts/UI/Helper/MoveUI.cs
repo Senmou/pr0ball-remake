@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class MoveUI : MonoBehaviour {
     
-    public void FadeTo(Vector2 targetPos, float timeToFade) {
+    public void FadeTo(Vector2 targetPos, float timeToFade, bool deactivateObjectWhenReachingTargetPos = false) {
         StopAllCoroutines();
-        StartCoroutine(FadePosition(targetPos, timeToFade));
+        StartCoroutine(FadePosition(targetPos, timeToFade, deactivateObjectWhenReachingTargetPos));
     }
 
-    private IEnumerator FadePosition(Vector2 targetPos, float timeToFade) {
+    private IEnumerator FadePosition(Vector2 targetPos, float timeToFade, bool deactivateObjectWhenReachingTargetPos) {
         
         float t = 0f;
         while (t < 1f) {
@@ -17,5 +17,8 @@ public class MoveUI : MonoBehaviour {
             yield return null;
         }
         yield return null;
+
+        if (deactivateObjectWhenReachingTargetPos)
+            gameObject.SetActive(false);
     }
 }

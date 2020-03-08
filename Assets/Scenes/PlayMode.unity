@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 29254748}
   - component: {fileID: 29254747}
   m_Layer: 0
-  m_Name: S
+  m_Name: DEBUG_Statistics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10604,23 +10604,30 @@ MonoBehaviour:
         type: 3}
       poolName: Enemy_0_pool
       probabilityWeight: 55
-      probabilityPercent: 55
+      probabilityPercent: 36.666668
       probabilityRangeFrom: 0
       probabilityRangeTo: 55
     - item: {fileID: 1688601153306911077, guid: b23cbc6dd2da95a4db5749c236b0ec90,
         type: 3}
       poolName: Enemy_1_pool
       probabilityWeight: 40
-      probabilityPercent: 40
+      probabilityPercent: 26.666666
       probabilityRangeFrom: 55
       probabilityRangeTo: 95
     - item: {fileID: 1688601153306911077, guid: ea3d98fa5f5610341af9c37e1a2e2081,
         type: 3}
       poolName: Enemy_2_pool
       probabilityWeight: 5
-      probabilityPercent: 5
+      probabilityPercent: 3.3333333
       probabilityRangeFrom: 95
       probabilityRangeTo: 100
+    - item: {fileID: 1688601153306911077, guid: 69cc29669384c3446869ef70277a0506,
+        type: 3}
+      poolName: Enemy_3_pool
+      probabilityWeight: 50
+      probabilityPercent: 33.333332
+      probabilityRangeFrom: 100
+      probabilityRangeTo: 150
   activeEnemies: []
   activeItems: []
   playStateController: {fileID: 0}
@@ -21811,7 +21818,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 24.300001
+  orthographic size: 25.283335
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -22069,6 +22076,11 @@ MonoBehaviour:
     fixedSize: 0
   - poolName: OrangeParticleSystem_Pool
     prefab: {fileID: 7199096499088925637, guid: 1bc6374432f6ab24291b30bfa51b4f9d,
+      type: 3}
+    poolSize: 20
+    fixedSize: 0
+  - poolName: Enemy_3_pool
+    prefab: {fileID: 1688601153306911077, guid: 69cc29669384c3446869ef70277a0506,
       type: 3}
     poolSize: 20
     fixedSize: 0
@@ -25600,54 +25612,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   desiredCanvasType: 6
---- !u!1 &1923680606
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1923680608}
-  - component: {fileID: 1923680607}
-  m_Layer: 8
-  m_Name: PostProcessing
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1923680607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1923680606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: ea043bb52a9f8bc45b8e31689fca978b, type: 2}
-  isGlobal: 1
-  blendDistance: 0
-  weight: 1
-  priority: 0
---- !u!4 &1923680608
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1923680606}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 28
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1925284803
 GameObject:
   m_ObjectHideFlags: 0

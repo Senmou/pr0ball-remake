@@ -13,6 +13,6 @@ public class HighscoreMenu : CanvasController {
     }
 
     public override void Hide() {
-        moveUI.FadeTo(new Vector2(-40f, 0f), 0.5f);
+        moveUI.FadeTo(new Vector2(-40f, 0f), 0.5f, true);
     }
 }

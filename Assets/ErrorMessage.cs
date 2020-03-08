@@ -15,9 +15,11 @@ public class ErrorMessage : MonoBehaviour {
         messageUI = transform.FindChild<TextMeshProUGUI>("Canvas/TextBackground/Text");
 
         GetComponentInChildren<Canvas>().sortingLayerName = "ErrorMessage";
+        FadeOut();
     }
 
     public void Show(float duration, string text) {
+        gameObject.SetActive(true);
         messageUI.text = text;
         StopAllCoroutines();
         StartCoroutine(FadeInOut(duration));
@@ -28,7 +30,7 @@ public class ErrorMessage : MonoBehaviour {
     }
 
     private void FadeOut() {
-        moveUI.FadeTo(new Vector2(-30f, -12f), 0.5f);
+        moveUI.FadeTo(new Vector2(-30f, -12f), 0.5f, true);
     }
 
     private IEnumerator FadeInOut(float duration) {

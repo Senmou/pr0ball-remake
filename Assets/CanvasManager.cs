@@ -52,18 +52,23 @@ public class CanvasManager : MonoBehaviour {
         currentActiveCanvasType = type;
 
         if (type == CanvasType.NONE) {
-            canvasControllerList.ForEach(x => x.Hide());
+            canvasControllerList.ForEach(x => {
+                if (x.gameObject.activeSelf)
+                    x.Hide();
+            });
             GameController.instance.ResumeGame();
             return;
         }
 
         if (lastActiveCanvas != null) {
-            lastActiveCanvas.Hide();
+            if (lastActiveCanvas.gameObject.activeSelf)
+                lastActiveCanvas.Hide();
         }
 
         CanvasController desiredCanvas = canvasControllerList.Find(x => x.canvasType == type);
 
         if (desiredCanvas != null) {
+            desiredCanvas.gameObject.SetActive(true);
             desiredCanvas.Show();
             lastActiveCanvas = desiredCanvas;
             GameController.instance.PauseGame();

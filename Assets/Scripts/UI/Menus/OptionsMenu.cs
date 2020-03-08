@@ -22,6 +22,6 @@ public class OptionsMenu : CanvasController {
     }
 
     public override void Hide() {
-        moveUI.FadeTo(new Vector2(-30f, 0f), 0.5f);
+        moveUI.FadeTo(new Vector2(-30f, 0f), 0.5f, true);
     }
 }

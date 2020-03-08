@@ -162,7 +162,8 @@ public class CurrentLevelData {
         Enemy_0,
         Enemy_1,
         Enemy_2,
-        Item
+        Item,
+        Enemy_3
     }
 
     [Serializable]

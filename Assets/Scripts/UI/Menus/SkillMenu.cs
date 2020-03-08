@@ -33,6 +33,6 @@ public class SkillMenu : CanvasController {
     public override void Hide() {
         isVisible = false;
         pauseBackground.SetBottomMargin(0f);
-        moveUI.FadeTo(new Vector2(0f, -50f), 0.5f);
+        moveUI.FadeTo(new Vector2(0f, -50f), 0.5f, true);
     }
 }

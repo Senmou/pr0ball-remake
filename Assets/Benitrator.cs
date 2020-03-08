@@ -47,7 +47,7 @@ public class Benitrator : MonoBehaviour {
         onStoppedRotating += OnStoppedRotating;
 
         winUI.text = "";
-
+        
         UpdateUI();
     }
 

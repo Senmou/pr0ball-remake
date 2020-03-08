@@ -11,14 +11,14 @@ public class PauseMenu : CanvasController {
         moveUI = GetComponent<MoveUI>();
         pauseBackground = FindObjectOfType<PauseBackground>();
 
-        visible = false;
+        visible = true;
     }
 
     public override void Hide() {
         if (visible) {
             pauseBackground.disableInteractability = false;
             visible = false;
-            moveUI.FadeTo(new Vector2(30f, 0f), 0.5f);
+            moveUI.FadeTo(new Vector2(30f, 0f), 0.5f, true);
         }
     }
 
