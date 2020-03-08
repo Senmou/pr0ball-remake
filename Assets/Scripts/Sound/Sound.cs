@@ -36,7 +36,7 @@ public class Sound : MonoBehaviour {
 
     private void Update() {
         if (soundLockTimer > 0f)
-            soundLockTimer -= Time.deltaTime;
+            soundLockTimer -= Time.unscaledDeltaTime;
         else
             soundLock = false;
 

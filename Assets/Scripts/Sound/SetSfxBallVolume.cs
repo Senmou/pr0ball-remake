@@ -13,6 +13,7 @@ public class SetSfxBallVolume : MonoBehaviour {
     private float maxVolume = 10f;
     private float currentVolume;
     private Sound ballSound;
+    private AudioSource ballAudioSource;
 
     private void OnValidate() {
         currentVolume = Mathf.Clamp(currentVolume, 0f, maxVolume);
@@ -20,6 +21,7 @@ public class SetSfxBallVolume : MonoBehaviour {
 
     private void Awake() {
         ballSound = FindObjectOfType<Sound>();
+        ballAudioSource = GameObject.Find("SfxBounce").GetComponent<AudioSource>();
         currentVolume = (int)PersistentData.instance.soundData.sfxBallVolume;
         EventManager.StartListening("SaveGame", OnSaveGame);
     }
@@ -39,7 +41,7 @@ public class SetSfxBallVolume : MonoBehaviour {
 
         if (currentVolume < 10) {
             currentVolume++;
-            ballSound.Bounce();
+            PlayBallSound();
         }
 
         SetVolume(currentVolume);
@@ -50,7 +52,7 @@ public class SetSfxBallVolume : MonoBehaviour {
 
         if (currentVolume > 0) {
             currentVolume--;
-            ballSound.Bounce();
+            PlayBallSound();
         }
 
         SetVolume(currentVolume);
@@ -67,5 +69,13 @@ public class SetSfxBallVolume : MonoBehaviour {
         value = currentVolume <= 0f ? -80f : value;
         audioMixer.SetFloat("sfxBallVolume", value);
         volumeUI.text = volume.ToString();
+    }
+
+    private void PlayBallSound() {
+#if UNITY_ANDROID && !UNITY_EDITOR
+            ballSound.Bounce();
+#else
+        ballAudioSource.PlayOneShot(ballAudioSource.clip);
+#endif
     }
 }
