@@ -54,21 +54,35 @@ public class Wheel : MonoBehaviour {
 
         isRotating = true;
 
+        const float initialRotationSpeed = 75f;
+
         float timer = 0f;
         float slotHeight = 4f;
-        float rotationSpeed = 75f;
         float decreaseSpeedDelta = 0.2f;
+        float rotationSpeed = initialRotationSpeed;
+
+        float rotationSum = 0f;
 
         float rotationTime = Random.Range(minRotationTime, maxRotationTime);
         while (timer < rotationTime) {
+
             float rotationDelta = rotationSpeed * Time.unscaledDeltaTime;
             rect.anchoredPosition += new Vector2(0f, rotationDelta);
-            
+
+            rotationSum += rotationDelta;
+
+            if (rotationSum > slotHeight) {
+                rotationSum -= slotHeight;
+                benitrator.PlayClickSfx();
+            }
+
+            // Jump back to mimic a continous wheel
             if (rect.anchoredPosition.y >= 9.5f)
                 rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, rect.anchoredPosition.y - (6 * slotHeight));
 
             // Slow down over time
             rotationSpeed -= Random.Range(decreaseSpeedDelta, 2 * decreaseSpeedDelta);
+            rotationSpeed = Mathf.Max(rotationSpeed, 20f);
 
             timer += Time.unscaledDeltaTime;
             yield return null;
@@ -89,6 +103,7 @@ public class Wheel : MonoBehaviour {
                 targetPos -= new Vector2(0f, 24f);
             }
 
+            // Snap slots in place
             rect.anchoredPosition = Vector2.Lerp(rect.anchoredPosition, targetPos, t / tMax);
             t += Time.unscaledDeltaTime;
             yield return null;
