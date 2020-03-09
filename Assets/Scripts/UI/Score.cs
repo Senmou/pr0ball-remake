@@ -31,7 +31,10 @@ public class Score : MonoBehaviour {
 
     private void Update() {
         if (Input.GetKey(KeyCode.H))
-            DecScore(10);
+            DecScore(100);
+
+        if (Input.GetKey(KeyCode.J))
+            IncScore(100);
     }
 
     private void OnSaveGame() {

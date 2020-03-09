@@ -76,10 +76,10 @@ public class EnemyController : MonoBehaviour {
     public void CheckForEnemiesWhichReachedDeadline() {
 
         List<BaseEnemy> enemiesToRemove = new List<BaseEnemy>();
-        for (int i = 0; i < activeEnemies.Count; i++) {
+        for (int i = activeEnemies.Count - 1; i >= 0; i--) {
             if (activeEnemies[i].transform.position.y >= deadline.position.y) {
 
-                enemiesToRemove.Add(activeEnemies[i]);
+                //enemiesToRemove.Add(activeEnemies[i]);
 
                 int inflictedDamage = activeEnemies[i].currentHP * 10;
 
@@ -94,19 +94,14 @@ public class EnemyController : MonoBehaviour {
         }
 
         List<Item_Skillpoint> itemsToRemove = new List<Item_Skillpoint>();
-        for (int i = 0; i < activeItems.Count; i++) {
+        for (int i = activeItems.Count - 1; i >= 0; i--) {
             if (activeItems[i].transform.position.y >= deadline.position.y) {
-                itemsToRemove.Add(activeItems[i]);
+                activeItems[i].DestroyAndRemoveItem();
             }
         }
 
-        for (int i = 0; i < enemiesToRemove.Count; i++) {
-            activeEnemies.Remove(enemiesToRemove[i]);
-        }
-
-        for (int i = 0; i < itemsToRemove.Count; i++) {
-            activeItems[i].DestroyAndRemoveItem();
-        }
+        //activeItems.RemoveAll(itemsToRemove.Contains);
+        //activeEnemies.RemoveAll(enemiesToRemove.Contains);
     }
 
     public bool AllEnemiesBelowDottedLine() {
@@ -118,13 +113,16 @@ public class EnemyController : MonoBehaviour {
     }
 
     public void DespawnAllEntities() {
+
         foreach (var enemy in activeEnemies) {
             EasyObjectPool.instance.ReturnObjectToPool(enemy.gameObject);
         }
 
-        for (int i = 0; i < activeItems.Count; i++) {
-            Destroy(activeItems[i].gameObject);
+        for (int i = activeItems.Count - 1; i >= 0; i--) {
+            if (activeItems[i] != null)
+                activeItems[i].DestroyAndRemoveItem();
         }
+
         activeItems.Clear();
         activeEnemies.Clear();
     }
