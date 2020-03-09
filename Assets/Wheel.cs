@@ -12,8 +12,7 @@ public enum SlotType {
 
 public class Wheel : MonoBehaviour {
 
-    [SerializeField] private float minRotationTime;
-    [SerializeField] private float maxRotationTime;
+    [SerializeField] private int fullTurns;
 
     [HideInInspector] public bool isRotating;
 
@@ -59,18 +58,23 @@ public class Wheel : MonoBehaviour {
         float rotationSum = 0f;
         float decreaseSpeedDelta = 0.2f;
         float rotationSpeed = initialRotationSpeed;
-        float rotationTime = Random.Range(minRotationTime, maxRotationTime);
 
         isRotating = true;
 
-        while (timer < rotationTime) {
+        int slotRotationCounter = 0;
+        int randomSlotNumber = Random.Range(0, 6);
+        int totalSlotRotations = (6 * fullTurns) + randomSlotNumber;
+
+        while (slotRotationCounter < totalSlotRotations) {
 
             float rotationDelta = rotationSpeed * Time.unscaledDeltaTime;
             rect.anchoredPosition += new Vector2(0f, rotationDelta);
 
             rotationSum += rotationDelta;
 
+            // Check if wheel rotated one full slot
             if (rotationSum > slotHeight) {
+                slotRotationCounter++;
                 rotationSum -= slotHeight;
                 benitrator.PlayClickSfx();
             }
@@ -80,14 +84,14 @@ public class Wheel : MonoBehaviour {
                 rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, rect.anchoredPosition.y - (6 * slotHeight));
 
             // Slow down over time
-            rotationSpeed -= Random.Range(decreaseSpeedDelta, 2 * decreaseSpeedDelta);
-            rotationSpeed = Mathf.Max(rotationSpeed, 20f);
+            rotationSpeed -= decreaseSpeedDelta;
+            rotationSpeed = Mathf.Max(rotationSpeed, 30f);
 
             timer += Time.unscaledDeltaTime;
             yield return null;
         }
 
-        // calculate overshoot
+        // Calculate overshoot
         float dYAdjustment = rect.anchoredPosition.y % slotHeight;
         Vector2 targetPos = new Vector2(rect.anchoredPosition.x, rect.anchoredPosition.y - dYAdjustment);
 
@@ -97,12 +101,13 @@ public class Wheel : MonoBehaviour {
         float tMax = 0.15f;
         while (t < tMax) {
 
+            // Jump back, same as above
             if (rect.anchoredPosition.y >= 9.5f) {
-                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, 9.5f - (6 * slotHeight));
+                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, rect.anchoredPosition.y - (6 * slotHeight));
                 targetPos -= new Vector2(0f, 24f);
             }
 
-            // Snap slots in place
+            // Snap slot in place
             rect.anchoredPosition = Vector2.Lerp(rect.anchoredPosition, targetPos, t / tMax);
             t += Time.unscaledDeltaTime;
             yield return null;

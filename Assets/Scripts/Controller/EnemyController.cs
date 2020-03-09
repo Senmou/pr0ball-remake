@@ -128,7 +128,7 @@ public class EnemyController : MonoBehaviour {
 
             int random = Random.Range(1, 100);
 
-            if (random <= 3) {
+            if (random <= 5) {
                 SpawnItem(spawnPoints[i].position);
             } else {
                 SpawnEnemy(spawnPoints[i].position);
