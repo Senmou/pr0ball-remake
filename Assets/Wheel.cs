@@ -12,8 +12,8 @@ public enum SlotType {
 
 public class Wheel : MonoBehaviour {
 
-    // How long should the wheel rotate?
-    [SerializeField] private int fullTurnsBeforeStop;
+    [SerializeField] private float minRotationTime;
+    [SerializeField] private float maxRotationTime;
 
     [HideInInspector] public bool isRotating;
 
@@ -54,58 +54,70 @@ public class Wheel : MonoBehaviour {
 
         isRotating = true;
 
-        float deltaY = 0.5f;
+        float timer = 0f;
         float slotHeight = 4f;
+        float rotationSpeed = 75f;
+        float decreaseSpeedDelta = 0.2f;
 
-        // How many slots should be cycled through after slowing down?
-        int stepCount = UnityEngine.Random.Range(0, 6) * (int)(slotHeight / deltaY);
+        float rotationTime = Random.Range(minRotationTime, maxRotationTime);
+        while (timer < rotationTime) {
+            float rotationDelta = rotationSpeed * Time.unscaledDeltaTime;
+            rect.anchoredPosition += new Vector2(0f, rotationDelta);
+            
+            if (rect.anchoredPosition.y >= 9.5f)
+                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, rect.anchoredPosition.y - (6 * slotHeight));
 
-        // How often is deltaY applied to the wheels posY
-        int stepCountTotal = fullTurnsBeforeStop * 6 * (int)(slotHeight / deltaY) + stepCount;
+            // Slow down over time
+            rotationSpeed -= Random.Range(decreaseSpeedDelta, 2 * decreaseSpeedDelta);
 
-        int posY = 0;
-        for (int i = 0; i < stepCountTotal; i++) {
-
-            if (i % (slotHeight / deltaY) == 0)
-                benitrator.PlayClickSfx();
-
-            rect.anchoredPosition += new Vector2(0f, deltaY);
-
-            // int cast to avoid floating point errors
-            posY = (int)(rect.anchoredPosition.y * 10f);
-            if (posY == 125f)
-                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, 12.5f - 24f);
-
+            timer += Time.unscaledDeltaTime;
             yield return null;
         }
 
-        /**
-        * posY
-        * -75 Benis
-        * -35 Damage
-        * 5 Crit
-        * 45 CritDamage
-        * 85 Balls
-        * 125 SkillPoint
-        * 
-        **/
+        // calculate overshoot
+        float dYAdjustment = rect.anchoredPosition.y % slotHeight;
+        Vector2 targetPos = new Vector2(rect.anchoredPosition.x, rect.anchoredPosition.y - dYAdjustment);
+
+        benitrator.PlayWheelStopSfx();
+
+        float t = 0f;
+        float tMax = 0.15f;
+        while (t < tMax) {
+
+            if (rect.anchoredPosition.y >= 9.5f) {
+                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, 9.5f - (6 * slotHeight));
+                targetPos -= new Vector2(0f, 24f);
+            }
+
+            rect.anchoredPosition = Vector2.Lerp(rect.anchoredPosition, targetPos, t / tMax);
+            t += Time.unscaledDeltaTime;
+            yield return null;
+        }
 
         isRotating = false;
-        benitrator.PlayWheelStopSfx();
+
+        const int ballSlotPos = 80;
+        const int benisSlotPos = -80;
+        const int damageSlotPos = -40;
+        const int critChanceSlotPos = 0;
+        const int critDamageSlotPos = 40;
+        const int skillPointSlotPos = -120;
+
+        int posY = (int)(10f * rect.anchoredPosition.y);
 
         SlotType result = new SlotType();
 
-        if (posY == -35) {
+        if (posY == damageSlotPos) {
             result = SlotType.Damage;
-        } else if (posY == 5) {
+        } else if (posY == critChanceSlotPos) {
             result = SlotType.CritChance;
-        } else if (posY == 45) {
+        } else if (posY == critDamageSlotPos) {
             result = SlotType.CritDamage;
-        } else if (posY == 85) {
+        } else if (posY == ballSlotPos) {
             result = SlotType.Ball;
-        } else if (posY == 125) {
+        } else if (posY == skillPointSlotPos) {
             result = SlotType.SkillPoint;
-        } else if (posY == -75) {
+        } else if (posY == benisSlotPos) {
             result = SlotType.Score;
         }
 

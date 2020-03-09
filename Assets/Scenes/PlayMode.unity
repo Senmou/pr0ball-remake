@@ -7625,8 +7625,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf46c428ad844e48a60898df0da45af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fullTurnsBeforeStop: 2
+  minRotationTime: 1.3
+  maxRotationTime: 2.1
   isRotating: 0
+  factorClickSound: 10
+  initialRotationSpeed: 75
+  decreaseSpeedFactor: 0.2
+  tMax: 0.4
+  minClickSoundInterval: 0.05
 --- !u!1 &476540042
 GameObject:
   m_ObjectHideFlags: 0
@@ -8007,8 +8013,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf46c428ad844e48a60898df0da45af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fullTurnsBeforeStop: 1
+  minRotationTime: 0.9
+  maxRotationTime: 1.3
   isRotating: 0
+  factorClickSound: 10
+  initialRotationSpeed: 75
+  decreaseSpeedFactor: 0.2
+  tMax: 0.4
+  minClickSoundInterval: 0.05
 --- !u!1 &505779968
 GameObject:
   m_ObjectHideFlags: 0
@@ -22111,8 +22123,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbf46c428ad844e48a60898df0da45af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fullTurnsBeforeStop: 3
+  minRotationTime: 2.1
+  maxRotationTime: 2.3
   isRotating: 0
+  factorClickSound: 10
+  initialRotationSpeed: 75
+  decreaseSpeedFactor: 0.2
+  tMax: 0.4
+  minClickSoundInterval: 0.05
 --- !u!1 &1251603577
 GameObject:
   m_ObjectHideFlags: 0
