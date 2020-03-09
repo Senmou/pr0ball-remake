@@ -92,7 +92,7 @@ public class BaseEnemy : MonoBehaviour {
         }
     }
 
-    public void TakeDamage(int amount) {
+    public void TakeDamage(int amount, bool shouldIncScore = true) {
         currentHP -= amount;
         UpdateUI();
         if (currentHP <= 0) {
@@ -102,13 +102,14 @@ public class BaseEnemy : MonoBehaviour {
             else
                 deathParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.SetColor(Shader.PropertyToID("Color_65DE3E46"), enemyColor);
             ReturnToPool(this);
-            Score.instance.IncScore(benisValue);
+            if (shouldIncScore)
+                Score.instance.IncScore(benisValue);
             OnDeath();
         }
     }
 
-    public void Kill() {
-        TakeDamage(currentHP);
+    public void Kill(bool shouldIncScore = true) {
+        TakeDamage(currentHP, shouldIncScore);
     }
 
     protected virtual void OnDeath() {

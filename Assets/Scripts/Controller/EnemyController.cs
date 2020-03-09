@@ -75,15 +75,12 @@ public class EnemyController : MonoBehaviour {
 
     public void CheckForEnemiesWhichReachedDeadline() {
 
-        List<BaseEnemy> enemiesToRemove = new List<BaseEnemy>();
         for (int i = activeEnemies.Count - 1; i >= 0; i--) {
             if (activeEnemies[i].transform.position.y >= deadline.position.y) {
 
-                //enemiesToRemove.Add(activeEnemies[i]);
-
                 int inflictedDamage = activeEnemies[i].currentHP * 10;
 
-                activeEnemies[i].Kill();
+                activeEnemies[i].Kill(shouldIncScore: false);
                 Score.instance.DecScore(inflictedDamage);
 
                 // Spawn floating text
@@ -93,15 +90,11 @@ public class EnemyController : MonoBehaviour {
             }
         }
 
-        List<Item_Skillpoint> itemsToRemove = new List<Item_Skillpoint>();
         for (int i = activeItems.Count - 1; i >= 0; i--) {
             if (activeItems[i].transform.position.y >= deadline.position.y) {
                 activeItems[i].DestroyAndRemoveItem();
             }
         }
-
-        //activeItems.RemoveAll(itemsToRemove.Contains);
-        //activeEnemies.RemoveAll(enemiesToRemove.Contains);
     }
 
     public bool AllEnemiesBelowDottedLine() {
