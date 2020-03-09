@@ -52,18 +52,17 @@ public class Wheel : MonoBehaviour {
 
     private IEnumerator Rotate(Benitrator.ResultDelegate onStoppedRotating) {
 
-        isRotating = true;
-
         const float initialRotationSpeed = 75f;
 
         float timer = 0f;
         float slotHeight = 4f;
+        float rotationSum = 0f;
         float decreaseSpeedDelta = 0.2f;
         float rotationSpeed = initialRotationSpeed;
-
-        float rotationSum = 0f;
-
         float rotationTime = Random.Range(minRotationTime, maxRotationTime);
+
+        isRotating = true;
+
         while (timer < rotationTime) {
 
             float rotationDelta = rotationSpeed * Time.unscaledDeltaTime;

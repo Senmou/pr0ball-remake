@@ -3,14 +3,17 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
-    public static GameController instance = null;
-    public static bool isGamePaused = false;
+    [SerializeField] private FloatingText floatingText;
 
+    public static bool isGamePaused = false;
+    public static GameController instance = null;
+
+    private Canvas canvas;
+    private BallMenu ballMenu;
     private PauseMenu mainMenu;
     private SkillMenu skillMenu;
-    private BallMenu ballMenu;
-    private EnemyController enemyController;
     private RestartGame restartGame;
+    private EnemyController enemyController;
 
     private float elapsedTimeSinceRestart;
 
@@ -19,18 +22,24 @@ public class GameController : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
-        DontDestroyOnLoad(gameObject);
 
+        ballMenu = FindObjectOfType<BallMenu>();
         mainMenu = FindObjectOfType<PauseMenu>();
         skillMenu = FindObjectOfType<SkillMenu>();
-        ballMenu = FindObjectOfType<BallMenu>();
-        enemyController = FindObjectOfType<EnemyController>();
         restartGame = FindObjectOfType<RestartGame>();
+        enemyController = FindObjectOfType<EnemyController>();
+        canvas = GameObject.Find("MainCanvas").GetComponent<Canvas>();
 
         LevelData.SetCurrentLevelData(PersistentData.instance.currentLevelData);
 
         EventManager.StartListening("SaveGame", OnSaveGame);
         EventManager.StartListening("GameRestarted", OnGameRestarted);
+    }
+
+    public void SpawnFloatingText(string text, Vector2 position) {
+        GameObject go = Instantiate(floatingText, position, Quaternion.identity).gameObject;
+        go.GetComponent<FloatingText>().SetText(text);
+        go.transform.SetParent(canvas.transform);
     }
 
     public int GetPlaytimeMinutes() => (int)elapsedTimeSinceRestart / 60;

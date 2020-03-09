@@ -28,7 +28,6 @@ public class Skill_Hammertime : Skill {
     }
 
     private void Start() {
-        cost = 0;
         description = "pr0-chan";
     }
 

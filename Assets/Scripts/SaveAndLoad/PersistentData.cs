@@ -24,7 +24,6 @@ public class PersistentData : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
-        DontDestroyOnLoad(gameObject);
 
         soundData = new SoundData();
         scoreData = new ScoreData();

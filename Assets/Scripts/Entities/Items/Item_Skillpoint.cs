@@ -20,10 +20,10 @@ public class Item_Skillpoint : MonoBehaviour {
         EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
 
         int random = Random.Range(0, 100);
-        if (random < 10)
+        if (random < 3)
             value = Random.Range(5, 10);
         else
-            value = Random.Range(1, 3);
+            value = Random.Range(1, 2);
 
         valueUI.text = value.ToString();
     }

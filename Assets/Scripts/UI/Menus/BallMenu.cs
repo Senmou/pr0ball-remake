@@ -113,8 +113,8 @@ public class BallMenu : CanvasController {
     public void UpdateUI() {
 
         damageUI.text = BallStats.Instance.damage.ToString();
-        critChanceUI.text = BallStats.Instance.critChance.ToString("0.00") + "%";
-        critDamageUI.text = BallStats.Instance.critDamage.ToString("0.00") + "x";
+        critChanceUI.text = BallStats.Instance.critChance.ToString("0") + "%";
+        critDamageUI.text = BallStats.Instance.critDamage.ToString("0") + "x";
         ballCountUI.text = BallStats.Instance.ballCount.ToString();
     }
 

@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine.Events;
+using UnityEngine;
 
 public class EventManager : MonoBehaviour {
 
@@ -20,10 +20,6 @@ public class EventManager : MonoBehaviour {
             }
             return eventManager;
         }
-    }
-
-    private void Awake() {
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Init() {

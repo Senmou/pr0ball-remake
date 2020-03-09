@@ -15,7 +15,6 @@ public class Skill_Frogs : Skill {
     }
 
     private void Start() {
-        cost = 0;
         description = "Es regnet hochexplosive Bergfestzelebrierungsfrösche. Verursachen Bereichsschaden.";
     }
 

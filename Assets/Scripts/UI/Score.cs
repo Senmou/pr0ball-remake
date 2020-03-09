@@ -5,12 +5,11 @@ public class Score : MonoBehaviour {
 
     public static Score instance;
 
-    public TextMeshProUGUI scoreUI;
+    [HideInInspector] public int score;
+    [HideInInspector] public int highscore;
+    [HideInInspector] public int skillPoints;
 
-    public int score;
-    public int highscore;
-    public int skillPoints;
-
+    private TextMeshProUGUI scoreUI;
     private PlayStateController playStateController;
 
     private void Awake() {
@@ -21,6 +20,7 @@ public class Score : MonoBehaviour {
 
         EventManager.StartListening("SaveGame", OnSaveGame);
 
+        scoreUI = transform.FindChild<TextMeshProUGUI>("Value");
         playStateController = FindObjectOfType<PlayStateController>();
 
         score = PersistentData.instance.scoreData.score;

@@ -176,7 +176,7 @@ public class Benitrator : MonoBehaviour {
         totalResults.TryGetValue(SlotType.CritChance, out critChanceSymbolCount);
         if (critChanceSymbolCount > 1) {
             float rewardCritChance = GetRewardCritChance(critChanceSymbolCount);
-            BallStats.Instance.critChance += rewardCritChance;
+            BallStats.Instance.IncCritChance(rewardCritChance);
             winUI.text = rewardCritChance.ToString() + "% Kritische Trefferchance";
         }
 

@@ -19,7 +19,6 @@ public class Skill_Triggered : Skill {
     }
 
     private void Start() {
-        cost = 0;
         description = "Listen here, you little shit";
     }
 

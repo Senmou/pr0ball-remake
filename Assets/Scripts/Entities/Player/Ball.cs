@@ -10,14 +10,15 @@ public class Ball : MonoBehaviour {
     private float startForce = 300f;
     private float maxVelocity = 50f;
 
-    private new Collider2D collider;
-    private AudioSource audioSource;
+    private Sound sound;
     private Transform bezierEndPoint;
+    private AudioSource audioSource;
+    private new Collider2D collider;
     private TrailRenderer trailRenderer;
     private SpriteRenderer spriteRenderer;
     private BallController ballController;
+    private GameController gameController;
     private EnemyController enemyController;
-    private Sound sound;
 
     private Vector2 randomEnemyPos = Vector2.zero;
 
@@ -29,6 +30,7 @@ public class Ball : MonoBehaviour {
         trailRenderer = GetComponent<TrailRenderer>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         ballController = FindObjectOfType<BallController>();
+        gameController = FindObjectOfType<GameController>();
         enemyController = FindObjectOfType<EnemyController>();
         audioSource = GameObject.Find("SfxBounce").GetComponent<AudioSource>();
         bezierEndPoint = GameObject.FindGameObjectWithTag("BallCounterIcon").transform;
@@ -53,7 +55,7 @@ public class Ball : MonoBehaviour {
         body.velocity = Vector2.ClampMagnitude(body.velocity, maxVelocity);
     }
 
-    public int Damage() => BallStats.Instance.ModifiedDamage();
+    public int Damage() => BallStats.Instance.ModifiedDamage(() => { gameController.SpawnFloatingText("CRIT", transform.position); });
 
     public void Move(float timeToReachEndPoint, PlayStateController controller) {
         StartCoroutine(MoveToPosition(timeToReachEndPoint, controller));
@@ -78,7 +80,7 @@ public class Ball : MonoBehaviour {
 
         yield return null;
     }
-    
+
     public Vector2 Bezier(Vector2 a, Vector2 b, Vector2 c, float t) {
         Vector2 ab = Vector2.Lerp(a, b, t);
         Vector2 bc = Vector2.Lerp(b, c, t);

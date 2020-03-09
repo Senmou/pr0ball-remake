@@ -1,5 +1,5 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using System;
 
 [System.Serializable]
 public class BallStats {
@@ -29,13 +29,19 @@ public class BallStats {
         ballCount = 1;
     }
 
+    public void IncCritChance(float amount) {
+        critChance += amount;
+        if (critChance > 100f)
+            critChance = 100f;
+    }
+
     public void AddBalls(int amount = 1) {
         ballCount += amount;
         ballController = GameObject.FindObjectOfType<BallController>();
         ballController.SetMaxBallCount(ballCount);
     }
 
-    public int ModifiedDamage() {
+    public int ModifiedDamage(System.Action onCrit) {
 
         float dmg = damage;
 
@@ -43,6 +49,7 @@ public class BallStats {
         if (r < critChance) {
             dmg *= critDamage;
             Statistics.Instance.balls.crits++;
+            onCrit?.Invoke();
         }
 
         return (int)dmg;
