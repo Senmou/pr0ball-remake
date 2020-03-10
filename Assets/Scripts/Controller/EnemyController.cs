@@ -150,9 +150,16 @@ public class EnemyController : MonoBehaviour {
     private void SpawnEnemy(Vector3 position, CurrentLevelData.EntityType? entityType = null, int? hp = null, bool isInitialWave = false) {
 
         string sourcePool = "";
-        if (entityType == null)
+        if (entityType == null) {
+
+            // Probability of the hardest enemy grows with the danger level
+            int bonusWeight = 5 * LevelData.DangerLevel;
+            enemyLDT.lootDropItems[2].probabilityWeight += bonusWeight;
             sourcePool = enemyLDT.PickLootDropItem().poolName;
-        else {
+            
+            // Reset the probability weight after picking an enemy
+            enemyLDT.lootDropItems[2].probabilityWeight -= bonusWeight;
+        } else {
             switch (entityType) {
                 case CurrentLevelData.EntityType.Enemy_0:
                     sourcePool = "Enemy_0_pool";

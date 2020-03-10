@@ -19,6 +19,37 @@ public class DotColorController : MonoBehaviour {
         image = GetComponent<Image>();
     }
 
+    public Color GetDangerLevelColor(int percentage) {
+
+        int index = 0;
+        if (percentage >= 0) {
+            index = 0;
+        }
+        if (percentage >= 5) {
+            index = 1;
+        }
+        if (percentage > 10) {
+            index = 2;
+        }
+        if (percentage > 15) {
+            index = 3;
+        }
+        if (percentage > 20) {
+            index = 4;
+        }
+        if (percentage > 25) {
+            index = 5;
+        }
+        if (percentage > 50) {
+            index = 6;
+        }
+        if (percentage > 75) {
+            index = 7;
+        }
+
+        return accountInfoList[index].dotColor;
+    }
+
     public void UpdateDotColor(int benis) {
 
         int index = 1;

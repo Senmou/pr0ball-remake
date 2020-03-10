@@ -273,6 +273,8 @@ public class Benitrator : MonoBehaviour {
             rewardDamage += bet;
         }
 
+        LevelData.DangerLevel += (symbolCount == 2) ? 5 : 10;
+
         return rewardDamage;
     }
 
@@ -289,6 +291,8 @@ public class Benitrator : MonoBehaviour {
         if (symbolCount == 3) {
             rewardCritChance += 2 * bet;
         }
+
+        LevelData.DangerLevel += (symbolCount == 2) ? 5 : 10;
 
         return rewardCritChance;
     }
@@ -307,6 +311,8 @@ public class Benitrator : MonoBehaviour {
             rewardCritDamage += 0.25f * bet;
         }
 
+        LevelData.DangerLevel += (symbolCount == 2) ? 2 : 3;
+
         return rewardCritDamage;
     }
 
@@ -323,6 +329,8 @@ public class Benitrator : MonoBehaviour {
         if (symbolCount == 3) {
             rewardBalls += 2 * bet;
         }
+
+        LevelData.DangerLevel += (symbolCount == 2) ? (2 + bet) * rewardBalls : 10 * rewardBalls;
 
         return rewardBalls;
     }

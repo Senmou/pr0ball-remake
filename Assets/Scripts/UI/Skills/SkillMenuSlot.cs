@@ -10,6 +10,8 @@ public class SkillMenuSlot : MonoBehaviour {
     private SkillMenu skillMenu;
     private SkillMenuUnlockButton unlockButton;
 
+    private Button plus;
+    private Button minus;
     private TextMeshProUGUI costUI;
     private TextMeshProUGUI damageUI;
     private TextMeshProUGUI descriptionUI;
@@ -32,7 +34,9 @@ public class SkillMenuSlot : MonoBehaviour {
         infoDamage = transform.FindChild<Transform>("InfoPopups/Damage");
         infoUsedCounter = transform.FindChild<Transform>("InfoPopups/UsedCounter");
 
-        costUI = transform.FindChild<TextMeshProUGUI>("SkillData/Cost/Value");
+        plus = transform.FindChild<Button>("Cost/Plus");
+        minus = transform.FindChild<Button>("Cost/Minus");
+        costUI = transform.FindChild<TextMeshProUGUI>("Cost/Value");
         damageUI = transform.FindChild<TextMeshProUGUI>("SkillData/Damage/Value");
         descriptionUI = transform.FindChild<TextMeshProUGUI>("Description/Value");
         usedCounterUI = transform.FindChild<TextMeshProUGUI>("SkillData/UsedCounter/Value");
@@ -40,6 +44,10 @@ public class SkillMenuSlot : MonoBehaviour {
 
         purchaseSfx = GameObject.Find("SfxUnlockSkill").GetComponent<AudioSource>();
         errorSfx = GameObject.Find("SfxError").GetComponent<AudioSource>();
+    }
+
+    private void Start() {
+        CheckButtonInteractability();
     }
 
     private void Update() {
@@ -69,6 +77,31 @@ public class SkillMenuSlot : MonoBehaviour {
         }
     }
 
+    public void OnClickPlus() {
+        skill.IncCost();
+        UpdateSlot();
+    }
+
+    public void OnClickMinus() {
+        skill.DecCost();
+        UpdateSlot();
+    }
+
+    private void CheckButtonInteractability() {
+
+        if (minus == null || skill == null || plus == null)
+            return;
+
+        minus.interactable = skill.cost > 1;
+        plus.interactable = skill.cost < Score.instance.skillPoints;
+    }
+
+    private void UpdateCost() {
+        if(skill.cost > Score.instance.skillPoints) {
+            skill.cost = Mathf.Max(1, Score.instance.skillPoints);
+        }        
+    }
+
     public void UnlockSkill() {
         if (LevelData.Level >= skill.unlockLevel) {
             skill.locked = false;
@@ -89,5 +122,8 @@ public class SkillMenuSlot : MonoBehaviour {
         unlockButton?.SetText(skill.unlockLevel);
         unlockButton?.SetColor(skill.unlockLevel);
         descriptionUI.text = (skill.locked) ? "" : skill.description;
+
+        UpdateCost();
+        CheckButtonInteractability();
     }
 }

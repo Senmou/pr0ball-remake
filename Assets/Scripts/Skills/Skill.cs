@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Skill : MonoBehaviour {
 
-    public int cost;
     public int unlockLevel;
     public int bonusDamagePercentagePerUse;
 
@@ -17,6 +16,7 @@ public class Skill : MonoBehaviour {
     public SkillMenuSlot menuSlot;
 
     [HideInInspector] public int id;
+    [HideInInspector] public int cost;
     [HideInInspector] public bool locked;
     [HideInInspector] public int usedCounter;
     [HideInInspector] public new string name;
@@ -53,6 +53,10 @@ public class Skill : MonoBehaviour {
 
         SkillData.Skill skillData = PersistentData.instance.skillData.GetSkillData(id);
         locked = skillData.locked;
+        cost = skillData.cost;
+
+        if (cost < 1)
+            cost = 1;
 
         sfxError = GameObject.Find("SfxError").GetComponent<AudioSource>();
         sfxSuccess = GameObject.Find("SfxSpawn").GetComponent<AudioSource>();
@@ -62,6 +66,19 @@ public class Skill : MonoBehaviour {
 
     protected virtual int CalcDamage() => LevelData.Level * 10;
     protected int CalcBonusDamage() => (int)(Damage * usedCounter * (1f / bonusDamagePercentagePerUse));
+
+    public bool IncCost() {
+        if (Score.instance.skillPoints > cost) {
+            cost++;
+            return true;
+        }
+        return false;
+    }
+
+    public void DecCost() {
+        if (cost > 1)
+            cost--;
+    }
 
     protected void OnSaveGame() {
         SaveSkillData(id, locked, usedCounter);
@@ -86,6 +103,7 @@ public class Skill : MonoBehaviour {
             sfxSuccess.Play();
             usedCounter++;
             Statistics.Instance.skills.skillPointsSpend += cost;
+            LevelData.DangerLevel -= cost;
             StartCoroutine(ActionCoroutine());
         }
     }
@@ -109,11 +127,12 @@ public class Skill : MonoBehaviour {
     }
 
     protected void SaveSkillData(int id, bool locked, int usedCounter) {
-        PersistentData.instance.skillData.SetSkillData(id, locked, usedCounter);
+        PersistentData.instance.skillData.SetSkillData(id, locked, usedCounter, cost);
     }
 
     public void ResetData() {
         locked = true;
         usedCounter = 0;
+        cost = 1;
     }
 }

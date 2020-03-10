@@ -47,6 +47,7 @@ public class GameController : MonoBehaviour {
     private void OnSaveGame() {
         PersistentData.instance.currentLevelData.wave = LevelData.Wave;
         PersistentData.instance.currentLevelData.level = LevelData.Level;
+        PersistentData.instance.currentLevelData.dangerLevel = LevelData.DangerLevel;
         PersistentData.instance.elapsedTimeSinceRestart = elapsedTimeSinceRestart;
         Statistics.Instance.OnSaveGame();
     }

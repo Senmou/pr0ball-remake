@@ -5,7 +5,7 @@ using System;
 [CreateAssetMenu(menuName = "EnemyHP")]
 public class EnemyHP : ScriptableObject {
 
-    public bool randomize;
+    public bool incWithDangerLevel;
     [Range(0, 1)]
     public float maxBonusHPPercentage;
     public StepValues[] stepValueList;
@@ -31,9 +31,16 @@ public class EnemyHP : ScriptableObject {
             maxHP += HP(level, stepValueList[i].value, stepValueList[i].step);
         }
 
-        if (randomize) {
-            float bonusPercantage = UnityEngine.Random.Range(1f, 1f + maxBonusHPPercentage);
-            maxHP = (int)(maxHP * bonusPercantage);
+        if (incWithDangerLevel) {
+
+            if (LevelData.Level > 10) {
+                if (UnityEngine.Random.Range(0, 50) < LevelData.DangerLevel)
+                    maxHP += LevelData.DangerLevel;
+                maxHP *= (int)(1f + LevelData.DangerLevel / 100f);
+            } else {
+                maxHP += LevelData.DangerLevel / 3;
+            }
+
         }
 
         return maxHP;
@@ -53,16 +60,14 @@ public class EnemyHPEditor : Editor {
 
     SerializedProperty maxHP;
     SerializedProperty testLevel;
-    SerializedProperty randomize;
-    SerializedProperty maxBonusHPPercentage;
+    SerializedProperty incWithDangerLevel;
     SerializedProperty stepValueList;
 
     void OnEnable() {
         myScript = target as EnemyHP;
         maxHP = serializedObject.FindProperty("maxHP");
         testLevel = serializedObject.FindProperty("testLevel");
-        randomize = serializedObject.FindProperty("randomize");
-        maxBonusHPPercentage = serializedObject.FindProperty("maxBonusHPPercentage");
+        incWithDangerLevel = serializedObject.FindProperty("incWithDangerLevel");
         stepValueList = serializedObject.FindProperty("stepValueList");
     }
 
@@ -71,11 +76,7 @@ public class EnemyHPEditor : Editor {
 
         EditorGUILayout.PropertyField(maxHP);
         int level = EditorGUILayout.IntSlider(myScript.testLevel, 1, 100);
-        EditorGUILayout.PropertyField(randomize);
-
-        float bonusHPPercantage = 0f;
-        if (randomize.boolValue)
-            bonusHPPercantage = EditorGUILayout.Slider(myScript.maxBonusHPPercentage, 0f, 1f);
+        EditorGUILayout.PropertyField(incWithDangerLevel);
         EditorGUILayout.PropertyField(stepValueList, true);
 
         if (GUILayout.Button("Calculate")) {
@@ -86,9 +87,6 @@ public class EnemyHPEditor : Editor {
             myScript.CalcHP(level);
             myScript.testLevel = level;
         }
-
-        if (bonusHPPercantage != myScript.maxBonusHPPercentage)
-            myScript.maxBonusHPPercentage = bonusHPPercantage;
 
         serializedObject.ApplyModifiedProperties();
     }

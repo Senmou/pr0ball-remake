@@ -117,20 +117,23 @@ public class SkillData {
     [Serializable]
     public struct Skill {
         public bool locked;
+        public int cost;
         public int usedCounter;
     }
 
     private Skill[] skills;
     public int[] equippedSkillIDs;
 
-    public void SetSkillData(int id, bool locked, int usedCounter) {
+    public void SetSkillData(int id, bool locked, int usedCounter, int cost) {
         skills[id].locked = locked;
         skills[id].usedCounter = usedCounter;
+        skills[id].cost = cost;
     }
 
     public Skill GetSkillData(int id) {
         Skill skill = new Skill();
         skill.locked = PersistentData.instance.skillData.skills[id].locked;
+        skill.cost = PersistentData.instance.skillData.skills[id].cost;
         return skill;
     }
 
@@ -174,6 +177,7 @@ public class CurrentLevelData {
 
     public int wave;
     public int level;
+    public int dangerLevel;
     public int spawnPointIndex;
     public List<EntityData> activeEntities;
 
@@ -185,6 +189,7 @@ public class CurrentLevelData {
     public CurrentLevelData() {
         wave = 1;
         level = 1;
+        dangerLevel = 0;
         spawnPointIndex = 0;
         activeEntities = new List<EntityData>();
     }
