@@ -60,7 +60,7 @@ public class Skill : MonoBehaviour {
         locked = skillData.locked;
         cost = skillData.cost;
 
-        EventManager.StartListening("ChacheData", OnChacheData);
+        EventManager.StartListening("SaveGame", OnSaveGame);
         EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
     }
 
@@ -80,7 +80,7 @@ public class Skill : MonoBehaviour {
             cost--;
     }
 
-    protected void OnChacheData() {
+    protected void OnSaveGame() {
         SaveSkillData(id, locked, usedCounter, cost, usedThisTurn);
     }
 

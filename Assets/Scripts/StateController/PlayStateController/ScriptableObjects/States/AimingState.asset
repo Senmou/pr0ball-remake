@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AimingState
   m_EditorClassIdentifier: 
   oneShots:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: ca0f4fb6a8a88134990232066bb6d744, type: 2}
   actions: []
   transitions:
   - decision: {fileID: 11400000, guid: 414602ce890173b4d93b92ee051f492f, type: 2}

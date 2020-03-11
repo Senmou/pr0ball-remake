@@ -4,6 +4,7 @@ using TMPro;
 public class Item_Skillpoint : MonoBehaviour {
 
     [HideInInspector] public int value;
+    [HideInInspector] public bool reachedStartingPosition;
     [HideInInspector] public CurrentLevelData.EntityType entityType;
 
     private RectTransform rect;

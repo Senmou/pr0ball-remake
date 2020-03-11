@@ -35,8 +35,35 @@ public class EnemyController : MonoBehaviour {
 
         enemyLDT.ValidateTable();
     }
-    
+
+    private bool AllEntitiesReachedStartingPosition() {
+
+        foreach (var enemy in activeEnemies) {
+            if (!enemy.reachedStartingPosition)
+                return false;
+        }
+
+        foreach (var item in activeItems) {
+            if (!item.reachedStartingPosition)
+                return false;
+        }
+
+        return true;
+    }
+
     private void OnChacheData() {
+        StartCoroutine(ChacheEntities());
+    }
+
+    private IEnumerator ChacheEntities() {
+
+        yield return new WaitForEndOfFrame();
+
+        while (!AllEntitiesReachedStartingPosition()) {
+            yield return null;
+        }
+
+        Debug.Log("chache begins");
 
         PersistentData.instance.currentLevelData.activeEntities.Clear();
 
@@ -52,7 +79,7 @@ public class EnemyController : MonoBehaviour {
     public void LoadEntities() {
 
         if (PersistentData.instance.currentLevelData.activeEntities != null && PersistentData.instance.currentLevelData.activeEntities.Count > 0) {
-
+            Debug.Log("Entities loaded");
             DespawnAllEntities();
 
             List<CurrentLevelData.EntityData> data = PersistentData.instance.currentLevelData.activeEntities;
@@ -68,6 +95,7 @@ public class EnemyController : MonoBehaviour {
             PersistentData.instance.currentLevelData.activeEntities.Clear();
 
         } else {
+            Debug.Log("No entities loaded");
             // No saved entites found
             CreateInitialWaves();
         }
@@ -139,6 +167,7 @@ public class EnemyController : MonoBehaviour {
 
     private void SpawnItem(Vector3 position, int value = -1, bool isInitialWave = false) {
         Item_Skillpoint item = Instantiate(itemAddSkillPoint, position, Quaternion.identity, canvas.transform).GetComponent<Item_Skillpoint>();
+        item.reachedStartingPosition = false;
         item.transform.SetParent(itemSkillPointContainer);
         if (value != -1)
             item.SetValue(value);
@@ -146,6 +175,8 @@ public class EnemyController : MonoBehaviour {
 
         if (isInitialWave)
             MoveToStartPosition(item.transform);
+        else
+            item.reachedStartingPosition = true;
     }
 
     private void SpawnEnemy(Vector3 position, CurrentLevelData.EntityType? entityType = null, int? hp = null, bool isInitialWave = false) {
@@ -185,12 +216,15 @@ public class EnemyController : MonoBehaviour {
 
         BaseEnemy newEnemy = EasyObjectPool.instance.GetObjectFromPool(sourcePool, position, Quaternion.identity).GetComponent<BaseEnemy>();
         newEnemy.SetData(hp);
+        newEnemy.reachedStartingPosition = false;
         activeEnemies.Add(newEnemy);
 
         Statistics.Instance.enemies.spawned++;
 
         if (isInitialWave)
             MoveToStartPosition(newEnemy.transform);
+        else
+            newEnemy.reachedStartingPosition = true;
     }
 
     public void CreateInitialWaves() {
@@ -241,6 +275,17 @@ public class EnemyController : MonoBehaviour {
             t += Time.deltaTime / duration;
             yield return null;
         }
+
+        var enemy = entity.GetComponent<BaseEnemy>();
+        if (enemy)
+            enemy.reachedStartingPosition = true;
+        else {
+            var item = entity.GetComponent<Item_Skillpoint>();
+            if (item) {
+                item.reachedStartingPosition = true;
+            }
+        }
+
         yield return null;
     }
 
