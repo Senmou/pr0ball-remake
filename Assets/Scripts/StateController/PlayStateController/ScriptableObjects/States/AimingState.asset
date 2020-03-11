@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b1628fe20464c44acf7e1480e753f3, type: 3}
   m_Name: AimingState
   m_EditorClassIdentifier: 
-  oneShots: []
+  oneShots:
+  - {fileID: 0}
   actions: []
   transitions:
   - decision: {fileID: 11400000, guid: 414602ce890173b4d93b92ee051f492f, type: 2}

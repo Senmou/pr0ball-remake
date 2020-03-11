@@ -31,12 +31,12 @@ public class EnemyController : MonoBehaviour {
         itemSkillPointContainer = GameObject.Find("ItemSkillPointContainer").transform;
         playStateController = FindObjectOfType<PlayStateController>();
 
+        EventManager.StartListening("ChacheData", OnChacheData);
+
         enemyLDT.ValidateTable();
-
-        EventManager.StartListening("SaveGame", OnSaveGame);
     }
-
-    private void OnSaveGame() {
+    
+    private void OnChacheData() {
 
         PersistentData.instance.currentLevelData.activeEntities.Clear();
 

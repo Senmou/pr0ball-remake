@@ -20,13 +20,13 @@ public class SpawnPoints : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
-        EventManager.StartListening("SaveGame", OnSaveGame);
+        EventManager.StartListening("ChacheData", OnChacheData);
         EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
 
         index = PersistentData.instance.currentLevelData.spawnPointIndex;
     }
 
-    private void OnSaveGame() {
+    private void OnChacheData() {
         PersistentData.instance.currentLevelData.spawnPointIndex = index;
     }
 

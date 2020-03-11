@@ -22,7 +22,7 @@ public class Statistics {
         instance = PersistentData.instance.statistics;
     }
 
-    public void OnSaveGame() {
+    public void OnChacheData() {
         PersistentData.instance.statistics = Instance;
     }
 

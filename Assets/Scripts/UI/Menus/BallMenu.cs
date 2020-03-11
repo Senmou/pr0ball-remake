@@ -50,7 +50,7 @@ public class BallMenu : CanvasController {
         BallStats.Instance.critDamage = PersistentData.instance.ballData.critDamage;
         BallStats.Instance.ballCount = PersistentData.instance.ballData.ballCount;
 
-        EventManager.StartListening("SaveGame", OnSaveGame);
+        EventManager.StartListening("ChacheData", OnChacheData);
     }
 
     private void Start() {
@@ -103,7 +103,7 @@ public class BallMenu : CanvasController {
         purchaseSfx.Play();
     }
 
-    private void OnSaveGame() {
+    private void OnChacheData() {
         PersistentData.instance.ballData.damage = BallStats.Instance.damage;
         PersistentData.instance.ballData.critChance = BallStats.Instance.critChance;
         PersistentData.instance.ballData.critDamage = BallStats.Instance.critDamage;

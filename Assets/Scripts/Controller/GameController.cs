@@ -34,7 +34,7 @@ public class GameController : MonoBehaviour {
 
         elapsedTimeSinceRestart = PersistentData.instance.elapsedTimeSinceRestart;
 
-        EventManager.StartListening("SaveGame", OnSaveGame);
+        EventManager.StartListening("ChacheData", OnChacheData);
         EventManager.StartListening("GameRestarted", OnGameRestarted);
     }
 
@@ -68,12 +68,12 @@ public class GameController : MonoBehaviour {
 
     public int GetPlaytimeMinutes() => (int)elapsedTimeSinceRestart / 60;
 
-    private void OnSaveGame() {
+    private void OnChacheData() {
         PersistentData.instance.currentLevelData.wave = LevelData.Wave;
         PersistentData.instance.currentLevelData.level = LevelData.Level;
         PersistentData.instance.currentLevelData.dangerLevel = LevelData.DangerLevel;
         PersistentData.instance.elapsedTimeSinceRestart = elapsedTimeSinceRestart;
-        Statistics.Instance.OnSaveGame();
+        Statistics.Instance.OnChacheData();
     }
 
     private void OnGameRestarted() {

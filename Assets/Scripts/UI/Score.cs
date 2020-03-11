@@ -18,7 +18,7 @@ public class Score : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
-        EventManager.StartListening("SaveGame", OnSaveGame);
+        EventManager.StartListening("ChacheData", OnChacheData);
 
         scoreUI = transform.FindChild<TextMeshProUGUI>("Value");
         playStateController = FindObjectOfType<PlayStateController>();
@@ -37,7 +37,7 @@ public class Score : MonoBehaviour {
             IncScore(100);
     }
 
-    private void OnSaveGame() {
+    private void OnChacheData() {
         PersistentData.instance.scoreData.score = score;
         PersistentData.instance.scoreData.highscore = highscore;
         PersistentData.instance.scoreData.skillPoints = skillPoints;
