@@ -116,24 +116,28 @@ public class SkillData {
 
     [Serializable]
     public struct Skill {
-        public bool locked;
         public int cost;
         public int usedCounter;
+
+        public bool locked;
+        public bool usedThisTurn;
     }
 
     private Skill[] skills;
     public int[] equippedSkillIDs;
 
-    public void SetSkillData(int id, bool locked, int usedCounter, int cost) {
+    public void SetSkillData(int id, bool locked, int usedCounter, int cost, bool usedThisTurn) {
         skills[id].locked = locked;
         skills[id].usedCounter = usedCounter;
         skills[id].cost = cost;
+        skills[id].usedThisTurn = usedThisTurn;
     }
 
     public Skill GetSkillData(int id) {
         Skill skill = new Skill();
         skill.locked = PersistentData.instance.skillData.skills[id].locked;
         skill.cost = PersistentData.instance.skillData.skills[id].cost;
+        skill.usedThisTurn = PersistentData.instance.skillData.skills[id].usedThisTurn;
         return skill;
     }
 
@@ -147,6 +151,8 @@ public class SkillData {
         for (int i = 0; i < skillCount; i++) {
             skills[i].locked = true;
             skills[i].usedCounter = 0;
+            skills[i].cost = 1;
+            skills[i].usedThisTurn = false;
         }
     }
 }

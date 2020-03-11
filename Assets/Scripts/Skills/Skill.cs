@@ -20,6 +20,7 @@ public class Skill : MonoBehaviour {
     [HideInInspector] public bool locked;
     [HideInInspector] public int usedCounter;
     [HideInInspector] public new string name;
+    [HideInInspector] public bool usedThisTurn;
     [HideInInspector] public string description;
 
     public int Damage { get => CalcDamage(); }
@@ -48,20 +49,19 @@ public class Skill : MonoBehaviour {
     }
 
     protected void Awake() {
+
         skillMenu = FindObjectOfType<SkillMenu>();
         ballController = FindObjectOfType<BallController>();
-
-        SkillData.Skill skillData = PersistentData.instance.skillData.GetSkillData(id);
-        locked = skillData.locked;
-        cost = skillData.cost;
-
-        if (cost < 1)
-            cost = 1;
-
         sfxError = GameObject.Find("SfxError").GetComponent<AudioSource>();
         sfxSuccess = GameObject.Find("SfxSpawn").GetComponent<AudioSource>();
 
+        SkillData.Skill skillData = PersistentData.instance.skillData.GetSkillData(id);
+        usedThisTurn = skillData.usedThisTurn;
+        locked = skillData.locked;
+        cost = skillData.cost;
+
         EventManager.StartListening("SaveGame", OnSaveGame);
+        EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
     }
 
     protected virtual int CalcDamage() => LevelData.Level * 10;
@@ -81,7 +81,11 @@ public class Skill : MonoBehaviour {
     }
 
     protected void OnSaveGame() {
-        SaveSkillData(id, locked, usedCounter);
+        SaveSkillData(id, locked, usedCounter, cost, usedThisTurn);
+    }
+
+    protected void OnReachedNextLevel() {
+        usedThisTurn = false;
     }
 
     protected void Action() {
@@ -98,8 +102,15 @@ public class Skill : MonoBehaviour {
             return;
         }
 
+        if (usedThisTurn) {
+            sfxError.Play();
+            ErrorMessage.instance.Show(1f, "Erst im nächsten Level wieder!");
+            return;
+        }
+
         if (Score.instance.PaySkillPoints(cost)) {
             pending = true;
+            usedThisTurn = true;
             sfxSuccess.Play();
             usedCounter++;
             Statistics.Instance.skills.skillPointsSpend += cost;
@@ -126,8 +137,8 @@ public class Skill : MonoBehaviour {
         locked = false;
     }
 
-    protected void SaveSkillData(int id, bool locked, int usedCounter) {
-        PersistentData.instance.skillData.SetSkillData(id, locked, usedCounter, cost);
+    protected void SaveSkillData(int id, bool locked, int usedCounter, int cost, bool usedThisTurn) {
+        PersistentData.instance.skillData.SetSkillData(id, locked, usedCounter, cost, usedThisTurn);
     }
 
     public void ResetData() {

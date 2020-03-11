@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
+    public float debugTime;
+
     [SerializeField] private FloatingText floatingText;
 
     public static bool isGamePaused = false;
@@ -32,6 +34,8 @@ public class GameController : MonoBehaviour {
 
         LevelData.SetCurrentLevelData(PersistentData.instance.currentLevelData);
 
+        elapsedTimeSinceRestart = PersistentData.instance.elapsedTimeSinceRestart;
+
         EventManager.StartListening("SaveGame", OnSaveGame);
         EventManager.StartListening("GameRestarted", OnGameRestarted);
     }
@@ -40,20 +44,6 @@ public class GameController : MonoBehaviour {
         GameObject go = Instantiate(floatingText, position, Quaternion.identity).gameObject;
         go.GetComponent<FloatingText>().SetText(text);
         go.transform.SetParent(canvas.transform);
-    }
-
-    public int GetPlaytimeMinutes() => (int)elapsedTimeSinceRestart / 60;
-
-    private void OnSaveGame() {
-        PersistentData.instance.currentLevelData.wave = LevelData.Wave;
-        PersistentData.instance.currentLevelData.level = LevelData.Level;
-        PersistentData.instance.currentLevelData.dangerLevel = LevelData.DangerLevel;
-        PersistentData.instance.elapsedTimeSinceRestart = elapsedTimeSinceRestart;
-        Statistics.Instance.OnSaveGame();
-    }
-
-    private void OnGameRestarted() {
-        elapsedTimeSinceRestart = 0f;
     }
 
     private void Start() {
@@ -76,6 +66,22 @@ public class GameController : MonoBehaviour {
             else if (CanvasManager.instance.CurrentActiveCanvasType != CanvasType.GAMEOVER)
                 CanvasManager.instance.GoOneCanvasBack();
         }
+
+        debugTime = elapsedTimeSinceRestart;
+    }
+
+    public int GetPlaytimeMinutes() => (int)elapsedTimeSinceRestart / 60;
+
+    private void OnSaveGame() {
+        PersistentData.instance.currentLevelData.wave = LevelData.Wave;
+        PersistentData.instance.currentLevelData.level = LevelData.Level;
+        PersistentData.instance.currentLevelData.dangerLevel = LevelData.DangerLevel;
+        PersistentData.instance.elapsedTimeSinceRestart = elapsedTimeSinceRestart;
+        Statistics.Instance.OnSaveGame();
+    }
+
+    private void OnGameRestarted() {
+        elapsedTimeSinceRestart = 0f;
     }
 
     public void PauseGame() {
