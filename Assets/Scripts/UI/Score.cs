@@ -5,8 +5,8 @@ public class Score : MonoBehaviour {
 
     public static Score instance;
 
-    [HideInInspector] public int score;
-    [HideInInspector] public int highscore;
+    [HideInInspector] public long score;
+    [HideInInspector] public long highscore;
     [HideInInspector] public int skillPoints;
 
     private TextMeshProUGUI scoreUI;

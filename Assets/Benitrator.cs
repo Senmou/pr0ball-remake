@@ -349,7 +349,7 @@ public class Benitrator : MonoBehaviour {
             rewardScoreMultiplier *= bet;
         }
 
-        int currentScore = Score.instance.score;
+        long currentScore = Score.instance.score;
         int rewardScore = (int)((currentScore + 250) * rewardScoreMultiplier);
 
         return rewardScore;

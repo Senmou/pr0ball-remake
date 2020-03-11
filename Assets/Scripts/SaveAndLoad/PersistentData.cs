@@ -84,8 +84,8 @@ public class SoundData {
 
 [Serializable]
 public class ScoreData {
-    public int score;
-    public int highscore;
+    public long score;
+    public long highscore;
     public int skillPoints;
 
     public ScoreData() {
@@ -206,7 +206,7 @@ public class Highscores {
 
     [Serializable]
     public struct HighscoreEntry {
-        public int highscore;
+        public long highscore;
         public string timestamp;
     }
 
@@ -216,7 +216,7 @@ public class Highscores {
         entries = new List<HighscoreEntry>();
     }
 
-    public void AddHighscore(int _highscore, string _timestamp) {
+    public void AddHighscore(long _highscore, string _timestamp) {
         HighscoreEntry entry = new HighscoreEntry { highscore = _highscore, timestamp = _timestamp };
         entries.Add(entry);
 

@@ -79,12 +79,13 @@ public class EnemyController : MonoBehaviour {
             if (activeEnemies[i].transform.position.y >= deadline.position.y) {
 
                 int inflictedDamage = activeEnemies[i].currentHP * 10;
+                Vector2 floatingTextSpawnPos = activeEnemies[i].transform.position;
 
                 activeEnemies[i].Kill(shouldIncScore: false);
                 Score.instance.DecScore(inflictedDamage);
 
                 // Spawn floating text
-                GameObject go = Instantiate(floatingText, activeEnemies[i].transform.position, Quaternion.identity).gameObject;
+                GameObject go = Instantiate(floatingText, floatingTextSpawnPos, Quaternion.identity).gameObject;
                 go.GetComponent<FloatingText>().SetText("-" + inflictedDamage.ToString());
                 go.transform.SetParent(canvas.transform);
             }

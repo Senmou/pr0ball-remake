@@ -17,10 +17,11 @@ public class HighscoreTable : MonoBehaviour {
         int highscoreCount = PersistentData.instance.highscores.entries.Count;
 
         // Clear all entries except the template
-        for (int i = 0; i < container.childCount; i++) {
-            Transform child = container.GetChild(0);
-            if (child != null && child != template)
+        for (int i = container.childCount - 1; i > 0; i--) {
+            Transform child = container.GetChild(i);
+            if (child != null && child != template) {
                 Destroy(child.gameObject);
+            }
         }
 
         // Recreate all entries

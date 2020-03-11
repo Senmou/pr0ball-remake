@@ -50,7 +50,7 @@ public class DotColorController : MonoBehaviour {
         return accountInfoList[index].dotColor;
     }
 
-    public void UpdateDotColor(int benis) {
+    public void UpdateDotColor(long benis) {
 
         int index = 1;
         if (benis < 0) {
