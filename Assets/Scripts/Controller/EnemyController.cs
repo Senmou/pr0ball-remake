@@ -154,11 +154,11 @@ public class EnemyController : MonoBehaviour {
 
             // Probability of the hardest enemy grows with the danger level
             int bonusWeight = 5 * LevelData.DangerLevel;
-            enemyLDT.lootDropItems[2].probabilityWeight += bonusWeight;
+            enemyLDT.AddWeight("Enemy_2_pool", bonusWeight);
             sourcePool = enemyLDT.PickLootDropItem().poolName;
-            
+
             // Reset the probability weight after picking an enemy
-            enemyLDT.lootDropItems[2].probabilityWeight -= bonusWeight;
+            enemyLDT.AddWeight("Enemy_2_pool", -bonusWeight);
         } else {
             switch (entityType) {
                 case CurrentLevelData.EntityType.Enemy_0:

@@ -16,9 +16,16 @@ public class GenericLootDropTable<T> where T : GenericLootDropItem {
         return null;
     }
 
+    public void AddWeight(string poolName, float weight) {
+        T item = GetItem(poolName);
+        item.probabilityWeight += weight;
+        ValidateTable();
+    }
+
     public void SetWeight(string poolName, float weight) {
         T item = GetItem(poolName);
         item.probabilityWeight = weight;
+        ValidateTable();
     }
 
     public void ValidateTable() {
