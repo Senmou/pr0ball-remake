@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
-    public float debugTime;
-
     [SerializeField] private FloatingText floatingText;
 
     public static bool isGamePaused = false;
@@ -66,8 +64,6 @@ public class GameController : MonoBehaviour {
             else if (CanvasManager.instance.CurrentActiveCanvasType != CanvasType.GAMEOVER)
                 CanvasManager.instance.GoOneCanvasBack();
         }
-
-        debugTime = elapsedTimeSinceRestart;
     }
 
     public int GetPlaytimeMinutes() => (int)elapsedTimeSinceRestart / 60;
