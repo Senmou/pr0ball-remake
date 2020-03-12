@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Skill_Triggered : Skill {
 
-    [SerializeField] private BigBall bigBallPrefab;
     [SerializeField] private GameObject triggeredText;
+    [SerializeField] private FogelBall fogelBallPrefab;
 
     private Canvas canvas;
     private AudioSource audioSource;
@@ -28,40 +27,31 @@ public class Skill_Triggered : Skill {
 
         Statistics.Instance.skills.skill_3.used++;
 
-        List<BigBall> bigBalls = new List<BigBall>();
-
-        pending = true;
-
-        while (pending) {
-            if (ballController.BallCount > 0) {
-                pending = false;
-                barSlot.UpdateSlot();
-            }
-            yield return null;
-        }
-
         GameObject text = Instantiate(triggeredText, new Vector2(0f, 0f), Quaternion.identity);
         triggeredAudio.Play();
         MusicController.instance.SetVolume(0f);
         audioSource.Play();
 
-        for (int i = 0; i < 1; i++) {
-            BigBall bigBall = Instantiate(bigBallPrefab);
-            bigBall.SetDamage(TotalDamage);
-            bigBalls.Add(bigBall);
+        FogelBall fogelBall = Instantiate(fogelBallPrefab);
+        fogelBall.SetDamage(TotalDamage);
+
+        float t = 6f;
+        float dashInterval = 0.05f;
+        while (t > 0f) {
+            t -= dashInterval;
+            fogelBall.MoveToTopMostEnemy();
+            CameraEffect.instance.Shake(0.05f, 0.7f, true);
+            yield return new WaitForSeconds(dashInterval);
         }
 
-        while (ballController.BallCount > 0) {
-            foreach (var item in bigBalls) {
-                item?.MoveToTopMostEnemy();
-            }
-            CameraEffect.instance.Shake(0.05f, 0.7f, true);
-            yield return new WaitForSeconds(0.05f);
-        }
+        pending = false;
 
         Destroy(text);
+        Destroy(fogelBall.gameObject);
+
         audioSource.Stop();
         triggeredAudio.Stop();
+
         MusicController.instance.RestoreLastVolume();
     }
 }

@@ -1,13 +1,12 @@
 ﻿using MarchingBytes;
 using UnityEngine;
 
-public class BigBall : MonoBehaviour {
+public class FogelBall : MonoBehaviour {
 
     private const string particleSystemPoolName = "OrangeParticleSystem_Pool";
 
     [SerializeField] private GameObject onHitParticleSystem;
 
-    private AudioSource audioSource;
     private EnemyController enemyController;
 
     [HideInInspector] public Rigidbody2D body;
@@ -25,8 +24,6 @@ public class BigBall : MonoBehaviour {
         trailRenderer = GetComponent<TrailRenderer>();
         enemyController = FindObjectOfType<EnemyController>();
         trailRenderer.material.color = new Color(1, 0.4829951f, 0f, 1f); // orange
-        audioSource = GameObject.Find("SfxOrangeBallHit").GetComponent<AudioSource>();
-        EventManager.StartListening("WaveCompleted", OnWaveCompleted);
     }
 
     private void Start() {
@@ -39,10 +36,6 @@ public class BigBall : MonoBehaviour {
 
     public void SetDamage(int value) {
         damage = value;
-    }
-
-    private void OnWaveCompleted() {
-        Destroy(gameObject);
     }
 
     public void MoveToTopMostEnemy() {
@@ -67,7 +60,6 @@ public class BigBall : MonoBehaviour {
         body.gravityScale = 5f;
 
         if (other.gameObject.CompareTag("Enemy")) {
-            //audioSource.PlayOneShot(audioSource.clip);
             BaseEnemy enemy = other.gameObject.GetComponent<BaseEnemy>();
             enemy.TakeDamage(damage);
             Statistics.Instance.skills.skill_3.damageDealt += damage;

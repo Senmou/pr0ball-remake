@@ -16,10 +16,12 @@ public class GenericLootDropTable<T> where T : GenericLootDropItem {
         return null;
     }
 
-    public void AddWeight(string poolName, float weight) {
+    public void AddWeight(string poolName, float weight, bool validateTable = false) {
         T item = GetItem(poolName);
         item.probabilityWeight += weight;
-        ValidateTable();
+
+        if (validateTable)
+            ValidateTable();
     }
 
     public void SetWeight(string poolName, float weight) {
@@ -50,7 +52,7 @@ public class GenericLootDropTable<T> where T : GenericLootDropItem {
             }
         }
     }
-    
+
     public T PickLootDropItem() {
         float pickedNumber = Random.Range(0f, probabilityTotalWeight);
 

@@ -63,8 +63,6 @@ public class EnemyController : MonoBehaviour {
             yield return null;
         }
 
-        Debug.Log("chache begins");
-
         PersistentData.instance.currentLevelData.activeEntities.Clear();
 
         foreach (var enemy in activeEnemies) {
@@ -79,7 +77,6 @@ public class EnemyController : MonoBehaviour {
     public void LoadEntities() {
 
         if (PersistentData.instance.currentLevelData.activeEntities != null && PersistentData.instance.currentLevelData.activeEntities.Count > 0) {
-            Debug.Log("Entities loaded");
             DespawnAllEntities();
 
             List<CurrentLevelData.EntityData> data = PersistentData.instance.currentLevelData.activeEntities;
@@ -95,7 +92,6 @@ public class EnemyController : MonoBehaviour {
             PersistentData.instance.currentLevelData.activeEntities.Clear();
 
         } else {
-            Debug.Log("No entities loaded");
             // No saved entites found
             CreateInitialWaves();
         }
@@ -184,13 +180,17 @@ public class EnemyController : MonoBehaviour {
         string sourcePool = "";
         if (entityType == null) {
 
-            // Probability of the hardest enemy grows with the danger level
-            int bonusWeight = 5 * LevelData.DangerLevel;
+            // Probability of the hardest enemies grows with the danger level
+            int bonusWeight = 2 * LevelData.DangerLevel;
             enemyLDT.AddWeight("Enemy_2_pool", bonusWeight);
+            enemyLDT.AddWeight("Enemy_4_pool", bonusWeight);
+            enemyLDT.AddWeight("Enemy_5_pool", bonusWeight, validateTable: true);
             sourcePool = enemyLDT.PickLootDropItem().poolName;
 
             // Reset the probability weight after picking an enemy
             enemyLDT.AddWeight("Enemy_2_pool", -bonusWeight);
+            enemyLDT.AddWeight("Enemy_4_pool", -bonusWeight);
+            enemyLDT.AddWeight("Enemy_5_pool", -bonusWeight, validateTable: true);
         } else {
             switch (entityType) {
                 case CurrentLevelData.EntityType.Enemy_0:
