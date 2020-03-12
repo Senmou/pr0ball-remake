@@ -35,18 +35,7 @@ public class Skill : MonoBehaviour {
     private AudioSource sfxError;
     private AudioSource sfxSuccess;
 
-    public Sprite Icon {
-        get {
-            if (locked)
-                return iconLocked;
-            else {
-                if (pendingIcon && pending)
-                    return pendingIcon;
-                else
-                    return icon;
-            }
-        }
-    }
+    public Sprite Icon { get => locked ? iconLocked : icon; }
 
     protected void Awake() {
 
@@ -130,7 +119,6 @@ public class Skill : MonoBehaviour {
             return;
 
         Action();
-        barSlot.UpdateSlot();
     }
 
     public void Unlock() {

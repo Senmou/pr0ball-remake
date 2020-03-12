@@ -105,10 +105,10 @@ public class SkillMenuSlot : MonoBehaviour {
     public void UnlockSkill() {
         if (LevelData.Level >= skill.unlockLevel) {
             skill.locked = false;
+            skill.barSlot.UpdateSlot(skill);
             purchaseSfx.Play();
             unlockButton.Hide();
             UpdateSlot();
-            skillMenu.lastSkillBarSlotClicked.EquipSkill(skill);
         } else
             errorSfx.Play();
     }

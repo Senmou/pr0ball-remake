@@ -6,8 +6,6 @@ public class SkillBarSlot : MonoBehaviour {
     public Skill skill;
     public Sprite defaultSprite;
 
-    [HideInInspector] public Skill equippedSkill;
-
     private Image image;
 
     private void Awake() {
@@ -15,23 +13,20 @@ public class SkillBarSlot : MonoBehaviour {
     }
 
     public void UseSkill() {
-        equippedSkill?.UseSkill();
+        if (!skill.locked)
+            skill.UseSkill();
     }
 
-    public void EquipSkill(Skill skill) {
-        equippedSkill = skill;
-        equippedSkill.barSlot = this;
-        UpdateSlot();
-    }
+    public void UpdateSlot(Skill skill = null) {
 
-    public void UpdateSlot() {
-        if (equippedSkill)
-            image.sprite = equippedSkill.Icon;
-        else
+        if (skill == null) {
             image.sprite = defaultSprite;
-    }
+            return;
+        }
 
-    public void ResetData() {
-        equippedSkill = null;
+        if (skill.locked)
+            image.sprite = defaultSprite;
+        else
+            image.sprite = skill.Icon;
     }
 }

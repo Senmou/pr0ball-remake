@@ -12,29 +12,15 @@ public class SkillBar : MonoBehaviour {
         slots[0] = transform.FindChild<SkillBarSlot>("Slot_1");
         slots[1] = transform.FindChild<SkillBarSlot>("Slot_2");
         slots[2] = transform.FindChild<SkillBarSlot>("Slot_3");
-
-        EventManager.StartListening("SaveGame", OnSaveGame);
     }
 
     private void Start() {
-        InitSkillBarSlotsWithLoadedData();
+        UpdateSlots();
     }
 
-    private void InitSkillBarSlotsWithLoadedData() {
+    private void UpdateSlots() {
         for (int i = 0; i < slots.Length; i++) {
-            int id = PersistentData.instance.skillData.equippedSkillIDs[i];
-            if (id == -1 || slots[i] == null)
-                continue;
-            slots[i].EquipSkill(slots[i].skill);
-            slots[i].UpdateSlot();
-        }
-    }
-
-    private void OnSaveGame() {
-        for (int i = 0; i < slots.Length; i++) {
-            if (slots[i] == null || slots[i].equippedSkill == null)
-                continue;
-            PersistentData.instance.skillData.equippedSkillIDs[i] = slots[i].equippedSkill.id;
+            slots[i].UpdateSlot(slots[i].skill);
         }
     }
 
@@ -58,8 +44,8 @@ public class SkillBar : MonoBehaviour {
 
     public void ResetData() {
         for (int i = 0; i < slots.Length; i++) {
-            slots[i].ResetData();
-            slots[i].UpdateSlot();
+            slots[i].skill.locked = true;
         }
+        UpdateSlots();
     }
 }

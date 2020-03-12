@@ -131,7 +131,6 @@ public class SkillData {
     }
 
     private Skill[] skills;
-    public int[] equippedSkillIDs;
 
     public void SetSkillData(int id, bool locked, int usedCounter, int cost, bool usedThisTurn) {
         skills[id].locked = locked;
@@ -150,9 +149,6 @@ public class SkillData {
 
     public SkillData() {
         skills = new Skill[3];
-
-        // index is skillBarSlot.id
-        equippedSkillIDs = new int[3] { -1, -1, -1 };
 
         int skillCount = 3;
         for (int i = 0; i < skillCount; i++) {

@@ -301,11 +301,11 @@ public class Benitrator : MonoBehaviour {
         float rewardCritDamage = 0;
 
         if (bet == 1)
-            rewardCritDamage = 0.1f;
+            rewardCritDamage = 0.25f;
         else if (bet == 2)
-            rewardCritDamage = 0.3f;
-        else if (bet == 3)
             rewardCritDamage = 0.5f;
+        else if (bet == 3)
+            rewardCritDamage = 1f;
 
         if (symbolCount == 3) {
             rewardCritDamage += 0.25f * bet;
