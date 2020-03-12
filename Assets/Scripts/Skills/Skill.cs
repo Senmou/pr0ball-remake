@@ -65,7 +65,7 @@ public class Skill : MonoBehaviour {
     }
 
     protected virtual int CalcDamage() => LevelData.Level * 10;
-    protected int CalcBonusDamage() => (int)(Damage * usedCounter * (1f / bonusDamagePercentagePerUse));
+    protected int CalcBonusDamage() => (int)(Damage * usedCounter * (bonusDamagePercentagePerUse / 100f));
 
     public bool IncCost() {
         if (Score.instance.skillPoints > cost) {
