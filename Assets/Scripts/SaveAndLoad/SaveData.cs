@@ -3,29 +3,33 @@
 [Serializable]
 public class SaveData {
 
+    public BallData ballData;
     public SoundData soundData;
     public ScoreData scoreData;
-    public BallData ballData;
     public SkillData skillData;
-    public CurrentLevelData currentLevelData;
     public Highscores highscores;
     public Statistics statistics;
+    public CurrentLevelData currentLevelData;
 
     public bool uniColor;
     public bool isGameOver;
+    public bool firstAppStart;
+    public bool enableParticleSystems;
     public float elapsedTimeSinceRestart;
 
     public SaveData() {
+        ballData = PersistentData.instance.ballData;
         soundData = PersistentData.instance.soundData;
         scoreData = PersistentData.instance.scoreData;
-        ballData = PersistentData.instance.ballData;
         skillData = PersistentData.instance.skillData;
-        currentLevelData = PersistentData.instance.currentLevelData;
         highscores = PersistentData.instance.highscores;
         statistics = PersistentData.instance.statistics;
+        currentLevelData = PersistentData.instance.currentLevelData;
 
         uniColor = PersistentData.instance.uniColor;
         isGameOver = PersistentData.instance.isGameOver;
+        firstAppStart = PersistentData.instance.firstAppStart;
+        enableParticleSystems = PersistentData.instance.enableParticleSystems;
         elapsedTimeSinceRestart = PersistentData.instance.elapsedTimeSinceRestart;
     }
 }

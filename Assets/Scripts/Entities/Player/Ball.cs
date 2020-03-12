@@ -55,7 +55,10 @@ public class Ball : MonoBehaviour {
         body.velocity = Vector2.ClampMagnitude(body.velocity, maxVelocity);
     }
 
-    public int Damage() => BallStats.Instance.ModifiedDamage(() => { gameController.SpawnFloatingText("CRIT", transform.position); });
+    public int Damage() => BallStats.Instance.ModifiedDamage(() => {
+        if (PersistentData.instance.enableParticleSystems)
+            EasyObjectPool.instance.GetObjectFromPool("BlueParticleSystem_Pool", transform.position, Quaternion.identity);
+    });
 
     public void Move(float timeToReachEndPoint, PlayStateController controller) {
         StartCoroutine(MoveToPosition(timeToReachEndPoint, controller));

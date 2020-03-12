@@ -8,7 +8,7 @@ public class Skill_Frogs : Skill {
 
     private const string frogPoolName = "Frog_pool";
 
-    protected override int CalcDamage() => cost + cost * (enemyHPReference.MaxHP / 5);
+    protected override int CalcDamage() => cost + cost * (enemyHPReference.MaxHP / 10);
 
     private new void Awake() {
         base.Awake();

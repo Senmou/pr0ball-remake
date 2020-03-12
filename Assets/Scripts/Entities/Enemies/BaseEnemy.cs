@@ -78,14 +78,16 @@ public class BaseEnemy : MonoBehaviour {
         currentHP -= amount;
         UpdateUI();
         if (currentHP <= 0) {
-            ParticleSystem deathParticles = Instantiate(particleSystem, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
-            var particleVelocity = deathParticles.velocityOverLifetime;
-            particleVelocity.x = (ball.transform.position.x < transform.position.x) ? 10f : -10f;
+            if (PersistentData.instance.enableParticleSystems) {
+                ParticleSystem deathParticles = Instantiate(particleSystem, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+                var particleVelocity = deathParticles.velocityOverLifetime;
+                particleVelocity.x = (ball.transform.position.x < transform.position.x) ? 10f : -10f;
 
-            if (PersistentData.instance.uniColor)
-                deathParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.SetColor(Shader.PropertyToID("Color_65DE3E46"), uniColor);
-            else
-                deathParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.SetColor(Shader.PropertyToID("Color_65DE3E46"), enemyColor);
+                if (PersistentData.instance.uniColor)
+                    deathParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.SetColor(Shader.PropertyToID("Color_65DE3E46"), uniColor);
+                else
+                    deathParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.SetColor(Shader.PropertyToID("Color_65DE3E46"), enemyColor);
+            }
 
             ReturnToPool(this);
             Score.instance.IncScore(benisValue);
@@ -97,11 +99,13 @@ public class BaseEnemy : MonoBehaviour {
         currentHP -= amount;
         UpdateUI();
         if (currentHP <= 0) {
-            ParticleSystem deathParticles = Instantiate(particleSystem, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
-            if (PersistentData.instance.uniColor)
-                deathParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.SetColor(Shader.PropertyToID("Color_65DE3E46"), uniColor);
-            else
-                deathParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.SetColor(Shader.PropertyToID("Color_65DE3E46"), enemyColor);
+            if (PersistentData.instance.enableParticleSystems) {
+                ParticleSystem deathParticles = Instantiate(particleSystem, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+                if (PersistentData.instance.uniColor)
+                    deathParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.SetColor(Shader.PropertyToID("Color_65DE3E46"), uniColor);
+                else
+                    deathParticles.GetComponent<ParticleSystemRenderer>().sharedMaterial.SetColor(Shader.PropertyToID("Color_65DE3E46"), enemyColor);
+            }
             ReturnToPool(this);
             if (shouldIncScore)
                 Score.instance.IncScore(benisValue);

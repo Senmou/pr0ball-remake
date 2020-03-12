@@ -4,20 +4,34 @@ using UnityEngine;
 public class OptionsMenu : CanvasController {
 
     private MoveUI moveUI;
-    private Toggle toggle;
-    private AudioSource audioSource;
+    private Toggle toggleUniColor;
+    private Toggle toggleParticleSystems;
 
     private void Awake() {
         moveUI = GetComponent<MoveUI>();
-        audioSource = GameObject.Find("SfxSpawn").GetComponent<AudioSource>();
-        toggle = transform.FindChild<Toggle>("MiscOptions/Toggle_UniColor");
-        toggle.isOn = PersistentData.instance.uniColor;
+        toggleUniColor = transform.FindChild<Toggle>("MiscOptions/Toggle_UniColor");
+        toggleParticleSystems = transform.FindChild<Toggle>("MiscOptions/Toggle_ParticleSystems");
+        
+        if (PersistentData.instance.firstAppStart) {
+            toggleUniColor.isOn = false;
+            toggleParticleSystems.isOn = true;
+
+            PersistentData.instance.uniColor = false;
+            PersistentData.instance.enableParticleSystems = true;
+        } else {
+            toggleUniColor.isOn = PersistentData.instance.uniColor;
+            toggleParticleSystems.isOn = PersistentData.instance.enableParticleSystems;
+        }
     }
 
-    public void OnValueChanged(bool value) {
+    public void OnValueChanged_UniColor(bool value) {
         PersistentData.instance.uniColor = value;
-        audioSource.Play();
         EventManager.TriggerEvent("ToggleUniColor");
+    }
+
+    public void OnValueChanged_Particlesystems(bool value) {
+        PersistentData.instance.enableParticleSystems = value;
+        EventManager.TriggerEvent("ToggleParticleSystems");
     }
 
     public override void Show() {

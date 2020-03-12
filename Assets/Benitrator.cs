@@ -184,7 +184,7 @@ public class Benitrator : MonoBehaviour {
         int critDamageSymbolCount = -1;
         totalResults.TryGetValue(SlotType.CritDamage, out critDamageSymbolCount);
         if (critDamageSymbolCount > 1) {
-            float rewardCritDamage = GetRewardDamage(critDamageSymbolCount);
+            float rewardCritDamage = GetRewardCritDamage(critDamageSymbolCount);
             BallStats.Instance.critDamage += rewardCritDamage;
             winUI.text = rewardCritDamage.ToString() + "x Kritischer Schaden";
         }
@@ -273,7 +273,7 @@ public class Benitrator : MonoBehaviour {
             rewardDamage += bet;
         }
 
-        LevelData.DangerLevel += (symbolCount == 2) ? 5 : 10;
+        LevelData.DangerLevel += (symbolCount == 2) ? 7 : 12;
 
         return rewardDamage;
     }
@@ -292,7 +292,7 @@ public class Benitrator : MonoBehaviour {
             rewardCritChance += 2 * bet;
         }
 
-        LevelData.DangerLevel += (symbolCount == 2) ? 5 : 10;
+        LevelData.DangerLevel += rewardCritChance;
 
         return rewardCritChance;
     }
@@ -311,7 +311,7 @@ public class Benitrator : MonoBehaviour {
             rewardCritDamage += 0.25f * bet;
         }
 
-        LevelData.DangerLevel += (symbolCount == 2) ? 2 : 3;
+        LevelData.DangerLevel += (symbolCount == 2) ? 2 : 5;
 
         return rewardCritDamage;
     }

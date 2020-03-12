@@ -31,7 +31,7 @@ public class Skill_Hammertime : Skill {
         description = "pr0-chan";
     }
 
-    protected override int CalcDamage() => cost + cost * (enemyHPReference.MaxHP / 5);
+    protected override int CalcDamage() => cost + cost * (enemyHPReference.MaxHP / 8);
 
     protected override IEnumerator ActionCoroutine() {
 

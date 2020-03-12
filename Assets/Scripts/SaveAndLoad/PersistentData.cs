@@ -17,6 +17,8 @@ public class PersistentData : MonoBehaviour {
 
     public bool uniColor;
     public bool isGameOver;
+    public bool firstAppStart;
+    public bool enableParticleSystems;
     public float elapsedTimeSinceRestart;
 
     private void Awake() {
@@ -25,28 +27,33 @@ public class PersistentData : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
+        ballData = new BallData();
         soundData = new SoundData();
         scoreData = new ScoreData();
-        ballData = new BallData();
         skillData = new SkillData();
-        currentLevelData = new CurrentLevelData();
         highscores = new Highscores();
         statistics = new Statistics();
+        currentLevelData = new CurrentLevelData();
+
+        firstAppStart = true;
 
         Serialization.Load();
     }
 
     public void LoadDataFromSaveFile(SaveData saveData) {
+        ballData = saveData.ballData ?? new BallData();
         soundData = saveData.soundData ?? new SoundData();
         scoreData = saveData.scoreData ?? new ScoreData();
-        ballData = saveData.ballData ?? new BallData();
         skillData = saveData.skillData ?? new SkillData();
-        currentLevelData = saveData.currentLevelData ?? new CurrentLevelData();
         highscores = saveData.highscores ?? new Highscores();
-        statistics = saveData.statistics;
-        elapsedTimeSinceRestart = saveData.elapsedTimeSinceRestart;
-        isGameOver = saveData.isGameOver;
+        currentLevelData = saveData.currentLevelData ?? new CurrentLevelData();
+
         uniColor = saveData.uniColor;
+        statistics = saveData.statistics;
+        isGameOver = saveData.isGameOver;
+        firstAppStart = saveData.firstAppStart;
+        enableParticleSystems = saveData.enableParticleSystems;
+        elapsedTimeSinceRestart = saveData.elapsedTimeSinceRestart;
     }
 
     private void OnApplicationFocus(bool focus) {

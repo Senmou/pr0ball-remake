@@ -63,7 +63,9 @@ public class FogelBall : MonoBehaviour {
             BaseEnemy enemy = other.gameObject.GetComponent<BaseEnemy>();
             enemy.TakeDamage(damage);
             Statistics.Instance.skills.skill_3.damageDealt += damage;
-            EasyObjectPool.instance.GetObjectFromPool(particleSystemPoolName, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+
+            if (PersistentData.instance.enableParticleSystems)
+                EasyObjectPool.instance.GetObjectFromPool(particleSystemPoolName, transform.position, Quaternion.identity);
         }
     }
 }

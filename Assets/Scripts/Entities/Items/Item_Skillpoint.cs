@@ -10,15 +10,24 @@ public class Item_Skillpoint : MonoBehaviour {
     private RectTransform rect;
     private AudioSource sfxCoins;
     private TextMeshProUGUI valueUI;
+    private ParticleSystem particleSystem;
     private EnemyController enemyController;
 
     private void Awake() {
         rect = GetComponent<RectTransform>();
         entityType = CurrentLevelData.EntityType.Item;
+        particleSystem = GetComponent<ParticleSystem>();
         enemyController = FindObjectOfType<EnemyController>();
         valueUI = transform.FindChild<TextMeshProUGUI>("Value");
         sfxCoins = GameObject.Find("SfxCoins").GetComponent<AudioSource>();
+
+        if (PersistentData.instance.enableParticleSystems)
+            particleSystem.Play();
+        else
+            particleSystem.Stop();
+
         EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
+        EventManager.StartListening("ToggleParticleSystems", OnToggleParticleSystems);
 
         int random = Random.Range(0, 100);
         if (random < 3)
@@ -36,6 +45,13 @@ public class Item_Skillpoint : MonoBehaviour {
 
     private void OnReachedNextLevel() {
         Destroy(gameObject);
+    }
+
+    private void OnToggleParticleSystems() {
+        if (PersistentData.instance.enableParticleSystems)
+            particleSystem.Play();
+        else
+            particleSystem.Stop();
     }
 
     public void OnItemCollect() {

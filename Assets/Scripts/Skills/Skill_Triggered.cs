@@ -21,7 +21,7 @@ public class Skill_Triggered : Skill {
         description = "Fogel";
     }
 
-    protected override int CalcDamage() => cost + cost * (enemyHPReference.MaxHP / 20);
+    protected override int CalcDamage() => cost + cost * (enemyHPReference.MaxHP / 25);
 
     protected override IEnumerator ActionCoroutine() {
 

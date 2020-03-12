@@ -13,33 +13,33 @@ MonoBehaviour:
   m_Name: Enemy_5
   m_EditorClassIdentifier: 
   incWithDangerLevel: 1
-  maxBonusHPPercentage: 0.5
+  maxBonusHPPercentage: 1
   stepValueList:
   - step: 1
+    value: 3
+  - step: 2
     value: 5
-  - step: 5
+  - step: 4
     value: 10
+  - step: 6
+    value: 15
   - step: 10
-    value: 50
+    value: 20
+  - step: 12
+    value: 25
   - step: 15
-    value: 50
+    value: 400
   - step: 20
-    value: 50
-  - step: 25
-    value: 50
-  - step: 30
-    value: 50
-  - step: 35
-    value: 50
-  - step: 40
-    value: 80
-  - step: 45
-    value: 120
-  - step: 50
-    value: 300
-  - step: 55
     value: 500
-  - step: 60
+  - step: 25
     value: 1000
-  maxHP: 8
+  - step: 30
+    value: 1250
+  - step: 35
+    value: 1500
+  - step: 40
+    value: 2000
+  - step: 50
+    value: 5000
+  maxHP: 3
   testLevel: 1
