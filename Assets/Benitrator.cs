@@ -28,6 +28,7 @@ public class Benitrator : MonoBehaviour {
     private TextMeshProUGUI blussiUI;
 
     private BallMenu ballMenu;
+    private Transform proChan;
     private AudioSource audioSource;
     private Image startButtonBackground;
 
@@ -37,6 +38,7 @@ public class Benitrator : MonoBehaviour {
         ballMenu = FindObjectOfType<BallMenu>();
         wheels = GetComponentsInChildren<Wheel>();
         audioSource = GetComponent<AudioSource>();
+        proChan = transform.FindChild<Transform>("proChan");
         betUI = transform.FindChild<TextMeshProUGUI>("Bet/Value");
         winUI = transform.FindChild<TextMeshProUGUI>("Win/Value");
         benisUI = transform.FindChild<TextMeshProUGUI>("Benis/Value");
@@ -63,15 +65,23 @@ public class Benitrator : MonoBehaviour {
             }
         }
 
-        if (CanvasManager.instance.CurrentActiveCanvasType == CanvasType.BALLS && Score.instance.skillPoints == 0)
+        if (CanvasManager.instance.CurrentActiveCanvasType != CanvasType.BALLS)
+            return;
+
+        if (Score.instance.skillPoints == 0)
             startButtonBackground.color = new Color(0.35f, 0.35f, 0.35f, 1f); // grey
         else
             startButtonBackground.color = new Color(0.8235295f, 0.2352941f, 0.1333333f, 1f); // red
 
-        if (CanvasManager.instance.CurrentActiveCanvasType == CanvasType.BALLS) {
-            benisUI.text = Score.instance.score.ToString();
-            blussiUI.text = Score.instance.skillPoints.ToString();
-        }
+        benisUI.text = Score.instance.score.ToString();
+        blussiUI.text = Score.instance.skillPoints.ToString();
+    }
+
+    public void ShowProChanIfZeroSkillPoints() {
+        if (Score.instance.skillPoints == 0)
+            proChan.gameObject.SetActive(true);
+        else
+            proChan.gameObject.SetActive(false);
     }
 
     public void SetInitialBetIfEnoughSkillPoints() {

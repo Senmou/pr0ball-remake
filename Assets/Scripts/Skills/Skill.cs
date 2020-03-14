@@ -110,7 +110,7 @@ public class Skill : MonoBehaviour {
             barSlot.ShowClockImage(true);
             usedCounter++;
             sfxSuccess.Play();
-            LevelData.DangerLevel -= cost;
+            LevelData.DangerLevel -= 2 * cost;
             Statistics.Instance.skills.skillPointsSpend += cost;
             StartCoroutine(ActionCoroutine());
         }

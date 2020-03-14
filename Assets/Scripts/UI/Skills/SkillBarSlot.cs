@@ -48,5 +48,6 @@ public class SkillBarSlot : MonoBehaviour {
             image.sprite = skill.Icon;
 
         ShowClockImage(skill.usedThisTurn);
+        costUI.gameObject.SetActive(!skill.locked);
     }
 }

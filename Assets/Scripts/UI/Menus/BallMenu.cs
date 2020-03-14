@@ -4,14 +4,15 @@ using TMPro;
 public class BallMenu : CanvasController {
 
     private TextMeshProUGUI damageUI;
+    private TextMeshProUGUI ballCountUI;
     private TextMeshProUGUI critChanceUI;
     private TextMeshProUGUI critDamageUI;
-    private TextMeshProUGUI ballCountUI;
 
     private Transform infoDamage;
+    private Transform infoBallCount;
     private Transform infoCritChance;
     private Transform infoCritDamage;
-    private Transform infoBallCount;
+    private Transform infoDangerLevel;
 
     private MoveUI moveUI;
     private BallController ballController;
@@ -29,26 +30,28 @@ public class BallMenu : CanvasController {
         benitrator = FindObjectOfType<Benitrator>();
 
         damageUI = transform.FindChild<TextMeshProUGUI>("Stats/CurrentStats/Damage/Value");
+        ballCountUI = transform.FindChild<TextMeshProUGUI>("Stats/CurrentStats/BallCount/Value");
         critChanceUI = transform.FindChild<TextMeshProUGUI>("Stats/CurrentStats/CritChance/Value");
         critDamageUI = transform.FindChild<TextMeshProUGUI>("Stats/CurrentStats/CritDamage/Value");
-        ballCountUI = transform.FindChild<TextMeshProUGUI>("Stats/CurrentStats/BallCount/Value");
 
         infoDamage = transform.FindChild<Transform>("Stats/InfoPopups/Damage");
+        infoBallCount = transform.FindChild<Transform>("Stats/InfoPopups/BallCount");
         infoCritChance = transform.FindChild<Transform>("Stats/InfoPopups/CritChance");
         infoCritDamage = transform.FindChild<Transform>("Stats/InfoPopups/CritDamage");
-        infoBallCount = transform.FindChild<Transform>("Stats/InfoPopups/BallCount");
+        infoDangerLevel = transform.FindChild<Transform>("Benitrator/DangerLevel/InfoPopup");
 
         infoDamage.gameObject.SetActive(false);
+        infoBallCount.gameObject.SetActive(false);
         infoCritChance.gameObject.SetActive(false);
         infoCritDamage.gameObject.SetActive(false);
-        infoBallCount.gameObject.SetActive(false);
+        infoDangerLevel.gameObject.SetActive(false);
 
         ballController = FindObjectOfType<BallController>();
 
         BallStats.Instance.damage = PersistentData.instance.ballData.damage;
+        BallStats.Instance.ballCount = PersistentData.instance.ballData.ballCount;
         BallStats.Instance.critChance = PersistentData.instance.ballData.critChance;
         BallStats.Instance.critDamage = PersistentData.instance.ballData.critDamage;
-        BallStats.Instance.ballCount = PersistentData.instance.ballData.ballCount;
 
         EventManager.StartListening("ChacheData", OnChacheData);
     }
@@ -65,6 +68,7 @@ public class BallMenu : CanvasController {
                 infoCritChance.gameObject.SetActive(false);
                 infoCritDamage.gameObject.SetActive(false);
                 infoBallCount.gameObject.SetActive(false);
+                infoDangerLevel.gameObject.SetActive(false);
             }
 
             if (InputHelper.instance.ClickedOnTag("InfoCritChance")) {
@@ -72,6 +76,7 @@ public class BallMenu : CanvasController {
                 infoCritChance.gameObject.SetActive(true);
                 infoCritDamage.gameObject.SetActive(false);
                 infoBallCount.gameObject.SetActive(false);
+                infoDangerLevel.gameObject.SetActive(false);
             }
 
             if (InputHelper.instance.ClickedOnTag("InfoCritDamage")) {
@@ -79,6 +84,7 @@ public class BallMenu : CanvasController {
                 infoCritChance.gameObject.SetActive(false);
                 infoCritDamage.gameObject.SetActive(true);
                 infoBallCount.gameObject.SetActive(false);
+                infoDangerLevel.gameObject.SetActive(false);
             }
 
             if (InputHelper.instance.ClickedOnTag("InfoBallCount")) {
@@ -86,12 +92,22 @@ public class BallMenu : CanvasController {
                 infoCritChance.gameObject.SetActive(false);
                 infoCritDamage.gameObject.SetActive(false);
                 infoBallCount.gameObject.SetActive(true);
+                infoDangerLevel.gameObject.SetActive(false);
+            }
+
+            if (InputHelper.instance.ClickedOnTag("InfoDangerLevel")) {
+                infoDamage.gameObject.SetActive(false);
+                infoCritChance.gameObject.SetActive(false);
+                infoCritDamage.gameObject.SetActive(false);
+                infoBallCount.gameObject.SetActive(false);
+                infoDangerLevel.gameObject.SetActive(true);
             }
         } else {
             infoDamage.gameObject.SetActive(false);
             infoCritChance.gameObject.SetActive(false);
             infoCritDamage.gameObject.SetActive(false);
             infoBallCount.gameObject.SetActive(false);
+            infoDangerLevel.gameObject.SetActive(false);
         }
     }
 
@@ -124,6 +140,7 @@ public class BallMenu : CanvasController {
     }
 
     public override void Show() {
+        benitrator.ShowProChanIfZeroSkillPoints();
         benitrator.SetInitialBetIfEnoughSkillPoints();
         UpdateUI();
         moveUI.FadeTo(new Vector2(0f, 0f), 0.5f);

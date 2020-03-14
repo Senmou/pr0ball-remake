@@ -44,7 +44,7 @@ public class SkillBar : MonoBehaviour {
 
     public void ResetData() {
         for (int i = 0; i < slots.Length; i++) {
-            slots[i].skill.locked = true;
+            slots[i].skill.ResetData();
         }
         UpdateSlots();
     }
