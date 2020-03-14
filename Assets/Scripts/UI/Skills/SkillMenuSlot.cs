@@ -99,7 +99,7 @@ public class SkillMenuSlot : MonoBehaviour {
     public void UnlockSkill() {
         if (LevelData.Level >= skill.unlockLevel) {
             skill.locked = false;
-            skill.barSlot.UpdateSlot(skill);
+            skill.barSlot.UpdateSlot();
             purchaseSfx.Play();
             unlockButton.Hide();
             UpdateSlot();
@@ -118,6 +118,6 @@ public class SkillMenuSlot : MonoBehaviour {
         descriptionUI.text = (skill.locked) ? "" : skill.description;
 
         CheckButtonInteractability();
-        skill.barSlot.UpdateCostUI(skill.cost);
+        skill.barSlot.UpdateSlot();
     }
 }

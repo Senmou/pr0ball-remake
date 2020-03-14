@@ -20,7 +20,7 @@ public class SkillBar : MonoBehaviour {
 
     private void UpdateSlots() {
         for (int i = 0; i < slots.Length; i++) {
-            slots[i].UpdateSlot(slots[i].skill);
+            slots[i].UpdateSlot();
         }
     }
 

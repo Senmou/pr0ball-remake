@@ -49,8 +49,12 @@ public class Skill : MonoBehaviour {
         locked = skillData.locked;
         cost = skillData.cost;
 
-        EventManager.StartListening("SaveData", OnSaveGame);
+        EventManager.StartListening("SaveGame", OnSaveGame);
         EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
+    }
+
+    private void Start() {
+        barSlot.UpdateSlot();
     }
 
     protected virtual int CalcDamage() => LevelData.Level * 10;
@@ -102,7 +106,7 @@ public class Skill : MonoBehaviour {
             pending = true;
             usedThisTurn = true;
             UpdateCost();
-            barSlot.UpdateCostUI(cost);
+            barSlot.UpdateSlot();
             barSlot.ShowClockImage(true);
             usedCounter++;
             sfxSuccess.Play();

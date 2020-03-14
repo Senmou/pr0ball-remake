@@ -352,6 +352,8 @@ public class Benitrator : MonoBehaviour {
         long currentScore = Score.instance.score;
         int rewardScore = (int)((currentScore + 250) * rewardScoreMultiplier);
 
+        LevelData.DangerLevel -= 5 + bet;
+
         return rewardScore;
     }
 
