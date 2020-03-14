@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfe736667e3865d40841f649a5f8d56f, type: 3}
   m_Name: Enemy_3
   m_EditorClassIdentifier: 
-  incWithDangerLevel: 0
+  incWithDangerLevel: 1
   maxBonusHPPercentage: 0.1
   stepValueList:
   - step: 1

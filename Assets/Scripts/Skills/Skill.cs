@@ -49,7 +49,7 @@ public class Skill : MonoBehaviour {
         locked = skillData.locked;
         cost = skillData.cost;
 
-        EventManager.StartListening("SaveGame", OnSaveGame);
+        EventManager.StartListening("SaveData", OnSaveGame);
         EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
     }
 
@@ -75,6 +75,7 @@ public class Skill : MonoBehaviour {
 
     protected void OnReachedNextLevel() {
         usedThisTurn = false;
+        barSlot.ShowClockImage(false);
     }
 
     protected void Action() {
@@ -100,11 +101,20 @@ public class Skill : MonoBehaviour {
         if (Score.instance.PaySkillPoints(cost)) {
             pending = true;
             usedThisTurn = true;
-            sfxSuccess.Play();
+            UpdateCost();
+            barSlot.UpdateCostUI(cost);
+            barSlot.ShowClockImage(true);
             usedCounter++;
-            Statistics.Instance.skills.skillPointsSpend += cost;
+            sfxSuccess.Play();
             LevelData.DangerLevel -= cost;
+            Statistics.Instance.skills.skillPointsSpend += cost;
             StartCoroutine(ActionCoroutine());
+        }
+    }
+
+    private void UpdateCost() {
+        if (cost > Score.instance.skillPoints) {
+            cost = Mathf.Max(1, Score.instance.skillPoints);
         }
     }
 
@@ -130,8 +140,9 @@ public class Skill : MonoBehaviour {
     }
 
     public void ResetData() {
+        cost = 1;
         locked = true;
         usedCounter = 0;
-        cost = 1;
+        usedThisTurn = false;
     }
 }

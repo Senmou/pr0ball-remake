@@ -40,7 +40,7 @@ public class SkillMenuSlot : MonoBehaviour {
         damageUI = transform.FindChild<TextMeshProUGUI>("SkillData/Damage/Value");
         descriptionUI = transform.FindChild<TextMeshProUGUI>("Description/Value");
         usedCounterUI = transform.FindChild<TextMeshProUGUI>("SkillData/UsedCounter/Value");
-        bonusDamageUI = transform.FindChild<TextMeshProUGUI>("SkillData/Damage/BonusDamageValue");
+        bonusDamageUI = transform.FindChild<TextMeshProUGUI>("SkillData/UsedCounter/BonusDamageValue");
 
         purchaseSfx = GameObject.Find("SfxUnlockSkill").GetComponent<AudioSource>();
         errorSfx = GameObject.Find("SfxError").GetComponent<AudioSource>();
@@ -96,12 +96,6 @@ public class SkillMenuSlot : MonoBehaviour {
         plus.interactable = skill.cost < Score.instance.skillPoints;
     }
 
-    private void UpdateCost() {
-        if(skill.cost > Score.instance.skillPoints) {
-            skill.cost = Mathf.Max(1, Score.instance.skillPoints);
-        }        
-    }
-
     public void UnlockSkill() {
         if (LevelData.Level >= skill.unlockLevel) {
             skill.locked = false;
@@ -123,7 +117,7 @@ public class SkillMenuSlot : MonoBehaviour {
         unlockButton?.SetColor(skill.unlockLevel);
         descriptionUI.text = (skill.locked) ? "" : skill.description;
 
-        UpdateCost();
         CheckButtonInteractability();
+        skill.barSlot.UpdateCostUI(skill.cost);
     }
 }

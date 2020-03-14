@@ -243,6 +243,7 @@ MonoBehaviour:
   currentHP: 0
   body: {fileID: 0}
   canTakeDamageFromSkill: 0
+  reachedStartingPosition: 0
   entityType: 0
 --- !u!212 &338860152524876274
 SpriteRenderer:
