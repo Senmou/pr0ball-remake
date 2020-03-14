@@ -1,11 +1,11 @@
 # pr0ball 2.0
 
 ##### Table of Contents  
-[Headers](#headers)     
+ 
 [myHeader](#myheader)
 
 1. Was ist pr0ball 2.0
-<a name="top"/>
+<a name="tableofcontents"/>
 
 Ein Spiel.
 
@@ -79,7 +79,7 @@ asfd
 
 
 
-[Back to TOP](#top)
+[Table of Contents](#tableofcontents)
 # myHeader
 <a name="myheader"/>
 asdf
