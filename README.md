@@ -2,8 +2,8 @@
 
 ##### Table of Contents  
 [Headers](#headers)     
-<a name="yourHeader"/>
-<a name="myHeader/>
+<a name="yourheader"/>
+<a name="myheader/>
 
 1. Was ist pr0ball 2.0
 
