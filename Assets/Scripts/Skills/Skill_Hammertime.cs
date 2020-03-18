@@ -33,11 +33,12 @@ public class Skill_Hammertime : Skill {
         description = "pr0-chan";
     }
 
-    protected override int CalcDamage() => cost + cost * (enemyHPReference.MaxHP / 5);
+    protected override int CalcDamage(int cost) => cost + cost * (enemyHPReference.MaxHP / 3);
 
     protected override IEnumerator ActionCoroutine() {
 
         Statistics.Instance.skills.skill_1.used++;
+        Statistics.Instance.skills.skill_1.skillPointsSpend += paidCost;
 
         float xPos = Random.Range(-8f, 7.4f);
         hammer.transform.position = new Vector3(xPos, 26f);
@@ -71,11 +72,11 @@ public class Skill_Hammertime : Skill {
                     PooledParticleSystem particleSystem = EasyObjectPool.instance.GetObjectFromPool("HammerTimeParticleSystem_Pool", hitEnemy.transform.position, Quaternion.identity).GetComponent<PooledParticleSystem>();
                     particleSystem.SetColor(hitEnemy.GetColor());
 
-                    hitEnemy.TakeDamage(TotalDamage);
+                    hitEnemy.TakeDamage(GetTotalDamage(paidCost));
                     hitEnemy.canTakeDamageFromSkill = false;
 
                     CameraEffect.instance.Shake(0.05f, 0.5f);
-                    Statistics.Instance.skills.skill_1.damageDealt += TotalDamage;
+                    Statistics.Instance.skills.skill_1.damageDealt += GetTotalDamage(paidCost);
                 }
             }
 

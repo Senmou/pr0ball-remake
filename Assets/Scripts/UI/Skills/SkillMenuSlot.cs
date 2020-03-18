@@ -110,9 +110,9 @@ public class SkillMenuSlot : MonoBehaviour {
     public void UpdateSlot() {
         image.sprite = skill.Icon;
         costUI.text = skill.cost.ToString();
-        damageUI.text = skill.TotalDamage.ToString();
+        damageUI.text = skill.GetTotalDamage(skill.cost).ToString();
         usedCounterUI.text = skill.BonusPercentage.ToString() + "%";
-        bonusDamageUI.text = "(+" + skill.BonusDamage.ToString() + ")";
+        bonusDamageUI.text = "(+" + skill.GetBonusDamage(skill.cost).ToString() + ")";
         unlockButton?.SetText(skill.unlockLevel);
         unlockButton?.SetColor(skill.unlockLevel);
         descriptionUI.text = (skill.locked) ? "" : skill.description;

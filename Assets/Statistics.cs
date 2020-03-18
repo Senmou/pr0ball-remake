@@ -59,6 +59,7 @@ public class Statistics {
         public struct Skill {
             public int used;
             public int damageDealt;
+            public int skillPointsSpend;
         }
     }
 

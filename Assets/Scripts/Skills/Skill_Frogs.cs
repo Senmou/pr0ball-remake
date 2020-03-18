@@ -8,7 +8,7 @@ public class Skill_Frogs : Skill {
 
     private const string frogPoolName = "Frog_pool";
 
-    protected override int CalcDamage() => cost + cost * (enemyHPReference.MaxHP / 8);
+    protected override int CalcDamage(int cost) => cost + cost * (enemyHPReference.MaxHP / 8);
 
     private new void Awake() {
         base.Awake();
@@ -21,12 +21,13 @@ public class Skill_Frogs : Skill {
     protected override IEnumerator ActionCoroutine() {
 
         Statistics.Instance.skills.skill_2.used++;
+        Statistics.Instance.skills.skill_2.skillPointsSpend += paidCost;
 
         for (int i = 0; i < frogCount; i++) {
             float posY = 23f;
             float posX = Random.Range(-9.36f, 9.36f);
             Frog frog = EasyObjectPool.instance.GetObjectFromPool(frogPoolName, new Vector3(posX, posY), Quaternion.identity).GetComponent<Frog>();
-            frog.SetDamage(TotalDamage);
+            frog.SetDamage(GetTotalDamage(paidCost));
             CameraEffect.instance.Shake(0.1f, 0.15f);
             yield return new WaitForSeconds(0.3f);
         }

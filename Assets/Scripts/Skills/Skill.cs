@@ -4,7 +4,7 @@ using UnityEngine;
 public class Skill : MonoBehaviour {
 
     public int unlockLevel;
-    public int bonusDamagePercentagePerUse;
+    public int bonusDamagePercentagePerPaidSkillPoint;
 
     // Used for skill damage calculation
     public EnemyHP enemyHPReference;
@@ -17,20 +17,23 @@ public class Skill : MonoBehaviour {
 
     [HideInInspector] public int id;
     [HideInInspector] public int cost;
+    [HideInInspector] public int paidCost;
     [HideInInspector] public bool locked;
     [HideInInspector] public int usedCounter;
     [HideInInspector] public new string name;
-     public bool usedThisTurn;
+    [HideInInspector] public bool usedThisTurn;
     [HideInInspector] public string description;
 
-    public int Damage { get => CalcDamage(); }
-    public int BonusDamage { get => CalcBonusDamage(); }
-    public int TotalDamage { get => Damage + BonusDamage; }
-    public int BonusPercentage { get => usedCounter * bonusDamagePercentagePerUse; }
+    public int BonusPercentage { get => skillPointsSpend * bonusDamagePercentagePerPaidSkillPoint; }
+
+    public int GetDamage(int paidCost) => CalcDamage(paidCost);
+    public int GetBonusDamage(int paidCost) => (int)(GetDamage(paidCost) * (BonusPercentage / 100f));
+    public int GetTotalDamage(int paidCost) => (int)(GetDamage(paidCost) * (1f + BonusPercentage / 100f));
 
     protected bool pending;
     protected BallController ballController;
 
+    private int skillPointsSpend;
     private SkillMenu skillMenu;
     private AudioSource sfxError;
     private AudioSource sfxSuccess;
@@ -57,8 +60,7 @@ public class Skill : MonoBehaviour {
         barSlot.UpdateSlot();
     }
 
-    protected virtual int CalcDamage() => LevelData.Level * 10;
-    protected int CalcBonusDamage() => (int)(Damage * usedCounter * (bonusDamagePercentagePerUse / 100f));
+    protected virtual int CalcDamage(int cost) => LevelData.Level * 10;
 
     public bool IncCost() {
         if (Score.instance.skillPoints > cost) {
@@ -103,6 +105,8 @@ public class Skill : MonoBehaviour {
         }
 
         if (Score.instance.PaySkillPoints(cost)) {
+            paidCost = cost;
+            skillPointsSpend += cost;
             pending = true;
             usedThisTurn = true;
             UpdateCost();

@@ -21,11 +21,12 @@ public class Skill_Triggered : Skill {
         description = "Gemeiner Virus";
     }
 
-    protected override int CalcDamage() => cost + cost * (enemyHPReference.MaxHP / 20);
+    protected override int CalcDamage(int cost) => cost + cost * (enemyHPReference.MaxHP / 20);
 
     protected override IEnumerator ActionCoroutine() {
 
         Statistics.Instance.skills.skill_3.used++;
+        Statistics.Instance.skills.skill_3.skillPointsSpend += paidCost;
 
         GameObject text = Instantiate(triggeredText, new Vector2(0f, 0f), Quaternion.identity);
         triggeredAudio.Play();
@@ -33,7 +34,7 @@ public class Skill_Triggered : Skill {
         audioSource.Play();
 
         FogelBall fogelBall = Instantiate(fogelBallPrefab);
-        fogelBall.SetDamage(TotalDamage);
+        fogelBall.SetDamage(GetTotalDamage(paidCost));
 
         float t = 6f;
         float dashInterval = 0.05f;

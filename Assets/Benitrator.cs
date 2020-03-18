@@ -308,14 +308,14 @@ public class Benitrator : MonoBehaviour {
         int rewardCritChance = 0;
 
         if (bet == 1)
-            rewardCritChance = 5;
+            rewardCritChance = 2;
         else if (bet == 2)
-            rewardCritChance = 10;
+            rewardCritChance = 5;
         else if (bet == 3)
-            rewardCritChance = 15;
+            rewardCritChance = 10;
 
         if (symbolCount == 3) {
-            rewardCritChance += 3 * bet;
+            rewardCritChance += 2 * bet;
         }
 
         return rewardCritChance;
