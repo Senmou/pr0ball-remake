@@ -18,7 +18,7 @@ public class Skill_Triggered : Skill {
     }
 
     private void Start() {
-        description = "Fogel";
+        description = "Gemeiner Virus";
     }
 
     protected override int CalcDamage() => cost + cost * (enemyHPReference.MaxHP / 20);

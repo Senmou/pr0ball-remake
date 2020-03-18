@@ -34,11 +34,11 @@ public class EnemyHP : ScriptableObject {
         if (incWithDangerLevel) {
 
             if (LevelData.Level > 10) {
-                if (UnityEngine.Random.Range(0, 50) < LevelData.DangerLevel)
+                if (UnityEngine.Random.Range(0, 100) < LevelData.DangerLevel)
                     maxHP += LevelData.DangerLevel;
                 maxHP *= (int)(1f + LevelData.DangerLevel / 100f);
             } else {
-                maxHP += LevelData.DangerLevel / 3;
+                maxHP += LevelData.DangerLevel / 5;
             }
 
         }

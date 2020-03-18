@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2603739272314104664}
   - component: {fileID: 2147208075993791555}
   m_Layer: 8
-  m_Name: BigBall
+  m_Name: CoronaBall
   m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4691551078425360276}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -108,8 +108,8 @@ SpriteRenderer:
   m_SortingLayerID: 1410852521
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 78dbbf2b8223f1c45b042fb18c1de5d1, type: 3}
-  m_Color: {r: 1, g: 0.4829951, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 888417ed435c5704886fca0df6e864c0, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

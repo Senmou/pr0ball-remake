@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2245935994484019807}
   - component: {fileID: 1302156582146200335}
+  - component: {fileID: 8476812535726685486}
   - component: {fileID: 7996309116781614700}
   m_Layer: 0
   m_Name: HammerTimeSplashParticleSystem
@@ -94,6 +95,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &8476812535726685486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7199096499088925637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa440a94ad2ffd41a0bc9ec733fecd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleSystem: {fileID: 0}
 --- !u!198 &7996309116781614700
 ParticleSystem:
   m_ObjectHideFlags: 0

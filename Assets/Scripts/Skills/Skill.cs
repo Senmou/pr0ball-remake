@@ -20,7 +20,7 @@ public class Skill : MonoBehaviour {
     [HideInInspector] public bool locked;
     [HideInInspector] public int usedCounter;
     [HideInInspector] public new string name;
-    [HideInInspector] public bool usedThisTurn;
+     public bool usedThisTurn;
     [HideInInspector] public string description;
 
     public int Damage { get => CalcDamage(); }

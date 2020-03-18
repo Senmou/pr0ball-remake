@@ -31,6 +31,7 @@ public class Benitrator : MonoBehaviour {
     private Transform proChan;
     private AudioSource audioSource;
     private Image startButtonBackground;
+    private Color winTextColorDefault;
 
     private Dictionary<SlotType, int> totalResults = new Dictionary<SlotType, int>();
 
@@ -49,6 +50,7 @@ public class Benitrator : MonoBehaviour {
         onStoppedRotating += OnStoppedRotating;
 
         winUI.text = "";
+        winTextColorDefault = winUI.color;
 
         UpdateUI();
     }
@@ -106,7 +108,7 @@ public class Benitrator : MonoBehaviour {
         if (Score.instance.PaySkillPoints(bet)) {
             ballMenu.PlaySuccessSound();
             isNewRoundStarted = true;
-            winUI.text = "";
+            SetWinText("");
             Statistics.Instance.benitrator.plays++;
             Statistics.Instance.benitrator.totalBets += bet;
             StartCoroutine(RotateWheels());
@@ -169,7 +171,7 @@ public class Benitrator : MonoBehaviour {
         totalResults.TryGetValue(SlotType.SkillPoint, out skillPointSymbolCount);
         if (skillPointSymbolCount > 1) {
             Score.instance.IncSkillPoints(GetRewardSkillPoints(skillPointSymbolCount));
-            winUI.text = skillPointSymbolCount.ToString() + " Blussis";
+            SetWinText(skillPointSymbolCount.ToString() + " Blussis");
         }
 
         // Damage
@@ -178,7 +180,7 @@ public class Benitrator : MonoBehaviour {
         if (damageSymbolCount > 1) {
             int rewardDamage = GetRewardDamage(damageSymbolCount);
             BallStats.Instance.damage += rewardDamage;
-            winUI.text = rewardDamage.ToString() + " Schaden";
+            SetWinText(rewardDamage.ToString() + " Schaden");
         }
 
         // Crit chance
@@ -187,7 +189,7 @@ public class Benitrator : MonoBehaviour {
         if (critChanceSymbolCount > 1) {
             float rewardCritChance = GetRewardCritChance(critChanceSymbolCount);
             BallStats.Instance.IncCritChance(rewardCritChance);
-            winUI.text = rewardCritChance.ToString() + "% Kritische Trefferchance";
+            SetWinText(rewardCritChance.ToString() + "% Kritische Trefferchance");
         }
 
         // Crit damage
@@ -196,7 +198,7 @@ public class Benitrator : MonoBehaviour {
         if (critDamageSymbolCount > 1) {
             float rewardCritDamage = GetRewardCritDamage(critDamageSymbolCount);
             BallStats.Instance.critDamage += rewardCritDamage;
-            winUI.text = rewardCritDamage.ToString() + "x Kritischer Schaden";
+            SetWinText(rewardCritDamage.ToString() + "x Kritischer Schaden");
         }
 
         // Balls
@@ -207,9 +209,9 @@ public class Benitrator : MonoBehaviour {
             BallStats.Instance.AddBalls(rewardBalls);
 
             if (rewardBalls == 1)
-                winUI.text = rewardBalls.ToString() + " Ball";
+                SetWinText(rewardBalls.ToString() + " Ball");
             else
-                winUI.text = rewardBalls.ToString() + " Bälle";
+                SetWinText(rewardBalls.ToString() + " Bälle");
         }
 
         // Score
@@ -218,7 +220,7 @@ public class Benitrator : MonoBehaviour {
         if (scoreSymbolCount > 1) {
             int rewardScore = GetRewardScore(scoreSymbolCount);
             Score.instance.IncScore(rewardScore);
-            winUI.text = rewardScore.ToString() + " Benis";
+            SetWinText(rewardScore.ToString() + " Benis");
         }
 
         // Three identical symbols
@@ -236,6 +238,9 @@ public class Benitrator : MonoBehaviour {
             Statistics.Instance.benitrator.wins++;
             StartCoroutine(ShowResultText("GEWONNEN"));
         } else {
+            int dangerLevelIncrease = 2 + bet;
+            LevelData.DangerLevel += dangerLevelIncrease;
+            SetWinText("+" + dangerLevelIncrease + "% GEFAHR", useColorRed: true);
             Statistics.Instance.benitrator.loses++;
             StartCoroutine(ShowResultText("VERLOREN"));
         }
@@ -245,9 +250,22 @@ public class Benitrator : MonoBehaviour {
         totalResults.Clear();
     }
 
+    private void SetWinText(string text, bool useColorRed = false) {
+        winUI.text = text;
+        winUI.color = useColorRed ? Color.red : winTextColorDefault;
+    }
+
     private IEnumerator ShowResultText(string text) {
         resultUI.gameObject.SetActive(true);
         resultUI.text = text;
+        yield return new WaitForSecondsRealtime(3f);
+        resultUI.gameObject.SetActive(false);
+    }
+
+    private IEnumerator ShowDangerLevelIncrease(int value) {
+        resultUI.gameObject.SetActive(true);
+        string sign = (value < 0) ? "-" : "+";
+        resultUI.text = sign + value.ToString();
         yield return new WaitForSecondsRealtime(3f);
         resultUI.gameObject.SetActive(false);
     }
@@ -283,7 +301,9 @@ public class Benitrator : MonoBehaviour {
             rewardDamage += bet;
         }
 
-        LevelData.DangerLevel += (symbolCount == 2) ? 7 : 12;
+        //int bonusDangerLevel = (symbolCount == 2) ? 7 : 12;
+        //LevelData.DangerLevel += bonusDangerLevel;
+        //ballMenu.ShowFloatingTextDangerLevel(bonusDangerLevel);
 
         return rewardDamage;
     }
@@ -302,7 +322,9 @@ public class Benitrator : MonoBehaviour {
             rewardCritChance += 2 * bet;
         }
 
-        LevelData.DangerLevel += rewardCritChance;
+        //int bonusDangerLevel = rewardCritChance / 2;
+        //LevelData.DangerLevel += bonusDangerLevel;
+        //ballMenu.ShowFloatingTextDangerLevel(bonusDangerLevel);
 
         return rewardCritChance;
     }
@@ -321,7 +343,7 @@ public class Benitrator : MonoBehaviour {
             rewardCritDamage += 0.25f * bet;
         }
 
-        LevelData.DangerLevel += (symbolCount == 2) ? 2 : 5;
+        //LevelData.DangerLevel += (symbolCount == 2) ? 2 : 4;
 
         return rewardCritDamage;
     }
@@ -340,7 +362,7 @@ public class Benitrator : MonoBehaviour {
             rewardBalls += 2 * bet;
         }
 
-        LevelData.DangerLevel += (symbolCount == 2) ? (2 + bet) * rewardBalls : 10 * rewardBalls;
+        //LevelData.DangerLevel += (symbolCount == 2) ? (2 + bet) * rewardBalls : 10 * rewardBalls;
 
         return rewardBalls;
     }

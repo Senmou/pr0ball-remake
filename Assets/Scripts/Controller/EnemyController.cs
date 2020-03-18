@@ -187,7 +187,7 @@ public class EnemyController : MonoBehaviour {
             enemyLDT.AddWeight("Enemy_3_pool", -levelDependentWeight);
 
             // Probability of the hardest enemies grows with the danger level
-            int bonusWeight = 2 * LevelData.DangerLevel;
+            int bonusWeight = LevelData.DangerLevel;
             enemyLDT.AddWeight("Enemy_2_pool", bonusWeight);
             enemyLDT.AddWeight("Enemy_4_pool", bonusWeight);
             enemyLDT.AddWeight("Enemy_5_pool", bonusWeight, validateTable: true);

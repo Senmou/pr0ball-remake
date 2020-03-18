@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
+using MarchingBytes;
 
 public class Skill_Hammertime : Skill {
 
@@ -12,13 +12,15 @@ public class Skill_Hammertime : Skill {
     public GameObject hammer;
     public ContactFilter2D contactFilter;
 
-    private BoxCollider2D hammerCollider;
     private AudioSource audioSource;
+    private BoxCollider2D hammerCollider;
+    private EnemyController enemyController;
 
     private new void Awake() {
         base.Awake();
         hammer = Instantiate(hammer);
         hammerCollider = hammer.GetComponent<BoxCollider2D>();
+        enemyController = FindObjectOfType<EnemyController>();
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = audioClips[0];
         hammer.SetActive(false);
@@ -41,8 +43,6 @@ public class Skill_Hammertime : Skill {
         hammer.transform.position = new Vector3(xPos, 26f);
         Vector2 startPos = hammer.transform.position;
         Vector2 targetPos = startPos + new Vector2(0f, -52f);
-
-        List<BaseEnemy> hitEnemies = new List<BaseEnemy>();
 
         hammer.SetActive(true);
         float fallingSpeed = 1.5f;
@@ -68,12 +68,11 @@ public class Skill_Hammertime : Skill {
                     int randomHitAudioClip = Random.Range(0, hitAudioClips.Length - 1);
                     audioSource.PlayOneShot(hitAudioClips[randomHitAudioClip], 0.4f);
 
-                    ParticleSystemRenderer psr = Instantiate(onHitParticleSystem, hitEnemy.transform.position, Quaternion.identity).GetComponent<ParticleSystemRenderer>();
-                    psr.material.color = hitEnemy.GetColor();
+                    PooledParticleSystem particleSystem = EasyObjectPool.instance.GetObjectFromPool("HammerTimeParticleSystem_Pool", hitEnemy.transform.position, Quaternion.identity).GetComponent<PooledParticleSystem>();
+                    particleSystem.SetColor(hitEnemy.GetColor());
 
                     hitEnemy.TakeDamage(TotalDamage);
                     hitEnemy.canTakeDamageFromSkill = false;
-                    hitEnemies.Add(hitEnemy);
 
                     CameraEffect.instance.Shake(0.05f, 0.5f);
                     Statistics.Instance.skills.skill_1.damageDealt += TotalDamage;
@@ -83,7 +82,7 @@ public class Skill_Hammertime : Skill {
             yield return null;
         }
 
-        foreach (var enemy in hitEnemies) {
+        foreach (var enemy in enemyController.activeEnemies) {
             enemy.canTakeDamageFromSkill = true;
         }
 

@@ -12,7 +12,6 @@ public class FogelBall : MonoBehaviour {
     [HideInInspector] public Rigidbody2D body;
     private float maxVelocity = 200f;
 
-    private TrailRenderer trailRenderer;
     private int damage;
 
     private void OnEnable() {
@@ -21,9 +20,7 @@ public class FogelBall : MonoBehaviour {
 
     private void Awake() {
         body = GetComponent<Rigidbody2D>();
-        trailRenderer = GetComponent<TrailRenderer>();
         enemyController = FindObjectOfType<EnemyController>();
-        trailRenderer.material.color = new Color(1, 0.4829951f, 0f, 1f); // orange
     }
 
     private void Start() {

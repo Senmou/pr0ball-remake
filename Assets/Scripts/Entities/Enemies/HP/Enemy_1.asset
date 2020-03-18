@@ -18,7 +18,7 @@ MonoBehaviour:
   - step: 1
     value: 2
   - step: 2
-    value: 5
+    value: 1
   - step: 10
     value: 15
   - step: 15
@@ -41,5 +41,5 @@ MonoBehaviour:
     value: 55
   - step: 60
     value: 60
-  maxHP: 14
+  maxHP: 9
   testLevel: 1

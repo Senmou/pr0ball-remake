@@ -82,4 +82,6 @@ public static class Extensions {
         var list = enumerable as IList<T> ?? enumerable.ToList();
         return list.Count == 0 ? default : list[r.Next(0, list.Count)];
     }
+
+    public static bool Approx(this float a, float b, float threshold) => ((a - b > 0f) ? (a - b) : (b - a)) <= threshold;
 }

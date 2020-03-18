@@ -3,6 +3,8 @@ using TMPro;
 
 public class BallMenu : CanvasController {
 
+    public FloatingText floatingTextPrefab;
+
     private TextMeshProUGUI damageUI;
     private TextMeshProUGUI ballCountUI;
     private TextMeshProUGUI critChanceUI;
@@ -12,7 +14,9 @@ public class BallMenu : CanvasController {
     private Transform infoBallCount;
     private Transform infoCritChance;
     private Transform infoCritDamage;
+
     private Transform infoDangerLevel;
+    private Transform dangerLevelTransform;
 
     private MoveUI moveUI;
     private BallController ballController;
@@ -38,6 +42,8 @@ public class BallMenu : CanvasController {
         infoBallCount = transform.FindChild<Transform>("Stats/InfoPopups/BallCount");
         infoCritChance = transform.FindChild<Transform>("Stats/InfoPopups/CritChance");
         infoCritDamage = transform.FindChild<Transform>("Stats/InfoPopups/CritDamage");
+
+        dangerLevelTransform = transform.FindChild<Transform>("Benitrator/DangerLevel");
         infoDangerLevel = transform.FindChild<Transform>("Benitrator/DangerLevel/InfoPopup");
 
         infoDamage.gameObject.SetActive(false);
@@ -127,7 +133,6 @@ public class BallMenu : CanvasController {
     }
 
     public void UpdateUI() {
-
         damageUI.text = BallStats.Instance.damage.ToString();
         critChanceUI.text = BallStats.Instance.critChance.ToString("0") + "%";
         critDamageUI.text = BallStats.Instance.critDamage.ToString("0.##") + "x";
@@ -137,6 +142,11 @@ public class BallMenu : CanvasController {
     public void ResetData() {
         BallStats.Instance.ResetStats();
         UpdateUI();
+    }
+
+    public void ShowFloatingTextDangerLevel(int value) {
+        FloatingText floatingText = Instantiate(floatingTextPrefab, dangerLevelTransform.position, Quaternion.identity);
+        floatingText.SetText(value.ToString());
     }
 
     public override void Show() {

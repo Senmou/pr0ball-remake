@@ -28,18 +28,18 @@ MonoBehaviour:
   - step: 12
     value: 25
   - step: 15
-    value: 400
+    value: 200
   - step: 20
-    value: 500
+    value: 750
   - step: 25
-    value: 1000
-  - step: 30
-    value: 1250
-  - step: 35
     value: 1500
+  - step: 30
+    value: 3000
+  - step: 35
+    value: 4500
   - step: 40
-    value: 2000
-  - step: 50
     value: 5000
-  maxHP: 11
+  - step: 50
+    value: 10000
+  maxHP: 16
   testLevel: 1

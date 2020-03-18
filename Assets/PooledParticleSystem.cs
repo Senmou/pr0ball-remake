@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PooledParticleSystem : MonoBehaviour {
 
-    public new ParticleSystem particleSystem;
+    [HideInInspector] public new ParticleSystem particleSystem;
     private ParticleSystemRenderer particleSystemRenderer;
 
     private void Awake() {

@@ -51,78 +51,71 @@ public class Wheel : MonoBehaviour {
 
     private IEnumerator Rotate(Benitrator.ResultDelegate onStoppedRotating) {
 
-        const float initialRotationSpeed = 75f;
-
-        float timer = 0f;
-        float slotHeight = 4f;
-        float rotationSum = 0f;
-        float decreaseSpeedDelta = 0.2f;
+        float initialRotationSpeed = 75f;
         float rotationSpeed = initialRotationSpeed;
 
         isRotating = true;
 
-        int slotRotationCounter = 0;
-        int randomSlotNumber = Random.Range(0, 6);
-        int totalSlotRotations = (6 * fullTurns) + randomSlotNumber;
+        // Rotating for some time
+        float t = 0f;
+        bool shouldRotate = true;
+        float rotateForSeconds = Random.Range(0.25f, 1.25f); 
 
-        while (slotRotationCounter < totalSlotRotations) {
+        while (shouldRotate) {
 
             float rotationDelta = rotationSpeed * Time.unscaledDeltaTime;
             rect.anchoredPosition += new Vector2(0f, rotationDelta);
 
-            rotationSum += rotationDelta;
+            //Jump back to mimic a continous wheel
+            if (rect.anchoredPosition.y >= 8.5f)
+                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -15.5f);
 
-            // Check if wheel rotated one full slot
-            if (rotationSum > slotHeight) {
-                slotRotationCounter++;
-                rotationSum -= slotHeight;
-                benitrator.PlayClickSfx();
-            }
-
-            // Jump back to mimic a continous wheel
-            if (rect.anchoredPosition.y >= 9.5f)
-                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, rect.anchoredPosition.y - (6 * slotHeight));
-
-            // Slow down over time
-            rotationSpeed -= decreaseSpeedDelta;
-            rotationSpeed = Mathf.Max(rotationSpeed, 30f);
-
-            timer += Time.unscaledDeltaTime;
-            yield return null;
-        }
-
-        // Calculate overshoot
-        float dYAdjustment = rect.anchoredPosition.y % slotHeight;
-        Vector2 targetPos = new Vector2(rect.anchoredPosition.x, rect.anchoredPosition.y - dYAdjustment);
-
-        benitrator.PlayWheelStopSfx();
-
-        float t = 0f;
-        float tMax = 0.15f;
-        while (t < tMax) {
-
-            // Jump back, same as above
-            if (rect.anchoredPosition.y >= 9.5f) {
-                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, rect.anchoredPosition.y - (6 * slotHeight));
-                targetPos -= new Vector2(0f, 24f);
-            }
-
-            // Snap slot in place
-            rect.anchoredPosition = Vector2.Lerp(rect.anchoredPosition, targetPos, t / tMax);
             t += Time.unscaledDeltaTime;
+            if (t >= rotateForSeconds)
+                shouldRotate = false;
+
             yield return null;
         }
+
+        float[] symbolPos = { -11.5f, -7.5f, -3.5f, 0.5f, 4.5f, 8.5f };
+        float targetSymbolPos = symbolPos.Random();
+
+        // Rotating to the target symbol
+        while (!rect.anchoredPosition.y.Approx(targetSymbolPos, 1f)) {
+
+            float rotationDelta = rotationSpeed * Time.unscaledDeltaTime;
+            rect.anchoredPosition += new Vector2(0f, rotationDelta);
+
+            //Jump back to mimic a continous wheel
+            if (rect.anchoredPosition.y >= 8.5f)
+                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -15.5f);
+
+            yield return null;
+        }
+
+        // Snapping into position
+        rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, targetSymbolPos);
+        
+        benitrator.PlayWheelStopSfx();
 
         isRotating = false;
 
-        const int ballSlotPos = 80;
-        const int benisSlotPos = -80;
-        const int damageSlotPos = -40;
-        const int critChanceSlotPos = 0;
-        const int critDamageSlotPos = 40;
-        const int skillPointSlotPos = -120;
+        // -11.5 crit Chance
+        //-8 dmg
+        //-3.5 Benis
+        //0.5 skillpoint
+        //4.5 balls
+        //8.5 crit DMG
+        //8.5 jump -> -15.5
 
-        int posY = (int)(10f * rect.anchoredPosition.y);
+        const float ballSlotPos = 4.5f;
+        const float benisSlotPos = -3.5f;
+        const float damageSlotPos = -8f;
+        const float critChanceSlotPos = -11.5f;
+        const float critDamageSlotPos = 8.5f;
+        const float skillPointSlotPos = 0.5f;
+
+        float posY = rect.anchoredPosition.y;
 
         SlotType result = new SlotType();
 
