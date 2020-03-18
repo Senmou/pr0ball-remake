@@ -59,26 +59,41 @@ public class Wheel : MonoBehaviour {
         // Rotating for some time
         float t = 0f;
         bool shouldRotate = true;
-        float rotateForSeconds = Random.Range(0.25f, 1.25f); 
+        float rotateForSeconds = Random.Range(0.25f, 1.25f);
 
-        while (shouldRotate) {
+        int turns = 0;
+        while(turns < fullTurns) {
 
             float rotationDelta = rotationSpeed * Time.unscaledDeltaTime;
             rect.anchoredPosition += new Vector2(0f, rotationDelta);
 
             //Jump back to mimic a continous wheel
-            if (rect.anchoredPosition.y >= 8.5f)
+            if (rect.anchoredPosition.y >= 8.5f) {
                 rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -15.5f);
-
-            t += Time.unscaledDeltaTime;
-            if (t >= rotateForSeconds)
-                shouldRotate = false;
+                turns++;
+            }
 
             yield return null;
         }
 
+        //while (shouldRotate) {
+
+        //    float rotationDelta = rotationSpeed * Time.unscaledDeltaTime;
+        //    rect.anchoredPosition += new Vector2(0f, rotationDelta);
+
+        //    //Jump back to mimic a continous wheel
+        //    if (rect.anchoredPosition.y >= 8.5f)
+        //        rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -15.5f);
+
+        //    t += Time.unscaledDeltaTime;
+        //    if (t >= rotateForSeconds)
+        //        shouldRotate = false;
+
+        //    yield return null;
+        //}
+
         float[] symbolPos = { -11.5f, -7.5f, -3.5f, 0.5f, 4.5f, 8.5f };
-        float targetSymbolPos = symbolPos.Random();
+        float targetSymbolPos = symbolPos[Random.Range(0, 6)];
 
         // Rotating to the target symbol
         while (!rect.anchoredPosition.y.Approx(targetSymbolPos, 1f)) {
