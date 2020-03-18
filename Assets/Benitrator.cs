@@ -301,10 +301,6 @@ public class Benitrator : MonoBehaviour {
             rewardDamage += bet;
         }
 
-        //int bonusDangerLevel = (symbolCount == 2) ? 7 : 12;
-        //LevelData.DangerLevel += bonusDangerLevel;
-        //ballMenu.ShowFloatingTextDangerLevel(bonusDangerLevel);
-
         return rewardDamage;
     }
 
@@ -312,19 +308,15 @@ public class Benitrator : MonoBehaviour {
         int rewardCritChance = 0;
 
         if (bet == 1)
-            rewardCritChance = 2;
-        else if (bet == 2)
             rewardCritChance = 5;
-        else if (bet == 3)
+        else if (bet == 2)
             rewardCritChance = 10;
+        else if (bet == 3)
+            rewardCritChance = 15;
 
         if (symbolCount == 3) {
-            rewardCritChance += 2 * bet;
+            rewardCritChance += 3 * bet;
         }
-
-        //int bonusDangerLevel = rewardCritChance / 2;
-        //LevelData.DangerLevel += bonusDangerLevel;
-        //ballMenu.ShowFloatingTextDangerLevel(bonusDangerLevel);
 
         return rewardCritChance;
     }
@@ -333,17 +325,15 @@ public class Benitrator : MonoBehaviour {
         float rewardCritDamage = 0;
 
         if (bet == 1)
-            rewardCritDamage = 0.25f;
+            rewardCritDamage = 0.1f;
         else if (bet == 2)
-            rewardCritDamage = 0.5f;
+            rewardCritDamage = 0.25f;
         else if (bet == 3)
             rewardCritDamage = 1f;
 
         if (symbolCount == 3) {
             rewardCritDamage += 0.25f * bet;
         }
-
-        //LevelData.DangerLevel += (symbolCount == 2) ? 2 : 4;
 
         return rewardCritDamage;
     }
@@ -361,8 +351,6 @@ public class Benitrator : MonoBehaviour {
         if (symbolCount == 3) {
             rewardBalls += 2 * bet;
         }
-
-        //LevelData.DangerLevel += (symbolCount == 2) ? (2 + bet) * rewardBalls : 10 * rewardBalls;
 
         return rewardBalls;
     }
