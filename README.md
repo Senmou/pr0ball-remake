@@ -8,4 +8,4 @@ Github:
 - pr0-chan trifft manche Gegner nicht
 - Die Highscores lassen sich manchmal nicht scrollen
 - Die Lautstärke der Bälle ist nicht von der globalen Lautstärke betroffen
-- Die App kann sich gelegentlich aufhängen (mögliche Lösung: Partikeleffekte ausschalten)
+- Die App kann sich gelegentlich aufhängen (Prozess killen und neustarten hilft; vorbeugend kann es helfen die Partikeleffekte auszuschalten)
