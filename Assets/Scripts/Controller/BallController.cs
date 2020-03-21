@@ -69,13 +69,14 @@ public class BallController : MonoBehaviour {
 
     private IEnumerator CollectBalls(PlayStateController controller) {
 
-        Ball[] temp = new Ball[MaxBallCount];
-        balls.CopyTo(temp);
+        Ball[] ballArray = new Ball[MaxBallCount];
+        balls.CopyTo(ballArray);
 
-        foreach (Ball ball in temp) {
-            if (ball == null) continue;
-            ball.DisableCollider();
-            ball.Move(Random.Range(0.2f, 0.5f), controller);
+        int limit = ballArray.Length;
+        for(int i = 0; i < limit; i++) {
+            if (ballArray[i] == null) continue;
+            ballArray[i].DisableCollider();
+            ballArray[i].Move(Random.Range(0.2f, 0.5f), controller);
             yield return null;
         }
 
