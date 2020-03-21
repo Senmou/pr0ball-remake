@@ -6,4 +6,5 @@ Github:
 
 ### Bekannte Bugs
 - pr0-chan trifft manche Gegner nicht
+- Die Highscores lassen sich manchmal nicht scrollen
 - Die Lautstärke der Bälle ist nicht von der globalen Lautstärke betroffen
