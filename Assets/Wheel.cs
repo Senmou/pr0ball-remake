@@ -56,6 +56,9 @@ public class Wheel : MonoBehaviour {
 
         isRotating = true;
 
+        float slotHeight = 4f;
+        float rotationSum = 0f;
+
         // Rotate for some full turns
         int turns = 0;
         while(turns < fullTurns) {
@@ -63,7 +66,14 @@ public class Wheel : MonoBehaviour {
             float rotationDelta = rotationSpeed * Time.unscaledDeltaTime;
             rect.anchoredPosition += new Vector2(0f, rotationDelta);
 
-            //Jump back to mimic a continous wheel
+            // Click sound
+            rotationSum += rotationDelta;
+            if (rotationSum > slotHeight) {
+                benitrator.PlayClickSfx();
+                rotationSum -= slotHeight;
+            }
+
+            // Jump back to mimic a continous wheel
             if (rect.anchoredPosition.y >= 8.5f) {
                 rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -15.5f);
                 turns++;
@@ -81,7 +91,14 @@ public class Wheel : MonoBehaviour {
             float rotationDelta = rotationSpeed * Time.unscaledDeltaTime;
             rect.anchoredPosition += new Vector2(0f, rotationDelta);
 
-            //Jump back to mimic a continous wheel
+            // Click sound
+            rotationSum += rotationDelta;
+            if (rotationSum > slotHeight) {
+                benitrator.PlayClickSfx();
+                rotationSum -= slotHeight;
+            }
+
+            // Jump back to mimic a continous wheel
             if (rect.anchoredPosition.y >= 8.5f)
                 rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -15.5f);
 

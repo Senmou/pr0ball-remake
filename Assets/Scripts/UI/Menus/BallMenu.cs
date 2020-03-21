@@ -144,11 +144,6 @@ public class BallMenu : CanvasController {
         UpdateUI();
     }
 
-    public void ShowFloatingTextDangerLevel(int value) {
-        FloatingText floatingText = Instantiate(floatingTextPrefab, dangerLevelTransform.position, Quaternion.identity);
-        floatingText.SetText(value.ToString());
-    }
-
     public override void Show() {
         benitrator.ShowProChanIfZeroSkillPoints();
         benitrator.SetInitialBetIfEnoughSkillPoints();

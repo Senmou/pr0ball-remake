@@ -30,12 +30,16 @@ public class Skill_Hammertime : Skill {
     }
 
     private void Start() {
-        description = "pr0-chan";
+        title = "pr0-chan";
+        description = "-5% Gefahrenlevel pro Blussi";
+        dangerLevelIncrease = -5;
     }
 
     protected override int CalcDamage(int cost) => cost + cost * (enemyHPReference.MaxHP / 3);
 
     protected override IEnumerator ActionCoroutine() {
+
+        LevelData.DangerLevel += dangerLevelIncrease * paidCost;
 
         Statistics.Instance.skills.skill_1.used++;
         Statistics.Instance.skills.skill_1.skillPointsSpend += paidCost;
@@ -59,7 +63,7 @@ public class Skill_Hammertime : Skill {
             if (!GameController.isGamePaused)
                 fallingSpeed += 0.7f;
 
-            Collider2D[] hits = new Collider2D[16];
+            Collider2D[] hits = new Collider2D[64];
             int numHits = Physics2D.OverlapCollider(hammerCollider, contactFilter, hits);
 
             for (int i = 0; i < numHits; i++) {

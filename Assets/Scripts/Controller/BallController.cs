@@ -9,8 +9,6 @@ public class BallController : MonoBehaviour {
 
     private const string ballPoolName = "BallPool";
 
-    public LootDropTable ballLDT;
-
     [HideInInspector] public bool canShootAgain;
 
     private Transform spawnPoint;
@@ -20,7 +18,7 @@ public class BallController : MonoBehaviour {
 
     private float lifeTime;
     private int maxBallCount = 1;
-    private float maxLifeTime = 6f;
+    private float maxLifeTime = 0.1f;
     private float shootingRate = 0.1f;
 
     private List<Ball> balls = new List<Ball>();
@@ -31,17 +29,11 @@ public class BallController : MonoBehaviour {
     public bool LifeTimeExeeded { get => lifeTime <= 0f; }
     public bool AllBallsShot { get => BallCount == MaxBallCount; }
 
-    private void OnValidate() {
-        ballLDT.ValidateTable();
-    }
-
     private void Awake() {
         spawnPoint = GameObject.Find("BallSpawnPoint").transform;
         lifeTimeSlider = GameObject.Find("LifeTimeSlider").GetComponent<Slider>();
         maxBallCountUI = GameObject.Find("MaxBallCount").GetComponent<TextMeshProUGUI>();
         currentBallCountUI = GameObject.Find("CurrentBallCount").GetComponent<TextMeshProUGUI>();
-
-        ballLDT.ValidateTable();
     }
 
     public void SetMaxBallCount(int value) {

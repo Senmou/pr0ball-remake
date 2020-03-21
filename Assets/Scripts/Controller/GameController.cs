@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using MarchingBytes;
+using System.Collections;
 using UnityEngine;
 
 public class GameController : MonoBehaviour {
@@ -40,9 +41,10 @@ public class GameController : MonoBehaviour {
     }
 
     public void SpawnFloatingText(string text, Vector2 position) {
-        GameObject go = Instantiate(floatingText, position, Quaternion.identity).gameObject;
-        go.GetComponent<FloatingText>().SetText(text);
+        FloatingText go = EasyObjectPool.instance.GetObjectFromPool("FloatingText_pool", position, Quaternion.identity).GetComponent<FloatingText>();
+        go.SetText(text);
         go.transform.SetParent(canvas.transform);
+        go.ReturnToPoolAfter(0.9f);
     }
 
     private void Start() {

@@ -13,7 +13,7 @@ public class SkillMenuUnlockButton : MonoBehaviour {
     }
 
     public void SetText(int unlockLevel) {
-        priceTag.text = "Unlock at level: " + unlockLevel.ToString();
+        priceTag.text = "Ab Level: " + unlockLevel.ToString();
     }
 
     public void SetColor(int unlockLevel) {

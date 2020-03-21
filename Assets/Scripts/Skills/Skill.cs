@@ -17,12 +17,14 @@ public class Skill : MonoBehaviour {
 
     [HideInInspector] public int id;
     [HideInInspector] public int cost;
-    [HideInInspector] public int paidCost;
     [HideInInspector] public bool locked;
+    [HideInInspector] public int paidCost;
+    [HideInInspector] public string title;
     [HideInInspector] public int usedCounter;
     [HideInInspector] public new string name;
     [HideInInspector] public bool usedThisTurn;
     [HideInInspector] public string description;
+    [HideInInspector] public int dangerLevelIncrease;
 
     public int BonusPercentage { get => skillPointsSpend * bonusDamagePercentagePerPaidSkillPoint; }
 
@@ -48,6 +50,7 @@ public class Skill : MonoBehaviour {
         sfxSuccess = GameObject.Find("SfxSpawn").GetComponent<AudioSource>();
 
         SkillData.Skill skillData = PersistentData.instance.skillData.GetSkillData(id);
+        skillPointsSpend = skillData.skillPointsSpend;
         usedThisTurn = skillData.usedThisTurn;
         locked = skillData.locked;
         cost = skillData.cost;
@@ -76,7 +79,7 @@ public class Skill : MonoBehaviour {
     }
 
     protected void OnSaveGame() {
-        SaveSkillData(id, locked, usedCounter, cost, usedThisTurn);
+        SaveSkillData(id, locked, usedCounter, cost, usedThisTurn, skillPointsSpend);
     }
 
     protected void OnReachedNextLevel() {
@@ -114,16 +117,14 @@ public class Skill : MonoBehaviour {
             barSlot.ShowClockImage(true);
             usedCounter++;
             sfxSuccess.Play();
-            LevelData.DangerLevel -= 2 * cost;
-            Statistics.Instance.skills.skillPointsSpend += cost;
+            Statistics.Instance.skills.skillPointsSpend += paidCost;
             StartCoroutine(ActionCoroutine());
         }
     }
 
-    private void UpdateCost() {
-        if (cost > Score.instance.skillPoints) {
+    public void UpdateCost() {
+        if (cost > Score.instance.skillPoints)
             cost = Mathf.Max(1, Score.instance.skillPoints);
-        }
     }
 
     protected virtual IEnumerator ActionCoroutine() {
@@ -143,8 +144,8 @@ public class Skill : MonoBehaviour {
         locked = false;
     }
 
-    protected void SaveSkillData(int id, bool locked, int usedCounter, int cost, bool usedThisTurn) {
-        PersistentData.instance.skillData.SetSkillData(id, locked, usedCounter, cost, usedThisTurn);
+    protected void SaveSkillData(int id, bool locked, int usedCounter, int cost, bool usedThisTurn, int skillPointsSpend) {
+        PersistentData.instance.skillData.SetSkillData(id, locked, usedCounter, cost, usedThisTurn, skillPointsSpend);
     }
 
     public void ResetData() {
@@ -152,5 +153,6 @@ public class Skill : MonoBehaviour {
         locked = true;
         usedCounter = 0;
         usedThisTurn = false;
+        skillPointsSpend = 0;
     }
 }

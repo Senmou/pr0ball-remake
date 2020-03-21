@@ -16,14 +16,14 @@ MonoBehaviour:
   maxBonusHPPercentage: 0
   stepValueList:
   - step: 1
-    value: 3
-  - step: 2
     value: 2
-  - step: 5
-    value: 5
+  - step: 2
+    value: 4
+  - step: 4
+    value: 8
+  - step: 6
+    value: 10
   - step: 10
-    value: 5
-  - step: 15
-    value: 5
-  maxHP: 2
+    value: 10
+  maxHP: 3
   testLevel: 1

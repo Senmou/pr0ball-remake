@@ -1,6 +1,7 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class SkillBarSlot : MonoBehaviour {
 

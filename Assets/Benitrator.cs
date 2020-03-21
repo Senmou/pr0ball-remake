@@ -226,14 +226,14 @@ public class Benitrator : MonoBehaviour {
         // Three identical symbols
         if (skillPointSymbolCount > 2 || damageSymbolCount > 2 || critChanceSymbolCount > 2 ||
             critDamageSymbolCount > 2 || ballSymbolCount > 2 || scoreSymbolCount > 2) {
-            MusicController.instance.ChangeVolumeForSeconds(0.2f, 1.5f);
+            MusicController.instance.ChangeVolumeForSeconds(0.2f, 1f);
             winBig.Play();
             Statistics.Instance.benitrator.wins++;
             StartCoroutine(ShowResultText("GEWONNEN"));
             // Two identical symbols
         } else if (skillPointSymbolCount > 1 || damageSymbolCount > 1 || critChanceSymbolCount > 1 ||
            critDamageSymbolCount > 1 || ballSymbolCount > 1 || scoreSymbolCount > 1) {
-            MusicController.instance.ChangeVolumeForSeconds(0.2f, 1.5f);
+            MusicController.instance.ChangeVolumeForSeconds(0.2f, 1f);
             winSmall.Play();
             Statistics.Instance.benitrator.wins++;
             StartCoroutine(ShowResultText("GEWONNEN"));
@@ -349,7 +349,7 @@ public class Benitrator : MonoBehaviour {
             rewardBalls = 3;
 
         if (symbolCount == 3) {
-            rewardBalls += 2 * bet;
+            rewardBalls += 1;
         }
 
         return rewardBalls;
@@ -371,8 +371,6 @@ public class Benitrator : MonoBehaviour {
 
         long currentScore = Score.instance.score;
         int rewardScore = (int)((currentScore + 250) * rewardScoreMultiplier);
-
-        LevelData.DangerLevel -= 5 + bet;
 
         return rewardScore;
     }

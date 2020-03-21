@@ -15,10 +15,14 @@ public class Skill_Frogs : Skill {
     }
 
     private void Start() {
-        description = "Bergfestzelebrierungsfrösche";
+        title = "Bergfestzelebrierungsfrösche";
+        description = "-2% Gefahrenlevel pro Blussi";
+        dangerLevelIncrease = -2;
     }
 
     protected override IEnumerator ActionCoroutine() {
+
+        LevelData.DangerLevel += dangerLevelIncrease * paidCost;
 
         Statistics.Instance.skills.skill_2.used++;
         Statistics.Instance.skills.skill_2.skillPointsSpend += paidCost;

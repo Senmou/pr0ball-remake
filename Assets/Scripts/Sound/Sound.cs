@@ -21,7 +21,7 @@ public class Sound : MonoBehaviour {
         sfxBallVolume = FindObjectOfType<SetSfxBallVolume>();
 
         soundLock = false;
-        soundLockDuration = 0.07f;
+        soundLockDuration = 0.09f;
         soundLockTimer = soundLockDuration;
 
         bounce = new SoundFile();

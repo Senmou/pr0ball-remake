@@ -125,6 +125,7 @@ public class SkillData {
     public struct Skill {
         public int cost;
         public int usedCounter;
+        public int skillPointsSpend;
 
         public bool locked;
         public bool usedThisTurn;
@@ -132,11 +133,12 @@ public class SkillData {
 
     private Skill[] skills;
 
-    public void SetSkillData(int id, bool locked, int usedCounter, int cost, bool usedThisTurn) {
+    public void SetSkillData(int id, bool locked, int usedCounter, int cost, bool usedThisTurn, int skillPointsSpend) {
         skills[id].locked = locked;
         skills[id].usedCounter = usedCounter;
         skills[id].cost = cost;
         skills[id].usedThisTurn = usedThisTurn;
+        skills[id].skillPointsSpend = skillPointsSpend;
     }
 
     public Skill GetSkillData(int id) {
@@ -144,6 +146,7 @@ public class SkillData {
         skill.locked = PersistentData.instance.skillData.skills[id].locked;
         skill.cost = PersistentData.instance.skillData.skills[id].cost;
         skill.usedThisTurn = PersistentData.instance.skillData.skills[id].usedThisTurn;
+        skill.skillPointsSpend = PersistentData.instance.skillData.skills[id].skillPointsSpend;
         return skill;
     }
 
@@ -156,6 +159,7 @@ public class SkillData {
             skills[i].usedCounter = 0;
             skills[i].cost = 1;
             skills[i].usedThisTurn = false;
+            skills[i].skillPointsSpend = 0;
         }
     }
 }

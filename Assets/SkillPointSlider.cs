@@ -27,9 +27,7 @@ public class SkillPointSlider : MonoBehaviour {
         if(slider.value == slider.maxValue) {
             slider.value = 0;
             Score.instance.IncSkillPoints(skillPointsEarned);
-            GameObject go = Instantiate(floatingText, new Vector2(4.3f, 22f), Quaternion.identity).gameObject;
-            go.GetComponent<FloatingText>().SetText("+" + skillPointsEarned + " Skillpunkte");
-            go.transform.SetParent(canvas.transform);
+            GameController.instance.SpawnFloatingText("+" + skillPointsEarned + " Skillpunkte", new Vector2(4.3f, 22f));
             EventManager.TriggerEvent("SkillPointGained");
         }
     }

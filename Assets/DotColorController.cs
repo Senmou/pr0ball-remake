@@ -25,25 +25,25 @@ public class DotColorController : MonoBehaviour {
         if (percentage >= 0) {
             index = 0;
         }
-        if (percentage >= 5) {
+        if (percentage >= 20) {
             index = 1;
         }
-        if (percentage > 10) {
+        if (percentage > 50) {
             index = 2;
         }
-        if (percentage > 15) {
+        if (percentage > 120) {
             index = 3;
         }
-        if (percentage > 20) {
+        if (percentage > 150) {
             index = 4;
         }
-        if (percentage > 25) {
+        if (percentage > 175) {
             index = 5;
         }
-        if (percentage > 50) {
+        if (percentage > 200) {
             index = 6;
         }
-        if (percentage > 75) {
+        if (percentage > 250) {
             index = 7;
         }
 
@@ -71,10 +71,10 @@ public class DotColorController : MonoBehaviour {
         if (benis > 2500) {
             index = 5;
         }
-        if (benis > 5000) {
+        if (benis > 7500) {
             index = 6;
         }
-        if (benis > 10000) {
+        if (benis > 15000) {
             index = 7;
         }
 

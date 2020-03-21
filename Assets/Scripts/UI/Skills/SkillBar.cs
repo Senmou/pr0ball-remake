@@ -43,6 +43,7 @@ public class SkillBar : MonoBehaviour {
     }
 
     public void ResetData() {
+
         for (int i = 0; i < slots.Length; i++) {
             slots[i].skill.ResetData();
         }

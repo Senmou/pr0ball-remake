@@ -18,12 +18,16 @@ public class Skill_Triggered : Skill {
     }
 
     private void Start() {
-        description = "Gemeiner Virus";
+        title = "Corona";
+        description = "+3% Gefahrenlevel pro Blussi";
+        dangerLevelIncrease = 3;
     }
 
-    protected override int CalcDamage(int cost) => cost + cost * (enemyHPReference.MaxHP / 20);
+    protected override int CalcDamage(int cost) => cost + cost * (enemyHPReference.MaxHP / 15);
 
     protected override IEnumerator ActionCoroutine() {
+
+        LevelData.DangerLevel += dangerLevelIncrease * paidCost;
 
         Statistics.Instance.skills.skill_3.used++;
         Statistics.Instance.skills.skill_3.skillPointsSpend += paidCost;
