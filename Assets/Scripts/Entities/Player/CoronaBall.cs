@@ -37,14 +37,16 @@ public class CoronaBall : MonoBehaviour {
 
     public void MoveToTopMostEnemy() {
         BaseEnemy topMostEnemy = null;
-        foreach (var enemy in enemyController.activeEnemies) {
+
+        int limit = enemyController.activeEnemies.Count;
+        for(int i = 0; i < limit; i++) { 
             if (topMostEnemy == null) {
-                topMostEnemy = enemy;
+                topMostEnemy = enemyController.activeEnemies[i];
                 continue;
             }
 
-            if (enemy.transform.position.y > topMostEnemy.transform.position.y)
-                topMostEnemy = enemy;
+            if (enemyController.activeEnemies[i].transform.position.y > topMostEnemy.transform.position.y)
+                topMostEnemy = enemyController.activeEnemies[i];
         }
 
         if (topMostEnemy) {
