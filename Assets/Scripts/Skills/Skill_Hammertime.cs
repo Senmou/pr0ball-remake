@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using UnityEngine;
 using MarchingBytes;
+using UnityEngine;
 
 public class Skill_Hammertime : Skill {
 
@@ -57,6 +57,7 @@ public class Skill_Hammertime : Skill {
         audioSource.Play();
 
         StartCoroutine(ShowHammerTimeLogo());
+
 
         while (Vector2.Distance(hammer.transform.position, targetPos) > 0.1f) {
             hammer.transform.position = Vector2.MoveTowards(hammer.transform.position, targetPos, fallingSpeed * Time.deltaTime);

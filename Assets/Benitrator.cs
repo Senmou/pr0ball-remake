@@ -106,7 +106,7 @@ public class Benitrator : MonoBehaviour {
         }
 
         if (Score.instance.PaySkillPoints(bet)) {
-            ballMenu.PlaySuccessSound();
+            PlayWheelStopSfx();
             isNewRoundStarted = true;
             SetWinText("");
             Statistics.Instance.benitrator.plays++;
@@ -238,6 +238,7 @@ public class Benitrator : MonoBehaviour {
             Statistics.Instance.benitrator.wins++;
             StartCoroutine(ShowResultText("GEWONNEN"));
         } else {
+            ballMenu.PlayErrorSound();
             int dangerLevelIncrease = 2 + bet;
             LevelData.DangerLevel += dangerLevelIncrease;
             SetWinText("+" + dangerLevelIncrease + "% GEFAHR", useColorRed: true);

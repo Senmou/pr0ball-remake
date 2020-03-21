@@ -82,10 +82,10 @@ public class SoundData {
     public float sfxSkillVolume;
 
     public SoundData() {
-        musicVolume = 5f;
+        musicVolume = 3f;
         masterVolume = 10f;
-        sfxBallVolume = 5f;
-        sfxSkillVolume = 5f;
+        sfxBallVolume = 1f;
+        sfxSkillVolume = 6f;
     }
 }
 
