@@ -1,7 +1,7 @@
 ﻿using MarchingBytes;
 using UnityEngine;
 
-public class FogelBall : MonoBehaviour {
+public class CoronaBall : MonoBehaviour {
 
     private const string particleSystemPoolName = "OrangeParticleSystem_Pool";
 

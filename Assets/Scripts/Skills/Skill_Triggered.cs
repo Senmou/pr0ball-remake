@@ -4,7 +4,7 @@ using UnityEngine;
 public class Skill_Triggered : Skill {
 
     [SerializeField] private GameObject triggeredText;
-    [SerializeField] private FogelBall fogelBallPrefab;
+    [SerializeField] private CoronaBall fogelBallPrefab;
 
     private Canvas canvas;
     private AudioSource audioSource;
@@ -37,7 +37,7 @@ public class Skill_Triggered : Skill {
         MusicController.instance.SetVolume(0f);
         audioSource.Play();
 
-        FogelBall fogelBall = Instantiate(fogelBallPrefab);
+        CoronaBall fogelBall = Instantiate(fogelBallPrefab);
         fogelBall.SetDamage(GetTotalDamage(paidCost));
 
         float t = 6f;
