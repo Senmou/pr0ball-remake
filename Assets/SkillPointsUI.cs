@@ -17,9 +17,6 @@ public class SkillPointsUI : MonoBehaviour {
 
     private void Update() {
 
-        if (Input.GetKey(KeyCode.UpArrow))
-            Score.instance.IncSkillPoints(1);
-
         if (oldSkillPointCount != Score.instance.skillPoints) {
             UpdateUI();
             oldSkillPointCount = Score.instance.skillPoints;

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3ea277251fdfe488a51c77cce42467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detonationRadius: 6
+  detonationRadius: 9
   particleSystem: {fileID: 7996309116781614700, guid: 19aca23288bd35340b66179cba2f24cf,
     type: 3}
 --- !u!212 &2788120358997577005

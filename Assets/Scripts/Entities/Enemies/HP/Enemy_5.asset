@@ -24,6 +24,6 @@ MonoBehaviour:
   - step: 6
     value: 20
   - step: 10
-    value: 80
-  maxHP: 3
+    value: 50
+  maxHP: 214
   testLevel: 1

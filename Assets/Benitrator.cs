@@ -170,8 +170,9 @@ public class Benitrator : MonoBehaviour {
         int skillPointSymbolCount = -1;
         totalResults.TryGetValue(SlotType.SkillPoint, out skillPointSymbolCount);
         if (skillPointSymbolCount > 1) {
-            Score.instance.IncSkillPoints(GetRewardSkillPoints(skillPointSymbolCount));
-            SetWinText(skillPointSymbolCount.ToString() + " Blussis");
+            int rewardSkillPointCount = GetRewardSkillPoints(skillPointSymbolCount);
+            Score.instance.IncSkillPoints(rewardSkillPointCount);
+            SetWinText(rewardSkillPointCount.ToString() + " Blussis");
         }
 
         // Damage
@@ -233,8 +234,7 @@ public class Benitrator : MonoBehaviour {
             // Two identical symbols
         } else if (skillPointSymbolCount > 1 || damageSymbolCount > 1 || critChanceSymbolCount > 1 ||
            critDamageSymbolCount > 1 || ballSymbolCount > 1 || scoreSymbolCount > 1) {
-            MusicController.instance.ChangeVolumeForSeconds(0.2f, 1f);
-            winSmall.Play();
+            PlayCoinSfx();
             Statistics.Instance.benitrator.wins++;
             StartCoroutine(ShowResultText("GEWONNEN"));
         } else {

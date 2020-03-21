@@ -37,7 +37,8 @@ public static class LevelData {
 
     public static void LevelUp() {
         Level++;
-        DangerLevel += (int)(Level * (1f + Statistics.Instance.benitrator.WinsPercentage)) + Statistics.Instance.benitrator.wins / 5;
+        DangerLevel += 2 * (int)(Level * (1f + Statistics.Instance.benitrator.WinsPercentage)) + Statistics.Instance.benitrator.wins / 5;
+        DangerLevel = (int)(DangerLevel * 1.1f);
         wave = 1;
         EventManager.TriggerEvent("ReachedNextLevel");
     }

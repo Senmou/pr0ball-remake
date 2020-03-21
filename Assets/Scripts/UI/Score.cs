@@ -29,14 +29,6 @@ public class Score : MonoBehaviour {
         UpdateUI();
     }
 
-    private void Update() {
-        if (Input.GetKey(KeyCode.H))
-            DecScore(100);
-
-        if (Input.GetKey(KeyCode.J))
-            IncScore(100);
-    }
-
     private void OnChacheData() {
         PersistentData.instance.scoreData.score = score;
         PersistentData.instance.scoreData.highscore = highscore;

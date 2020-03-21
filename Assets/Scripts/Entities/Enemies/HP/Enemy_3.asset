@@ -20,10 +20,10 @@ MonoBehaviour:
   - step: 2
     value: 6
   - step: 4
-    value: 15
+    value: 10
   - step: 6
-    value: 15
+    value: 8
   - step: 10
     value: 20
-  maxHP: 2
+  maxHP: 70
   testLevel: 1
