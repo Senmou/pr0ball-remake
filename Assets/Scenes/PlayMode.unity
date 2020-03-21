@@ -692,51 +692,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 26173295}
   m_CullTransparentMesh: 0
---- !u!1 &29254746
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 29254748}
-  - component: {fileID: 29254747}
-  m_Layer: 0
-  m_Name: DEBUG_Statistics
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &29254747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 29254746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ce75ded0465a2d458a34a98b5ac235d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collisions: 0
-  averageBet: 0
---- !u!4 &29254748
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 29254746}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &43228838
 GameObject:
   m_ObjectHideFlags: 0
@@ -6667,66 +6622,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   desiredCanvasType: 3
---- !u!1 &413751783
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 413751785}
-  - component: {fileID: 413751784}
-  m_Layer: 0
-  m_Name: DEBUG_WHEEL
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &413751784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 413751783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b76ad7f8d7a5de4f9b7a20ac9142489, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  counter: 0
-  fullTurns: 2
-  slotRotations: 0
-  damage: 0
-  critChance: 0
-  critDamage: 0
-  balls: 0
-  skillPoints: 0
-  score: 0
-  pDamage: 0
-  pCritChance: 0
-  pCritDamage: 0
-  pBalls: 0
-  pSkillPoints: 0
-  pScore: 0
-  a: 0
-  b: 0
---- !u!4 &413751785
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 413751783}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &416913002
 GameObject:
   m_ObjectHideFlags: 0
@@ -10382,6 +10277,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b56d377f280b21548816a0023b9a00fb, type: 3}
   - {fileID: 8300000, guid: 3d646386444a9b34283e0e198b9cdbfe, type: 3}
   - {fileID: 8300000, guid: 492d9fc49c3df6c49b2a47f91e790a37, type: 3}
+  - {fileID: 8300000, guid: 05c2bca11f6f69845b82b3abdc90e211, type: 3}
 --- !u!1 &598005919
 GameObject:
   m_ObjectHideFlags: 0
@@ -14551,44 +14447,44 @@ MonoBehaviour:
         type: 3}
       poolName: Enemy_0_pool
       probabilityWeight: 250
-      probabilityPercent: 32.467533
+      probabilityPercent: 32.679737
       probabilityRangeFrom: 0
       probabilityRangeTo: 250
     - item: {fileID: 1688601153306911077, guid: b23cbc6dd2da95a4db5749c236b0ec90,
         type: 3}
       poolName: Enemy_1_pool
       probabilityWeight: 250
-      probabilityPercent: 32.467533
+      probabilityPercent: 32.679737
       probabilityRangeFrom: 250
       probabilityRangeTo: 500
     - item: {fileID: 1688601153306911077, guid: ea3d98fa5f5610341af9c37e1a2e2081,
         type: 3}
       poolName: Enemy_2_pool
-      probabilityWeight: 10
-      probabilityPercent: 1.2987013
+      probabilityWeight: 5
+      probabilityPercent: 0.6535948
       probabilityRangeFrom: 500
-      probabilityRangeTo: 510
+      probabilityRangeTo: 505
     - item: {fileID: 1688601153306911077, guid: 69cc29669384c3446869ef70277a0506,
         type: 3}
       poolName: Enemy_3_pool
       probabilityWeight: 200
-      probabilityPercent: 25.974026
-      probabilityRangeFrom: 510
-      probabilityRangeTo: 710
+      probabilityPercent: 26.143791
+      probabilityRangeFrom: 505
+      probabilityRangeTo: 705
     - item: {fileID: 1688601153306911077, guid: 36478deea8ff6254b91e4af57969f204,
         type: 3}
       poolName: Enemy_4_pool
       probabilityWeight: 30
-      probabilityPercent: 3.8961039
-      probabilityRangeFrom: 710
-      probabilityRangeTo: 740
+      probabilityPercent: 3.9215686
+      probabilityRangeFrom: 705
+      probabilityRangeTo: 735
     - item: {fileID: 1688601153306911077, guid: 7db70b7665c185a4cb4c0fc6144c6eb2,
         type: 3}
       poolName: Enemy_5_pool
       probabilityWeight: 30
-      probabilityPercent: 3.8961039
-      probabilityRangeFrom: 740
-      probabilityRangeTo: 770
+      probabilityPercent: 3.9215686
+      probabilityRangeFrom: 735
+      probabilityRangeTo: 765
   activeEnemies: []
   activeItems: []
   playStateController: {fileID: 0}
@@ -16034,7 +15930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &872857040
 RectTransform:
   m_ObjectHideFlags: 0

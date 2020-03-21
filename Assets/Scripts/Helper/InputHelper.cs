@@ -49,7 +49,7 @@ public class InputHelper : MonoBehaviour {
         EventSystem.current.RaycastAll(eventData, results);
 
         foreach (var item in results) {
-            if (item.gameObject.tag == tag)
+            if (item.gameObject.CompareTag(tag))
                 return true;
         }
         return false;
