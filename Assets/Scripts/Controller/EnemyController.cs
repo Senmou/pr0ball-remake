@@ -38,13 +38,15 @@ public class EnemyController : MonoBehaviour {
 
     private bool AllEntitiesReachedStartingPosition() {
 
-        foreach (var enemy in activeEnemies) {
-            if (!enemy.reachedStartingPosition)
+        int limit = activeEnemies.Count;
+        for (int i = 0; i < limit; i++) {
+            if (!activeEnemies[i].reachedStartingPosition)
                 return false;
         }
 
-        foreach (var item in activeItems) {
-            if (!item.reachedStartingPosition)
+        limit = activeItems.Count;
+        for (int i = 0; i < limit; i++) {
+            if (!activeItems[i].reachedStartingPosition)
                 return false;
         }
 
@@ -65,12 +67,14 @@ public class EnemyController : MonoBehaviour {
 
         PersistentData.instance.currentLevelData.activeEntities.Clear();
 
-        foreach (var enemy in activeEnemies) {
-            PersistentData.instance.currentLevelData.AddEntity(enemy.entityType, enemy.transform.position.x, enemy.transform.position.y, enemy.currentHP);
+        int limit = activeEnemies.Count;
+        for (int i = 0; i < limit; i++) {
+            PersistentData.instance.currentLevelData.AddEntity(activeEnemies[i].entityType, activeEnemies[i].transform.position.x, activeEnemies[i].transform.position.y, activeEnemies[i].currentHP);
         }
 
-        foreach (var item in activeItems) {
-            PersistentData.instance.currentLevelData.AddEntity(item.entityType, item.transform.position.x, item.transform.position.y, item.value);
+        limit = activeItems.Count;
+        for (int i = 0; i < limit; i++) {
+            PersistentData.instance.currentLevelData.AddEntity(activeItems[i].entityType, activeItems[i].transform.position.x, activeItems[i].transform.position.y, activeItems[i].value);
         }
     }
 
@@ -79,14 +83,14 @@ public class EnemyController : MonoBehaviour {
         if (PersistentData.instance.currentLevelData.activeEntities != null && PersistentData.instance.currentLevelData.activeEntities.Count > 0) {
             DespawnAllEntities();
 
-            List<CurrentLevelData.EntityData> data = PersistentData.instance.currentLevelData.activeEntities;
+            List<CurrentLevelData.EntityData> activeEntities = PersistentData.instance.currentLevelData.activeEntities;
 
-            foreach (CurrentLevelData.EntityData entity in data) {
-                if (entity.entityType == CurrentLevelData.EntityType.Item)
-                    SpawnItem(new Vector3(entity.posX, entity.posY), entity.value);
-                else {
-                    SpawnEnemy(new Vector3(entity.posX, entity.posY), entity.entityType, entity.value);
-                }
+            int limit = activeEntities.Count;
+            for (int i = 0; i < limit; i++) {
+                if (activeEntities[i].entityType == CurrentLevelData.EntityType.Item)
+                    SpawnItem(new Vector3(activeEntities[i].posX, activeEntities[i].posY), activeEntities[i].value);
+                else
+                    SpawnEnemy(new Vector3(activeEntities[i].posX, activeEntities[i].posY), activeEntities[i].entityType, activeEntities[i].value);
             }
 
             PersistentData.instance.currentLevelData.activeEntities.Clear();
