@@ -15,7 +15,7 @@ public class Skill_Frogs : Skill {
     }
 
     private void Start() {
-        title = "Bergfestzelebrierungsfrösche";
+        title = "Bergfestzelebrierungsfrosch";
         description = "-2% Gefahrenlevel pro Blussi";
         dangerLevelIncrease = -2;
     }
