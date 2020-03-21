@@ -19,6 +19,7 @@ public class SetMusicVolume : MonoBehaviour {
 
     private void Awake() {
         currentVolume = (int)PersistentData.instance.soundData.musicVolume;
+        SetVolume(currentVolume);
 
         EventManager.StartListening("SaveGame", OnSaveGame);
     }
@@ -28,7 +29,6 @@ public class SetMusicVolume : MonoBehaviour {
     }
 
     private void Start() {
-        SetVolume(currentVolume);
         CheckButtonInteractability();
     }
 

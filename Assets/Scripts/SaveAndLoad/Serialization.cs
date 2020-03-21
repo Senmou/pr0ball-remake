@@ -6,7 +6,7 @@ using System;
 
 public static class Serialization {
 
-    public static string fileName = "saveData.dat";
+    public static string fileName = "saveData_v1.dat";
     public static string directory = Path.Combine(Application.persistentDataPath, "data");
     public static string filePath = Path.Combine(directory, fileName);
 
@@ -47,6 +47,7 @@ public static class Serialization {
             PersistentData.instance.LoadDataFromSaveFile(saveData);
 
             //Debug.Log("Loaded data from: " + filePath);
+
             stream.Close();
             return true;
         } catch (Exception e) {
