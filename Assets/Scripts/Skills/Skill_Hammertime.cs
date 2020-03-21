@@ -88,8 +88,9 @@ public class Skill_Hammertime : Skill {
             yield return null;
         }
 
-        foreach (var enemy in enemyController.activeEnemies) {
-            enemy.canTakeDamageFromSkill = true;
+        int limit = enemyController.activeEnemies.Count;
+        for (int i = 0; i < limit; i++) {
+            enemyController.activeEnemies[i].canTakeDamageFromSkill = true;
         }
 
         pending = false;

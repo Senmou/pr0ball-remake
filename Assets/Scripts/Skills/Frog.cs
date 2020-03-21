@@ -37,10 +37,11 @@ public class Frog : MonoBehaviour {
             BaseEnemy[] activeEnemiesCopy = new BaseEnemy[enemyController.activeEnemies.Count];
             enemyController.activeEnemies.CopyTo(activeEnemiesCopy);
 
-            foreach (var enemy in activeEnemiesCopy) {
-                float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
+            int limit = activeEnemiesCopy.Length;
+            for (int i = 0; i < limit; i++) {
+                float distanceToEnemy = Vector2.Distance(transform.position, activeEnemiesCopy[i].transform.position);
                 if (distanceToEnemy < detonationRadius) {
-                    enemy.TakeDamage(explosionDamage);
+                    activeEnemiesCopy[i].TakeDamage(explosionDamage);
                     Statistics.Instance.skills.skill_2.damageDealt += explosionDamage;
                 }
             }
