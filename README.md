@@ -7,5 +7,7 @@ Github:
 ### Bekannte Bugs
 - pr0-chan trifft manche Gegner nicht
 - Die Highscores lassen sich manchmal nicht scrollen
+- Der Benitrat0r dreht manchmal durch, was zu langen Wartezeiten führt
 - Die Lautstärke der Bälle ist nicht von der globalen Lautstärke betroffen
+- Wenn man zu viel "Glück" hatte, wird das Spiel zum Selbstläufer und man kann nicht mehr verlieren.
 - Die App kann sich gelegentlich aufhängen (Prozess killen und neustarten hilft; vorbeugend kann es helfen die Partikeleffekte auszuschalten)
