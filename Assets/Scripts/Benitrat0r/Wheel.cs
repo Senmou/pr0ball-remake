@@ -125,6 +125,12 @@ public class Wheel : MonoBehaviour {
             }
         }
 
+        // Chance for extra balls is increased while you have less than 5
+        if(BallStats.Instance.ballCount < 5) {
+            if (Random.value < 0.1f)
+                targetSlot = wheelSlots.First(x => x.type == SlotType.Ball);
+        }
+
         // Rotating to the target symbol
         while (!rect.anchoredPosition.y.Approx(targetSlot.pos, 1f)) {
 
