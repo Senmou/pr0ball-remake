@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using System.Linq;
 
 public enum SlotType {
     Damage,
@@ -8,6 +9,11 @@ public enum SlotType {
     Ball,
     SkillPoint,
     Score
+}
+
+public struct WheelSlot {
+    public float pos;
+    public SlotType type;
 }
 
 public class Wheel : MonoBehaviour {
@@ -19,6 +25,8 @@ public class Wheel : MonoBehaviour {
     private Transform[] slots;
     private RectTransform rect;
     private Benitrator benitrator;
+
+    private WheelSlot[] wheelSlots;
 
     private void Awake() {
 
@@ -40,6 +48,17 @@ public class Wheel : MonoBehaviour {
         StartCoroutine(SetPositionDelayed());
     }
 
+    private void Start() {
+        wheelSlots = new WheelSlot[]{
+            new WheelSlot{ type = SlotType.Ball, pos = 4.5f},
+            new WheelSlot{ type = SlotType.Damage, pos = -7.5f},
+            new WheelSlot{ type = SlotType.Score, pos = -3.5f},
+            new WheelSlot{ type = SlotType.SkillPoint, pos = 0.5f},
+            new WheelSlot{ type = SlotType.CritDamage, pos = 8.5f},
+            new WheelSlot{ type = SlotType.CritChance, pos = -11.5f},
+        };
+    }
+
     private IEnumerator SetPositionDelayed() {
         yield return new WaitForEndOfFrame();
         rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -3.5f);
@@ -59,9 +78,17 @@ public class Wheel : MonoBehaviour {
         float slotHeight = 4f;
         float rotationSum = 0f;
 
+        float maxRotationTime = 6f;
+        float rotationTimeCounter = 0f;
+
         // Rotate for some full turns
         int turns = 0;
-        while(turns < fullTurns) {
+        while (turns < fullTurns) {
+
+            // To prevent the endless spinning bug
+            rotationTimeCounter += Time.unscaledDeltaTime;
+            if (rotationTimeCounter >= maxRotationTime)
+                break;
 
             float rotationDelta = rotationSpeed * Time.unscaledDeltaTime;
             rect.anchoredPosition += new Vector2(0f, rotationDelta);
@@ -71,6 +98,12 @@ public class Wheel : MonoBehaviour {
             if (rotationSum > slotHeight) {
                 benitrator.PlayClickSfx();
                 rotationSum -= slotHeight;
+            }
+
+            // Slow down
+            if (turns == fullTurns - 1) {
+                rotationSpeed *= 0.985f;
+                rotationSpeed = Mathf.Max(45f, rotationSpeed);
             }
 
             // Jump back to mimic a continous wheel
@@ -82,11 +115,23 @@ public class Wheel : MonoBehaviour {
             yield return null;
         }
 
-        float[] symbolPos = { -11.5f, -7.5f, -3.5f, 0.5f, 4.5f, 8.5f };
-        float targetSymbolPos = symbolPos[Random.Range(0, 6)];
+        int randomSlotID = Random.Range(0, 6);
+        WheelSlot targetSlot = wheelSlots[randomSlotID];
+
+        // When crit chance is maxed out, you'll get score instead
+        if (targetSlot.type == SlotType.CritChance) {
+            if (BallStats.Instance.critChance >= 100f) {
+                targetSlot = wheelSlots.First(x => x.type == SlotType.Score);
+            }
+        }
 
         // Rotating to the target symbol
-        while (!rect.anchoredPosition.y.Approx(targetSymbolPos, 1f)) {
+        while (!rect.anchoredPosition.y.Approx(targetSlot.pos, 1f)) {
+
+            // To prevent the endless spinning bug
+            rotationTimeCounter += Time.unscaledDeltaTime;
+            if (rotationTimeCounter >= maxRotationTime)
+                break;
 
             float rotationDelta = rotationSpeed * Time.unscaledDeltaTime;
             rect.anchoredPosition += new Vector2(0f, rotationDelta);
@@ -98,6 +143,10 @@ public class Wheel : MonoBehaviour {
                 rotationSum -= slotHeight;
             }
 
+            // Slow down
+            rotationSpeed *= 0.95f;
+            rotationSpeed = Mathf.Max(30f, rotationSpeed);
+
             // Jump back to mimic a continous wheel
             if (rect.anchoredPosition.y >= 8.5f)
                 rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -15.5f);
@@ -106,45 +155,12 @@ public class Wheel : MonoBehaviour {
         }
 
         // Snapping into position
-        rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, targetSymbolPos);
-        
+        rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, targetSlot.pos);
+
         benitrator.PlayWheelStopSfx();
 
         isRotating = false;
 
-        // -11.5 crit Chance
-        //-8 dmg
-        //-3.5 Benis
-        //0.5 skillpoint
-        //4.5 balls
-        //8.5 crit DMG
-        //8.5 jump -> -15.5
-
-        const float ballSlotPos = 4.5f;
-        const float benisSlotPos = -3.5f;
-        const float damageSlotPos = -8f;
-        const float critChanceSlotPos = -11.5f;
-        const float critDamageSlotPos = 8.5f;
-        const float skillPointSlotPos = 0.5f;
-
-        float posY = rect.anchoredPosition.y;
-
-        SlotType result = new SlotType();
-
-        if (posY == damageSlotPos) {
-            result = SlotType.Damage;
-        } else if (posY == critChanceSlotPos) {
-            result = SlotType.CritChance;
-        } else if (posY == critDamageSlotPos) {
-            result = SlotType.CritDamage;
-        } else if (posY == ballSlotPos) {
-            result = SlotType.Ball;
-        } else if (posY == skillPointSlotPos) {
-            result = SlotType.SkillPoint;
-        } else if (posY == benisSlotPos) {
-            result = SlotType.Score;
-        }
-
-        onStoppedRotating(result, gameObject.name);
+        onStoppedRotating(targetSlot.type, gameObject.name);
     }
 }
