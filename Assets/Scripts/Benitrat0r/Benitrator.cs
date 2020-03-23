@@ -309,14 +309,14 @@ public class Benitrator : MonoBehaviour {
         int rewardCritChance = 0;
 
         if (bet == 1)
-            rewardCritChance = 2;
+            rewardCritChance = 1;
         else if (bet == 2)
-            rewardCritChance = 5;
+            rewardCritChance = 2;
         else if (bet == 3)
-            rewardCritChance = 10;
+            rewardCritChance = 3;
 
         if (symbolCount == 3) {
-            rewardCritChance += 2 * bet;
+            rewardCritChance += bet;
         }
 
         return rewardCritChance;
@@ -328,12 +328,12 @@ public class Benitrator : MonoBehaviour {
         if (bet == 1)
             rewardCritDamage = 0.1f;
         else if (bet == 2)
-            rewardCritDamage = 0.25f;
+            rewardCritDamage = 0.2f;
         else if (bet == 3)
-            rewardCritDamage = 1f;
+            rewardCritDamage = 0.5f;
 
         if (symbolCount == 3) {
-            rewardCritDamage += 0.25f * bet;
+            rewardCritDamage += 0.1f * bet;
         }
 
         return rewardCritDamage;
@@ -345,9 +345,9 @@ public class Benitrator : MonoBehaviour {
         if (bet == 1)
             rewardBalls = 1;
         else if (bet == 2)
-            rewardBalls = 2;
+            rewardBalls = 1;
         else if (bet == 3)
-            rewardBalls = 3;
+            rewardBalls = 2;
 
         if (symbolCount == 3) {
             rewardBalls += 1;
@@ -357,21 +357,18 @@ public class Benitrator : MonoBehaviour {
     }
 
     private int GetRewardScore(int symbolCount) {
-        float rewardScoreMultiplier = 0;
+        int rewardScore = 0;
 
         if (bet == 1)
-            rewardScoreMultiplier = 0.1f;
+            rewardScore = 50;
         else if (bet == 2)
-            rewardScoreMultiplier = 0.3f;
+            rewardScore = 100;
         else if (bet == 3)
-            rewardScoreMultiplier = 0.5f;
+            rewardScore = 250;
 
         if (symbolCount == 3) {
-            rewardScoreMultiplier *= bet;
+            rewardScore += 100 * bet;
         }
-
-        long currentScore = Score.instance.score;
-        int rewardScore = (int)((currentScore + 250) * rewardScoreMultiplier);
 
         return rewardScore;
     }
