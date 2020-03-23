@@ -227,8 +227,7 @@ public class Benitrator : MonoBehaviour {
         // Three identical symbols
         if (skillPointSymbolCount > 2 || damageSymbolCount > 2 || critChanceSymbolCount > 2 ||
             critDamageSymbolCount > 2 || ballSymbolCount > 2 || scoreSymbolCount > 2) {
-            MusicController.instance.ChangeVolumeForSeconds(0.2f, 1f);
-            winBig.Play();
+            PlayCoinSfx();
             Statistics.Instance.benitrator.wins++;
             StartCoroutine(ShowResultText("GEWONNEN"));
             // Two identical symbols
@@ -239,7 +238,7 @@ public class Benitrator : MonoBehaviour {
             StartCoroutine(ShowResultText("GEWONNEN"));
         } else {
             ballMenu.PlayErrorSound();
-            int dangerLevelIncrease = 2 + bet;
+            int dangerLevelIncrease = 5 + bet;
             LevelData.DangerLevel += dangerLevelIncrease;
             SetWinText("+" + dangerLevelIncrease + "% GEFAHR", useColorRed: true);
             Statistics.Instance.benitrator.loses++;
