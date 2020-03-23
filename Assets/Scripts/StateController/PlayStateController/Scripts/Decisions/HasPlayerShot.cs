@@ -11,9 +11,7 @@ public class HasPlayerShot : Decision {
         float halfWidth = c.levelScale.levelWidth / 2f;
         float halfHeight = c.levelScale.levelHeight / 2f;
 
-        bool mousePosInLevel = mousePos.x > -halfWidth &&
-                               mousePos.x < halfWidth &&
-                               mousePos.y < halfHeight &&
+        bool mousePosInLevel = mousePos.y < halfHeight &&
                                mousePos.y > -halfHeight;
 
         return Input.GetMouseButtonUp(0) && mousePosInLevel && c.ballController.canShootAgain && !GameController.isGamePaused;
