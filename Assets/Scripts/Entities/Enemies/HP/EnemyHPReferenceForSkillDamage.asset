@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfe736667e3865d40841f649a5f8d56f, type: 3}
-  m_Name: ReferenceForSkillDamage
+  m_Name: EnemyHPReferenceForSkillDamage
   m_EditorClassIdentifier: 
   incWithDangerLevel: 0
-  maxBonusHPPercentage: 0
+  maxBonusHPPercentage: 0.25
   stepValueList:
   - step: 1
-    value: 2
+    value: 1
   - step: 2
     value: 4
   - step: 4
-    value: 8
-  - step: 6
+    value: 5
+  - step: 8
     value: 10
   - step: 10
-    value: 10
-  maxHP: 3
-  testLevel: 1
+    value: 50
+  maxHP: 24
+  testLevel: 21

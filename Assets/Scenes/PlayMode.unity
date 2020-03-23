@@ -352,7 +352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unlockLevel: 10
   bonusDamagePercentagePerPaidSkillPoint: 1
-  enemyHPReference: {fileID: 11400000, guid: 9ba2c21f088117b43ad528b8eb96898d, type: 2}
+  enemyHPReference: {fileID: 11400000, guid: 0c15fe3c8c6afd7449b9c974afa86f28, type: 2}
   icon: {fileID: 21300000, guid: 888417ed435c5704886fca0df6e864c0, type: 3}
   iconLocked: {fileID: 21300000, guid: e516f19d4620dfb4a81b4068034c2f9c, type: 3}
   pendingIcon: {fileID: 0}
@@ -28127,7 +28127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unlockLevel: 1
   bonusDamagePercentagePerPaidSkillPoint: 1
-  enemyHPReference: {fileID: 11400000, guid: 9ba2c21f088117b43ad528b8eb96898d, type: 2}
+  enemyHPReference: {fileID: 11400000, guid: 0c15fe3c8c6afd7449b9c974afa86f28, type: 2}
   icon: {fileID: 21300000, guid: 122a96a037f3fc84e878c9cbee0a28f2, type: 3}
   iconLocked: {fileID: 21300000, guid: 6a8449cd82fd6f843bc066d80070feb3, type: 3}
   pendingIcon: {fileID: 0}
@@ -34244,7 +34244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unlockLevel: 5
   bonusDamagePercentagePerPaidSkillPoint: 1
-  enemyHPReference: {fileID: 11400000, guid: 9ba2c21f088117b43ad528b8eb96898d, type: 2}
+  enemyHPReference: {fileID: 11400000, guid: 0c15fe3c8c6afd7449b9c974afa86f28, type: 2}
   icon: {fileID: 21300000, guid: 8cb83d26ce6d0a24a8ab548b78c86b85, type: 3}
   iconLocked: {fileID: 21300000, guid: 4ff0fa5a750b60b469f3f2f2b1f46e00, type: 3}
   pendingIcon: {fileID: 0}

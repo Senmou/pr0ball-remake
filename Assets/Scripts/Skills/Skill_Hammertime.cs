@@ -35,7 +35,7 @@ public class Skill_Hammertime : Skill {
         dangerLevelIncrease = -5;
     }
 
-    protected override int CalcDamage(int cost) => cost + cost * (enemyHPReference.MaxHP / 3);
+    protected override int CalcDamage(int cost) => cost + cost * (enemyHPReference.MaxHP / 1);
 
     protected override IEnumerator ActionCoroutine() {
 

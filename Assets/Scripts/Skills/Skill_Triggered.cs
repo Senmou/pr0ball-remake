@@ -23,7 +23,7 @@ public class Skill_Triggered : Skill {
         dangerLevelIncrease = 3;
     }
 
-    protected override int CalcDamage(int cost) => cost + cost * (enemyHPReference.MaxHP / 15);
+    protected override int CalcDamage(int cost) => cost + cost * (enemyHPReference.MaxHP / 1);
 
     protected override IEnumerator ActionCoroutine() {
 

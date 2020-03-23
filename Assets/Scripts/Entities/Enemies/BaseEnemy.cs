@@ -24,9 +24,10 @@ public class BaseEnemy : MonoBehaviour {
     private EnemyController enemyController;
 
     private int benisValue = 1;
+    protected float hpMultiplicator;
 
     protected void OnEnable() {
-        maxHP = hp.MaxHP;
+        maxHP = (int)(hp.MaxHP * hpMultiplicator);
     }
 
     protected void Awake() {

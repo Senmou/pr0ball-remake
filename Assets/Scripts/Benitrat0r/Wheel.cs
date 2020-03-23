@@ -78,7 +78,7 @@ public class Wheel : MonoBehaviour {
         float slotHeight = 4f;
         float rotationSum = 0f;
 
-        float maxRotationTime = 6f;
+        float maxRotationTime = 4f;
         float rotationTimeCounter = 0f;
 
         // Rotate for some full turns
@@ -101,7 +101,7 @@ public class Wheel : MonoBehaviour {
             }
 
             // Slow down
-            if (turns == fullTurns - 1) {
+            if (turns >= fullTurns - 2) {
                 rotationSpeed *= 0.985f;
                 rotationSpeed = Mathf.Max(45f, rotationSpeed);
             }

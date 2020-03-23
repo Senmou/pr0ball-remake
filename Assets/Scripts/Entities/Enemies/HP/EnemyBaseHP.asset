@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfe736667e3865d40841f649a5f8d56f, type: 3}
-  m_Name: Enemy_4
+  m_Name: EnemyBaseHP
   m_EditorClassIdentifier: 
   incWithDangerLevel: 1
-  maxBonusHPPercentage: 1
+  maxBonusHPPercentage: 0.25
   stepValueList:
   - step: 1
-    value: 3
+    value: 1
   - step: 2
-    value: 5
+    value: 4
   - step: 4
-    value: 15
-  - step: 6
+    value: 5
+  - step: 8
     value: 10
   - step: 10
-    value: 40
-  maxHP: 174
+    value: 50
+  maxHP: 520
   testLevel: 1

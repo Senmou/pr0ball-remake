@@ -236,7 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyColor: {r: 1, g: 0, b: 0.7322521, a: 1}
   uniColor: {r: 0.55, g: 0.15782608, b: 0.088478245, a: 1}
-  hp: {fileID: 11400000, guid: e95400de77080524a8f0a63f3536c9f4, type: 2}
+  hp: {fileID: 11400000, guid: 0b619df4c108ac84f9dc98c888091ce2, type: 2}
   particleSystem: {fileID: 7199096499088925637, guid: cc61f3667670b7e469667e44d8c5714d,
     type: 3}
   maxHP: 0
@@ -259,6 +259,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -270,6 +271,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

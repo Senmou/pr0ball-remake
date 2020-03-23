@@ -26,8 +26,8 @@ Preset:
     value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
-    propertyPath: randomize
-    value: 1
+    propertyPath: incWithDangerLevel
+    value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: maxBonusHPPercentage

@@ -3,5 +3,6 @@
     private new void Awake() {
         base.Awake();
         entityType = CurrentLevelData.EntityType.Enemy_5;
+        hpMultiplicator = 4f;
     }
 }
