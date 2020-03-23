@@ -6,7 +6,7 @@ public class ResetGameButton : MonoBehaviour {
 
     public void ResetGame() {
 
-        string fileName = "saveData.dat";
+        string fileName = GameController.saveFileName;
         string directory = Path.Combine(Application.persistentDataPath, "data");
         string filePath = Path.Combine(directory, fileName);
 

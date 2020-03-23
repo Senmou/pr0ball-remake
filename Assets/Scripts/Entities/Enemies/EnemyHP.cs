@@ -31,8 +31,15 @@ public class EnemyHP : ScriptableObject {
             maxHP += HP(level, stepValueList[i].value, stepValueList[i].step);
         }
 
-        if (incWithDangerLevel)
+        if (incWithDangerLevel) {
+
+            if (LevelData.Level > 5)
+                maxHP += (int)(LevelData.Wave * (1f + LevelData.DangerLevel / 100f));
+
+            maxHP += LevelData.DangerLevel / Mathf.Max(1, (11 - LevelData.Level));
+
             maxHP *= (int)(1f + LevelData.DangerLevel / 100f);
+        }
 
         return maxHP;
     }

@@ -1,8 +1,10 @@
-﻿using MarchingBytes;
-using System.Collections;
+﻿using System.Collections;
+using MarchingBytes;
 using UnityEngine;
 
 public class GameController : MonoBehaviour {
+
+    public const string saveFileName = "saveData_v1.dat";
 
     [SerializeField] private FloatingText floatingText;
 
