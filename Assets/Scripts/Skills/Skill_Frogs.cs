@@ -8,16 +8,14 @@ public class Skill_Frogs : Skill {
 
     private const string frogPoolName = "Frog_pool";
 
-    protected override int CalcDamage(int cost) => cost + cost * (enemyHPReference.MaxHP / 1);
+    protected override int CalcDamage(int cost) => enemyHPReference.MaxHP;
 
     private new void Awake() {
         base.Awake();
-    }
-
-    private void Start() {
-        title = "Bergfestzelebrierungsfrosch";
+        title = "Quak";
         description = "-2% Gefahrenlevel pro Blussi";
         dangerLevelIncrease = -2;
+        tokenCost = 2;
     }
 
     protected override IEnumerator ActionCoroutine() {

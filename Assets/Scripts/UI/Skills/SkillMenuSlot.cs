@@ -8,17 +8,18 @@ public class SkillMenuSlot : MonoBehaviour {
 
     private Image image;
     private SkillMenu skillMenu;
-    private SkillMenuUnlockButton unlockButton;
+    //private SkillMenuUnlockButton unlockButton;
 
-    private Button plus;
-    private Button minus;
-    private TextMeshProUGUI costUI;
+    //private Button plus;
+    //private Button minus;
+    //private TextMeshProUGUI costUI;
+    private TextMeshProUGUI tokenUI;
     private TextMeshProUGUI titleUI;
     private TextMeshProUGUI damageUI;
     private TextMeshProUGUI descriptionUI;
     private TextMeshProUGUI usedCounterUI;
     private TextMeshProUGUI bonusDamageUI;
-    private TextMeshProUGUI dangerLevelIncreaseUI;
+    //private TextMeshProUGUI dangerLevelIncreaseUI;
 
     private Transform infoCost;
     private Transform infoDamage;
@@ -32,38 +33,41 @@ public class SkillMenuSlot : MonoBehaviour {
     private void Awake() {
         skillMenu = FindObjectOfType<SkillMenu>();
         image = transform.FindChild<Image>("Icon");
-        unlockButton = GetComponentInChildren<SkillMenuUnlockButton>();
+        //unlockButton = GetComponentInChildren<SkillMenuUnlockButton>();
 
         infoCost = transform.FindChild<Transform>("InfoPopups/Cost");
         infoDamage = transform.FindChild<Transform>("InfoPopups/Damage");
         infoUsedCounter = transform.FindChild<Transform>("InfoPopups/UsedCounter");
 
-        plus = transform.FindChild<Button>("Cost/Plus");
-        minus = transform.FindChild<Button>("Cost/Minus");
+        tokenUI = transform.FindChild<TextMeshProUGUI>("Token/Value");
+
+        //plus = transform.FindChild<Button>("Cost/Plus");
+        //minus = transform.FindChild<Button>("Cost/Minus");
         titleUI = transform.FindChild<TextMeshProUGUI>("Title");
-        costUI = transform.FindChild<TextMeshProUGUI>("Cost/Value");
+        //costUI = transform.FindChild<TextMeshProUGUI>("Cost/Value");
         damageIcon = transform.FindChild<Transform>("SkillData/Damage/Icon");
         damageUI = transform.FindChild<TextMeshProUGUI>("SkillData/Damage/Value");
         descriptionUI = transform.FindChild<TextMeshProUGUI>("Description/Value");
         usedCounterIcon = transform.FindChild<Transform>("SkillData/UsedCounter/Icon");
         usedCounterUI = transform.FindChild<TextMeshProUGUI>("SkillData/UsedCounter/Value");
-        dangerLevelIncreaseUI = transform.FindChild<TextMeshProUGUI>("DangerLevelIncrease");
+        //dangerLevelIncreaseUI = transform.FindChild<TextMeshProUGUI>("DangerLevelIncrease");
         bonusDamageUI = transform.FindChild<TextMeshProUGUI>("SkillData/UsedCounter/BonusDamageValue");
-
 
         purchaseSfx = GameObject.Find("SfxUnlockSkill").GetComponent<AudioSource>();
         errorSfx = GameObject.Find("SfxError").GetComponent<AudioSource>();
     }
 
     private void Start() {
-        CheckButtonInteractability();
+        //CheckButtonInteractability();
+
+        //UpdateSlot();
     }
 
     private void Update() {
-        if (skill && skill.locked)
-            unlockButton.Show();
-        else
-            unlockButton.Hide();
+        //if (skill && skill.locked)
+        //    unlockButton.Show();
+        //else
+        //    unlockButton.Hide();
 
         if (Input.GetMouseButton(0)) {
             if (InputHelper.instance.ClickedOnTag("InfoDamage")) {
@@ -98,68 +102,69 @@ public class SkillMenuSlot : MonoBehaviour {
 
     private void CheckButtonInteractability() {
 
-        if (minus == null || skill == null || plus == null)
-            return;
+        //if (minus == null || skill == null || plus == null)
+        //    return;
 
-        minus.interactable = skill.cost > 1;
-        plus.interactable = skill.cost < Score.instance.skillPoints;
+        //minus.interactable = skill.cost > 1;
+        //plus.interactable = skill.cost < Score.instance.skillPoints;
     }
 
     public void UnlockSkill() {
-        if (LevelData.Level >= skill.unlockLevel) {
-            skill.locked = false;
-            skill.barSlot.UpdateSlot();
-            purchaseSfx.Play();
-            unlockButton.Hide();
-            UpdateSlot();
-        } else
-            errorSfx.Play();
+        //if (LevelData.Level >= skill.unlockLevel) {
+        //skill.locked = false;
+        //skill.barSlot.UpdateSlot();
+        //purchaseSfx.Play();
+        //unlockButton.Hide();
+        UpdateSlot();
+        //} else
+        //    errorSfx.Play();
     }
 
     public void UpdateSlot() {
 
-        if (skill.locked) {
-            plus.gameObject.SetActive(false);
-            minus.gameObject.SetActive(false);
-            costUI.gameObject.SetActive(false);
-            titleUI.gameObject.SetActive(false);
-            damageUI.gameObject.SetActive(false);
-            damageIcon.gameObject.SetActive(false);
-            usedCounterUI.gameObject.SetActive(false);
-            bonusDamageUI.gameObject.SetActive(false);
-            descriptionUI.gameObject.SetActive(false);
-            usedCounterIcon.gameObject.SetActive(false);
-            dangerLevelIncreaseUI.gameObject.SetActive(false);
-        } else {
-            plus.gameObject.SetActive(true);
-            minus.gameObject.SetActive(true);
-            costUI.gameObject.SetActive(true);
-            titleUI.gameObject.SetActive(true);
-            damageUI.gameObject.SetActive(true);
-            damageIcon.gameObject.SetActive(true);
-            usedCounterUI.gameObject.SetActive(true);
-            bonusDamageUI.gameObject.SetActive(true);
-            descriptionUI.gameObject.SetActive(true);
-            usedCounterIcon.gameObject.SetActive(true);
-            dangerLevelIncreaseUI.gameObject.SetActive(true);
+        //if (skill.locked) {
+        //    plus.gameObject.SetActive(false);
+        //    minus.gameObject.SetActive(false);
+        //    costUI.gameObject.SetActive(false);
+        //    titleUI.gameObject.SetActive(false);
+        //    damageUI.gameObject.SetActive(false);
+        //    damageIcon.gameObject.SetActive(false);
+        //    usedCounterUI.gameObject.SetActive(false);
+        //    bonusDamageUI.gameObject.SetActive(false);
+        //    descriptionUI.gameObject.SetActive(false);
+        //    usedCounterIcon.gameObject.SetActive(false);
+        //    dangerLevelIncreaseUI.gameObject.SetActive(false);
+        //} else {
+        //plus.gameObject.SetActive(true);
+        //minus.gameObject.SetActive(true);
+        //costUI.gameObject.SetActive(true);
+        titleUI.gameObject.SetActive(true);
+        damageUI.gameObject.SetActive(true);
+        damageIcon.gameObject.SetActive(true);
+        usedCounterUI.gameObject.SetActive(true);
+        bonusDamageUI.gameObject.SetActive(true);
+        descriptionUI.gameObject.SetActive(true);
+        usedCounterIcon.gameObject.SetActive(true);
+        //dangerLevelIncreaseUI.gameObject.SetActive(true);
 
-            skill.UpdateCost();
-        }
+        //skill.UpdateCost();
+        //}
 
         image.sprite = skill.Icon;
-        costUI.text = skill.cost.ToString();
+        //costUI.text = skill.cost.ToString();
         damageUI.text = skill.GetTotalDamage(skill.cost).ToString();
         usedCounterUI.text = skill.BonusPercentage.ToString() + "%";
         bonusDamageUI.text = "(+" + skill.GetBonusDamage(skill.cost).ToString() + ")";
-        unlockButton?.SetText(skill.unlockLevel);
-        unlockButton?.SetColor(skill.unlockLevel);
+        //unlockButton?.SetText(skill.unlockLevel);
+        //unlockButton?.SetColor(skill.unlockLevel);
         descriptionUI.text = skill.description;
         titleUI.text = skill.title;
+        tokenUI.text = skill.tokenCount + "/" + skill.tokenCost;
 
-        if (skill.dangerLevelIncrease < 0)
-            dangerLevelIncreaseUI.text = (skill.dangerLevelIncrease * skill.cost).ToString() + "%";
-        else
-            dangerLevelIncreaseUI.text = "+" + (skill.dangerLevelIncrease * skill.cost).ToString() + "%";
+        //if (skill.dangerLevelIncrease < 0)
+        //    dangerLevelIncreaseUI.text = (skill.dangerLevelIncrease * skill.cost).ToString() + "%";
+        //else
+        //    dangerLevelIncreaseUI.text = "+" + (skill.dangerLevelIncrease * skill.cost).ToString() + "%";
 
         CheckButtonInteractability();
         skill.barSlot.UpdateSlot();

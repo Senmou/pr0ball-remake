@@ -20,6 +20,8 @@ public class Skill : MonoBehaviour {
     [HideInInspector] public bool locked;
     [HideInInspector] public int paidCost;
     [HideInInspector] public string title;
+    [HideInInspector] public int tokenCost;
+    [HideInInspector] public int tokenCount;
     [HideInInspector] public int usedCounter;
     [HideInInspector] public new string name;
     [HideInInspector] public bool usedThisTurn;
@@ -52,11 +54,14 @@ public class Skill : MonoBehaviour {
         SkillData.Skill skillData = PersistentData.instance.skillData.GetSkillData(id);
         skillPointsSpend = skillData.skillPointsSpend;
         usedThisTurn = skillData.usedThisTurn;
-        locked = skillData.locked;
+        //locked = skillData.locked;
         cost = skillData.cost;
 
         EventManager.StartListening("SaveGame", OnSaveGame);
         EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
+
+        tokenCost = 1;
+        locked = false;
     }
 
     private void Start() {
@@ -89,9 +94,15 @@ public class Skill : MonoBehaviour {
 
     protected void Action() {
 
-        if (Score.instance.skillPoints < cost) {
+        //if (Score.instance.skillPoints < cost) {
+        //    sfxError.Play();
+        //    ErrorMessage.instance.Show(1f, "Nicht genug Skillpunkte!");
+        //    return;
+        //}
+
+        if (tokenCount < tokenCost) {
             sfxError.Play();
-            ErrorMessage.instance.Show(1f, "Nicht genug Skillpunkte!");
+            ErrorMessage.instance.Show(1f, "Nicht genug Token!");
             return;
         }
 
@@ -101,23 +112,32 @@ public class Skill : MonoBehaviour {
             return;
         }
 
-        if (usedThisTurn) {
-            sfxError.Play();
-            ErrorMessage.instance.Show(1f, "Erst im nächsten Level wieder!");
-            return;
-        }
+        //if (usedThisTurn) {
+        //    sfxError.Play();
+        //    ErrorMessage.instance.Show(1f, "Erst im nächsten Level wieder!");
+        //    return;
+        //}
 
-        if (Score.instance.PaySkillPoints(cost)) {
-            paidCost = cost;
-            skillPointsSpend += cost;
+        //if (Score.instance.PaySkillPoints(cost)) {
+        //    paidCost = cost;
+        //    skillPointsSpend += cost;
+        //    pending = true;
+        //    usedThisTurn = true;
+        //    UpdateCost();
+        //    barSlot.UpdateSlot();
+        //    barSlot.ShowClockImage(true);
+        //    usedCounter++;
+        //    sfxSuccess.Play();
+        //    Statistics.Instance.skills.skillPointsSpend += paidCost;
+        //    StartCoroutine(ActionCoroutine());
+        //}
+
+        if (tokenCount >= tokenCost) {
+            tokenCount -= tokenCost;
             pending = true;
-            usedThisTurn = true;
-            UpdateCost();
-            barSlot.UpdateSlot();
-            barSlot.ShowClockImage(true);
             usedCounter++;
             sfxSuccess.Play();
-            Statistics.Instance.skills.skillPointsSpend += paidCost;
+            barSlot.UpdateSlot();
             StartCoroutine(ActionCoroutine());
         }
     }
@@ -149,10 +169,10 @@ public class Skill : MonoBehaviour {
     }
 
     public void ResetData() {
-        cost = 1;
-        locked = true;
+        //cost = 1;
+        //locked = true;
         usedCounter = 0;
-        usedThisTurn = false;
-        skillPointsSpend = 0;
+        //usedThisTurn = false;
+        //skillPointsSpend = 0;
     }
 }

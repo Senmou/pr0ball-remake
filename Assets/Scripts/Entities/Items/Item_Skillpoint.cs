@@ -1,50 +1,30 @@
 ﻿using UnityEngine;
 using TMPro;
 
-public class Item_Skillpoint : MonoBehaviour {
+public class Item_Skillpoint : BaseItem {
 
-    [HideInInspector] public int value;
-    [HideInInspector] public bool reachedStartingPosition;
-    [HideInInspector] public CurrentLevelData.EntityType entityType;
-
-    private RectTransform rect;
-    private AudioSource sfxCoins;
     private TextMeshProUGUI valueUI;
-    private ParticleSystem particleSystem;
-    private EnemyController enemyController;
+    private new ParticleSystem particleSystem;
 
-    private void Awake() {
-        rect = GetComponent<RectTransform>();
-        entityType = CurrentLevelData.EntityType.Item;
+    private new void Awake() {
+        base.Awake();
+        entityType = CurrentLevelData.EntityType.ItemSkillPoint;
         particleSystem = GetComponent<ParticleSystem>();
-        enemyController = FindObjectOfType<EnemyController>();
+
         valueUI = transform.FindChild<TextMeshProUGUI>("Value");
-        sfxCoins = GameObject.Find("SfxCoins").GetComponent<AudioSource>();
 
         if (PersistentData.instance.enableParticleSystems)
             particleSystem.Play();
         else
             particleSystem.Stop();
 
-        EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
-        EventManager.StartListening("ToggleParticleSystems", OnToggleParticleSystems);
-
         int random = Random.Range(0, 100);
         if (random < 3)
-            value = Random.Range(5, 11);
+            SetValue(Random.Range(5, 11), valueUI);
         else
-            value = Random.Range(1, 4);
+            SetValue(Random.Range(1, 4), valueUI);
 
-        valueUI.text = value.ToString();
-    }
-
-    public void SetValue(int _value) {
-        value = _value;
-        valueUI.text = value.ToString();
-    }
-
-    private void OnReachedNextLevel() {
-        Destroy(gameObject);
+        EventManager.StartListening("ToggleParticleSystems", OnToggleParticleSystems);
     }
 
     private void OnToggleParticleSystems() {
@@ -54,19 +34,7 @@ public class Item_Skillpoint : MonoBehaviour {
             particleSystem.Stop();
     }
 
-    public void OnItemCollect() {
+    protected override void OnItemCollected() {
         Score.instance.IncSkillPoints(value);
-        sfxCoins.Play();
-        DestroyAndRemoveItem();
-    }
-
-    public void DestroyAndRemoveItem() {
-        enemyController.activeItems.Remove(this);
-        Destroy(gameObject);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Ball"))
-            OnItemCollect();
     }
 }

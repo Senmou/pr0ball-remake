@@ -6,12 +6,12 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour {
 
     [SerializeField] private FloatingText floatingText;
-    [SerializeField] private GameObject itemAddSkillPoint;
 
+    public LootDropTable itemLDT;
     public LootDropTable enemyLDT;
 
     [HideInInspector] public List<BaseEnemy> activeEnemies;
-    [HideInInspector] public List<Item_Skillpoint> activeItems;
+    [HideInInspector] public List<BaseItem> activeItems;
     [HideInInspector] public PlayStateController playStateController;
 
     private Canvas canvas;
@@ -20,6 +20,7 @@ public class EnemyController : MonoBehaviour {
     private Transform itemSkillPointContainer;
 
     private void OnValidate() {
+        itemLDT.ValidateTable();
         enemyLDT.ValidateTable();
     }
 
@@ -33,6 +34,7 @@ public class EnemyController : MonoBehaviour {
 
         EventManager.StartListening("ChacheData", OnChacheData);
 
+        itemLDT.ValidateTable();
         enemyLDT.ValidateTable();
     }
 
@@ -87,10 +89,18 @@ public class EnemyController : MonoBehaviour {
 
             int limit = activeEntities.Count;
             for (int i = 0; i < limit; i++) {
-                if (activeEntities[i].entityType == CurrentLevelData.EntityType.Item)
-                    SpawnItem(new Vector3(activeEntities[i].posX, activeEntities[i].posY), activeEntities[i].value);
-                else
-                    SpawnEnemy(new Vector3(activeEntities[i].posX, activeEntities[i].posY), activeEntities[i].entityType, activeEntities[i].value);
+
+                switch (activeEntities[i].entityType) {
+                    case CurrentLevelData.EntityType.ItemSkillPoint:
+                        SpawnItem(itemLDT.lootDropItems[0].item, new Vector3(activeEntities[i].posX, activeEntities[i].posY), activeEntities[i].value);
+                        break;
+                    case CurrentLevelData.EntityType.ItemTokenSkill_1:
+                        SpawnItem(itemLDT.lootDropItems[1].item, new Vector3(activeEntities[i].posX, activeEntities[i].posY), activeEntities[i].value);
+                        break;
+                    default:
+                        SpawnEnemy(new Vector3(activeEntities[i].posX, activeEntities[i].posY), activeEntities[i].entityType, activeEntities[i].value);
+                        break;
+                }
             }
 
             PersistentData.instance.currentLevelData.activeEntities.Clear();
@@ -155,15 +165,15 @@ public class EnemyController : MonoBehaviour {
             int random = Random.Range(1, 100);
 
             if (random <= 5) {
-                SpawnItem(spawnPoints[i].position);
+                SpawnItem(itemLDT.PickLootDropItem().item, spawnPoints[i].position);
             } else {
                 SpawnEnemy(spawnPoints[i].position);
             }
         }
     }
 
-    private void SpawnItem(Vector3 position, int value = -1, bool isInitialWave = false) {
-        Item_Skillpoint item = Instantiate(itemAddSkillPoint, position, Quaternion.identity, canvas.transform).GetComponent<Item_Skillpoint>();
+    private void SpawnItem(GameObject itemPrefab, Vector3 position, int value = -1, bool isInitialWave = false) {
+        BaseItem item = Instantiate(itemPrefab, position, Quaternion.identity, canvas.transform).GetComponent<BaseItem>();
         item.reachedStartingPosition = false;
         item.transform.SetParent(itemSkillPointContainer);
         if (value != -1)
@@ -252,7 +262,7 @@ public class EnemyController : MonoBehaviour {
             int random = Random.Range(1, 100);
 
             if (random <= 7) {
-                SpawnItem(spawnPoints[i].position, isInitialWave: true);
+                SpawnItem(itemLDT.PickLootDropItem().item, spawnPoints[i].position, isInitialWave: true);
             } else {
                 SpawnEnemy(spawnPoints[i].position, isInitialWave: true);
             }
@@ -292,7 +302,7 @@ public class EnemyController : MonoBehaviour {
         if (enemy)
             enemy.reachedStartingPosition = true;
         else {
-            var item = entity.GetComponent<Item_Skillpoint>();
+            var item = entity.GetComponent<BaseItem>();
             if (item) {
                 item.reachedStartingPosition = true;
             }

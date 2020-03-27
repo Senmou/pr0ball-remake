@@ -172,10 +172,13 @@ public class CurrentLevelData {
         Enemy_0,
         Enemy_1,
         Enemy_2,
-        Item,
+        ItemSkillPoint,
         Enemy_3,
         Enemy_4,
-        Enemy_5
+        Enemy_5,
+        ItemTokenSkill_1,
+        ItemTokenSkill_2,
+        ItemTokenSkill_3
     }
 
     [Serializable]

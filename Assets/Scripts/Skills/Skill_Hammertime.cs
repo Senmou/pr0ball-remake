@@ -27,15 +27,14 @@ public class Skill_Hammertime : Skill {
 
         hammerTimeLogo = Instantiate(hammerTimeLogo, new Vector3(-30f, 9f), Quaternion.identity);
         hammerTimeLogo.gameObject.SetActive(false);
-    }
 
-    private void Start() {
         title = "pr0-chan";
         description = "-5% Gefahrenlevel pro Blussi";
         dangerLevelIncrease = -5;
+        tokenCost = 1;
     }
 
-    protected override int CalcDamage(int cost) => cost + cost * (enemyHPReference.MaxHP / 1);
+    protected override int CalcDamage(int cost) => enemyHPReference.MaxHP;
 
     protected override IEnumerator ActionCoroutine() {
 

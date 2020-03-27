@@ -15,15 +15,14 @@ public class Skill_Triggered : Skill {
         canvas = FindObjectOfType<Canvas>();
         audioSource = GetComponent<AudioSource>();
         triggeredAudio = GameObject.Find("SfxTriggered").GetComponent<AudioSource>();
-    }
 
-    private void Start() {
         title = "Corona";
         description = "+3% Gefahrenlevel pro Blussi";
         dangerLevelIncrease = 3;
+        tokenCost = 3;
     }
 
-    protected override int CalcDamage(int cost) => cost + cost * (enemyHPReference.MaxHP / 1);
+    protected override int CalcDamage(int cost) => enemyHPReference.MaxHP;
 
     protected override IEnumerator ActionCoroutine() {
 

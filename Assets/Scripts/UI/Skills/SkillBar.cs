@@ -18,7 +18,7 @@ public class SkillBar : MonoBehaviour {
         UpdateSlots();
     }
 
-    private void UpdateSlots() {
+    public void UpdateSlots() {
         for (int i = 0; i < slots.Length; i++) {
             slots[i].UpdateSlot();
         }

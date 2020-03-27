@@ -15308,6 +15308,8 @@ MonoBehaviour:
     type: 3}
   itemAddSkillPoint: {fileID: 2601613320603431390, guid: 4af49e19cddfbe84d9a992746150cbbf,
     type: 3}
+  itemTokenSkill_1: {fileID: 2601613320603431390, guid: c1880662cb5b8fe42bd3be90455f40f9,
+    type: 3}
   enemyLDT:
     lootDropItems:
     - item: {fileID: 1688601153306911077, guid: f7dfc4e3f460f9e4a89262c4b4b69737,
