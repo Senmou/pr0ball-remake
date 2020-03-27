@@ -130,7 +130,14 @@ public class BaseEnemy : MonoBehaviour {
         if (ball == null)
             return;
 
-        LeanTween.scale(gameObject, new Vector2(1.85f, 1.85f), 0.05f).setLoopPingPong(1);
+        LeanTween.scale(gameObject, new Vector2(1.85f, 1.85f), 0.05f).setOnComplete(() => {
+            LeanTween.scale(gameObject, new Vector2(2f, 2f), 0.05f);
+        });
+        LeanTween.rotateZ(gameObject, 7.5f, 0.05f).setOnComplete(() => {
+            LeanTween.rotateZ(gameObject, -7.5f, 0.05f).setOnComplete(() => {
+                LeanTween.rotateZ(gameObject, 0f, 0.05f);
+            });
+        });
 
         TakeDamage(ball);
         Statistics.Instance.balls.damageDealt += ball.Damage();
