@@ -18,7 +18,6 @@ public class BaseEnemy : MonoBehaviour {
     [HideInInspector] public bool reachedStartingPosition;
     [HideInInspector] public CurrentLevelData.EntityType entityType;
 
-    private Animator animator;
     private SpriteRenderer spriteRenderer;
     private TextMeshProUGUI healthPointUI;
     private EnemyController enemyController;
@@ -31,7 +30,6 @@ public class BaseEnemy : MonoBehaviour {
     }
 
     protected void Awake() {
-        animator = GetComponent<Animator>();
         body = GetComponentInChildren<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         enemyController = FindObjectOfType<EnemyController>();
@@ -127,12 +125,12 @@ public class BaseEnemy : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        animator.SetTrigger("hit");
-
         Ball ball = other.gameObject.GetComponent<Ball>();
 
         if (ball == null)
             return;
+
+        LeanTween.scale(gameObject, new Vector2(1.85f, 1.85f), 0.05f).setLoopPingPong(1);
 
         TakeDamage(ball);
         Statistics.Instance.balls.damageDealt += ball.Damage();
