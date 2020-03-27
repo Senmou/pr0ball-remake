@@ -30,7 +30,7 @@ public class Skill_Hammertime : Skill {
 
         title = "pr0-chan";
         description = "-5% Gefahrenlevel pro Blussi";
-        dangerLevelIncrease = -5;
+        dangerLevelReduction = 5;
         tokenCost = 1;
     }
 
@@ -38,7 +38,7 @@ public class Skill_Hammertime : Skill {
 
     protected override IEnumerator ActionCoroutine() {
 
-        LevelData.DangerLevel += dangerLevelIncrease * paidCost;
+        LevelData.DangerLevel -= dangerLevelReduction;
 
         Statistics.Instance.skills.skill_1.used++;
         Statistics.Instance.skills.skill_1.skillPointsSpend += paidCost;

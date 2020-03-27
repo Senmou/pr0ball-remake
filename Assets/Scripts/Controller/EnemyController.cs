@@ -97,6 +97,12 @@ public class EnemyController : MonoBehaviour {
                     case CurrentLevelData.EntityType.ItemTokenSkill_1:
                         SpawnItem(itemLDT.lootDropItems[1].item, new Vector3(activeEntities[i].posX, activeEntities[i].posY), activeEntities[i].value);
                         break;
+                    case CurrentLevelData.EntityType.ItemTokenSkill_2:
+                        SpawnItem(itemLDT.lootDropItems[2].item, new Vector3(activeEntities[i].posX, activeEntities[i].posY), activeEntities[i].value);
+                        break;
+                    case CurrentLevelData.EntityType.ItemTokenSkill_3:
+                        SpawnItem(itemLDT.lootDropItems[3].item, new Vector3(activeEntities[i].posX, activeEntities[i].posY), activeEntities[i].value);
+                        break;
                     default:
                         SpawnEnemy(new Vector3(activeEntities[i].posX, activeEntities[i].posY), activeEntities[i].entityType, activeEntities[i].value);
                         break;

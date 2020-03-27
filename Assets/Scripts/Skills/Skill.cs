@@ -26,7 +26,7 @@ public class Skill : MonoBehaviour {
     [HideInInspector] public new string name;
     [HideInInspector] public bool usedThisTurn;
     [HideInInspector] public string description;
-    [HideInInspector] public int dangerLevelIncrease;
+    [HideInInspector] public int dangerLevelReduction;
 
     public int BonusPercentage { get => skillPointsSpend * bonusDamagePercentagePerPaidSkillPoint; }
 
@@ -54,10 +54,11 @@ public class Skill : MonoBehaviour {
         SkillData.Skill skillData = PersistentData.instance.skillData.GetSkillData(id);
         skillPointsSpend = skillData.skillPointsSpend;
         usedThisTurn = skillData.usedThisTurn;
+        tokenCount = skillData.tokenCount;
         //locked = skillData.locked;
         cost = skillData.cost;
 
-        EventManager.StartListening("SaveGame", OnSaveGame);
+        EventManager.StartListening("ChacheData", OnChanceData);
         EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
 
         tokenCost = 1;
@@ -83,8 +84,8 @@ public class Skill : MonoBehaviour {
             cost--;
     }
 
-    protected void OnSaveGame() {
-        SaveSkillData(id, locked, usedCounter, cost, usedThisTurn, skillPointsSpend);
+    protected void OnChanceData() {
+        SaveSkillData(id, locked, usedCounter, cost, tokenCount, usedThisTurn, skillPointsSpend);
     }
 
     protected void OnReachedNextLevel() {
@@ -164,8 +165,8 @@ public class Skill : MonoBehaviour {
         locked = false;
     }
 
-    protected void SaveSkillData(int id, bool locked, int usedCounter, int cost, bool usedThisTurn, int skillPointsSpend) {
-        PersistentData.instance.skillData.SetSkillData(id, locked, usedCounter, cost, usedThisTurn, skillPointsSpend);
+    protected void SaveSkillData(int id, bool locked, int usedCounter, int cost, int tokenCount, bool usedThisTurn, int skillPointsSpend) {
+        PersistentData.instance.skillData.SetSkillData(id, locked, usedCounter, cost, tokenCount, usedThisTurn, skillPointsSpend);
     }
 
     public void ResetData() {

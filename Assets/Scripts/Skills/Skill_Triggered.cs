@@ -18,7 +18,7 @@ public class Skill_Triggered : Skill {
 
         title = "Corona";
         description = "+3% Gefahrenlevel pro Blussi";
-        dangerLevelIncrease = 3;
+        dangerLevelReduction = 15;
         tokenCost = 3;
     }
 
@@ -26,7 +26,7 @@ public class Skill_Triggered : Skill {
 
     protected override IEnumerator ActionCoroutine() {
 
-        LevelData.DangerLevel += dangerLevelIncrease * paidCost;
+        LevelData.DangerLevel -= dangerLevelReduction;
 
         Statistics.Instance.skills.skill_3.used++;
         Statistics.Instance.skills.skill_3.skillPointsSpend += paidCost;
