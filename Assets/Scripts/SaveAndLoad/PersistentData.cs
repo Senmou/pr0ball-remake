@@ -213,8 +213,10 @@ public class Highscores {
 
     [Serializable]
     public struct HighscoreEntry {
+        public int id;
         public long highscore;
         public string timestamp;
+        public Statistics statistics;
     }
 
     public List<HighscoreEntry> entries;
@@ -223,15 +225,15 @@ public class Highscores {
         entries = new List<HighscoreEntry>();
     }
 
-    public void AddHighscore(long _highscore, string _timestamp) {
-        HighscoreEntry entry = new HighscoreEntry { highscore = _highscore, timestamp = _timestamp };
+    public void AddHighscore(long _highscore, string _timestamp, Statistics _statistics) {
+        HighscoreEntry entry = new HighscoreEntry { highscore = _highscore, timestamp = _timestamp, statistics = _statistics };
+        entry.id = entries.Count;
         entries.Add(entry);
 
         entries = entries.OrderByDescending(e => e.highscore).ToList();
+    }
 
-        for (int i = 0; i < entries.Count; i++) {
-            if (i > 10)
-                entries.RemoveAt(i);
-        }
+    public Statistics GetStatisticsById(int id) {
+        return entries.First(e => e.id == id).statistics;
     }
 }

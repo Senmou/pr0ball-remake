@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Runtime.Serialization.Formatters.Binary;
+using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.IO;
 using System;
 
 public static class Extensions {
@@ -84,4 +86,13 @@ public static class Extensions {
     }
 
     public static bool Approx(this float a, float b, float threshold) => ((a - b > 0f) ? (a - b) : (b - a)) <= threshold;
+
+    public static T GetCopy<T>(this object objSource) {
+        using (MemoryStream stream = new MemoryStream()) {
+            BinaryFormatter formatter = new BinaryFormatter();
+            formatter.Serialize(stream, objSource);
+            stream.Position = 0;
+            return (T)formatter.Deserialize(stream);
+        }
+    }
 }

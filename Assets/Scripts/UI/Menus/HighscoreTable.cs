@@ -1,12 +1,16 @@
-﻿using UnityEngine;
+﻿using UnityEngine.UI;
+using UnityEngine;
 using TMPro;
+using System.Linq;
 
 public class HighscoreTable : MonoBehaviour {
 
     private Transform template;
     private Transform container;
+    private StatisticsMenu statisticsMenu;
 
     private void Start() {
+        statisticsMenu = FindObjectOfType<StatisticsMenu>();
         container = transform.FindChild<Transform>("EntryContainer");
         template = transform.FindChild<Transform>("EntryContainer/EntryTemplate");
         template.gameObject.SetActive(false);
@@ -17,7 +21,8 @@ public class HighscoreTable : MonoBehaviour {
         int highscoreCount = PersistentData.instance.highscores.entries.Count;
 
         // Clear all entries except the template
-        for (int i = container.childCount - 1; i > 0; i--) {
+        int startIndex = container.childCount - 1;
+        for (int i = startIndex; i > 0; i--) {
             Transform child = container.GetChild(i);
             if (child != null && child != template) {
                 Destroy(child.gameObject);
@@ -34,10 +39,20 @@ public class HighscoreTable : MonoBehaviour {
             timestampUI.text = PersistentData.instance.highscores.entries[i].timestamp;
             highscoreUI.text = PersistentData.instance.highscores.entries[i].highscore.ToString();
 
+            int entryID = PersistentData.instance.highscores.entries[i].id;
+            newEntry.GetComponent<Button>().onClick.AddListener(() => OnClick(entryID));
+
             newEntry.gameObject.SetActive(true);
 
             DotColorController dotColorController = newEntry.FindChild<DotColorController>("Dot").GetComponent<DotColorController>();
             dotColorController.UpdateDotColor(PersistentData.instance.highscores.entries[i].highscore);
         }
+    }
+
+    private void OnClick(int id) {
+
+        Statistics statisticsCopy = PersistentData.instance.highscores.entries.First(entry => entry.id == id).statistics;
+        statisticsMenu.SetStatistics(statisticsCopy);
+        CanvasManager.instance.SwitchCanvas(CanvasType.STATISTICS);
     }
 }

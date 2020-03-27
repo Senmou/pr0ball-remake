@@ -16,7 +16,11 @@ public class CanvasSwitcher : MonoBehaviour {
     }
 
     private void OnButtonClicked() {
-        if (menuButton.IsInteractable())
-            canvasManager.SwitchCanvas(desiredCanvasType);
+        if (menuButton.IsInteractable()) {
+            if (desiredCanvasType == CanvasType.LAST)
+                canvasManager.GoOneCanvasBack();
+            else
+                canvasManager.SwitchCanvas(desiredCanvasType);
+        }
     }
 }

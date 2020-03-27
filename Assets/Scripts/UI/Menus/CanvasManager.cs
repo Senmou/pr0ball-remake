@@ -9,7 +9,9 @@ public enum CanvasType {
     BALLS,
     SKILLS,
     HIGHSCORES,
-    NONE
+    NONE,
+    STATISTICS,
+    LAST
 }
 
 public class CanvasManager : MonoBehaviour {
