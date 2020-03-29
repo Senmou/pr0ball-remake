@@ -11,9 +11,20 @@ public class MainCamera : MonoBehaviour {
         ScaleCamera();
     }
 
+    private void Awake() {
+        EventManager.StartListening("ToggleBlackBackground", OnToggleBlackBackground);
+    }
+
     private void Start() {
         // Called in Start(), so the level's walls are already set up, which happens in Awake()
         ScaleCamera();
+    }
+
+    private void OnToggleBlackBackground() {
+        if (PersistentData.instance.blackBackground)
+            Camera.main.backgroundColor = new Color32(0, 0, 0, 1);
+        else
+            Camera.main.backgroundColor = new Color32(22, 22, 24, 1);
     }
 
     private void ScaleCamera() {

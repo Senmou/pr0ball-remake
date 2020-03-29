@@ -81,40 +81,6 @@ public class Wheel : MonoBehaviour {
         float maxRotationTime = 4f;
         float rotationTimeCounter = 0f;
 
-        // Rotate for some full turns
-        int turns = 0;
-        while (turns < fullTurns) {
-
-            // To prevent the endless spinning bug
-            rotationTimeCounter += Time.unscaledDeltaTime;
-            if (rotationTimeCounter >= maxRotationTime)
-                break;
-
-            float rotationDelta = rotationSpeed * Time.unscaledDeltaTime;
-            rect.anchoredPosition += new Vector2(0f, rotationDelta);
-
-            // Click sound
-            rotationSum += rotationDelta;
-            if (rotationSum > slotHeight) {
-                benitrator.PlayClickSfx();
-                rotationSum -= slotHeight;
-            }
-
-            // Slow down
-            if (turns >= fullTurns - 2) {
-                rotationSpeed *= 0.985f;
-                rotationSpeed = Mathf.Max(45f, rotationSpeed);
-            }
-
-            // Jump back to mimic a continous wheel
-            if (rect.anchoredPosition.y >= 8.5f) {
-                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -15.5f);
-                turns++;
-            }
-
-            yield return null;
-        }
-
         int randomSlotID = Random.Range(0, 6);
         WheelSlot targetSlot = wheelSlots[randomSlotID];
 
@@ -126,38 +92,74 @@ public class Wheel : MonoBehaviour {
         }
 
         // Chance for extra balls is increased while you have less than 5
-        if(BallStats.Instance.ballCount < 5) {
+        if (BallStats.Instance.ballCount < 5) {
             if (Random.value < 0.1f)
                 targetSlot = wheelSlots.First(x => x.type == SlotType.Ball);
         }
 
-        // Rotating to the target symbol
-        while (!rect.anchoredPosition.y.Approx(targetSlot.pos, 1f)) {
+        if (!PersistentData.instance.benitratorWithoutAnimation) {
+            // Rotate for some full turns
+            int turns = 0;
+            while (turns < fullTurns) {
 
-            // To prevent the endless spinning bug
-            rotationTimeCounter += Time.unscaledDeltaTime;
-            if (rotationTimeCounter >= maxRotationTime)
-                break;
+                // To prevent the endless spinning bug
+                rotationTimeCounter += Time.unscaledDeltaTime;
+                if (rotationTimeCounter >= maxRotationTime)
+                    break;
 
-            float rotationDelta = rotationSpeed * Time.unscaledDeltaTime;
-            rect.anchoredPosition += new Vector2(0f, rotationDelta);
+                float rotationDelta = rotationSpeed * Time.unscaledDeltaTime;
+                rect.anchoredPosition += new Vector2(0f, rotationDelta);
 
-            // Click sound
-            rotationSum += rotationDelta;
-            if (rotationSum > slotHeight) {
-                benitrator.PlayClickSfx();
-                rotationSum -= slotHeight;
+                // Click sound
+                rotationSum += rotationDelta;
+                if (rotationSum > slotHeight) {
+                    benitrator.PlayClickSfx();
+                    rotationSum -= slotHeight;
+                }
+
+                // Slow down
+                if (turns >= fullTurns - 2) {
+                    rotationSpeed *= 0.985f;
+                    rotationSpeed = Mathf.Max(45f, rotationSpeed);
+                }
+
+                // Jump back to mimic a continous wheel
+                if (rect.anchoredPosition.y >= 8.5f) {
+                    rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -15.5f);
+                    turns++;
+                }
+
+                yield return null;
             }
 
-            // Slow down
-            rotationSpeed *= 0.95f;
-            rotationSpeed = Mathf.Max(30f, rotationSpeed);
+            // Rotating to the target symbol
+            while (!rect.anchoredPosition.y.Approx(targetSlot.pos, 1f)) {
 
-            // Jump back to mimic a continous wheel
-            if (rect.anchoredPosition.y >= 8.5f)
-                rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -15.5f);
+                // To prevent the endless spinning bug
+                rotationTimeCounter += Time.unscaledDeltaTime;
+                if (rotationTimeCounter >= maxRotationTime)
+                    break;
 
-            yield return null;
+                float rotationDelta = rotationSpeed * Time.unscaledDeltaTime;
+                rect.anchoredPosition += new Vector2(0f, rotationDelta);
+
+                // Click sound
+                rotationSum += rotationDelta;
+                if (rotationSum > slotHeight) {
+                    benitrator.PlayClickSfx();
+                    rotationSum -= slotHeight;
+                }
+
+                // Slow down
+                rotationSpeed *= 0.95f;
+                rotationSpeed = Mathf.Max(30f, rotationSpeed);
+
+                // Jump back to mimic a continous wheel
+                if (rect.anchoredPosition.y >= 8.5f)
+                    rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, -15.5f);
+
+                yield return null;
+            }
         }
 
         // Snapping into position

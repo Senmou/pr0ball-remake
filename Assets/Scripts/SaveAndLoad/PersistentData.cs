@@ -18,8 +18,10 @@ public class PersistentData : MonoBehaviour {
     public bool uniColor;
     public bool isGameOver;
     public bool firstAppStart;
+    public bool blackBackground;
     public bool enableParticleSystems;
     public float elapsedTimeSinceRestart;
+    public bool benitratorWithoutAnimation;
 
     private void Awake() {
         if (instance == null)
@@ -52,6 +54,8 @@ public class PersistentData : MonoBehaviour {
         statistics = saveData.statistics;
         isGameOver = saveData.isGameOver;
         firstAppStart = saveData.firstAppStart;
+        blackBackground = saveData.blackBackground;
+        benitratorWithoutAnimation = saveData.benitratorWithoutAnimation;
         enableParticleSystems = saveData.enableParticleSystems;
         elapsedTimeSinceRestart = saveData.elapsedTimeSinceRestart;
     }

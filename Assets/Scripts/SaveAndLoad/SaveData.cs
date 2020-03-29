@@ -14,8 +14,10 @@ public class SaveData {
     public bool uniColor;
     public bool isGameOver;
     public bool firstAppStart;
+    public bool blackBackground;
     public bool enableParticleSystems;
     public float elapsedTimeSinceRestart;
+    public bool benitratorWithoutAnimation;
 
     public SaveData() {
         ballData = PersistentData.instance.ballData;
@@ -29,7 +31,9 @@ public class SaveData {
         uniColor = PersistentData.instance.uniColor;
         isGameOver = PersistentData.instance.isGameOver;
         firstAppStart = PersistentData.instance.firstAppStart;
+        blackBackground = PersistentData.instance.blackBackground;
         enableParticleSystems = PersistentData.instance.enableParticleSystems;
         elapsedTimeSinceRestart = PersistentData.instance.elapsedTimeSinceRestart;
+        benitratorWithoutAnimation = PersistentData.instance.benitratorWithoutAnimation;
     }
 }
