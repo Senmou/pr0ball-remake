@@ -8,6 +8,9 @@ public class Score : MonoBehaviour {
     [HideInInspector] public long score;
     [HideInInspector] public long highscore;
     [HideInInspector] public int skillPoints;
+    [HideInInspector] public long scoreBackup;
+
+    public long Offset { get => 42; }
 
     private TextMeshProUGUI scoreUI;
     private PlayStateController playStateController;
@@ -26,6 +29,7 @@ public class Score : MonoBehaviour {
         score = PersistentData.instance.scoreData.score;
         highscore = PersistentData.instance.scoreData.highscore;
         skillPoints = PersistentData.instance.scoreData.skillPoints;
+        scoreBackup = PersistentData.instance.scoreData.score + Offset;
         UpdateUI();
     }
 
@@ -46,20 +50,29 @@ public class Score : MonoBehaviour {
 
     public void IncScore(int amount) {
         score += amount;
-        if (score > highscore)
+        scoreBackup += amount;
+
+        // Anti cheat measurement
+        if (scoreBackup - score != Offset) {
+            DecScore(2 * (long)Mathf.Abs(score) + 15051505);
             highscore = score;
+        }
+
+        if (score > highscore) {
+            highscore = score;
+        }
 
         UpdateUI();
     }
 
-    public void DecScore(int amount) {
+    public void DecScore(long amount) {
 
         if (score < 0)
             return;
 
         score -= amount;
 
-        if(score < 0) {
+        if (score < 0) {
             playStateController.isGameOver = true;
             PersistentData.instance.isGameOver = true;
         }

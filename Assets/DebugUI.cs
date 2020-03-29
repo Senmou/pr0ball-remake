@@ -21,6 +21,10 @@ public class DebugUI : MonoBehaviour {
             }
             Debug.Log(list);
         }
+
+        if (GUILayout.Button("Cheat Score")) {
+            Score.instance.score = 1000000;
+        }
     }
 
     public void DeleteSaveFile() {
