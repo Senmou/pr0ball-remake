@@ -1,13 +1,12 @@
-﻿using UnityEngine.UI;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GlobalHighscoreTable : MonoBehaviour {
 
     private Transform template;
     private Transform container;
     private TextMeshProUGUI timestampUI;
-
     private HighscoreController highscoreController;
 
     public struct GlobalHighscoreEntry {
@@ -19,7 +18,6 @@ public class GlobalHighscoreTable : MonoBehaviour {
     private void Start() {
         highscoreController = FindObjectOfType<HighscoreController>();
         container = transform.FindChild<Transform>("EntryContainer");
-        timestampUI = transform.FindChild<TextMeshProUGUI>("")
         template = transform.FindChild<Transform>("EntryContainer/EntryTemplate");
         template.gameObject.SetActive(false);
     }
@@ -40,23 +38,26 @@ public class GlobalHighscoreTable : MonoBehaviour {
 
     private void OnGlobalEntriesLoaded(GlobalHighscoreEntry[] globalEntries) {
 
+        float anchoredPosFirstElement = 0f;
+
         int limit = globalEntries.Length;
         for (int i = 0; i < limit; i++) {
             Transform newEntry = Instantiate(template, container);
 
             TextMeshProUGUI highscoreUI = newEntry.FindChild<TextMeshProUGUI>("Value");
-            TextMeshProUGUI timestampUI = newEntry.FindChild<TextMeshProUGUI>("Playtime");
+            TextMeshProUGUI nameUI = newEntry.FindChild<TextMeshProUGUI>("Signature/PlayerName");
+            TextMeshProUGUI timestampUI = newEntry.transform.FindChild<TextMeshProUGUI>("Signature/PlayerName/TimestampContainer/Timestamp");
 
-            timestampUI.text = PersistentData.instance.highscores.entries[i].timestamp;
-            highscoreUI.text = PersistentData.instance.highscores.entries[i].highscore.ToString();
+            nameUI.text = globalEntries[i].playerName;
+            timestampUI.text = globalEntries[i].timestamp;
+            highscoreUI.text = globalEntries[i].score.ToString();
 
-            int entryID = PersistentData.instance.highscores.entries[i].id;
-            //newEntry.GetComponent<Button>().onClick.AddListener(() => OnClick(entryID));
+            if (i == 0) anchoredPosFirstElement = newEntry.GetComponent<RectTransform>().anchoredPosition.y;
 
             newEntry.gameObject.SetActive(true);
 
-            DotColorController dotColorController = newEntry.FindChild<DotColorController>("Dot").GetComponent<DotColorController>();
-            dotColorController.UpdateDotColor(PersistentData.instance.highscores.entries[i].highscore);
+            DotColorController dotColorController = newEntry.FindChild<DotColorController>("Signature/PlayerName/TimestampContainer/Dot").GetComponent<DotColorController>();
+            dotColorController.UpdateDotColor(globalEntries[i].score);
         }
     }
 }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class HighscoreController : MonoBehaviour {
 
-    
-
     private static int nameIndex = 1;
 
     public void PostRandomScore() {
@@ -49,16 +47,19 @@ public class HighscoreController : MonoBehaviour {
             else {
                 string result = www.downloadHandler.text;
 
-                string[] entries = result.Split(' ');
+                string[] entries = result.Split('_');
 
                 GlobalHighscoreTable.GlobalHighscoreEntry[] globalEntries = new GlobalHighscoreTable.GlobalHighscoreEntry[entries.Length];
 
                 for (int i = 0; i < entries.Length; i++) {
                     GlobalHighscoreTable.GlobalHighscoreEntry entry = new GlobalHighscoreTable.GlobalHighscoreEntry();
-                    string[] entryTouple = entries[i].Split('-');
+                    string[] entryTriple = entries[i].Split('-');
 
-                    entry.playerName = entryTouple[0];
-                    entry.score = int.Parse(entryTouple[1]);
+                    //Debug.Log(entryTriple[i]);
+
+                    entry.playerName = entryTriple[0];
+                    entry.score = int.Parse(entryTriple[1]);
+                    entry.timestamp = entryTriple[2];
 
                     globalEntries[i] = entry;
                 }
