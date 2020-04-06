@@ -11,7 +11,8 @@ public enum CanvasType {
     HIGHSCORES,
     NONE,
     STATISTICS,
-    LAST
+    LAST,
+    NAME
 }
 
 public class CanvasManager : MonoBehaviour {
@@ -33,10 +34,6 @@ public class CanvasManager : MonoBehaviour {
         canvasHistory = new Stack<CanvasType>();
         canvasControllerList = GetComponentsInChildren<CanvasController>().ToList();
         canvasControllerList.ForEach(x => x.Hide());
-    }
-
-    private void Start() {
-        SwitchCanvas(CanvasType.NONE);
     }
 
     public void GoOneCanvasBack() {

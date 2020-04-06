@@ -13,6 +13,8 @@ public class SaveData {
 
     public bool uniColor;
     public bool isGameOver;
+    public long backupOffset;
+    public string playerName;
     public bool firstAppStart;
     public bool blackBackground;
     public bool enableParticleSystems;
@@ -30,6 +32,8 @@ public class SaveData {
 
         uniColor = PersistentData.instance.uniColor;
         isGameOver = PersistentData.instance.isGameOver;
+        playerName = PersistentData.instance.playerName;
+        backupOffset = PersistentData.instance.backupOffset;
         firstAppStart = PersistentData.instance.firstAppStart;
         blackBackground = PersistentData.instance.blackBackground;
         enableParticleSystems = PersistentData.instance.enableParticleSystems;

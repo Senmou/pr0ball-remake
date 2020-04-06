@@ -37,19 +37,19 @@ public class GameController : MonoBehaviour {
 
         elapsedTimeSinceRestart = PersistentData.instance.elapsedTimeSinceRestart;
 
+        if (PersistentData.instance.firstAppStart)
+            PersistentData.instance.backupOffset = Random.Range(1, 15);
+
         EventManager.StartListening("SaveGame", OnSaveGame);
         EventManager.StartListening("ChacheData", OnChacheData);
         EventManager.StartListening("GameRestarted", OnGameRestarted);
-    }
 
-    public void SpawnFloatingText(string text, Vector2 position) {
-        FloatingText go = EasyObjectPool.instance.GetObjectFromPool("FloatingText_pool", position, Quaternion.identity).GetComponent<FloatingText>();
-        go.SetText(text);
-        go.transform.SetParent(canvas.transform);
-        go.ReturnToPoolAfter(0.9f);
+        CanvasManager.instance.SwitchCanvas(CanvasType.NONE);
     }
 
     private void Start() {
+
+        StartCoroutine(ShowNameInputMenuDelayed());
 
         if (PersistentData.instance.isGameOver) {
             restartGame.StartNewGame();
@@ -59,17 +59,35 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    private IEnumerator ShowNameInputMenuDelayed() {
+        if (string.IsNullOrEmpty(PersistentData.instance.playerName)) {
+            yield return new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
+            CanvasManager.instance.SwitchCanvas(CanvasType.NAME);
+        }
+    }
+
     private void Update() {
 
         elapsedTimeSinceRestart += Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.Escape)) {
 
-            if (CanvasManager.instance.CurrentActiveCanvasType == CanvasType.NONE)
+            CanvasType currentCanvas = CanvasManager.instance.CurrentActiveCanvasType;
+
+            if (currentCanvas == CanvasType.NONE)
                 CanvasManager.instance.SwitchCanvas(CanvasType.PAUSE);
-            else if (CanvasManager.instance.CurrentActiveCanvasType != CanvasType.GAMEOVER)
+            else if (currentCanvas != CanvasType.GAMEOVER && currentCanvas != CanvasType.NAME)
                 CanvasManager.instance.GoOneCanvasBack();
         }
+    }
+
+    public void SpawnFloatingText(string text, Vector2 position) {
+        FloatingText go = EasyObjectPool.instance.GetObjectFromPool("FloatingText_pool", position, Quaternion.identity).GetComponent<FloatingText>();
+        go.SetText(text);
+        go.transform.SetParent(canvas.transform);
+        go.ReturnToPoolAfter(0.9f);
     }
 
     public int GetPlaytimeMinutes() => (int)elapsedTimeSinceRestart / 60;

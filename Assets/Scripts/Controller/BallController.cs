@@ -69,7 +69,7 @@ public class BallController : MonoBehaviour {
 
     private IEnumerator CollectBalls(PlayStateController controller) {
 
-        Ball[] ballArray = new Ball[MaxBallCount];
+        Ball[] ballArray = new Ball[balls.Count];
         balls.CopyTo(ballArray);
 
         int limit = ballArray.Length;

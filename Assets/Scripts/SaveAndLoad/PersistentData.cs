@@ -17,6 +17,8 @@ public class PersistentData : MonoBehaviour {
 
     public bool uniColor;
     public bool isGameOver;
+    public long backupOffset;
+    public string playerName;
     public bool firstAppStart;
     public bool blackBackground;
     public bool enableParticleSystems;
@@ -53,6 +55,8 @@ public class PersistentData : MonoBehaviour {
         uniColor = saveData.uniColor;
         statistics = saveData.statistics;
         isGameOver = saveData.isGameOver;
+        playerName = saveData.playerName;
+        backupOffset = saveData.backupOffset;
         firstAppStart = saveData.firstAppStart;
         blackBackground = saveData.blackBackground;
         benitratorWithoutAnimation = saveData.benitratorWithoutAnimation;

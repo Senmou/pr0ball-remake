@@ -10,8 +10,6 @@ public class Score : MonoBehaviour {
     [HideInInspector] public int skillPoints;
     [HideInInspector] public long scoreBackup;
 
-    public long Offset { get => 42; }
-
     private TextMeshProUGUI scoreUI;
     private PlayStateController playStateController;
 
@@ -29,8 +27,11 @@ public class Score : MonoBehaviour {
         score = PersistentData.instance.scoreData.score;
         highscore = PersistentData.instance.scoreData.highscore;
         skillPoints = PersistentData.instance.scoreData.skillPoints;
-        scoreBackup = PersistentData.instance.scoreData.score + Offset;
         UpdateUI();
+    }
+
+    private void Start() {
+        scoreBackup = PersistentData.instance.scoreData.score + PersistentData.instance.backupOffset;
     }
 
     private void OnChacheData() {
@@ -53,8 +54,8 @@ public class Score : MonoBehaviour {
         scoreBackup += amount;
 
         // Anti cheat measurement
-        if (scoreBackup - score != Offset) {
-            DecScore(2 * (long)Mathf.Abs(score) + 15051505);
+        if (scoreBackup - score != PersistentData.instance.backupOffset) {
+            DecScore(2 * (long)Mathf.Abs(score));
             highscore = score;
         }
 
@@ -71,8 +72,15 @@ public class Score : MonoBehaviour {
             return;
 
         score -= amount;
+        scoreBackup -= amount;
 
         if (score < 0) {
+
+            // if score was manipulated
+            if (scoreBackup - score != PersistentData.instance.backupOffset) {
+                highscore = score;
+            }
+
             playStateController.isGameOver = true;
             PersistentData.instance.isGameOver = true;
         }
@@ -90,6 +98,7 @@ public class Score : MonoBehaviour {
 
     public void ResetData() {
         score = 0;
+        scoreBackup = PersistentData.instance.backupOffset;
         highscore = 0;
         skillPoints = 0;
         UpdateUI();

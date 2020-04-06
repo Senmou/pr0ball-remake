@@ -8,8 +8,6 @@ public class Benitrator : MonoBehaviour {
 
     [SerializeField] private AudioSource click;
     [SerializeField] private AudioSource coins;
-    [SerializeField] private AudioSource winBig;
-    [SerializeField] private AudioSource winSmall;
     [SerializeField] private AudioSource wheelStop;
 
     private Wheel[] wheels;

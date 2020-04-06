@@ -57,7 +57,6 @@ public class Skill_Hammertime : Skill {
 
         StartCoroutine(ShowHammerTimeLogo());
 
-
         while (Vector2.Distance(hammer.transform.position, targetPos) > 0.1f) {
             hammer.transform.position = Vector2.MoveTowards(hammer.transform.position, targetPos, fallingSpeed * Time.deltaTime);
             if (!GameController.isGamePaused)

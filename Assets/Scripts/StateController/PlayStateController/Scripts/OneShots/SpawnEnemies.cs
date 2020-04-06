@@ -6,8 +6,6 @@ public class SpawnEnemies : OneShot {
     public override void Act(StateController controller) {
         PlayStateController c = controller as PlayStateController;
 
-        CanvasManager.instance.SwitchCanvas(CanvasType.NONE);
-
         // game restarted
         if (c.gameRestarted) {
             LevelData.ResetData();

@@ -4,26 +4,39 @@ using System;
 
 public class DebugUI : MonoBehaviour {
 
-    private void OnGUI() {
+    public static DebugUI instance;
 
-        if (GUILayout.Button("GameOver")) {
-            Score.instance.DecScore((int)Score.instance.score + 1);
-        }
+    private void Awake() {
+        instance = this;
+    }
+
+    private void OnGUI() {
 
         if (GUILayout.Button("DELETE")) {
             DeleteSaveFile();
         }
 
-        if (GUILayout.Button("History")) {
-            string list = "";
-            foreach(var h in FindObjectOfType<CanvasManager>().canvasHistory) {
-                list += h + " - ";
-            }
-            Debug.Log(list);
+        if (GUILayout.Button("Token")) {
+            FindObjectOfType<Skill_Hammertime>().tokenCount += 10;
+            FindObjectOfType<Skill_Frogs>().tokenCount += 10;
+            FindObjectOfType<Skill_Triggered>().tokenCount += 10;
+            Score.instance.IncSkillPoints(10);
         }
 
-        if (GUILayout.Button("Cheat Score")) {
-            Score.instance.score = 1000000;
+        if (GUILayout.Button("Input Name")) {
+            CanvasManager.instance.SwitchCanvas(CanvasType.NAME);
+        }
+
+        if (GUILayout.Button("GameOver")) {
+            Score.instance.DecScore((int)Score.instance.score + 1);
+        }
+
+        if (GUILayout.Button("Random Score")) {
+            FindObjectOfType<HighscoreController>().PostRandomScore();
+        }
+
+        if (GUILayout.Button("Print Scores")) {
+            FindObjectOfType<HighscoreController>().GetHighscores();
         }
     }
 

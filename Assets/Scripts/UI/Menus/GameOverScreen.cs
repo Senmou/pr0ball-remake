@@ -41,5 +41,7 @@ public class GameOverScreen : CanvasController {
         highscoreUI.text = Score.instance.highscore.ToString();
         Statistics stats = Statistics.Instance;
         PersistentData.instance.highscores.AddHighscore(Score.instance.highscore, timestamp, stats.GetCopy<Statistics>());
+
+        //GlobalHighscores.AddScoreToLeaderboard(Score.instance.highscore);
     }
 }

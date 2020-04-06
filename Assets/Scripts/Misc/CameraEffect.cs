@@ -28,6 +28,11 @@ public class CameraEffect : MonoBehaviour {
         float elapsedTime = 0f;
         while (elapsedTime < duration) {
 
+            while(Time.timeScale == 0f) {
+                transform.position = startPos;
+                yield return null;
+            }
+
             if (withOverlay) {
                 overlayColor.a = Random.Range(0.05f, 0.1f);
                 overlay.color = overlayColor;

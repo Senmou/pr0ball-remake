@@ -1,7 +1,7 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
-using TMPro;
 using System.Linq;
+using TMPro;
 
 public class HighscoreTable : MonoBehaviour {
 
