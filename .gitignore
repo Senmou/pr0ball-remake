@@ -282,3 +282,4 @@ __pycache__/
 /.gradle
 /Assets/TextMesh Pro/Examples & Extras
 /Assets/TextMesh Pro
+/Assets/Scripts/Helper/Constants.cs

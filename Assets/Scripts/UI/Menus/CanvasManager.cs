@@ -12,7 +12,8 @@ public enum CanvasType {
     NONE,
     STATISTICS,
     LAST,
-    NAME
+    NAME,
+    GLOBAL_HIGHSCORES
 }
 
 public class CanvasManager : MonoBehaviour {

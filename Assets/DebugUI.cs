@@ -34,10 +34,6 @@ public class DebugUI : MonoBehaviour {
         if (GUILayout.Button("Random Score")) {
             FindObjectOfType<HighscoreController>().PostRandomScore();
         }
-
-        if (GUILayout.Button("Print Scores")) {
-            FindObjectOfType<HighscoreController>().GetHighscores();
-        }
     }
 
     public void DeleteSaveFile() {
