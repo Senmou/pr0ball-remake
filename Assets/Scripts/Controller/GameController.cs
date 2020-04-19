@@ -49,7 +49,7 @@ public class GameController : MonoBehaviour {
 
     private void Start() {
 
-        StartCoroutine(ShowNameInputMenuDelayed());
+        //StartCoroutine(ShowNameInputMenuDelayed());
 
         if (PersistentData.instance.isGameOver) {
             restartGame.StartNewGame();

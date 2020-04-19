@@ -10,12 +10,14 @@ public class GameOverScreen : CanvasController {
     private StatisticsMenu statisticsMenu;
     private GameController gameController;
     private PauseBackground pauseBackground;
+    private HighscoreController highscoreController;
 
     private void Awake() {
         moveUI = GetComponent<MoveUI>();
         statisticsMenu = FindObjectOfType<StatisticsMenu>();
         gameController = FindObjectOfType<GameController>();
         pauseBackground = FindObjectOfType<PauseBackground>();
+        highscoreController = FindObjectOfType<HighscoreController>();
         highscoreUI = transform.FindChild<TextMeshProUGUI>("Highscore/Value");
         playtimeUI = transform.FindChild<TextMeshProUGUI>("Highscore/Playtime");
     }
@@ -42,6 +44,6 @@ public class GameOverScreen : CanvasController {
         Statistics stats = Statistics.Instance;
         PersistentData.instance.highscores.AddHighscore(Score.instance.highscore, timestamp, stats.GetCopy<Statistics>());
 
-        //GlobalHighscores.AddScoreToLeaderboard(Score.instance.highscore);
+        highscoreController.UploadHighscore(Score.instance.highscore);
     }
 }

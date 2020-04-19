@@ -14,6 +14,10 @@ public class HighscoreController : MonoBehaviour {
         StartCoroutine(PostScores(playerName, score));
     }
 
+    public void UploadHighscore(long score) {
+        StartCoroutine(PostScores(PersistentData.instance.playerName, score));
+    }
+
     public void ShowGlobalHighscores(System.Action<GlobalHighscoreTable.GlobalHighscoreEntry[]> OnSuccess) {
         StartCoroutine(FetchHighscores(OnSuccess));
     }
@@ -54,6 +58,11 @@ public class HighscoreController : MonoBehaviour {
                 for (int i = 0; i < entries.Length; i++) {
                     GlobalHighscoreTable.GlobalHighscoreEntry entry = new GlobalHighscoreTable.GlobalHighscoreEntry();
                     string[] entryTriple = entries[i].Split('-');
+
+                    if (entryTriple.Length < 3) {
+                        Debug.LogWarning("No valid entries!");
+                        break;
+                    }
 
                     //Debug.Log(entryTriple[i]);
 

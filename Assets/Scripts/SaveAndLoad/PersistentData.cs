@@ -7,6 +7,8 @@ public class PersistentData : MonoBehaviour {
 
     public static PersistentData instance;
 
+    public string defaultPlayerName = "anonymous";
+
     public SoundData soundData;
     public ScoreData scoreData;
     public BallData ballData;
