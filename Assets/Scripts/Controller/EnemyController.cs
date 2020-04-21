@@ -117,28 +117,47 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    public void CheckForEnemiesWhichReachedDeadline() {
+    private void HandleEnemyAtDeadline(BaseEnemy enemy) {
+        if (enemy.transform.position.y >= deadline.position.y) {
 
-        int enemyCount = activeEnemies.Count;
-        for (int i = enemyCount - 1; i >= 0; i--) {
-            if (activeEnemies[i].transform.position.y >= deadline.position.y) {
+            int inflictedDamage = enemy.currentHP * 10;
+            Vector2 floatingTextSpawnPos = enemy.transform.position;
 
-                int inflictedDamage = activeEnemies[i].currentHP * 10;
-                Vector2 floatingTextSpawnPos = activeEnemies[i].transform.position;
+            enemy.Kill(shouldIncScore: false);
+            Score.instance.DecScore(inflictedDamage);
 
-                activeEnemies[i].Kill(shouldIncScore: false);
-                Score.instance.DecScore(inflictedDamage);
-
-                GameController.instance.SpawnFloatingText("-" + inflictedDamage.ToString(), floatingTextSpawnPos);
-            }
-        }
-
-        for (int i = activeItems.Count - 1; i >= 0; i--) {
-            if (activeItems[i].transform.position.y >= deadline.position.y) {
-                activeItems[i].DestroyAndRemoveItem();
-            }
+            GameController.instance.SpawnFloatingText("-" + inflictedDamage.ToString(), floatingTextSpawnPos);
         }
     }
+
+    private void HandleItemAtDeadline(BaseItem item) {
+        if (item.transform.position.y >= deadline.position.y) {
+            item.DestroyAndRemoveItem();
+        }
+    }
+
+    //public void CheckForEnemiesWhichReachedDeadline() {
+
+    //    int enemyCount = activeEnemies.Count;
+    //    for (int i = enemyCount - 1; i >= 0; i--) {
+    //        if (activeEnemies[i].transform.position.y >= deadline.position.y) {
+
+    //            int inflictedDamage = activeEnemies[i].currentHP * 10;
+    //            Vector2 floatingTextSpawnPos = activeEnemies[i].transform.position;
+
+    //            activeEnemies[i].Kill(shouldIncScore: false);
+    //            Score.instance.DecScore(inflictedDamage);
+
+    //            GameController.instance.SpawnFloatingText("-" + inflictedDamage.ToString(), floatingTextSpawnPos);
+    //        }
+    //    }
+
+    //    for (int i = activeItems.Count - 1; i >= 0; i--) {
+    //        if (activeItems[i].transform.position.y >= deadline.position.y) {
+    //            activeItems[i].DestroyAndRemoveItem();
+    //        }
+    //    }
+    //}
 
     public bool AllEnemiesBelowDottedLine() {
         foreach (var enemy in activeEnemies) {
@@ -281,13 +300,17 @@ public class EnemyController : MonoBehaviour {
         int enemyCount = activeEnemies.Count;
         for (int i = 0; i < enemyCount; i++) {
             GameObject enemy = activeEnemies[i].gameObject;
-            LeanTween.moveY(enemy, enemy.transform.position.y + deltaY, moveTime).setEase(LeanTweenType.easeInOutExpo);
+            LeanTween.moveY(enemy, enemy.transform.position.y + deltaY, moveTime).setEase(LeanTweenType.easeInOutExpo).setOnComplete(() => {
+                HandleEnemyAtDeadline(enemy.GetComponent<BaseEnemy>());
+            });
         }
 
         int itemCount = activeItems.Count;
         for (int i = 0; i < itemCount; i++) {
             GameObject item = activeItems[i].gameObject;
-            LeanTween.moveY(item, item.transform.position.y + deltaY, moveTime).setEase(LeanTweenType.easeInOutExpo);
+            LeanTween.moveY(item, item.transform.position.y + deltaY, moveTime).setEase(LeanTweenType.easeInOutExpo).setOnComplete(() => {
+                HandleItemAtDeadline(item.GetComponent<BaseItem>());
+            });
         }
     }
 

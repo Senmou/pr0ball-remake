@@ -30,11 +30,11 @@ public class SpawnEnemies : OneShot {
                 LevelData.LevelUp();
             } else {
                 c.enemyController.CreateWave();
-                c.enemyController.CheckForEnemiesWhichReachedDeadline();
+                //c.enemyController.CheckForEnemiesWhichReachedDeadline();
                 return;
             }
 
-            c.enemyController.CheckForEnemiesWhichReachedDeadline();
+            //c.enemyController.CheckForEnemiesWhichReachedDeadline();
         }
     }
 }
