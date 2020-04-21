@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour {
 
     [SerializeField] private FloatingText floatingText;
+    [SerializeField] private AudioClip swooshAudioClip;
 
     public LootDropTable itemLDT;
     public LootDropTable enemyLDT;
@@ -17,6 +18,7 @@ public class EnemyController : MonoBehaviour {
     private Canvas canvas;
     private Transform deadline;
     private Transform dottedLine;
+    private AudioSource audioSource;
     private Transform itemSkillPointContainer;
 
     private void OnValidate() {
@@ -31,6 +33,7 @@ public class EnemyController : MonoBehaviour {
         dottedLine = GameObject.Find("DottedLine").transform;
         itemSkillPointContainer = GameObject.Find("ItemSkillPointContainer").transform;
         playStateController = FindObjectOfType<PlayStateController>();
+        audioSource = GameObject.Find("SfxSwoosh").GetComponent<AudioSource>();
 
         EventManager.StartListening("ChacheData", OnChacheData);
 
@@ -136,29 +139,6 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    //public void CheckForEnemiesWhichReachedDeadline() {
-
-    //    int enemyCount = activeEnemies.Count;
-    //    for (int i = enemyCount - 1; i >= 0; i--) {
-    //        if (activeEnemies[i].transform.position.y >= deadline.position.y) {
-
-    //            int inflictedDamage = activeEnemies[i].currentHP * 10;
-    //            Vector2 floatingTextSpawnPos = activeEnemies[i].transform.position;
-
-    //            activeEnemies[i].Kill(shouldIncScore: false);
-    //            Score.instance.DecScore(inflictedDamage);
-
-    //            GameController.instance.SpawnFloatingText("-" + inflictedDamage.ToString(), floatingTextSpawnPos);
-    //        }
-    //    }
-
-    //    for (int i = activeItems.Count - 1; i >= 0; i--) {
-    //        if (activeItems[i].transform.position.y >= deadline.position.y) {
-    //            activeItems[i].DestroyAndRemoveItem();
-    //        }
-    //    }
-    //}
-
     public bool AllEnemiesBelowDottedLine() {
         foreach (var enemy in activeEnemies) {
             if (enemy.transform.position.y >= dottedLine.position.y)
@@ -183,6 +163,7 @@ public class EnemyController : MonoBehaviour {
     }
 
     public void CreateWave() {
+        PlaySwooshSound();
         MoveEnemiesAndItems();
         List<Transform> spawnPoints = SpawnPoints.instance.GetNextSpawnPoints();
 
@@ -272,6 +253,7 @@ public class EnemyController : MonoBehaviour {
     }
 
     public void CreateInitialWaves() {
+        PlaySwooshSound();
         StartCoroutine(CreateInitalWavesDelayed());
     }
 
@@ -300,17 +282,23 @@ public class EnemyController : MonoBehaviour {
         int enemyCount = activeEnemies.Count;
         for (int i = 0; i < enemyCount; i++) {
             GameObject enemy = activeEnemies[i].gameObject;
-            LeanTween.moveY(enemy, enemy.transform.position.y + deltaY, moveTime).setEase(LeanTweenType.easeInOutExpo).setOnComplete(() => {
-                HandleEnemyAtDeadline(enemy.GetComponent<BaseEnemy>());
-            });
+            LeanTween.moveY(enemy, enemy.transform.position.y + deltaY, moveTime)
+                .setEase(LeanTweenType.easeInOutExpo)
+                .setOnComplete(() => {
+                    //audioSource.PlayOneShot(swooshAudioClip);
+                    HandleEnemyAtDeadline(enemy.GetComponent<BaseEnemy>());
+                });
         }
 
         int itemCount = activeItems.Count;
         for (int i = 0; i < itemCount; i++) {
             GameObject item = activeItems[i].gameObject;
-            LeanTween.moveY(item, item.transform.position.y + deltaY, moveTime).setEase(LeanTweenType.easeInOutExpo).setOnComplete(() => {
-                HandleItemAtDeadline(item.GetComponent<BaseItem>());
-            });
+            LeanTween.moveY(item, item.transform.position.y + deltaY, moveTime)
+                .setEase(LeanTweenType.easeInOutExpo)
+                .setOnComplete(() => {
+                    //audioSource.PlayOneShot(swooshAudioClip);
+                    HandleItemAtDeadline(item.GetComponent<BaseItem>());
+                });
         }
     }
 
@@ -321,17 +309,19 @@ public class EnemyController : MonoBehaviour {
 
         float duration = entity.position.x.Map(-10f, 10, 0.3f, 0.6f);
 
-        LeanTween.moveY(entity.gameObject, endPosY, duration).setEase(LeanTweenType.easeInOutExpo).setOnComplete(() => {
-            var enemy = entity.GetComponent<BaseEnemy>();
-            if (enemy)
-                enemy.reachedStartingPosition = true;
-            else {
-                var item = entity.GetComponent<BaseItem>();
-                if (item) {
-                    item.reachedStartingPosition = true;
+        LeanTween.moveY(entity.gameObject, endPosY, duration)
+            .setEase(LeanTweenType.easeInOutExpo)
+            .setOnComplete(() => {
+                var enemy = entity.GetComponent<BaseEnemy>();
+                if (enemy)
+                    enemy.reachedStartingPosition = true;
+                else {
+                    var item = entity.GetComponent<BaseItem>();
+                    if (item) {
+                        item.reachedStartingPosition = true;
+                    }
                 }
-            }
-        });
+            });
     }
 
     public Vector2 GetRandomTarget() {
@@ -340,5 +330,10 @@ public class EnemyController : MonoBehaviour {
             return Vector2.zero;
 
         return activeEnemies.Random().transform.position;
+    }
+    
+    private void PlaySwooshSound() {
+        float startPitch = Random.Range(1.2f, 1.4f);
+        audioSource.PlayOneShot(swooshAudioClip, 1f);
     }
 }

@@ -49,8 +49,6 @@ public class GameController : MonoBehaviour {
 
     private void Start() {
 
-        StartCoroutine(ShowNameInputMenuDelayed());
-
         if (PersistentData.instance.isGameOver) {
             restartGame.StartNewGame();
         } else {
@@ -58,16 +56,7 @@ public class GameController : MonoBehaviour {
             Statistics.Instance.OnLoadGame();
         }
     }
-
-    private IEnumerator ShowNameInputMenuDelayed() {
-        if (string.IsNullOrEmpty(PersistentData.instance.playerName)) {
-            yield return new WaitForEndOfFrame();
-            yield return new WaitForEndOfFrame();
-            yield return new WaitForEndOfFrame();
-            CanvasManager.instance.SwitchCanvas(CanvasType.NAME);
-        }
-    }
-
+    
     private void Update() {
 
         elapsedTimeSinceRestart += Time.deltaTime;

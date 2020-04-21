@@ -12,11 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: 
-  rsKeyList: []
+  rsKeyList:
+  - metadata:
+      entityId: 3a7266d1-158e-4bfd-88a7-93e94c3ceafa
+    rs:
+      key: enemyHealthMultiplier
+      type: float
+      value: 1
   rsLastCachedKeyList: []
-  configId: 
-  currentEnvironmentId: 
-  environments: []
+  configId: f832d74c-a44f-4861-9687-6ae45fa06fbf
+  currentEnvironmentId: bd7eef5d-44df-436d-83cd-1d8b898c5fc2
+  environments:
+  - id: 876913ef-a641-49cb-b50f-82c9bd6a45a7
+    appId: 
+    name: Release (Default)
+    description: 
+    createdAt: 2020-04-21T14:33:13Z
+    updatedAt: 2020-04-21T14:33:13Z
+  - id: bd7eef5d-44df-436d-83cd-1d8b898c5fc2
+    appId: 
+    name: Development
+    description: 
+    createdAt: 2020-04-21T14:33:13Z
+    updatedAt: 2020-04-21T14:33:13Z
   rulesList: []
   lastCachedRulesList: []
   addedRulesIDs: []

@@ -13,7 +13,8 @@ public enum CanvasType {
     STATISTICS,
     LAST,
     NAME,
-    GLOBAL_HIGHSCORES
+    GLOBAL_HIGHSCORES,
+    SECURITY_QUESTION_NEW_GAME
 }
 
 public class CanvasManager : MonoBehaviour {
@@ -46,7 +47,7 @@ public class CanvasManager : MonoBehaviour {
         }
     }
 
-    public void SwitchCanvas(CanvasType type) {
+    public void SwitchCanvas(CanvasType type, bool hideLastMenu = true) {
 
         canvasHistory.Push(type);
         currentActiveCanvasType = type;
@@ -60,7 +61,7 @@ public class CanvasManager : MonoBehaviour {
             return;
         }
 
-        if (lastActiveCanvas != null) {
+        if (hideLastMenu && lastActiveCanvas != null) {
             if (lastActiveCanvas.gameObject.activeSelf)
                 lastActiveCanvas.Hide();
         }

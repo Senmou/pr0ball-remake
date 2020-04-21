@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using TMPro;
 
 public class GameOverScreen : CanvasController {
@@ -24,12 +23,21 @@ public class GameOverScreen : CanvasController {
 
     public override void Show() {
         pauseBackground.disableInteractability = true;
-        moveUI.FadeTo(new Vector2(0f, 0f), 0.5f);
+        LeanTween.moveY(gameObject, 0f, showEaseDuration)
+            .setIgnoreTimeScale(true)
+            .setEase(showEaseType).setOnComplete(() => {
+                if (string.IsNullOrEmpty(PersistentData.instance.playerName) || string.IsNullOrWhiteSpace(PersistentData.instance.playerName)) {
+                    CanvasManager.instance.SwitchCanvas(CanvasType.NAME, false);
+                }
+            });
     }
 
     public override void Hide() {
         pauseBackground.disableInteractability = false;
-        moveUI.FadeTo(new Vector2(0f, 55f), 0.5f, true);
+        LeanTween.moveY(gameObject, 55f, hideEaseDuration)
+            .setIgnoreTimeScale(true)
+            .setEase(hideEaseType)
+            .setOnComplete(() => gameObject.SetActive(false));
     }
 
     public void ShowStatistics() {

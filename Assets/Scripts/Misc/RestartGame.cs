@@ -18,6 +18,11 @@ public class RestartGame : MonoBehaviour {
         playStateController = FindObjectOfType<PlayStateController>();
     }
 
+    public void OnStartButtonClicked() {
+
+        CanvasManager.instance.SwitchCanvas(CanvasType.SECURITY_QUESTION_NEW_GAME, false);
+    }
+
     public void StartNewGame() {
 
         playStateController.gameRestarted = true;
