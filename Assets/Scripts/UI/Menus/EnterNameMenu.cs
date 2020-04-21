@@ -16,8 +16,6 @@ public class EnterNameMenu : CanvasController {
         pauseBackground = FindObjectOfType<PauseBackground>();
         inputField = transform.FindChild<TMP_InputField>("NameInputField");
         okButtonBackground = transform.FindChild<Image>("OkButton/Background");
-
-        PersistentData.instance.playerName = string.Empty;
     }
 
     private void Update() {

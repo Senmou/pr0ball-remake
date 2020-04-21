@@ -7,8 +7,6 @@ public class PersistentData : MonoBehaviour {
 
     public static PersistentData instance;
 
-    public string defaultPlayerName = "anonymous";
-
     public SoundData soundData;
     public ScoreData scoreData;
     public BallData ballData;
@@ -19,6 +17,7 @@ public class PersistentData : MonoBehaviour {
 
     public bool uniColor;
     public bool isGameOver;
+    public bool enableBloom;
     public long backupOffset;
     public string playerName;
     public bool firstAppStart;
@@ -58,6 +57,7 @@ public class PersistentData : MonoBehaviour {
         statistics = saveData.statistics;
         isGameOver = saveData.isGameOver;
         playerName = saveData.playerName;
+        enableBloom = saveData.enableBloom;
         backupOffset = saveData.backupOffset;
         firstAppStart = saveData.firstAppStart;
         blackBackground = saveData.blackBackground;

@@ -1,6 +1,7 @@
 ﻿using UnityEngine.Networking;
 using System.Collections;
 using UnityEngine;
+using System.Text.RegularExpressions;
 
 public class HighscoreController : MonoBehaviour {
 
@@ -15,7 +16,16 @@ public class HighscoreController : MonoBehaviour {
     }
 
     public void UploadHighscore(long score) {
-        StartCoroutine(PostScores(PersistentData.instance.playerName, score));
+
+        string playerName = PersistentData.instance.playerName;
+
+        Regex rgx = new Regex("[^a-zA-Z0-9]");
+        playerName = rgx.Replace(playerName, "");
+
+        if (string.IsNullOrEmpty(playerName) || string.IsNullOrWhiteSpace(playerName))
+            playerName = "anonymous";
+
+        StartCoroutine(PostScores(playerName, score));
     }
 
     public void ShowGlobalHighscores(System.Action<GlobalHighscoreTable.GlobalHighscoreEntry[]> OnSuccess) {

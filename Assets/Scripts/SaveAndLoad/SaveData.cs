@@ -13,6 +13,7 @@ public class SaveData {
 
     public bool uniColor;
     public bool isGameOver;
+    public bool enableBloom;
     public long backupOffset;
     public string playerName;
     public bool firstAppStart;
@@ -33,6 +34,7 @@ public class SaveData {
         uniColor = PersistentData.instance.uniColor;
         isGameOver = PersistentData.instance.isGameOver;
         playerName = PersistentData.instance.playerName;
+        enableBloom = PersistentData.instance.enableBloom;
         backupOffset = PersistentData.instance.backupOffset;
         firstAppStart = PersistentData.instance.firstAppStart;
         blackBackground = PersistentData.instance.blackBackground;

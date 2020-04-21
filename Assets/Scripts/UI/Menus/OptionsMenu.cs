@@ -4,6 +4,7 @@ using UnityEngine;
 public class OptionsMenu : CanvasController {
 
     private MoveUI moveUI;
+    private Toggle toggleBloom;
     private Toggle toggleUniColor;
     private Toggle toggleParticleSystems;
     private Toggle toggleBlackBackground;
@@ -11,22 +12,26 @@ public class OptionsMenu : CanvasController {
 
     private void Awake() {
         moveUI = GetComponent<MoveUI>();
+        toggleBloom = transform.FindChild<Toggle>("MiscOptions/Toggle_Bloom");
         toggleUniColor = transform.FindChild<Toggle>("MiscOptions/Toggle_UniColor");
         toggleParticleSystems = transform.FindChild<Toggle>("MiscOptions/Toggle_ParticleSystems");
         toggleBlackBackground = transform.FindChild<Toggle>("MiscOptions/Toggle_BlackBackground");
         toggleBenitratorAnimation = transform.FindChild<Toggle>("MiscOptions/Toggle_BenitratorAnimation");
 
         if (PersistentData.instance.firstAppStart) {
+            toggleBloom.isOn = true;
             toggleUniColor.isOn = false;
             toggleParticleSystems.isOn = true;
             toggleBlackBackground.isOn = false;
             toggleBenitratorAnimation.isOn = false;
 
             PersistentData.instance.uniColor = false;
+            PersistentData.instance.enableBloom = true;
             PersistentData.instance.blackBackground = false;
             PersistentData.instance.enableParticleSystems = true;
             PersistentData.instance.benitratorWithoutAnimation = false;
         } else {
+            toggleBloom.isOn = PersistentData.instance.enableBloom;
             toggleUniColor.isOn = PersistentData.instance.uniColor;
             toggleBlackBackground.isOn = PersistentData.instance.blackBackground;
             toggleParticleSystems.isOn = PersistentData.instance.enableParticleSystems;
@@ -51,6 +56,11 @@ public class OptionsMenu : CanvasController {
     public void OnValueChanged_Particlesystems(bool value) {
         PersistentData.instance.enableParticleSystems = value;
         EventManager.TriggerEvent("ToggleParticleSystems");
+    }
+
+    public void OnValueChanged_Bloom(bool value) {
+        PersistentData.instance.enableBloom = value;
+        EventManager.TriggerEvent("ToggleBloom");
     }
 
     public override void Show() {

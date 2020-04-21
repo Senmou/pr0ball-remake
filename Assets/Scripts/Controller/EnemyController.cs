@@ -87,24 +87,24 @@ public class EnemyController : MonoBehaviour {
 
             List<CurrentLevelData.EntityData> activeEntities = PersistentData.instance.currentLevelData.activeEntities;
 
-            int limit = activeEntities.Count;
-            for (int i = 0; i < limit; i++) {
+            int enemyCount = activeEntities.Count;
+            for (int i = 0; i < enemyCount; i++) {
 
                 switch (activeEntities[i].entityType) {
                     case CurrentLevelData.EntityType.ItemSkillPoint:
-                        SpawnItem(itemLDT.lootDropItems[0].item, new Vector3(activeEntities[i].posX, activeEntities[i].posY), activeEntities[i].value);
+                        SpawnItem(itemLDT.lootDropItems[0].item, new Vector3(activeEntities[i].posX, activeEntities[i].posY), moveToStartingPos: false, activeEntities[i].value);
                         break;
                     case CurrentLevelData.EntityType.ItemTokenSkill_1:
-                        SpawnItem(itemLDT.lootDropItems[1].item, new Vector3(activeEntities[i].posX, activeEntities[i].posY), activeEntities[i].value);
+                        SpawnItem(itemLDT.lootDropItems[1].item, new Vector3(activeEntities[i].posX, activeEntities[i].posY), moveToStartingPos: false, activeEntities[i].value);
                         break;
                     case CurrentLevelData.EntityType.ItemTokenSkill_2:
-                        SpawnItem(itemLDT.lootDropItems[2].item, new Vector3(activeEntities[i].posX, activeEntities[i].posY), activeEntities[i].value);
+                        SpawnItem(itemLDT.lootDropItems[2].item, new Vector3(activeEntities[i].posX, activeEntities[i].posY), moveToStartingPos: false, activeEntities[i].value);
                         break;
                     case CurrentLevelData.EntityType.ItemTokenSkill_3:
-                        SpawnItem(itemLDT.lootDropItems[3].item, new Vector3(activeEntities[i].posX, activeEntities[i].posY), activeEntities[i].value);
+                        SpawnItem(itemLDT.lootDropItems[3].item, new Vector3(activeEntities[i].posX, activeEntities[i].posY), moveToStartingPos: false, activeEntities[i].value);
                         break;
                     default:
-                        SpawnEnemy(new Vector3(activeEntities[i].posX, activeEntities[i].posY), activeEntities[i].entityType, activeEntities[i].value);
+                        SpawnEnemy(new Vector3(activeEntities[i].posX, activeEntities[i].posY), moveToStartingPos: false, activeEntities[i].entityType, activeEntities[i].value);
                         break;
                 }
             }
@@ -119,7 +119,8 @@ public class EnemyController : MonoBehaviour {
 
     public void CheckForEnemiesWhichReachedDeadline() {
 
-        for (int i = activeEnemies.Count - 1; i >= 0; i--) {
+        int enemyCount = activeEnemies.Count;
+        for (int i = enemyCount - 1; i >= 0; i--) {
             if (activeEnemies[i].transform.position.y >= deadline.position.y) {
 
                 int inflictedDamage = activeEnemies[i].currentHP * 10;
@@ -171,14 +172,14 @@ public class EnemyController : MonoBehaviour {
             int random = Random.Range(1, 100);
 
             if (random <= 5) {
-                SpawnItem(itemLDT.PickLootDropItem().item, spawnPoints[i].position);
+                SpawnItem(itemLDT.PickLootDropItem().item, spawnPoints[i].position, moveToStartingPos: true);
             } else {
-                SpawnEnemy(spawnPoints[i].position);
+                SpawnEnemy(spawnPoints[i].position, moveToStartingPos: true);
             }
         }
     }
 
-    private void SpawnItem(GameObject itemPrefab, Vector3 position, int value = -1, bool isInitialWave = false) {
+    private void SpawnItem(GameObject itemPrefab, Vector3 position, bool moveToStartingPos = false, int value = -1, bool isInitialWave = false) {
         BaseItem item = Instantiate(itemPrefab, position, Quaternion.identity, canvas.transform).GetComponent<BaseItem>();
         item.reachedStartingPosition = false;
         item.transform.SetParent(itemSkillPointContainer);
@@ -186,13 +187,11 @@ public class EnemyController : MonoBehaviour {
             item.SetValue(value);
         activeItems.Add(item);
 
-        if (isInitialWave)
-            MoveToStartPosition(item.transform);
-        else
-            item.reachedStartingPosition = true;
+        if (moveToStartingPos)
+            MoveEntityToStartPosition(item.transform, isInitialWave);
     }
 
-    private void SpawnEnemy(Vector3 position, CurrentLevelData.EntityType? entityType = null, int? hp = null, bool isInitialWave = false) {
+    private void SpawnEnemy(Vector3 position, bool moveToStartingPos = false, CurrentLevelData.EntityType? entityType = null, int? hp = null, bool isInitialWave = false) {
 
         string sourcePool = "";
         if (entityType == null) {
@@ -249,10 +248,8 @@ public class EnemyController : MonoBehaviour {
 
         Statistics.Instance.enemies.spawned++;
 
-        if (isInitialWave)
-            MoveToStartPosition(newEnemy.transform);
-        else
-            newEnemy.reachedStartingPosition = true;
+        if (moveToStartingPos)
+            MoveEntityToStartPosition(newEnemy.transform, isInitialWave);
     }
 
     public void CreateInitialWaves() {
@@ -263,58 +260,55 @@ public class EnemyController : MonoBehaviour {
         yield return new WaitForEndOfFrame();
         List<Transform> spawnPoints = SpawnPoints.instance.GetInitialSpawnPoints();
 
-        for (int i = 0; i < spawnPoints.Count; i++) {
+        int spawnPointCount = spawnPoints.Count;
+        for (int i = 0; i < spawnPointCount; i++) {
 
             int random = Random.Range(1, 100);
 
             if (random <= 7) {
-                SpawnItem(itemLDT.PickLootDropItem().item, spawnPoints[i].position, isInitialWave: true);
+                SpawnItem(itemLDT.PickLootDropItem().item, spawnPoints[i].position, moveToStartingPos: true, isInitialWave: true);
             } else {
-                SpawnEnemy(spawnPoints[i].position, isInitialWave: true);
+                SpawnEnemy(spawnPoints[i].position, moveToStartingPos: true, isInitialWave: true);
             }
         }
     }
 
     private void MoveEnemiesAndItems() {
 
-        Vector3 moveY = new Vector3(0f, 2f);
+        float deltaY = 2f;
+        float moveTime = 0.1f;
 
-        foreach (var enemy in activeEnemies) {
-            enemy.transform.position += moveY;
+        int enemyCount = activeEnemies.Count;
+        for (int i = 0; i < enemyCount; i++) {
+            GameObject enemy = activeEnemies[i].gameObject;
+            LeanTween.moveY(enemy, enemy.transform.position.y + deltaY, moveTime).setEase(LeanTweenType.easeInOutExpo);
         }
 
-        foreach (var item in activeItems) {
-            item.transform.position += moveY;
+        int itemCount = activeItems.Count;
+        for (int i = 0; i < itemCount; i++) {
+            GameObject item = activeItems[i].gameObject;
+            LeanTween.moveY(item, item.transform.position.y + deltaY, moveTime).setEase(LeanTweenType.easeInOutExpo);
         }
     }
 
-    private void MoveToStartPosition(Transform entity) {
-        StartCoroutine(MoveEnemyToStartPosition(entity));
-    }
+    private void MoveEntityToStartPosition(Transform entity, bool isInitialWave) {
 
-    private IEnumerator MoveEnemyToStartPosition(Transform entity) {
+        float deltaY = (isInitialWave) ? 30f : 10f;
+        float endPosY = entity.position.y + deltaY;
 
-        Vector2 startPos = entity.position;
-        Vector2 endPos = startPos + new Vector2(0f, 30f);
-        float t = 0;
-        float duration = Random.Range(0.4f, 1.2f);
-        while (t < 1f) {
-            entity.position = Vector2.Lerp(entity.position, endPos, t);
-            t += Time.deltaTime / duration;
-            yield return null;
-        }
+        float duration = entity.position.x.Map(-10f, 10, 0.3f, 0.6f);
 
-        var enemy = entity.GetComponent<BaseEnemy>();
-        if (enemy)
-            enemy.reachedStartingPosition = true;
-        else {
-            var item = entity.GetComponent<BaseItem>();
-            if (item) {
-                item.reachedStartingPosition = true;
+        LeanTween.moveY(entity.gameObject, endPosY, duration).setEase(LeanTweenType.easeInOutExpo).setOnComplete(() => {
+            var enemy = entity.GetComponent<BaseEnemy>();
+            if (enemy)
+                enemy.reachedStartingPosition = true;
+            else {
+                var item = entity.GetComponent<BaseItem>();
+                if (item) {
+                    item.reachedStartingPosition = true;
+                }
             }
-        }
-
-        yield return null;
+        });
     }
 
     public Vector2 GetRandomTarget() {

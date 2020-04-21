@@ -7,11 +7,22 @@ public class CameraEffect : MonoBehaviour {
     public static CameraEffect instance;
 
     [SerializeField] private Image overlay;
+
     private Vector2 startPos;
+    private GameObject bloomVolume;
 
     private void Awake() {
         instance = this;
         startPos = transform.position;
+
+        bloomVolume = GameObject.Find("VFX_Bloom");
+        bloomVolume.SetActive(PersistentData.instance.enableBloom);
+
+        EventManager.StartListening("ToggleBloom", OnToggleBloom);
+    }
+
+    private void OnToggleBloom() {
+        bloomVolume.SetActive(PersistentData.instance.enableBloom);
     }
 
     public void Shake(float duration, float magnitude, bool withOverlay = false) {
@@ -28,7 +39,7 @@ public class CameraEffect : MonoBehaviour {
         float elapsedTime = 0f;
         while (elapsedTime < duration) {
 
-            while(Time.timeScale == 0f) {
+            while (Time.timeScale == 0f) {
                 transform.position = startPos;
                 yield return null;
             }
