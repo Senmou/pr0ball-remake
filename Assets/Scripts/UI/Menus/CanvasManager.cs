@@ -47,9 +47,10 @@ public class CanvasManager : MonoBehaviour {
         }
     }
 
-    public void SwitchCanvas(CanvasType type, bool hideLastMenu = true) {
+    public void SwitchCanvas(CanvasType type, bool hideLastMenu = true, bool addToHistory = true) {
 
-        canvasHistory.Push(type);
+        if (addToHistory)
+            canvasHistory.Push(type);
         currentActiveCanvasType = type;
 
         if (type == CanvasType.NONE) {

@@ -13,14 +13,10 @@ public class Skill_Frogs : Skill {
     private new void Awake() {
         base.Awake();
         title = "Quak";
-        description = "-2% Gefahrenlevel pro Blussi";
-        dangerLevelReduction = 10;
         tokenCost = 2;
     }
 
     protected override IEnumerator ActionCoroutine() {
-
-        LevelData.DangerLevel -= dangerLevelReduction;
 
         Statistics.Instance.skills.skill_2.used++;
         Statistics.Instance.skills.skill_2.skillPointsSpend += paidCost;

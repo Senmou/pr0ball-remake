@@ -28,7 +28,9 @@ public class DebugUI : MonoBehaviour {
         }
 
         if (GUILayout.Button("GameOver")) {
-            Score.instance.DecScore((int)Score.instance.score + 1);
+            Score.instance.LoseLife();
+            Score.instance.LoseLife();
+            Score.instance.LoseLife();
         }
 
         if (GUILayout.Button("Random Score")) {

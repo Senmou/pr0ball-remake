@@ -25,7 +25,6 @@ public class Skill : MonoBehaviour {
     [HideInInspector] public int usedCounter;
     [HideInInspector] public new string name;
     [HideInInspector] public bool usedThisTurn;
-    [HideInInspector] public string description;
     [HideInInspector] public int dangerLevelReduction;
 
     public int BonusPercentage { get => skillPointsSpend * bonusDamagePercentagePerPaidSkillPoint; }
@@ -55,7 +54,6 @@ public class Skill : MonoBehaviour {
         skillPointsSpend = skillData.skillPointsSpend;
         usedThisTurn = skillData.usedThisTurn;
         tokenCount = skillData.tokenCount;
-        //locked = skillData.locked;
         cost = skillData.cost;
 
         EventManager.StartListening("ChacheData", OnChanceData);
@@ -94,13 +92,7 @@ public class Skill : MonoBehaviour {
     }
 
     protected void Action() {
-
-        //if (Score.instance.skillPoints < cost) {
-        //    sfxError.Play();
-        //    ErrorMessage.instance.Show(1f, "Nicht genug Skillpunkte!");
-        //    return;
-        //}
-
+        
         if (tokenCount < tokenCost) {
             sfxError.Play();
             ErrorMessage.instance.Show(1f, "Nicht genug Token!");
@@ -112,27 +104,7 @@ public class Skill : MonoBehaviour {
             ErrorMessage.instance.Show(1f, "Skill im vollen Gange!");
             return;
         }
-
-        //if (usedThisTurn) {
-        //    sfxError.Play();
-        //    ErrorMessage.instance.Show(1f, "Erst im nächsten Level wieder!");
-        //    return;
-        //}
-
-        //if (Score.instance.PaySkillPoints(cost)) {
-        //    paidCost = cost;
-        //    skillPointsSpend += cost;
-        //    pending = true;
-        //    usedThisTurn = true;
-        //    UpdateCost();
-        //    barSlot.UpdateSlot();
-        //    barSlot.ShowClockImage(true);
-        //    usedCounter++;
-        //    sfxSuccess.Play();
-        //    Statistics.Instance.skills.skillPointsSpend += paidCost;
-        //    StartCoroutine(ActionCoroutine());
-        //}
-
+        
         if (tokenCount >= tokenCost) {
             tokenCount -= tokenCost;
             pending = true;
@@ -170,10 +142,7 @@ public class Skill : MonoBehaviour {
     }
 
     public void ResetData() {
-        //cost = 1;
-        //locked = true;
         usedCounter = 0;
-        //usedThisTurn = false;
-        //skillPointsSpend = 0;
+        tokenCount = 0;
     }
 }

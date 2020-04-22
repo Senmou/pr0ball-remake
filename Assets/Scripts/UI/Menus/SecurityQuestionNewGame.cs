@@ -5,7 +5,7 @@ public class SecurityQuestionNewGame : CanvasController {
     private RestartGame restartGame;
 
     private void Awake() {
-        transform.position = new Vector2(0f, -3.5f);
+        transform.position = new Vector2(0f, 0f);
         restartGame = FindObjectOfType<RestartGame>();
     }
 

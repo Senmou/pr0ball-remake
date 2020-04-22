@@ -5,11 +5,15 @@ public class Score : MonoBehaviour {
 
     public static Score instance;
 
+    public HeartContainer[] heartContainers;
+
     [HideInInspector] public long score;
     [HideInInspector] public long highscore;
     [HideInInspector] public int skillPoints;
     [HideInInspector] public long scoreBackup;
+    [HideInInspector] public int lifes;
 
+    private const int maxLifes = 3;
     private TextMeshProUGUI scoreUI;
     private PlayStateController playStateController;
 
@@ -24,10 +28,12 @@ public class Score : MonoBehaviour {
         scoreUI = transform.FindChild<TextMeshProUGUI>("Value");
         playStateController = FindObjectOfType<PlayStateController>();
 
+        lifes = PersistentData.instance.scoreData.lifes;
         score = PersistentData.instance.scoreData.score;
         highscore = PersistentData.instance.scoreData.highscore;
         skillPoints = PersistentData.instance.scoreData.skillPoints;
         UpdateUI();
+        UpdateHeartContainers(withAnimation: false);
     }
 
     private void Start() {
@@ -35,6 +41,7 @@ public class Score : MonoBehaviour {
     }
 
     private void OnChacheData() {
+        PersistentData.instance.scoreData.lifes = lifes;
         PersistentData.instance.scoreData.score = score;
         PersistentData.instance.scoreData.highscore = highscore;
         PersistentData.instance.scoreData.skillPoints = skillPoints;
@@ -47,6 +54,35 @@ public class Score : MonoBehaviour {
             return true;
         } else
             return false;
+    }
+
+    public void GainLife() {
+        if (lifes < maxLifes) {
+            lifes++;
+            UpdateHeartContainers();
+        }
+    }
+
+    public void LoseLife() {
+        if (lifes > 0) {
+            lifes--;
+            UpdateHeartContainers();
+        }
+
+        if(lifes <= 0) {
+            playStateController.isGameOver = true;
+            PersistentData.instance.isGameOver = true;
+        }
+    }
+
+    public void UpdateHeartContainers(bool withAnimation = true) {
+        for (int i = 0; i < maxLifes; i++) {
+            if (i >= maxLifes - lifes) {
+                heartContainers[i].Restore();
+            } else {
+                heartContainers[i].Explode(withAnimation);
+            }
+        }
     }
 
     public void IncScore(int amount) {
@@ -74,13 +110,9 @@ public class Score : MonoBehaviour {
         score -= amount;
         scoreBackup -= amount;
 
-        if (score < 0) {
-
-            // if score was manipulated
-            if (scoreBackup - score != PersistentData.instance.backupOffset) {
-                highscore = score;
-            }
-
+        // if score was manipulated
+        if (scoreBackup - score != PersistentData.instance.backupOffset) {
+            highscore = score;
             playStateController.isGameOver = true;
             PersistentData.instance.isGameOver = true;
         }
@@ -101,6 +133,8 @@ public class Score : MonoBehaviour {
         scoreBackup = PersistentData.instance.backupOffset;
         highscore = 0;
         skillPoints = 0;
+        lifes = maxLifes;
         UpdateUI();
+        UpdateHeartContainers(withAnimation: false);
     }
 }

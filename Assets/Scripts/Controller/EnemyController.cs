@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
 
+    [SerializeField] private float itemSpawnChance;
     [SerializeField] private FloatingText floatingText;
     [SerializeField] private AudioClip swooshAudioClip;
 
@@ -122,14 +123,8 @@ public class EnemyController : MonoBehaviour {
 
     private void HandleEnemyAtDeadline(BaseEnemy enemy) {
         if (enemy.transform.position.y >= deadline.position.y) {
-
-            int inflictedDamage = enemy.currentHP * 10;
-            Vector2 floatingTextSpawnPos = enemy.transform.position;
-
             enemy.Kill(shouldIncScore: false);
-            Score.instance.DecScore(inflictedDamage);
-
-            GameController.instance.SpawnFloatingText("-" + inflictedDamage.ToString(), floatingTextSpawnPos);
+            Score.instance.LoseLife();
         }
     }
 
@@ -171,7 +166,7 @@ public class EnemyController : MonoBehaviour {
 
             int random = Random.Range(1, 100);
 
-            if (random <= 5) {
+            if (random <= itemSpawnChance) {
                 SpawnItem(itemLDT.PickLootDropItem().item, spawnPoints[i].position, moveToStartingPos: true);
             } else {
                 SpawnEnemy(spawnPoints[i].position, moveToStartingPos: true);
@@ -266,7 +261,7 @@ public class EnemyController : MonoBehaviour {
 
             int random = Random.Range(1, 100);
 
-            if (random <= 7) {
+            if (random <= itemSpawnChance) {
                 SpawnItem(itemLDT.PickLootDropItem().item, spawnPoints[i].position, moveToStartingPos: true, isInitialWave: true);
             } else {
                 SpawnEnemy(spawnPoints[i].position, moveToStartingPos: true, isInitialWave: true);

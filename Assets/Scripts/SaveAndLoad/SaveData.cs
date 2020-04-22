@@ -11,6 +11,7 @@ public class SaveData {
     public Statistics statistics;
     public CurrentLevelData currentLevelData;
 
+    public int lifes;
     public bool uniColor;
     public bool isGameOver;
     public bool enableBloom;
@@ -32,6 +33,7 @@ public class SaveData {
         currentLevelData = PersistentData.instance.currentLevelData;
 
         uniColor = PersistentData.instance.uniColor;
+        lifes = PersistentData.instance.scoreData.lifes;
         isGameOver = PersistentData.instance.isGameOver;
         playerName = PersistentData.instance.playerName;
         enableBloom = PersistentData.instance.enableBloom;

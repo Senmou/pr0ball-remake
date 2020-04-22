@@ -101,11 +101,13 @@ public class SoundData {
 
 [Serializable]
 public class ScoreData {
+    public int lifes;
     public long score;
     public long highscore;
     public int skillPoints;
 
     public ScoreData() {
+        lifes = 3;
         score = 0;
         highscore = 0;
         skillPoints = 0;

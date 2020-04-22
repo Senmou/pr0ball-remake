@@ -20,7 +20,7 @@ public class RestartGame : MonoBehaviour {
 
     public void OnStartButtonClicked() {
 
-        CanvasManager.instance.SwitchCanvas(CanvasType.SECURITY_QUESTION_NEW_GAME, false);
+        CanvasManager.instance.SwitchCanvas(CanvasType.SECURITY_QUESTION_NEW_GAME, hideLastMenu: false, addToHistory: false);
     }
 
     public void StartNewGame() {

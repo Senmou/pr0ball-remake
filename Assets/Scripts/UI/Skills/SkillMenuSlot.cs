@@ -157,7 +157,6 @@ public class SkillMenuSlot : MonoBehaviour {
         bonusDamageUI.text = "(+" + skill.GetBonusDamage(skill.cost).ToString() + ")";
         //unlockButton?.SetText(skill.unlockLevel);
         //unlockButton?.SetColor(skill.unlockLevel);
-        descriptionUI.text = skill.description;
         titleUI.text = skill.title;
         tokenUI.text = skill.tokenCount + "/" + skill.tokenCost;
 

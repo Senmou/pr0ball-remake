@@ -17,16 +17,12 @@ public class Skill_Triggered : Skill {
         triggeredAudio = GameObject.Find("SfxTriggered").GetComponent<AudioSource>();
 
         title = "Corona";
-        description = "+3% Gefahrenlevel pro Blussi";
-        dangerLevelReduction = 15;
         tokenCost = 3;
     }
 
     protected override int CalcDamage(int cost) => enemyHPReference.MaxHP;
 
     protected override IEnumerator ActionCoroutine() {
-
-        LevelData.DangerLevel -= dangerLevelReduction;
 
         Statistics.Instance.skills.skill_3.used++;
         Statistics.Instance.skills.skill_3.skillPointsSpend += paidCost;

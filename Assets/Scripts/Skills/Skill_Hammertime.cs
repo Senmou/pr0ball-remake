@@ -29,16 +29,12 @@ public class Skill_Hammertime : Skill {
         hammerTimeLogo.gameObject.SetActive(false);
 
         title = "pr0-chan";
-        description = "-5% Gefahrenlevel pro Blussi";
-        dangerLevelReduction = 5;
         tokenCost = 1;
     }
 
     protected override int CalcDamage(int cost) => enemyHPReference.MaxHP;
 
     protected override IEnumerator ActionCoroutine() {
-
-        LevelData.DangerLevel -= dangerLevelReduction;
 
         Statistics.Instance.skills.skill_1.used++;
         Statistics.Instance.skills.skill_1.skillPointsSpend += paidCost;
