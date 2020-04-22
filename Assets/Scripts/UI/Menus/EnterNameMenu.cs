@@ -30,6 +30,7 @@ public class EnterNameMenu : CanvasController {
 
     public void OnOkButtonClick() {
         PersistentData.instance.playerName = inputField.text;
+        FindObjectOfType<DisplayPlayerName>().UpdateNameUI();
     }
 
     public override void Show() {
