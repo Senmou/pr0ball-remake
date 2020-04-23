@@ -54,22 +54,22 @@ public class HeartContainer : MonoBehaviour {
         if (tween != null)
             LeanTween.cancel(tween.uniqueId);
 
+        color.a = 1f;
         heartIsFull = true;
-        heartLeft.isKinematic = true;
-        heartRight.isKinematic = true;
+        leftImage.color = color;
+        rightImage.color = color;
         heartLeft.simulated = false;
         heartRight.simulated = false;
+        heartLeft.isKinematic = true;
+        heartRight.isKinematic = true;
+        heartLeft.velocity = Vector2.zero;
+        heartRight.velocity = Vector2.zero;
         heartLeft.gameObject.SetActive(true);
         heartRight.gameObject.SetActive(true);
         heartLeft.transform.position = startPos;
         heartRight.transform.position = startPos;
         heartLeft.transform.rotation = Quaternion.identity;
         heartRight.transform.rotation = Quaternion.identity;
-        heartLeft.velocity = Vector2.zero;
-        heartRight.velocity = Vector2.zero;
-        color.a = 1f;
-        leftImage.color = color;
-        rightImage.color = color;
     }
 
     private void SetAlpha(float value) {

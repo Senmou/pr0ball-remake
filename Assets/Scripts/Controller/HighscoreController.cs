@@ -25,7 +25,29 @@ public class HighscoreController : MonoBehaviour {
         if (string.IsNullOrEmpty(playerName) || string.IsNullOrWhiteSpace(playerName))
             playerName = "anonymous";
 
-        StartCoroutine(PostScores(playerName, score));
+        StartCoroutine(CheckIfTop20(playerName, score));
+    }
+
+    private IEnumerator CheckIfTop20(string name, long score) {
+        string hash = Helper.Md5Sum(name + score + Constants.secretKey);
+
+        string url = Constants.checkNewHighscore + "name=" + UnityWebRequest.EscapeURL(name) + "&score=" + score + "&hash=" + hash;
+
+        using (UnityWebRequest www = UnityWebRequest.Get(url)) {
+
+            yield return www.SendWebRequest();
+
+            if (www.isNetworkError || www.isHttpError) {
+                Debug.Log("ERROR: " + www.error);
+            } else {
+                string result = www.downloadHandler.text;
+                Debug.Log(result);
+
+                if (result.Equals("true")) {
+                    StartCoroutine(PostScores(name, score));
+                }
+            }
+        }
     }
 
     public void ShowGlobalHighscores(System.Action<GlobalHighscoreTable.GlobalHighscoreEntry[]> OnSuccess) {

@@ -9,11 +9,13 @@ public class EnterNameMenu : CanvasController {
     private Image okButtonBackground;
     private TMP_InputField inputField;
     private PauseBackground pauseBackground;
+    private DisplayPlayerName displayPlayerName;
 
     private void Awake() {
         moveUI = GetComponent<MoveUI>();
         okButton = transform.FindChild<Button>("OkButton");
         pauseBackground = FindObjectOfType<PauseBackground>();
+        displayPlayerName = FindObjectOfType<DisplayPlayerName>();
         inputField = transform.FindChild<TMP_InputField>("NameInputField");
         okButtonBackground = transform.FindChild<Image>("OkButton/Background");
     }
@@ -30,7 +32,8 @@ public class EnterNameMenu : CanvasController {
 
     public void OnOkButtonClick() {
         PersistentData.instance.playerName = inputField.text;
-        FindObjectOfType<DisplayPlayerName>().UpdateNameUI();
+        if (displayPlayerName)
+            displayPlayerName.UpdateNameUI();
     }
 
     public override void Show() {

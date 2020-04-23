@@ -33,11 +33,11 @@ public class Score : MonoBehaviour {
         highscore = PersistentData.instance.scoreData.highscore;
         skillPoints = PersistentData.instance.scoreData.skillPoints;
         UpdateUI();
-        UpdateHeartContainers(withAnimation: false);
     }
 
     private void Start() {
         scoreBackup = PersistentData.instance.scoreData.score + PersistentData.instance.backupOffset;
+        UpdateHeartContainers(withAnimation: false);
     }
 
     private void OnChacheData() {
@@ -69,7 +69,7 @@ public class Score : MonoBehaviour {
             UpdateHeartContainers();
         }
 
-        if(lifes <= 0) {
+        if (lifes <= 0) {
             playStateController.isGameOver = true;
             PersistentData.instance.isGameOver = true;
         }
