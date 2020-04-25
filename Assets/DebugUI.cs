@@ -17,9 +17,9 @@ public class DebugUI : MonoBehaviour {
         }
 
         if (GUILayout.Button("Token")) {
-            FindObjectOfType<Skill_Hammertime>().tokenCount += 10;
-            FindObjectOfType<Skill_Frogs>().tokenCount += 10;
-            FindObjectOfType<Skill_Triggered>().tokenCount += 10;
+            FindObjectOfType<Skill_Hammertime>().hasToken = true;
+            FindObjectOfType<Skill_Frogs>().hasToken = true;
+            FindObjectOfType<Skill_Triggered>().hasToken = true;
             Score.instance.IncSkillPoints(10);
         }
 

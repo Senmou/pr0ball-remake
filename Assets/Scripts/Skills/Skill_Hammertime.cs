@@ -29,10 +29,9 @@ public class Skill_Hammertime : Skill {
         hammerTimeLogo.gameObject.SetActive(false);
 
         title = "pr0-chan";
-        tokenCost = 1;
     }
 
-    protected override int CalcDamage(int cost) => enemyHPReference.MaxHP;
+    protected override int CalcDamage(int cost) => (int)(enemyHPReference.MaxHP * 1.5f);
 
     protected override IEnumerator ActionCoroutine() {
 

@@ -30,7 +30,7 @@ MonoBehaviour:
   m_DefaultStencilState:
     overrideStencilState: 0
     stencilReference: 0
-    stencilCompareFunction: 8
-    passOperation: 0
-    failOperation: 0
-    zFailOperation: 0
+    stencilCompareFunction: 1
+    passOperation: 3
+    failOperation: 1
+    zFailOperation: 1

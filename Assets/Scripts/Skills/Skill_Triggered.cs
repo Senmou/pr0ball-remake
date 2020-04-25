@@ -17,10 +17,9 @@ public class Skill_Triggered : Skill {
         triggeredAudio = GameObject.Find("SfxTriggered").GetComponent<AudioSource>();
 
         title = "Corona";
-        tokenCost = 3;
     }
 
-    protected override int CalcDamage(int cost) => enemyHPReference.MaxHP;
+    protected override int CalcDamage(int cost) => (int)Mathf.Max(1f, enemyHPReference.MaxHP / 1.5f);
 
     protected override IEnumerator ActionCoroutine() {
 

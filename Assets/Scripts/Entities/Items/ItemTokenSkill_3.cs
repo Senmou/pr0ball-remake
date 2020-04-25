@@ -9,7 +9,7 @@
     }
 
     protected override void OnItemCollected() {
-        skill_3.tokenCount++;
+        skill_3.hasToken = true;
         skillBar.UpdateSlots();
     }
 }

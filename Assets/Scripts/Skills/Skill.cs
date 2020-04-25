@@ -20,8 +20,7 @@ public class Skill : MonoBehaviour {
     [HideInInspector] public bool locked;
     [HideInInspector] public int paidCost;
     [HideInInspector] public string title;
-    [HideInInspector] public int tokenCost;
-    [HideInInspector] public int tokenCount;
+    [HideInInspector] public bool hasToken;
     [HideInInspector] public int usedCounter;
     [HideInInspector] public new string name;
     [HideInInspector] public bool usedThisTurn;
@@ -53,13 +52,12 @@ public class Skill : MonoBehaviour {
         SkillData.Skill skillData = PersistentData.instance.skillData.GetSkillData(id);
         skillPointsSpend = skillData.skillPointsSpend;
         usedThisTurn = skillData.usedThisTurn;
-        tokenCount = skillData.tokenCount;
+        hasToken = skillData.hasToken;
         cost = skillData.cost;
 
         EventManager.StartListening("ChacheData", OnChanceData);
         EventManager.StartListening("ReachedNextLevel", OnReachedNextLevel);
 
-        tokenCost = 1;
         locked = false;
     }
 
@@ -83,19 +81,18 @@ public class Skill : MonoBehaviour {
     }
 
     protected void OnChanceData() {
-        SaveSkillData(id, locked, usedCounter, cost, tokenCount, usedThisTurn, skillPointsSpend);
+        SaveSkillData(id, locked, usedCounter, cost, hasToken, usedThisTurn, skillPointsSpend);
     }
 
     protected void OnReachedNextLevel() {
         usedThisTurn = false;
-        barSlot.ShowClockImage(false);
     }
 
     protected void Action() {
         
-        if (tokenCount < tokenCost) {
+        if (hasToken == false) {
             sfxError.Play();
-            ErrorMessage.instance.Show(1f, "Nicht genug Token!");
+            ErrorMessage.instance.Show(1f, "Kein Token!");
             return;
         }
 
@@ -105,8 +102,8 @@ public class Skill : MonoBehaviour {
             return;
         }
         
-        if (tokenCount >= tokenCost) {
-            tokenCount -= tokenCost;
+        if (hasToken) {
+            hasToken = false;
             pending = true;
             usedCounter++;
             sfxSuccess.Play();
@@ -137,12 +134,12 @@ public class Skill : MonoBehaviour {
         locked = false;
     }
 
-    protected void SaveSkillData(int id, bool locked, int usedCounter, int cost, int tokenCount, bool usedThisTurn, int skillPointsSpend) {
-        PersistentData.instance.skillData.SetSkillData(id, locked, usedCounter, cost, tokenCount, usedThisTurn, skillPointsSpend);
+    protected void SaveSkillData(int id, bool locked, int usedCounter, int cost, bool hasToken, bool usedThisTurn, int skillPointsSpend) {
+        PersistentData.instance.skillData.SetSkillData(id, locked, usedCounter, cost, hasToken, usedThisTurn, skillPointsSpend);
     }
 
     public void ResetData() {
         usedCounter = 0;
-        tokenCount = 0;
+        hasToken = false;
     }
 }

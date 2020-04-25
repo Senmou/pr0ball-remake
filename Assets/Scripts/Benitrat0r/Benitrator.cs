@@ -306,14 +306,14 @@ public class Benitrator : MonoBehaviour {
         int rewardCritChance = 0;
 
         if (bet == 1)
-            rewardCritChance = 1;
-        else if (bet == 2)
             rewardCritChance = 2;
-        else if (bet == 3)
+        else if (bet == 2)
             rewardCritChance = 3;
+        else if (bet == 3)
+            rewardCritChance = 4;
 
         if (symbolCount == 3) {
-            rewardCritChance += bet;
+            rewardCritChance *= 2;
         }
 
         return rewardCritChance;
@@ -323,14 +323,14 @@ public class Benitrator : MonoBehaviour {
         float rewardCritDamage = 0;
 
         if (bet == 1)
-            rewardCritDamage = 0.1f;
+            rewardCritDamage = 0.25f;
         else if (bet == 2)
-            rewardCritDamage = 0.2f;
-        else if (bet == 3)
             rewardCritDamage = 0.5f;
+        else if (bet == 3)
+            rewardCritDamage = 0.75f;
 
         if (symbolCount == 3) {
-            rewardCritDamage += 0.1f * bet;
+            rewardCritDamage += 0.25f * bet;
         }
 
         return rewardCritDamage;
@@ -364,7 +364,7 @@ public class Benitrator : MonoBehaviour {
             rewardScore = 250;
 
         if (symbolCount == 3) {
-            rewardScore += 100 * bet;
+            rewardScore *= 2;
         }
 
         return rewardScore;

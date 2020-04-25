@@ -13,7 +13,6 @@ public class SkillMenuSlot : MonoBehaviour {
     //private Button plus;
     //private Button minus;
     //private TextMeshProUGUI costUI;
-    private TextMeshProUGUI tokenUI;
     private TextMeshProUGUI titleUI;
     private TextMeshProUGUI damageUI;
     private TextMeshProUGUI descriptionUI;
@@ -39,7 +38,6 @@ public class SkillMenuSlot : MonoBehaviour {
         infoDamage = transform.FindChild<Transform>("InfoPopups/Damage");
         infoUsedCounter = transform.FindChild<Transform>("InfoPopups/UsedCounter");
 
-        tokenUI = transform.FindChild<TextMeshProUGUI>("Token/Value");
 
         //plus = transform.FindChild<Button>("Cost/Plus");
         //minus = transform.FindChild<Button>("Cost/Minus");
@@ -158,7 +156,6 @@ public class SkillMenuSlot : MonoBehaviour {
         //unlockButton?.SetText(skill.unlockLevel);
         //unlockButton?.SetColor(skill.unlockLevel);
         titleUI.text = skill.title;
-        tokenUI.text = skill.tokenCount + "/" + skill.tokenCost;
 
         //if (skill.dangerLevelIncrease < 0)
         //    dangerLevelIncreaseUI.text = (skill.dangerLevelIncrease * skill.cost).ToString() + "%";

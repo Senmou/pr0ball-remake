@@ -41,11 +41,11 @@ public class HighscoreController : MonoBehaviour {
                 Debug.Log("ERROR: " + www.error);
             } else {
                 string result = www.downloadHandler.text;
-                Debug.Log(result);
 
                 if (result.Equals("true")) {
                     StartCoroutine(PostScores(name, score));
-                }
+                } else
+                    Debug.Log(result);
             }
         }
     }

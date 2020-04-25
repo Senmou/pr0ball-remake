@@ -56,7 +56,7 @@ public class GameController : MonoBehaviour {
             Statistics.Instance.OnLoadGame();
         }
     }
-    
+
     private void Update() {
 
         elapsedTimeSinceRestart += Time.deltaTime;

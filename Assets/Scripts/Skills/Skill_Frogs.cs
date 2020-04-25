@@ -13,7 +13,6 @@ public class Skill_Frogs : Skill {
     private new void Awake() {
         base.Awake();
         title = "Quak";
-        tokenCost = 2;
     }
 
     protected override IEnumerator ActionCoroutine() {
