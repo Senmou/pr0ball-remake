@@ -25,6 +25,11 @@ public class InputHelper : MonoBehaviour {
         return results.Count > 0;
     }
 
+    private void Update() {
+        if (Input.GetMouseButtonDown(0))
+            PrintClickedElementsName();
+    }
+
     public void PrintClickedElementsName() {
         PointerEventData eventData = new PointerEventData(EventSystem.current);
         eventData.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
@@ -39,7 +44,7 @@ public class InputHelper : MonoBehaviour {
         if (text.Length > 2)
             text = text.Remove(text.Length - 3);
 
-        //Debug.Log(text);
+        Debug.Log(text);
     }
 
     public bool ClickedOnTag(string tag) {

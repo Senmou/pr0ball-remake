@@ -18,6 +18,7 @@ public class HighscoreTable : MonoBehaviour {
 
     public void UpdateUI() {
 
+        float anchoredPosFirstElement = 0f;
         int highscoreCount = PersistentData.instance.highscores.entries.Count;
 
         // Clear all entries except the template
@@ -41,6 +42,8 @@ public class HighscoreTable : MonoBehaviour {
 
             int entryID = PersistentData.instance.highscores.entries[i].id;
             newEntry.GetComponent<Button>().onClick.AddListener(() => OnClick(entryID));
+
+            if (i == 0) anchoredPosFirstElement = newEntry.GetComponent<RectTransform>().anchoredPosition.y;
 
             newEntry.gameObject.SetActive(true);
 

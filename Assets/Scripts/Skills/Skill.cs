@@ -24,7 +24,6 @@ public class Skill : MonoBehaviour {
     [HideInInspector] public int usedCounter;
     [HideInInspector] public new string name;
     [HideInInspector] public bool usedThisTurn;
-    [HideInInspector] public int dangerLevelReduction;
 
     public int BonusPercentage { get => skillPointsSpend * bonusDamagePercentagePerPaidSkillPoint; }
 

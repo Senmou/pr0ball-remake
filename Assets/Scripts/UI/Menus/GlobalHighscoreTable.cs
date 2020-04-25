@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 
 public class GlobalHighscoreTable : MonoBehaviour {
 

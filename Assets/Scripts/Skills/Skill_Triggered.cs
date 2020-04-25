@@ -6,13 +6,11 @@ public class Skill_Triggered : Skill {
     [SerializeField] private GameObject triggeredText;
     [SerializeField] private CoronaBall fogelBallPrefab;
 
-    private Canvas canvas;
     private AudioSource audioSource;
     private AudioSource triggeredAudio;
 
     private new void Awake() {
         base.Awake();
-        canvas = FindObjectOfType<Canvas>();
         audioSource = GetComponent<AudioSource>();
         triggeredAudio = GameObject.Find("SfxTriggered").GetComponent<AudioSource>();
 
