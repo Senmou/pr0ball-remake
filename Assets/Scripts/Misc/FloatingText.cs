@@ -1,17 +1,15 @@
-﻿using UnityEngine;
-using TMPro;
+﻿using System.Collections;
 using MarchingBytes;
-using System.Collections;
+using UnityEngine;
+using TMPro;
 
 public class FloatingText : MonoBehaviour {
 
     private MoveUI moveUI;
-    private Canvas canvas;
     private TextMeshProUGUI value;
 
     private void Awake() {
         moveUI = GetComponent<MoveUI>();
-        canvas = FindObjectOfType<Canvas>();
         value = GetComponent<TextMeshProUGUI>();
     }
 

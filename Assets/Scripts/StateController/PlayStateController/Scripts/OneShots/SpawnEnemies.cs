@@ -25,16 +25,14 @@ public class SpawnEnemies : OneShot {
 
             // cleared level before wave 20 is over OR all enemies are below the dotted line
             if (c.enemyController.activeEnemies.Count == 0 || c.enemyController.AllEnemiesBelowDottedLine()) {
+                c.levelClearText.ShowLevelClearRewardText(Score.instance.GetRewardScoreForClearingLevel());
                 c.enemyController.DespawnAllEntities();
                 c.enemyController.CreateInitialWaves();
                 LevelData.LevelUp();
             } else {
                 c.enemyController.CreateWave();
-                //c.enemyController.CheckForEnemiesWhichReachedDeadline();
                 return;
             }
-
-            //c.enemyController.CheckForEnemiesWhichReachedDeadline();
         }
     }
 }

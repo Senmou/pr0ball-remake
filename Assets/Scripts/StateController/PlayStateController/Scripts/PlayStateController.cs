@@ -2,6 +2,8 @@
 
 public class PlayStateController : StateController {
 
+    public LevelClearText levelClearText;
+
     [HideInInspector] public bool cycleFinished;
     [HideInInspector] public bool gameRestarted;
     [HideInInspector] public bool hasGameStarted;

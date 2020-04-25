@@ -15,6 +15,7 @@ public class SecurityQuestionNewGame : CanvasController {
 
     public override void Show() {
         LeanTween.scale(gameObject, Vector3.one, 0.1f)
+            .setOnStart(() => gameObject.SetActive(true))
             .setIgnoreTimeScale(true)
             .setEase(showEaseType);
     }
@@ -22,6 +23,7 @@ public class SecurityQuestionNewGame : CanvasController {
     public override void Hide() {
         LeanTween.scale(gameObject, Vector3.zero, 0.15f)
             .setIgnoreTimeScale(true)
-            .setEase(hideEaseType);
+            .setEase(hideEaseType)
+            .setOnComplete(() => gameObject.SetActive(false));
     }
 }

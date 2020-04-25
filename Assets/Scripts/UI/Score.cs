@@ -47,6 +47,12 @@ public class Score : MonoBehaviour {
         PersistentData.instance.scoreData.skillPoints = skillPoints;
     }
 
+    public int GetRewardScoreForClearingLevel() {
+        int reward = 50 * (20 - LevelData.Wave);
+        IncScore(reward);
+        return reward;
+    }
+
     public bool PaySkillPoints(int upgradePrice) {
         if (skillPoints >= upgradePrice) {
             skillPoints -= upgradePrice;

@@ -25,11 +25,6 @@ public class InputHelper : MonoBehaviour {
         return results.Count > 0;
     }
 
-    private void Update() {
-        if (Input.GetMouseButtonDown(0))
-            PrintClickedElementsName();
-    }
-
     public void PrintClickedElementsName() {
         PointerEventData eventData = new PointerEventData(EventSystem.current);
         eventData.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
