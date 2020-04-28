@@ -4,7 +4,6 @@ using TMPro;
 
 public class EnterNameMenu : CanvasController {
 
-    private MoveUI moveUI;
     private Button okButton;
     private Image okButtonBackground;
     private TMP_InputField inputField;
@@ -12,7 +11,7 @@ public class EnterNameMenu : CanvasController {
     private DisplayPlayerName displayPlayerName;
 
     private void Awake() {
-        moveUI = GetComponent<MoveUI>();
+        transform.position = new Vector2(0f, 0f);
         okButton = transform.FindChild<Button>("OkButton");
         pauseBackground = FindObjectOfType<PauseBackground>();
         displayPlayerName = FindObjectOfType<DisplayPlayerName>();
@@ -37,13 +36,19 @@ public class EnterNameMenu : CanvasController {
     }
 
     public override void Show() {
-        inputField.text = PersistentData.instance.playerName;
         pauseBackground.disableInteractability = true;
-        moveUI.FadeTo(Vector2.zero, 0.5f);
+        inputField.text = PersistentData.instance.playerName;
+        LeanTween.scale(gameObject, Vector3.one, 0.1f)
+           .setOnStart(() => gameObject.SetActive(true))
+           .setIgnoreTimeScale(true)
+           .setEase(showEaseType);
     }
 
     public override void Hide() {
         pauseBackground.disableInteractability = false;
-        moveUI.FadeTo(new Vector2(0f, -35f), 0.5f, true);
+        LeanTween.scale(gameObject, Vector3.zero, 0.15f)
+             .setIgnoreTimeScale(true)
+             .setEase(hideEaseType)
+             .setOnComplete(() => gameObject.SetActive(false));
     }
 }

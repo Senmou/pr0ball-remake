@@ -1,13 +1,13 @@
-﻿using System.Collections;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 using UnityEngine;
 
 public class PauseBackground : MonoBehaviour {
 
+    public float fadeTime;
+
     public bool disableInteractability;
 
     private Image image;
-    private float fadeTime = 0.5f;
     private float maxAlpha = 0.99f;
     private Button clickableBackground;
     private RectTransform rect;
@@ -30,6 +30,13 @@ public class PauseBackground : MonoBehaviour {
         rect.offsetMin = new Vector2(rect.offsetMin.x, value);
     }
 
+    public void SetAlpha(float value) {
+        StopAllCoroutines();
+        Color color = image.color;
+        color.a = value;
+        image.color = color;
+    }
+
     public void OnAppStart() {
         clickableBackground.interactable = false;
         image.enabled = true;
@@ -39,48 +46,44 @@ public class PauseBackground : MonoBehaviour {
     }
 
     private void OnGamePaused() {
-        StopAllCoroutines();
-        StartCoroutine(FadeIn());
+        FadeIn();
     }
 
     private void OnGameResumed() {
-        StopAllCoroutines();
-        StartCoroutine(FadeOut());
+        FadeOut();
     }
 
-    private IEnumerator FadeIn() {
+    private void FadeIn() {
         clickableBackground.interactable = true;
-
-        if(disableInteractability)
+        if (disableInteractability)
             clickableBackground.interactable = false;
 
-        image.enabled = true;
-
         Color color = image.color;
 
-        float t = 0f;
-        while (t < 1f) {
-            color.a = Mathf.Lerp(color.a, maxAlpha, t);
-            image.color = color;
-            t += Time.unscaledDeltaTime / fadeTime;
-            yield return null;
-        }
-        yield return null;
+        LeanTween.value(image.color.a, 1f, fadeTime)
+            .setOnStart(() => image.enabled = true)
+            .setEase(LeanTweenType.easeOutExpo)
+            .setIgnoreTimeScale(true)
+            .setOnUpdate((alpha) => {
+                color.a = alpha;
+                image.color = color;
+            });
     }
-
-    private IEnumerator FadeOut() {
+    
+    private void FadeOut() {
 
         Color color = image.color;
 
-        float t = 0f;
-        while (t < 1f) {
-            color.a = Mathf.Lerp(color.a, 0f, t);
-            image.color = color;
-            t += Time.unscaledDeltaTime / fadeTime;
-            yield return null;
-        }
-        clickableBackground.interactable = false;
-        image.enabled = false;
-        yield return null;
+        LeanTween.value(image.color.a, 0f, fadeTime)
+             .setEase(LeanTweenType.easeOutExpo)
+             .setIgnoreTimeScale(true)
+             .setOnUpdate((alpha) => {
+                 color.a = alpha;
+                 image.color = color;
+             })
+            .setOnComplete(() => {
+                clickableBackground.interactable = false;
+                image.enabled = false;
+            });
     }
 }

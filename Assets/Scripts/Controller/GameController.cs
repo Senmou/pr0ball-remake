@@ -54,6 +54,19 @@ public class GameController : MonoBehaviour {
             enemyController.LoadEntities();
             Statistics.Instance.OnLoadGame();
         }
+
+        StartCoroutine(ShowNameInputFieldDelayed());
+    }
+
+    private IEnumerator ShowNameInputFieldDelayed() {
+
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+
+        if (string.IsNullOrEmpty(PersistentData.instance.playerName)) {
+            CanvasManager.instance.SwitchCanvas(CanvasType.NAME);
+        }
     }
 
     private void Update() {
