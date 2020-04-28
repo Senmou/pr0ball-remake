@@ -9,7 +9,6 @@ public class BaseEnemy : MonoBehaviour {
     public Color enemyColor;
     [SerializeField] private Color uniColor;
     [SerializeField] protected EnemyHP hp;
-    [SerializeField] private new GameObject particleSystem;
 
     [HideInInspector] public int maxHP;
     [HideInInspector] public int currentHP;
@@ -23,12 +22,7 @@ public class BaseEnemy : MonoBehaviour {
     private EnemyController enemyController;
 
     private int benisValue = 1;
-    protected float hpMultiplicator;
-
-    protected void OnEnable() {
-        maxHP = (int)(hp.MaxHP * hpMultiplicator);
-    }
-
+    
     protected void Awake() {
         body = GetComponentInChildren<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -45,12 +39,14 @@ public class BaseEnemy : MonoBehaviour {
         UpdateUI();
         ApplyColor();
     }
-
+    
     public Color GetColor() => spriteRenderer.color;
 
     protected void OnToggleUniColor() {
         ApplyColor();
     }
+
+    protected RemoteConfig.RemoteHealthMultiplier GetRemoteHealthMultiplier() => RemoteConfig.instance.remoteHealthMultiplier;
 
     protected void ApplyColor() {
         if (PersistentData.instance.uniColor)

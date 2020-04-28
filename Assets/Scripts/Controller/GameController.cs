@@ -42,7 +42,6 @@ public class GameController : MonoBehaviour {
 
         EventManager.StartListening("SaveGame", OnSaveGame);
         EventManager.StartListening("ChacheData", OnChacheData);
-        EventManager.StartListening("GameRestarted", OnGameRestarted);
 
         CanvasManager.instance.SwitchCanvas(CanvasType.NONE);
     }
@@ -93,8 +92,9 @@ public class GameController : MonoBehaviour {
         PersistentData.instance.firstAppStart = false;
     }
 
-    private void OnGameRestarted() {
+    public void OnGameRestarted() {
         elapsedTimeSinceRestart = 0f;
+        RemoteConfig.instance.FetchConfig();
     }
 
     public void PauseGame() {

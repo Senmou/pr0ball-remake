@@ -35,6 +35,7 @@ public class RestartGame : MonoBehaviour {
         skillController.ResetData();
         ballController.ResetData();
         Statistics.Instance.ResetData();
+        GameController.instance.OnGameRestarted();
         //skillPointSlider.ResetData();
 
         CanvasManager.instance.SwitchCanvas(CanvasType.NONE);

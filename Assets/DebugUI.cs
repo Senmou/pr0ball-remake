@@ -23,18 +23,18 @@ public class DebugUI : MonoBehaviour {
             Score.instance.IncSkillPoints(10);
         }
 
-        if (GUILayout.Button("Input Name")) {
-            CanvasManager.instance.SwitchCanvas(CanvasType.NAME);
-        }
-
         if (GUILayout.Button("GameOver")) {
             Score.instance.LoseLife();
             Score.instance.LoseLife();
             Score.instance.LoseLife();
         }
 
-        if (GUILayout.Button("Random Score")) {
-            FindObjectOfType<HighscoreController>().PostRandomScore();
+        if (GUILayout.Button("Fast Mode")) {
+            Time.timeScale = 5f;
+        }
+
+        if (GUILayout.Button("Normal Mode")) {
+            Time.timeScale = 1f;
         }
     }
 

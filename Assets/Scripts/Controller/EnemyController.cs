@@ -4,8 +4,7 @@ using MarchingBytes;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
-
-    [SerializeField] private float itemSpawnChance;
+    
     [SerializeField] private FloatingText floatingText;
     [SerializeField] private AudioClip swooshAudioClip;
 
@@ -166,7 +165,7 @@ public class EnemyController : MonoBehaviour {
 
             int random = Random.Range(1, 100);
 
-            if (random <= itemSpawnChance) {
+            if (random <= RemoteConfig.instance.remoteItemSpawnChance) {
                 SpawnItem(itemLDT.PickLootDropItem().item, spawnPoints[i].position, moveToStartingPos: true);
             } else {
                 SpawnEnemy(spawnPoints[i].position, moveToStartingPos: true);
@@ -261,7 +260,7 @@ public class EnemyController : MonoBehaviour {
 
             int random = Random.Range(1, 100);
 
-            if (random <= itemSpawnChance) {
+            if (random <= RemoteConfig.instance.remoteItemSpawnChance) {
                 SpawnItem(itemLDT.PickLootDropItem().item, spawnPoints[i].position, moveToStartingPos: true, isInitialWave: true);
             } else {
                 SpawnEnemy(spawnPoints[i].position, moveToStartingPos: true, isInitialWave: true);
