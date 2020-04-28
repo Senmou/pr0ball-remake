@@ -14,27 +14,75 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rsKeyList:
   - metadata:
-      entityId: 3a7266d1-158e-4bfd-88a7-93e94c3ceafa
+      entityId: 5fc9b437-1ec0-48cb-911a-1a2cba01dd8f
     rs:
-      key: enemyHealthMultiplier
+      key: itemSpawnChance
+      type: float
+      value: 5
+  - metadata:
+      entityId: 468c83cc-615e-4772-9015-d514b72c59ee
+    rs:
+      key: enemy0_hpMult
       type: float
       value: 1
-  rsLastCachedKeyList: []
+  - metadata:
+      entityId: 3f00ee52-949f-4d26-859c-3c5a84678fb6
+    rs:
+      key: enemy1_hpMult
+      type: float
+      value: 1
+  - metadata:
+      entityId: 33f1dcff-91d2-4c9e-b8d1-492fd624e207
+    rs:
+      key: enemy2_hpMult
+      type: float
+      value: 1
+  - metadata:
+      entityId: 034162b0-e313-4b6a-89dd-3e29e6ab7682
+    rs:
+      key: enemy3_hpMult
+      type: float
+      value: 1
+  - metadata:
+      entityId: bcb5848e-6b96-4fda-811e-0d5dd6af913a
+    rs:
+      key: enemy4_hpMult
+      type: float
+      value: 1
+  - metadata:
+      entityId: 136ebf8e-f6fc-4bd8-8c31-6df2d4511524
+    rs:
+      key: enemy5_hpMult
+      type: float
+      value: 1
+  rsLastCachedKeyList:
+  - metadata:
+      entityId: 5fc9b437-1ec0-48cb-911a-1a2cba01dd8f
+    rs:
+      key: testKey
+      type: int
+      value: 46
+  - metadata:
+      entityId: 468c83cc-615e-4772-9015-d514b72c59ee
+    rs:
+      key: Setting1
+      type: string
+      value: Hallo
   configId: f832d74c-a44f-4861-9687-6ae45fa06fbf
   currentEnvironmentId: bd7eef5d-44df-436d-83cd-1d8b898c5fc2
   environments:
   - id: 876913ef-a641-49cb-b50f-82c9bd6a45a7
     appId: 
-    name: Release (Default)
+    name: Release
     description: 
     createdAt: 2020-04-21T14:33:13Z
-    updatedAt: 2020-04-21T14:33:13Z
+    updatedAt: 2020-04-21T14:35:15Z
   - id: bd7eef5d-44df-436d-83cd-1d8b898c5fc2
     appId: 
-    name: Development
+    name: Development (Default)
     description: 
     createdAt: 2020-04-21T14:33:13Z
-    updatedAt: 2020-04-21T14:33:13Z
+    updatedAt: 2020-04-21T14:35:15Z
   rulesList: []
   lastCachedRulesList: []
   addedRulesIDs: []

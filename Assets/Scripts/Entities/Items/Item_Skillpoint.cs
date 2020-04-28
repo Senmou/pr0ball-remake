@@ -16,8 +16,6 @@ public class Item_Skillpoint : BaseItem {
             SetValue(Random.Range(5, 11), valueUI);
         else
             SetValue(Random.Range(1, 4), valueUI);
-
-        EventManager.StartListening("ToggleParticleSystems", OnToggleParticleSystems);
     }
 
     protected override void OnItemCollected() {

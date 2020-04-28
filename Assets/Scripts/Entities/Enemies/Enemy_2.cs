@@ -3,6 +3,6 @@
     private new void Awake() {
         base.Awake();
         entityType = CurrentLevelData.EntityType.Enemy_2;
-        hpMultiplicator = 8f;
+        hpMultiplicator = RemoteConfig.remoteConfig.healthMultiplier.enemy_2;
     }
 }
