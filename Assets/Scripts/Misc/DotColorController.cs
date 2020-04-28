@@ -59,22 +59,22 @@ public class DotColorController : MonoBehaviour {
         if (benis >= 0) {
             index = 1;
         }
-        if (benis > 5000) {
+        if (benis > 500) {
             index = 2;
         }
-        if (benis > 10000) {
+        if (benis > 1000) {
             index = 3;
         }
-        if (benis > 20000) {
+        if (benis > 2000) {
             index = 4;
         }
-        if (benis > 50000) {
+        if (benis > 5000) {
             index = 5;
         }
-        if (benis > 75000) {
+        if (benis > 15000) {
             index = 6;
         }
-        if (benis > 100000) {
+        if (benis > 20000) {
             index = 7;
         }
 

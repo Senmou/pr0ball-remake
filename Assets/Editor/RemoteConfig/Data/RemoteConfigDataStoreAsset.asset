@@ -14,18 +14,90 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rsKeyList:
   - metadata:
-      entityId: ad175db1-9af0-41e7-a6eb-d628052f26d0
+      entityId: a234447d-ff5e-4fa5-840b-5c49b314135c
     rs:
       key: enemy0hpMult
-      type: float
-      value: 0,2
+      type: int
+      value: 10
+  - metadata:
+      entityId: 99f3591f-dfb7-4ad9-a966-13729a61642a
+    rs:
+      key: enemy1hpMult
+      type: int
+      value: 11
+  - metadata:
+      entityId: bfc00ab4-73cf-4932-8d6d-feac7c970036
+    rs:
+      key: enemy2hpMult
+      type: int
+      value: 80
+  - metadata:
+      entityId: 3fd03545-7ef2-4899-8ac8-b3e5ee5e131d
+    rs:
+      key: enemy3hpMult
+      type: int
+      value: 15
+  - metadata:
+      entityId: 21db670b-4841-4d84-b2e3-735928b3464a
+    rs:
+      key: enemy4hpMult
+      type: int
+      value: 50
+  - metadata:
+      entityId: 7c3959a1-acf2-4420-97ea-3b9024665754
+    rs:
+      key: enemy5hpMult
+      type: int
+      value: 65
+  - metadata:
+      entityId: c10103c5-eebe-4239-b8e3-ef25e3a8d71c
+    rs:
+      key: itemSpawnChance
+      type: int
+      value: 75
   rsLastCachedKeyList:
   - metadata:
-      entityId: ad175db1-9af0-41e7-a6eb-d628052f26d0
+      entityId: a234447d-ff5e-4fa5-840b-5c49b314135c
     rs:
       key: enemy0hpMult
-      type: float
-      value: 1535
+      type: int
+      value: 10
+  - metadata:
+      entityId: 99f3591f-dfb7-4ad9-a966-13729a61642a
+    rs:
+      key: enemy1hpMult
+      type: int
+      value: 11
+  - metadata:
+      entityId: bfc00ab4-73cf-4932-8d6d-feac7c970036
+    rs:
+      key: enemy2hpMult
+      type: int
+      value: 80
+  - metadata:
+      entityId: 3fd03545-7ef2-4899-8ac8-b3e5ee5e131d
+    rs:
+      key: enemy3hpMult
+      type: int
+      value: 15
+  - metadata:
+      entityId: 21db670b-4841-4d84-b2e3-735928b3464a
+    rs:
+      key: enemy4hpMult
+      type: int
+      value: 50
+  - metadata:
+      entityId: 7c3959a1-acf2-4420-97ea-3b9024665754
+    rs:
+      key: enemy5hpMult
+      type: int
+      value: 65
+  - metadata:
+      entityId: c10103c5-eebe-4239-b8e3-ef25e3a8d71c
+    rs:
+      key: itemSpawnChance
+      type: int
+      value: 75
   configId: 6c5496cf-771c-4d63-8dc6-f35f7651c2a1
   currentEnvironmentId: 6ba25753-6eee-4f37-b868-bd8dfc8f7519
   environments:

@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour {
         yield return new WaitForEndOfFrame();
 
         if (string.IsNullOrEmpty(PersistentData.instance.playerName)) {
-            CanvasManager.instance.SwitchCanvas(CanvasType.NAME);
+            CanvasManager.instance.SwitchCanvas(CanvasType.NAME, addToHistory: false);
         }
     }
 

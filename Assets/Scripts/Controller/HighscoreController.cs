@@ -1,19 +1,11 @@
-﻿using UnityEngine.Networking;
+﻿using System.Text.RegularExpressions;
+using UnityEngine.Networking;
 using System.Collections;
 using UnityEngine;
-using System.Text.RegularExpressions;
 
 public class HighscoreController : MonoBehaviour {
 
     private static int nameIndex = 1;
-
-    public void PostRandomScore() {
-
-        string playerName = "name" + nameIndex++;
-        long score = Random.Range(0, 100000);
-
-        StartCoroutine(PostScores(playerName, score));
-    }
 
     public void UploadHighscore(long score) {
 

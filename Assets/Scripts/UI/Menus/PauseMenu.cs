@@ -2,31 +2,29 @@
 
 public class PauseMenu : CanvasController {
 
-    [HideInInspector] public bool visible;
-
-    private MoveUI moveUI;
     private PauseBackground pauseBackground;
 
     private void Awake() {
-        moveUI = GetComponent<MoveUI>();
         pauseBackground = FindObjectOfType<PauseBackground>();
-
-        visible = true;
     }
 
     public override void Hide() {
-        if (visible) {
-            pauseBackground.disableInteractability = false;
-            visible = false;
-            moveUI.FadeTo(new Vector2(30f, 0f), 0.5f, true);
-        }
+        LeanTween.move(gameObject, new Vector2(30f, 0f), 0.15f)
+            .setIgnoreTimeScale(true)
+            .setEase(showEaseType)
+            .setOnComplete(() => {
+                pauseBackground.disableInteractability = false;
+                gameObject.SetActive(false);
+            });
     }
 
     public override void Show() {
-        if (!visible) {
-            pauseBackground.disableInteractability = true;
-            visible = true;
-            moveUI.FadeTo(Vector2.zero, 0.5f);
-        }
+        LeanTween.move(gameObject, Vector2.zero, 0.15f)
+            .setOnStart(() => gameObject.SetActive(true))
+            .setIgnoreTimeScale(true)
+            .setEase(showEaseType)
+            .setOnComplete(() => {
+                pauseBackground.disableInteractability = true;
+            });
     }
 }
