@@ -28,7 +28,8 @@ public class Frog : MonoBehaviour {
 
     private IEnumerator ReturnToPool() {
         yield return new WaitForSeconds(3f);
-        EasyObjectPool.instance.ReturnObjectToPool(gameObject);
+        if (gameObject.activeInHierarchy)
+            EasyObjectPool.instance.ReturnObjectToPool(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

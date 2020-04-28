@@ -5,7 +5,14 @@ using UnityEngine;
 
 public class HighscoreController : MonoBehaviour {
 
+    public GameObject loadingIndicator;
+
     private static int nameIndex = 1;
+    private UnityWebRequest fetchScoresWebRequest;
+
+    private void Awake() {
+        loadingIndicator.SetActive(false);
+    }
 
     public void UploadHighscore(long score) {
 
@@ -67,38 +74,57 @@ public class HighscoreController : MonoBehaviour {
 
     private IEnumerator FetchHighscores(System.Action<GlobalHighscoreTable.GlobalHighscoreEntry[]> OnSuccess) {
 
-        using (UnityWebRequest www = UnityWebRequest.Get(Constants.fetchScoresURL)) {
-            yield return www.SendWebRequest();
+        LeanTween.rotateAround(loadingIndicator, Vector3.forward, -360f, 0.5f)
+          .setOnStart(() => loadingIndicator.SetActive(true))
+          .setEase(LeanTweenType.linear)
+          .setIgnoreTimeScale(true)
+          .setLoopClamp();
 
-            if (www.isNetworkError || www.isHttpError)
-                Debug.Log(www.error);
-            else {
-                string result = www.downloadHandler.text;
+        fetchScoresWebRequest = UnityWebRequest.Get(Constants.fetchScoresURL);
 
-                string[] entries = result.Split('_');
+        using (fetchScoresWebRequest) {
 
-                GlobalHighscoreTable.GlobalHighscoreEntry[] globalEntries = new GlobalHighscoreTable.GlobalHighscoreEntry[entries.Length];
+            fetchScoresWebRequest.SendWebRequest();
 
-                for (int i = 0; i < entries.Length; i++) {
-                    GlobalHighscoreTable.GlobalHighscoreEntry entry = new GlobalHighscoreTable.GlobalHighscoreEntry();
-                    string[] entryTriple = entries[i].Split('-');
+            float timer = 0f;
+            float retryTimer = 5f;
 
-                    if (entryTriple.Length < 3) {
-                        Debug.LogWarning("No valid entries!");
-                        break;
-                    }
+            while (!fetchScoresWebRequest.isDone || fetchScoresWebRequest.isNetworkError || fetchScoresWebRequest.isHttpError) {
+                if (timer > retryTimer) {
+                    timer = 0f;
+                    fetchScoresWebRequest.Abort();
+                    fetchScoresWebRequest.Dispose();
+                    fetchScoresWebRequest = UnityWebRequest.Get(Constants.fetchScoresURL);
+                    fetchScoresWebRequest.SendWebRequest();
+                } else
+                    timer += Time.unscaledDeltaTime;
+                yield return null;
+            }
 
-                    //Debug.Log(entryTriple[i]);
+            string result = fetchScoresWebRequest.downloadHandler.text;
 
-                    entry.playerName = entryTriple[0];
-                    entry.score = int.Parse(entryTriple[1]);
-                    entry.timestamp = entryTriple[2];
+            string[] entries = result.Split('_');
 
-                    globalEntries[i] = entry;
+            GlobalHighscoreTable.GlobalHighscoreEntry[] globalEntries = new GlobalHighscoreTable.GlobalHighscoreEntry[entries.Length];
+
+            for (int i = 0; i < entries.Length; i++) {
+                GlobalHighscoreTable.GlobalHighscoreEntry entry = new GlobalHighscoreTable.GlobalHighscoreEntry();
+                string[] entryTriple = entries[i].Split('-');
+
+                if (entryTriple.Length < 3) {
+                    Debug.LogWarning("No valid entries!");
+                    break;
                 }
 
-                OnSuccess?.Invoke(globalEntries);
+                entry.playerName = entryTriple[0];
+                entry.score = int.Parse(entryTriple[1]);
+                entry.timestamp = entryTriple[2];
+
+                globalEntries[i] = entry;
             }
+
+            loadingIndicator.SetActive(false);
+            OnSuccess?.Invoke(globalEntries);
         }
     }
 }

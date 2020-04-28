@@ -71,6 +71,10 @@ public class GameController : MonoBehaviour {
 
     private void Update() {
 
+        if (Input.GetKeyDown(KeyCode.P)) {
+            CanvasManager.instance.SwitchCanvas(CanvasType.DATA_SECURITY_POLICY);
+        }
+
         elapsedTimeSinceRestart += Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.Escape)) {
