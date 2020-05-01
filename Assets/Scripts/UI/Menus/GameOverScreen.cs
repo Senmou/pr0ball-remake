@@ -1,5 +1,7 @@
 ﻿using System;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Analytics;
 
 public class GameOverScreen : CanvasController {
 
@@ -10,6 +12,8 @@ public class GameOverScreen : CanvasController {
     private GameController gameController;
     private PauseBackground pauseBackground;
     private HighscoreController highscoreController;
+    private SimpleStatisticsMenu simpleStatisticsMenu;
+
 
     private void Awake() {
         moveUI = GetComponent<MoveUI>();
@@ -17,6 +21,7 @@ public class GameOverScreen : CanvasController {
         gameController = FindObjectOfType<GameController>();
         pauseBackground = FindObjectOfType<PauseBackground>();
         highscoreController = FindObjectOfType<HighscoreController>();
+        simpleStatisticsMenu = FindObjectOfType<SimpleStatisticsMenu>();
         highscoreUI = transform.FindChild<TextMeshProUGUI>("Highscore/Value");
         playtimeUI = transform.FindChild<TextMeshProUGUI>("Highscore/Playtime");
     }
@@ -24,12 +29,7 @@ public class GameOverScreen : CanvasController {
     public override void Show() {
         pauseBackground.disableInteractability = true;
         LeanTween.moveY(gameObject, 0f, showEaseDuration)
-            .setIgnoreTimeScale(true)
-            .setEase(showEaseType).setOnComplete(() => {
-                if (string.IsNullOrEmpty(PersistentData.instance.playerName) || string.IsNullOrWhiteSpace(PersistentData.instance.playerName)) {
-                    CanvasManager.instance.SwitchCanvas(CanvasType.NAME, false);
-                }
-            });
+            .setIgnoreTimeScale(true);
     }
 
     public override void Hide() {
@@ -42,7 +42,8 @@ public class GameOverScreen : CanvasController {
 
     public void ShowStatistics() {
         statisticsMenu.SetStatistics(Statistics.Instance);
-        CanvasManager.instance.SwitchCanvas(CanvasType.STATISTICS);
+        simpleStatisticsMenu.SetStatistics(Statistics.Instance);
+        CanvasManager.instance.SwitchCanvas(CanvasType.SIMPLE_STATISTICS_MENU);
     }
 
     public void SaveHighscore() {
@@ -51,6 +52,13 @@ public class GameOverScreen : CanvasController {
         highscoreUI.text = Score.instance.highscore.ToString();
         Statistics stats = Statistics.Instance;
         PersistentData.instance.highscores.AddHighscore(Score.instance.highscore, timestamp, stats.GetCopy<Statistics>());
+
+        //Analytics.CustomEvent("gameOver", new Dictionary<string, object> {
+        //    { "level", LevelData.Level }
+        //});
+
+        AnalyticsResult ar = Analytics.CustomEvent("MyEvent");
+        Debug.Log("Result = " + ar.ToString());
 
         highscoreController.UploadHighscore(Score.instance.highscore);
     }

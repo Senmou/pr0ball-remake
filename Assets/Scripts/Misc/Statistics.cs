@@ -32,6 +32,12 @@ public class Statistics {
 
     [Serializable]
     public struct BallStatistics {
+
+        public int damage;
+        public float critChance;
+        public float critDamage;
+        public int ballCount;
+
         public int fired;
         public int crits;
         public int collisions;

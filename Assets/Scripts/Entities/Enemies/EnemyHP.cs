@@ -32,7 +32,7 @@ public class EnemyHP : ScriptableObject {
         }
 
         if (incWithDangerLevel) {
-            maxHP += LevelData.DangerLevel;
+            maxHP += LevelData.DangerLevel / 2;
             maxHP *= (int)(1f + LevelData.Level * LevelData.DangerLevel / 100f);
         }
 

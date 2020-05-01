@@ -48,14 +48,14 @@ public class GameController : MonoBehaviour {
 
     private void Start() {
 
+        StartCoroutine(ShowPrivacyDialogueDelayed());
+
         if (PersistentData.instance.isGameOver) {
             restartGame.StartNewGame();
         } else {
             enemyController.LoadEntities();
             Statistics.Instance.OnLoadGame();
         }
-
-        StartCoroutine(ShowNameInputFieldDelayed());
     }
 
     private IEnumerator ShowNameInputFieldDelayed() {
@@ -68,6 +68,18 @@ public class GameController : MonoBehaviour {
             CanvasManager.instance.SwitchCanvas(CanvasType.NAME, addToHistory: false);
         }
     }
+
+    private IEnumerator ShowPrivacyDialogueDelayed() {
+
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+
+        if (!PersistentData.instance.privacyPolicyAgreement) {
+            CanvasManager.instance.SwitchCanvas(CanvasType.DATA_SECURITY_POLICY_DIALOGUE);
+        }
+    }
+
 
     private void Update() {
 
@@ -83,7 +95,10 @@ public class GameController : MonoBehaviour {
 
             if (currentCanvas == CanvasType.NONE)
                 CanvasManager.instance.SwitchCanvas(CanvasType.PAUSE);
-            else if (currentCanvas != CanvasType.GAMEOVER && currentCanvas != CanvasType.NAME)
+            else if (
+                currentCanvas != CanvasType.GAMEOVER &&
+                currentCanvas != CanvasType.NAME &&
+                currentCanvas != CanvasType.DATA_SECURITY_POLICY_DIALOGUE)
                 CanvasManager.instance.GoOneCanvasBack();
         }
     }

@@ -23,7 +23,9 @@ public class PersistentData : MonoBehaviour {
     public bool firstAppStart;
     public bool blackBackground;
     public bool enableParticleSystems;
+    public bool privacyPolicyAgreement;
     public float elapsedTimeSinceRestart;
+    public string latestDataPrivacyPolicy;
     public bool benitratorWithoutAnimation;
 
     private void Awake() {
@@ -43,6 +45,10 @@ public class PersistentData : MonoBehaviour {
         firstAppStart = true;
 
         Serialization.Load();
+
+        if (string.IsNullOrEmpty(latestDataPrivacyPolicy)) {
+            latestDataPrivacyPolicy = GetDefaultDataPrivacyPolicy();
+        }
     }
 
     public void LoadDataFromSaveFile(SaveData saveData) {
@@ -61,9 +67,11 @@ public class PersistentData : MonoBehaviour {
         backupOffset = saveData.backupOffset;
         firstAppStart = saveData.firstAppStart;
         blackBackground = saveData.blackBackground;
-        benitratorWithoutAnimation = saveData.benitratorWithoutAnimation;
         enableParticleSystems = saveData.enableParticleSystems;
+        privacyPolicyAgreement = saveData.privacyPolicyAgreement;
+        latestDataPrivacyPolicy = saveData.latestDataPrivacyPolicy;
         elapsedTimeSinceRestart = saveData.elapsedTimeSinceRestart;
+        benitratorWithoutAnimation = saveData.benitratorWithoutAnimation;
     }
 
     private void OnApplicationFocus(bool focus) {
@@ -80,6 +88,34 @@ public class PersistentData : MonoBehaviour {
 
     private void OnApplicationQuit() {
         Serialization.Save();
+    }
+
+    private string GetDefaultDataPrivacyPolicy() {
+
+        string policy = "default tl; dr: Unity sammelt Daten; über den Button “Unity Datenschutzrichtlinie” kommt ihr zum opt-out\n" +
+"---------------------------------------------\n\n" +
+"Damit der Schwierigkeitsgrad nach Release noch geändert werden kann, verwendet dieses Spiel Unity Analytics.\n\n" +
+
+"Unity Analytics sammelt diverse Daten eurer Geräte, darunter etwa:\n" +
+"-IP - Adresse\n" +
+"- Betriebssystem\n" +
+"- Bildschirmgröße\n" +
+"- CPU / GPU Charakteristiken\n" +
+"- Hardware - und Softwareversion\n" +
+"- \"Custom event\" - Daten(z.B.das höchste erreichte Level)\n" +
+"- Statistiken über den Gebrauch der App(z.B.Tag des ersten Starts, Dauer der Session)\n\n" +
+
+"Durch Tippen auf die Schaltfläche \"Unity Datenschutzrichtlinie\" öffnet sich eine Webseite auf der ihr weitere Informationen zu dem Thema findet.Außerdem könnt ihr dort eure gesammelten Daten anfordern oder das Datensammeln unterbinden(opt-out).\n\n" +
+
+"Welche Daten werden auf deinem Gerät gespeichert?\n" +
+"-Spieldaten, die benötigt werden, um euren Spielstand der letzten Session wiederherzustellen(z.B.Anzahl verbleibender Gegner, Punktestand etc.)\n\n" +
+
+"Welche Daten werden in einer Datenbank auf einem Server gespeichert?\n" +
+"-Sofern ihr einen Spielernamen angegeben habt, wird dieser zusammen mit eurem Highscore übertragen.Sollte kein Name angegeben worden sein, wird euer Highscore unter dem Namen “anonymous” veröffentlicht.Die Top20-Highscores sind für jeden unter “Globale Highscores” einsehbar.\n\n" +
+
+"Die aktuelle Version dieser Datenschutzerkärung findet ihr stets im Hauptmenü unten rechts unter \"Datenschutzerklärung\".Solltet ihr keine aktive Internetverbindung haben, so wird immer die letzte Version der Datenschutzerkärung angezeigt.\n";
+
+        return policy;
     }
 }
 

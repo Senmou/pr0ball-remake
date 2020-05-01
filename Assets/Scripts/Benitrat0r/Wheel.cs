@@ -93,7 +93,7 @@ public class Wheel : MonoBehaviour {
 
         // Chance for extra balls is increased while you have less than 5
         if (BallStats.Instance.ballCount < 5) {
-            if (Random.value < 0.1f)
+            if (Random.value < 0.15f)
                 targetSlot = wheelSlots.First(x => x.type == SlotType.Ball);
         }
 

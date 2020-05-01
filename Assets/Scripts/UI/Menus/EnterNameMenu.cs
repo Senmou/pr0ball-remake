@@ -5,7 +5,6 @@ using TMPro;
 public class EnterNameMenu : CanvasController {
 
     private Button okButton;
-    private Image okButtonBackground;
     private TMP_InputField inputField;
     private PauseBackground pauseBackground;
     private DisplayPlayerName displayPlayerName;
@@ -16,19 +15,8 @@ public class EnterNameMenu : CanvasController {
         pauseBackground = FindObjectOfType<PauseBackground>();
         displayPlayerName = FindObjectOfType<DisplayPlayerName>();
         inputField = transform.FindChild<TMP_InputField>("NameInputField");
-        okButtonBackground = transform.FindChild<Image>("OkButton/Background");
     }
-
-    private void Update() {
-        if (string.IsNullOrEmpty(inputField.text) || string.IsNullOrWhiteSpace(inputField.text)) {
-            okButton.interactable = false;
-            okButtonBackground.color = new Color(0.35f, 0.35f, 0.35f, 1f); // grey
-        } else {
-            okButton.interactable = true;
-            okButtonBackground.color = new Color(0.8235295f, 0.2352941f, 0.1333333f, 1f); // red
-        }
-    }
-
+    
     public void OnOkButtonClick() {
         PersistentData.instance.playerName = inputField.text;
         if (displayPlayerName)

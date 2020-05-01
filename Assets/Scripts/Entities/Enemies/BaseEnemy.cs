@@ -17,6 +17,7 @@ public class BaseEnemy : MonoBehaviour {
     [HideInInspector] public bool reachedStartingPosition;
     [HideInInspector] public CurrentLevelData.EntityType entityType;
 
+    private AudioSource audioSource;
     private SpriteRenderer spriteRenderer;
     private TextMeshProUGUI healthPointUI;
     private EnemyController enemyController;
@@ -30,6 +31,7 @@ public class BaseEnemy : MonoBehaviour {
         healthPointUI = GetComponentInChildren<TextMeshProUGUI>();
         canTakeDamageFromSkill = true;
 
+        audioSource = GameObject.Find("SfxEnemyDeath").GetComponent<AudioSource>();
         transform.FindChild<Canvas>("HealthPoints/Canvas").worldCamera = Camera.main;
 
         EventManager.StartListening("ToggleUniColor", OnToggleUniColor);
@@ -113,6 +115,8 @@ public class BaseEnemy : MonoBehaviour {
 
     protected virtual void OnDeath() {
         Statistics.Instance.enemies.killed++;
+        CameraEffect.instance.Shake(0.05f, 0.05f);
+        audioSource.Play();
         EventManager.TriggerEvent("EnemyDied");
     }
 

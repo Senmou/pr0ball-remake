@@ -20,7 +20,9 @@ public class SaveData {
     public bool firstAppStart;
     public bool blackBackground;
     public bool enableParticleSystems;
+    public bool privacyPolicyAgreement;
     public float elapsedTimeSinceRestart;
+    public string latestDataPrivacyPolicy;
     public bool benitratorWithoutAnimation;
 
     public SaveData() {
@@ -41,7 +43,9 @@ public class SaveData {
         firstAppStart = PersistentData.instance.firstAppStart;
         blackBackground = PersistentData.instance.blackBackground;
         enableParticleSystems = PersistentData.instance.enableParticleSystems;
+        privacyPolicyAgreement = PersistentData.instance.privacyPolicyAgreement;
         elapsedTimeSinceRestart = PersistentData.instance.elapsedTimeSinceRestart;
+        latestDataPrivacyPolicy = PersistentData.instance.latestDataPrivacyPolicy;
         benitratorWithoutAnimation = PersistentData.instance.benitratorWithoutAnimation;
     }
 }

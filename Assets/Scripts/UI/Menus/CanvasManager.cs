@@ -15,7 +15,9 @@ public enum CanvasType {
     NAME,
     GLOBAL_HIGHSCORES,
     SECURITY_QUESTION_NEW_GAME,
-    DATA_SECURITY_POLICY
+    DATA_SECURITY_POLICY,
+    DATA_SECURITY_POLICY_DIALOGUE,
+    SIMPLE_STATISTICS_MENU
 }
 
 public class CanvasManager : MonoBehaviour {
