@@ -16,13 +16,6 @@ public class DebugUI : MonoBehaviour {
             DeleteSaveFile();
         }
 
-        if (GUILayout.Button("Token")) {
-            FindObjectOfType<Skill_Hammertime>().hasToken = true;
-            FindObjectOfType<Skill_Frogs>().hasToken = true;
-            FindObjectOfType<Skill_Triggered>().hasToken = true;
-            Score.instance.IncSkillPoints(10);
-        }
-
         if (GUILayout.Button("GameOver")) {
             Score.instance.LoseLife();
             Score.instance.LoseLife();
@@ -35,6 +28,13 @@ public class DebugUI : MonoBehaviour {
 
         if (GUILayout.Button("Normal Mode")) {
             Time.timeScale = 1f;
+        }
+
+        if (GUILayout.Button("Token", GUILayout.Width(150), GUILayout.Height(100))) {
+            FindObjectOfType<Skill_Hammertime>().hasToken = true;
+            FindObjectOfType<Skill_Frogs>().hasToken = true;
+            FindObjectOfType<Skill_Triggered>().hasToken = true;
+            Score.instance.IncSkillPoints(10);
         }
     }
 

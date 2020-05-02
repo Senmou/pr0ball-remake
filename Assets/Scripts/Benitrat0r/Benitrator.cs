@@ -236,7 +236,7 @@ public class Benitrator : MonoBehaviour {
             StartCoroutine(ShowResultText("GEWONNEN"));
         } else {
             ballMenu.PlayErrorSound();
-            int dangerLevelIncrease = LevelData.Level;
+            int dangerLevelIncrease = LevelData.Level + bet;
             LevelData.DangerLevel += dangerLevelIncrease;
             SetWinText("+" + dangerLevelIncrease + "% GEFAHR", useColorRed: true);
             Statistics.Instance.benitrator.loses++;

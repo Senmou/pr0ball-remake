@@ -9,20 +9,20 @@ public class CameraEffect : MonoBehaviour {
     [SerializeField] private Image overlay;
 
     private Vector2 startPos;
-    private GameObject bloomVolume;
+    //private GameObject bloomVolume;
 
     private void Awake() {
         instance = this;
         startPos = transform.position;
 
-        bloomVolume = GameObject.Find("VFX_Bloom");
-        bloomVolume.SetActive(PersistentData.instance.enableBloom);
+        //bloomVolume = GameObject.Find("VFX_Bloom");
+        //bloomVolume.SetActive(PersistentData.instance.enableBloom);
 
         EventManager.StartListening("ToggleBloom", OnToggleBloom);
     }
 
     private void OnToggleBloom() {
-        bloomVolume.SetActive(PersistentData.instance.enableBloom);
+        //bloomVolume.SetActive(PersistentData.instance.enableBloom);
     }
 
     public void Shake(float duration, float magnitude, bool withOverlay = false) {

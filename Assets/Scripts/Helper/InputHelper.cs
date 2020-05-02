@@ -43,16 +43,18 @@ public class InputHelper : MonoBehaviour {
     }
 
     public bool ClickedOnTag(string tag) {
-        PointerEventData eventData = new PointerEventData(EventSystem.current);
-        eventData.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventData, results);
-
-        foreach (var item in results) {
-            if (item.gameObject.CompareTag(tag))
-                return true;
-        }
         return false;
+        //PointerEventData eventData = new PointerEventData(EventSystem.current);
+        //eventData.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        //List<RaycastResult> results = new List<RaycastResult>();
+        //EventSystem.current.RaycastAll(eventData, results);
+
+        //int resultCount = results.Count;
+        //for (int i = 0; i < resultCount; i++) {
+        //    if (results[i].gameObject.CompareTag(tag))
+        //        return true;
+        //}
+        //return false;
     }
 
     public bool LongPress(float seconds) {

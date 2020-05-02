@@ -14,86 +14,86 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rsKeyList:
   - metadata:
-      entityId: a234447d-ff5e-4fa5-840b-5c49b314135c
+      entityId: 95457266-5e1f-46a0-aea0-7bd631959722
     rs:
       key: enemy0hpMult
       type: int
       value: 10
   - metadata:
-      entityId: 99f3591f-dfb7-4ad9-a966-13729a61642a
+      entityId: 15f80a47-032f-4f9b-9807-197ccb843f81
     rs:
       key: enemy1hpMult
       type: int
       value: 11
   - metadata:
-      entityId: bfc00ab4-73cf-4932-8d6d-feac7c970036
+      entityId: 58b2e41f-ef34-4536-8e80-cb367642d1e1
     rs:
       key: enemy2hpMult
       type: int
-      value: 80
+      value: 50
   - metadata:
-      entityId: 3fd03545-7ef2-4899-8ac8-b3e5ee5e131d
+      entityId: 529a001a-79a8-46ce-bf4d-6a33c9dcde80
     rs:
       key: enemy3hpMult
       type: int
       value: 15
   - metadata:
-      entityId: 21db670b-4841-4d84-b2e3-735928b3464a
+      entityId: ebb1b359-5d37-43ff-947d-16d9d74ba656
     rs:
       key: enemy4hpMult
       type: int
-      value: 50
+      value: 30
   - metadata:
-      entityId: 7c3959a1-acf2-4420-97ea-3b9024665754
+      entityId: 4012f284-d531-418e-97db-787cb42a9e1d
     rs:
       key: enemy5hpMult
       type: int
-      value: 65
+      value: 45
   - metadata:
-      entityId: c10103c5-eebe-4239-b8e3-ef25e3a8d71c
+      entityId: c5e4585b-cf67-48e9-82fb-fff5d1305cf0
     rs:
       key: itemSpawnChance
       type: int
       value: 75
   rsLastCachedKeyList:
   - metadata:
-      entityId: a234447d-ff5e-4fa5-840b-5c49b314135c
+      entityId: 95457266-5e1f-46a0-aea0-7bd631959722
     rs:
       key: enemy0hpMult
       type: int
       value: 10
   - metadata:
-      entityId: 99f3591f-dfb7-4ad9-a966-13729a61642a
+      entityId: 15f80a47-032f-4f9b-9807-197ccb843f81
     rs:
       key: enemy1hpMult
       type: int
       value: 11
   - metadata:
-      entityId: bfc00ab4-73cf-4932-8d6d-feac7c970036
+      entityId: 58b2e41f-ef34-4536-8e80-cb367642d1e1
     rs:
       key: enemy2hpMult
       type: int
-      value: 80
+      value: 50
   - metadata:
-      entityId: 3fd03545-7ef2-4899-8ac8-b3e5ee5e131d
+      entityId: 529a001a-79a8-46ce-bf4d-6a33c9dcde80
     rs:
       key: enemy3hpMult
       type: int
       value: 15
   - metadata:
-      entityId: 21db670b-4841-4d84-b2e3-735928b3464a
+      entityId: ebb1b359-5d37-43ff-947d-16d9d74ba656
     rs:
       key: enemy4hpMult
       type: int
-      value: 50
+      value: 30
   - metadata:
-      entityId: 7c3959a1-acf2-4420-97ea-3b9024665754
+      entityId: 4012f284-d531-418e-97db-787cb42a9e1d
     rs:
       key: enemy5hpMult
       type: int
-      value: 65
+      value: 45
   - metadata:
-      entityId: c10103c5-eebe-4239-b8e3-ef25e3a8d71c
+      entityId: c5e4585b-cf67-48e9-82fb-fff5d1305cf0
     rs:
       key: itemSpawnChance
       type: int
@@ -103,16 +103,16 @@ MonoBehaviour:
   environments:
   - id: 6ba25753-6eee-4f37-b868-bd8dfc8f7519
     appId: 
-    name: Development
+    name: Development (Default)
     description: 
     createdAt: 2020-04-28T14:53:09Z
-    updatedAt: 2020-04-28T14:53:09Z
+    updatedAt: 2020-04-29T12:55:34Z
   - id: 517e2474-cac1-4fba-917b-b81b711e8eb7
     appId: 
-    name: Release (Default)
+    name: Release
     description: 
     createdAt: 2020-04-28T14:53:09Z
-    updatedAt: 2020-04-28T14:53:09Z
+    updatedAt: 2020-04-29T12:55:34Z
   rulesList: []
   lastCachedRulesList: []
   addedRulesIDs: []

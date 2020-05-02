@@ -43,6 +43,8 @@ public class GameController : MonoBehaviour {
         EventManager.StartListening("SaveGame", OnSaveGame);
         EventManager.StartListening("ChacheData", OnChacheData);
 
+        Application.targetFrameRate = 60;
+
         CanvasManager.instance.SwitchCanvas(CanvasType.NONE);
     }
 
