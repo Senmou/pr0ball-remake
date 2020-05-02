@@ -1,6 +1,6 @@
 # pr0ball 2.0
 
-GitHub
+### GitHub
 [Download .apk](https://github.com/Senmou/pr0ball-remake/releases/download/v2.1/pr0ball_remake_v2.apk)
 
 ### Bekannte Bugs
