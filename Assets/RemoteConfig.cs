@@ -17,8 +17,15 @@ public class RemoteConfig : MonoBehaviour {
         public float enemy_5;
     }
 
+    public struct RemoteItemSkillPointValues {
+        public int minValue;
+        public int maxValue;
+    }
+
     public float remoteItemSpawnChance;
+    public int remoteDangerLevelIncreaseBenitrator;
     public RemoteHealthMultiplier remoteHealthMultiplier;
+    public RemoteItemSkillPointValues remoteItemSkillPointValues;
 
     private void Awake() {
         instance = this;
@@ -26,6 +33,10 @@ public class RemoteConfig : MonoBehaviour {
         ConfigManager.FetchConfigs(new userAttributes(), new appAttributes());
 
         remoteItemSpawnChance = 5f;
+        remoteDangerLevelIncreaseBenitrator = 0;
+
+        remoteItemSkillPointValues.minValue = 1;
+        remoteItemSkillPointValues.maxValue = 3;
 
         remoteHealthMultiplier.enemy_0 = 1f;
         remoteHealthMultiplier.enemy_1 = 1.1f;
@@ -33,11 +44,6 @@ public class RemoteConfig : MonoBehaviour {
         remoteHealthMultiplier.enemy_3 = 1.5f;
         remoteHealthMultiplier.enemy_4 = 5f;
         remoteHealthMultiplier.enemy_5 = 6.5f;
-    }
-
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.F))
-            ConfigManager.FetchConfigs(new userAttributes(), new appAttributes());
     }
 
     public void FetchConfig() {
@@ -60,13 +66,15 @@ public class RemoteConfig : MonoBehaviour {
         }
     }
 
+    // Remote values are integers, because dumbfuck Unity can't push/pull float values without errors
     private void ApplyRemoteValues() {
 
-        // Remote values are integers, because dumbfuck Unity can't push/pull float values without errors
-        // Every value needs to be divided by 10 to get the correct hp multiplier
+        remoteDangerLevelIncreaseBenitrator = ConfigManager.appConfig.GetInt("dangerLevelIncreaseBenitrator", 0);
+        remoteItemSkillPointValues.minValue = ConfigManager.appConfig.GetInt("itemSkillPointValueMin", 1);
+        remoteItemSkillPointValues.maxValue = ConfigManager.appConfig.GetInt("itemSkillPointValueMax", 3);
 
+        // These values must be divided by 10 to get the correct float value
         remoteItemSpawnChance = ConfigManager.appConfig.GetInt("itemSpawnChance", 50) / 10f;
-
         remoteHealthMultiplier.enemy_0 = ConfigManager.appConfig.GetInt("enemy0hpMult", 10) / 10f;
         remoteHealthMultiplier.enemy_1 = ConfigManager.appConfig.GetInt("enemy1hpMult", 11) / 10f;
         remoteHealthMultiplier.enemy_2 = ConfigManager.appConfig.GetInt("enemy2hpMult", 80) / 10f;

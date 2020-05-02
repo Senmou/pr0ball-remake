@@ -14,92 +14,128 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rsKeyList:
   - metadata:
-      entityId: 95457266-5e1f-46a0-aea0-7bd631959722
+      entityId: d8508d1c-f9b1-4b5e-8d4c-66f2d6191a6c
     rs:
       key: enemy0hpMult
       type: int
       value: 10
   - metadata:
-      entityId: 15f80a47-032f-4f9b-9807-197ccb843f81
+      entityId: e93de809-b0e7-4b23-9f09-e4b39787f4ff
     rs:
       key: enemy1hpMult
       type: int
       value: 11
   - metadata:
-      entityId: 58b2e41f-ef34-4536-8e80-cb367642d1e1
+      entityId: e52df79b-ad25-407d-9ec7-722801dfa722
     rs:
       key: enemy2hpMult
       type: int
-      value: 50
+      value: 35
   - metadata:
-      entityId: 529a001a-79a8-46ce-bf4d-6a33c9dcde80
+      entityId: e29c0e15-4375-4abc-a3ec-0ca1c7507d5a
     rs:
       key: enemy3hpMult
       type: int
       value: 15
   - metadata:
-      entityId: ebb1b359-5d37-43ff-947d-16d9d74ba656
+      entityId: 980c9e39-5c63-474e-83e4-6aea2e449e51
     rs:
       key: enemy4hpMult
       type: int
-      value: 30
+      value: 20
   - metadata:
-      entityId: 4012f284-d531-418e-97db-787cb42a9e1d
+      entityId: c905eac6-a405-4cf5-ae68-c8dd814bd6b3
     rs:
       key: enemy5hpMult
       type: int
-      value: 45
+      value: 25
   - metadata:
-      entityId: c5e4585b-cf67-48e9-82fb-fff5d1305cf0
+      entityId: 253193e2-7b7d-4801-abdf-a4ec48273786
     rs:
       key: itemSpawnChance
       type: int
       value: 75
+  - metadata:
+      entityId: 9bd1787b-7071-4866-8992-c1d3ccebdeba
+    rs:
+      key: dangerLevelIncreaseBenitrator
+      type: int
+      value: 0
+  - metadata:
+      entityId: f5c878b3-6569-4729-9209-50460067dd6f
+    rs:
+      key: itemSkillPointValueMin
+      type: int
+      value: 1
+  - metadata:
+      entityId: d4b74466-d095-4af9-b34b-65a3cd3507f0
+    rs:
+      key: itemSkillPointValueMax
+      type: int
+      value: 3
   rsLastCachedKeyList:
   - metadata:
-      entityId: 95457266-5e1f-46a0-aea0-7bd631959722
+      entityId: d8508d1c-f9b1-4b5e-8d4c-66f2d6191a6c
     rs:
       key: enemy0hpMult
       type: int
       value: 10
   - metadata:
-      entityId: 15f80a47-032f-4f9b-9807-197ccb843f81
+      entityId: e93de809-b0e7-4b23-9f09-e4b39787f4ff
     rs:
       key: enemy1hpMult
       type: int
       value: 11
   - metadata:
-      entityId: 58b2e41f-ef34-4536-8e80-cb367642d1e1
+      entityId: e52df79b-ad25-407d-9ec7-722801dfa722
     rs:
       key: enemy2hpMult
       type: int
-      value: 50
+      value: 35
   - metadata:
-      entityId: 529a001a-79a8-46ce-bf4d-6a33c9dcde80
+      entityId: e29c0e15-4375-4abc-a3ec-0ca1c7507d5a
     rs:
       key: enemy3hpMult
       type: int
       value: 15
   - metadata:
-      entityId: ebb1b359-5d37-43ff-947d-16d9d74ba656
+      entityId: 980c9e39-5c63-474e-83e4-6aea2e449e51
     rs:
       key: enemy4hpMult
       type: int
-      value: 30
+      value: 20
   - metadata:
-      entityId: 4012f284-d531-418e-97db-787cb42a9e1d
+      entityId: c905eac6-a405-4cf5-ae68-c8dd814bd6b3
     rs:
       key: enemy5hpMult
       type: int
-      value: 45
+      value: 25
   - metadata:
-      entityId: c5e4585b-cf67-48e9-82fb-fff5d1305cf0
+      entityId: 253193e2-7b7d-4801-abdf-a4ec48273786
     rs:
       key: itemSpawnChance
       type: int
       value: 75
-  configId: 6c5496cf-771c-4d63-8dc6-f35f7651c2a1
-  currentEnvironmentId: 6ba25753-6eee-4f37-b868-bd8dfc8f7519
+  - metadata:
+      entityId: 9bd1787b-7071-4866-8992-c1d3ccebdeba
+    rs:
+      key: dangerLevelIncreaseBenitrator
+      type: int
+      value: 0
+  - metadata:
+      entityId: f5c878b3-6569-4729-9209-50460067dd6f
+    rs:
+      key: itemSkillPointValueMin
+      type: int
+      value: 1
+  - metadata:
+      entityId: d4b74466-d095-4af9-b34b-65a3cd3507f0
+    rs:
+      key: itemSkillPointValueMax
+      type: int
+      value: 3
+  configId: bce2c9bc-f856-491f-81ce-92c2b12246c2
+  currentEnvironmentId: 517e2474-cac1-4fba-917b-b81b711e8eb7
   environments:
   - id: 6ba25753-6eee-4f37-b868-bd8dfc8f7519
     appId: 

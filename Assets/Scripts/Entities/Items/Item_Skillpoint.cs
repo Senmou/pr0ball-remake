@@ -11,11 +11,13 @@ public class Item_Skillpoint : BaseItem {
 
         valueUI = transform.FindChild<TextMeshProUGUI>("Value");
 
+        RemoteConfig.RemoteItemSkillPointValues remoteValues = RemoteConfig.instance.remoteItemSkillPointValues;
+
         int random = Random.Range(0, 100);
         if (random < 3)
-            SetValue(Random.Range(5, 11), valueUI);
+            SetValue(Random.Range(remoteValues.minValue * 5, remoteValues.maxValue * 4), valueUI);
         else
-            SetValue(Random.Range(1, 4), valueUI);
+            SetValue(Random.Range(remoteValues.minValue, remoteValues.maxValue + 1), valueUI);
     }
 
     protected override void OnItemCollected() {

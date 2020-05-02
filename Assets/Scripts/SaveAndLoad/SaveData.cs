@@ -11,10 +11,11 @@ public class SaveData {
     public Statistics statistics;
     public CurrentLevelData currentLevelData;
 
-    public int lifes;
+    public int targetFPS;
     public bool uniColor;
     public bool isGameOver;
     public bool enableBloom;
+    public bool screenShake;
     public long backupOffset;
     public string playerName;
     public bool firstAppStart;
@@ -35,9 +36,10 @@ public class SaveData {
         currentLevelData = PersistentData.instance.currentLevelData;
 
         uniColor = PersistentData.instance.uniColor;
-        lifes = PersistentData.instance.scoreData.lifes;
+        targetFPS = PersistentData.instance.targetFPS;
         isGameOver = PersistentData.instance.isGameOver;
         playerName = PersistentData.instance.playerName;
+        screenShake = PersistentData.instance.screenShake;
         enableBloom = PersistentData.instance.enableBloom;
         backupOffset = PersistentData.instance.backupOffset;
         firstAppStart = PersistentData.instance.firstAppStart;

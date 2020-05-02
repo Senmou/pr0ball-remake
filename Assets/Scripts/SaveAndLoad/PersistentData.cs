@@ -15,9 +15,11 @@ public class PersistentData : MonoBehaviour {
     public Highscores highscores;
     public Statistics statistics;
 
+    public int targetFPS;
     public bool uniColor;
     public bool isGameOver;
     public bool enableBloom;
+    public bool screenShake;
     public long backupOffset;
     public string playerName;
     public bool firstAppStart;
@@ -60,10 +62,12 @@ public class PersistentData : MonoBehaviour {
         currentLevelData = saveData.currentLevelData ?? new CurrentLevelData();
 
         uniColor = saveData.uniColor;
+        targetFPS = saveData.targetFPS;
         statistics = saveData.statistics;
         isGameOver = saveData.isGameOver;
         playerName = saveData.playerName;
         enableBloom = saveData.enableBloom;
+        screenShake = saveData.screenShake;
         backupOffset = saveData.backupOffset;
         firstAppStart = saveData.firstAppStart;
         blackBackground = saveData.blackBackground;

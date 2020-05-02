@@ -7,6 +7,13 @@ public class StatisticsMenu : CanvasController {
 
     private MoveUI moveUI;
     private PauseBackground pauseBackground;
+    private DotColorController colorController;
+
+    private TextMeshProUGUI damageUI;
+    private TextMeshProUGUI ballCountUI;
+    private TextMeshProUGUI critChanceUI;
+    private TextMeshProUGUI critDamageUI;
+    private TextMeshProUGUI dangerLevelUI;
 
     // Balls
     private TextMeshProUGUI ballsCollisionsUI;
@@ -42,6 +49,13 @@ public class StatisticsMenu : CanvasController {
         statistics = null;
         moveUI = GetComponent<MoveUI>();
         pauseBackground = FindObjectOfType<PauseBackground>();
+        colorController = FindObjectOfType<DotColorController>();
+
+        dangerLevelUI = transform.FindChild<TextMeshProUGUI>("Statistics/DangerLevel");
+        damageUI = transform.FindChild<TextMeshProUGUI>("Statistics/BallStats/CurrentStats/Damage/Value");
+        ballCountUI = transform.FindChild<TextMeshProUGUI>("Statistics/BallStats/CurrentStats/BallCount/Value");
+        critChanceUI = transform.FindChild<TextMeshProUGUI>("Statistics/BallStats/CurrentStats/CritChance/Value");
+        critDamageUI = transform.FindChild<TextMeshProUGUI>("Statistics/BallStats/CurrentStats/CritDamage/Value");
 
         // Balls
         ballsCollisionsUI = transform.FindChild<TextMeshProUGUI>("Statistics/Table/BallStatistics/Collisions/Value");
@@ -75,6 +89,14 @@ public class StatisticsMenu : CanvasController {
     }
 
     public void UpdateStatisticsUI(Statistics statistics) {
+
+        dangerLevelUI.text = statistics.game.dangerLevel.ToString() + "%";
+        dangerLevelUI.color = colorController.GetDangerLevelColor(statistics.game.dangerLevel);
+
+        damageUI.text = statistics.balls.damage.ToString();
+        critChanceUI.text = statistics.balls.critChance.ToString("0") + "%";
+        critDamageUI.text = statistics.balls.critDamage.ToString("0.##") + "x";
+        ballCountUI.text = statistics.balls.ballCount.ToString();
 
         // Balls
         ballsCollisionsUI.text = statistics.balls.collisions.ToString();

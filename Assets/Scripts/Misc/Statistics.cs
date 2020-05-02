@@ -93,6 +93,7 @@ public class Statistics {
 
     [Serializable]
     public struct GameStatistics {
+        public int dangerLevel;
         public int TotalSkillPointsSpend { get => Instance.skills.skillPointsSpend + Instance.benitrator.totalBets; }
     }
 }

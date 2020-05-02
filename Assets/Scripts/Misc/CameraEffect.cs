@@ -26,7 +26,8 @@ public class CameraEffect : MonoBehaviour {
     }
 
     public void Shake(float duration, float magnitude, bool withOverlay = false) {
-        StartCoroutine(ShakeCamera(duration, magnitude, withOverlay));
+        if (PersistentData.instance.screenShake)
+            StartCoroutine(ShakeCamera(duration, magnitude, withOverlay));
     }
 
     private IEnumerator ShakeCamera(float duration, float magnitude, bool withOverlay) {
@@ -48,6 +49,10 @@ public class CameraEffect : MonoBehaviour {
                 overlayColor.a = Random.Range(0.05f, 0.1f);
                 overlay.color = overlayColor;
             }
+
+            // Interrupt, if screen is shaking while it's turned off
+            if (!PersistentData.instance.screenShake)
+                break;
 
             transform.position = startPos + new Vector2(Random.value, Random.value) * magnitude;
 

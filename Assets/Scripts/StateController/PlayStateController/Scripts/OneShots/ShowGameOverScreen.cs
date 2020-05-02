@@ -5,6 +5,7 @@ public class ShowGameOverScreen : OneShot {
 
     public override void Act(StateController controller) {
 
+        Statistics.Instance.game.dangerLevel = LevelData.DangerLevel;
         Statistics.Instance.balls.damage = BallStats.Instance.damage;
         Statistics.Instance.balls.critChance = BallStats.Instance.critChance;
         Statistics.Instance.balls.critDamage = BallStats.Instance.critDamage;

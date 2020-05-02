@@ -32,6 +32,8 @@ public class SetMasterVolume : MonoBehaviour {
         CheckButtonInteractability();
     }
 
+    public float GetCurrentVolume() => currentVolume;
+
     public void OnClickPlus() {
 
         if (currentVolume < 10)

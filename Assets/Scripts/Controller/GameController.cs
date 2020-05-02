@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
-    public const string saveFileName = "saveData_v1.dat";
+    public const string saveFileName = "saveData_v2.dat";
 
     [SerializeField] private FloatingText floatingText;
 
@@ -42,8 +42,6 @@ public class GameController : MonoBehaviour {
 
         EventManager.StartListening("SaveGame", OnSaveGame);
         EventManager.StartListening("ChacheData", OnChacheData);
-
-        Application.targetFrameRate = 60;
 
         CanvasManager.instance.SwitchCanvas(CanvasType.NONE);
     }
@@ -84,11 +82,7 @@ public class GameController : MonoBehaviour {
 
 
     private void Update() {
-
-        if (Input.GetKeyDown(KeyCode.P)) {
-            CanvasManager.instance.SwitchCanvas(CanvasType.DATA_SECURITY_POLICY);
-        }
-
+        
         elapsedTimeSinceRestart += Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -128,10 +122,10 @@ public class GameController : MonoBehaviour {
 
     public void OnGameRestarted() {
         elapsedTimeSinceRestart = 0f;
-        RemoteConfig.instance.FetchConfig();
     }
 
     public void PauseGame() {
+        RemoteConfig.instance.FetchConfig();
         Time.timeScale = 0f;
         isGamePaused = true;
         EventManager.TriggerEvent("GamePaused");

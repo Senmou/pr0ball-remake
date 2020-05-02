@@ -15,6 +15,7 @@ public class Sound : MonoBehaviour {
     private float soundLockDuration;
 
     private SetSfxBallVolume sfxBallVolume;
+    private SetMasterVolume sfxMasterVolume;
 
     private void Awake() {
 
@@ -39,7 +40,6 @@ public class Sound : MonoBehaviour {
             soundLockTimer -= Time.unscaledDeltaTime;
         else
             soundLock = false;
-
     }
 
     public void Bounce() {

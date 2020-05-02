@@ -9,20 +9,26 @@ public class SimpleStatisticsMenu : CanvasController {
     private TextMeshProUGUI ballCountUI;
     private TextMeshProUGUI critChanceUI;
     private TextMeshProUGUI critDamageUI;
+    private TextMeshProUGUI dangerLevelUI;
 
     private PauseBackground pauseBackground;
+    private DotColorController colorController;
 
     private void Awake() {
         statistics = null;
         pauseBackground = FindObjectOfType<PauseBackground>();
+        colorController = FindObjectOfType<DotColorController>();
+        dangerLevelUI = transform.FindChild<TextMeshProUGUI>("DangerLevel");
         damageUI = transform.FindChild<TextMeshProUGUI>("Stats/CurrentStats/Damage/Value");
         ballCountUI = transform.FindChild<TextMeshProUGUI>("Stats/CurrentStats/BallCount/Value");
         critChanceUI = transform.FindChild<TextMeshProUGUI>("Stats/CurrentStats/CritChance/Value");
         critDamageUI = transform.FindChild<TextMeshProUGUI>("Stats/CurrentStats/CritDamage/Value");
-
     }
 
     public void UpdateStatisticsUI(Statistics statistics) {
+        dangerLevelUI.text = statistics.game.dangerLevel.ToString() + "%";
+        dangerLevelUI.color = colorController.GetDangerLevelColor(statistics.game.dangerLevel);
+
         damageUI.text = statistics.balls.damage.ToString();
         critChanceUI.text = statistics.balls.critChance.ToString("0") + "%";
         critDamageUI.text = statistics.balls.critDamage.ToString("0.##") + "x";
