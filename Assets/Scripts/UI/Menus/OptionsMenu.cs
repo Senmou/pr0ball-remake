@@ -28,16 +28,15 @@ public class OptionsMenu : CanvasController {
 
         if (PersistentData.instance.firstAppStart) {
             //toggleBloom.isOn = true;
-            toggleVSync.isOn = false;
-            toggleFPS_60.isOn = true;
+            toggleVSync.isOn = true;
             toggleUniColor.isOn = false;
             toggleScreenShake.isOn = true;
             toggleParticleSystems.isOn = true;
             toggleBlackBackground.isOn = false;
             toggleBenitratorAnimation.isOn = false;
 
-            QualitySettings.vSyncCount = 0;
-            PersistentData.instance.vSync = false;
+            QualitySettings.vSyncCount = 1;
+            PersistentData.instance.vSync = true;
             PersistentData.instance.targetFPS = 60;
             PersistentData.instance.uniColor = false;
             PersistentData.instance.enableBloom = true;

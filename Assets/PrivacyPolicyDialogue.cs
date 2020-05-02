@@ -9,7 +9,6 @@ public class PrivacyPolicyDialogue : CanvasController {
     private PauseBackground pauseBackground;
 
     private void Awake() {
-        transform.position = new Vector2(0f, 0f);
         pauseBackground = FindObjectOfType<PauseBackground>();
         playButton = transform.FindChild<Button>("PlayButton");
         toggle = transform.FindChild<Toggle>("Toggle_Agreement");
@@ -33,6 +32,7 @@ public class PrivacyPolicyDialogue : CanvasController {
     }
 
     public override void Show() {
+        transform.position = new Vector2(0f, 0f);
         pauseBackground.disableInteractability = true;
         LeanTween.scale(gameObject, Vector3.one, 0.1f)
            .setOnStart(() => gameObject.SetActive(true))

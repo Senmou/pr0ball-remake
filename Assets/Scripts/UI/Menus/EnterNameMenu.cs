@@ -10,13 +10,12 @@ public class EnterNameMenu : CanvasController {
     private DisplayPlayerName displayPlayerName;
 
     private void Awake() {
-        transform.position = new Vector2(0f, 0f);
         okButton = transform.FindChild<Button>("OkButton");
         pauseBackground = FindObjectOfType<PauseBackground>();
         displayPlayerName = FindObjectOfType<DisplayPlayerName>();
         inputField = transform.FindChild<TMP_InputField>("NameInputField");
     }
-    
+
     public void OnOkButtonClick() {
         PersistentData.instance.playerName = inputField.text;
         if (displayPlayerName)
@@ -24,6 +23,7 @@ public class EnterNameMenu : CanvasController {
     }
 
     public override void Show() {
+        transform.position = new Vector2(0f, 0f);
         pauseBackground.disableInteractability = true;
         inputField.text = PersistentData.instance.playerName;
         LeanTween.scale(gameObject, Vector3.one, 0.1f)

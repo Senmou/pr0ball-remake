@@ -5,7 +5,6 @@ public class SecurityQuestionNewGame : CanvasController {
     private RestartGame restartGame;
 
     private void Awake() {
-        transform.position = new Vector2(0f, 0f);
         restartGame = FindObjectOfType<RestartGame>();
     }
 
@@ -14,6 +13,7 @@ public class SecurityQuestionNewGame : CanvasController {
     }
 
     public override void Show() {
+        transform.position = new Vector2(0f, 0f);
         LeanTween.scale(gameObject, Vector3.one, 0.1f)
             .setOnStart(() => gameObject.SetActive(true))
             .setIgnoreTimeScale(true)
