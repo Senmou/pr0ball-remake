@@ -5,6 +5,7 @@ public class OptionsMenu : CanvasController {
 
     private MoveUI moveUI;
     //private Toggle toggleBloom;
+    private Toggle toggleVSync;
     private Toggle toggleFPS_30;
     private Toggle toggleFPS_60;
     private Toggle toggleUniColor;
@@ -17,6 +18,7 @@ public class OptionsMenu : CanvasController {
         moveUI = GetComponent<MoveUI>();
         //toggleBloom = transform.FindChild<Toggle>("MiscOptions/Toggle_Bloom");
         toggleUniColor = transform.FindChild<Toggle>("MiscOptions/Toggle_UniColor");
+        toggleVSync = transform.FindChild<Toggle>("MiscOptions/Toggle_FPS/Toggle_VSync");
         toggleScreenShake = transform.FindChild<Toggle>("MiscOptions/Toggle_ScreenShake");
         toggleFPS_30 = transform.FindChild<Toggle>("MiscOptions/Toggle_FPS/Toggle_FPS_30");
         toggleFPS_60 = transform.FindChild<Toggle>("MiscOptions/Toggle_FPS/Toggle_FPS_60");
@@ -26,6 +28,7 @@ public class OptionsMenu : CanvasController {
 
         if (PersistentData.instance.firstAppStart) {
             //toggleBloom.isOn = true;
+            toggleVSync.isOn = false;
             toggleFPS_60.isOn = true;
             toggleUniColor.isOn = false;
             toggleScreenShake.isOn = true;
@@ -33,6 +36,8 @@ public class OptionsMenu : CanvasController {
             toggleBlackBackground.isOn = false;
             toggleBenitratorAnimation.isOn = false;
 
+            QualitySettings.vSyncCount = 0;
+            PersistentData.instance.vSync = false;
             PersistentData.instance.targetFPS = 60;
             PersistentData.instance.uniColor = false;
             PersistentData.instance.enableBloom = true;
@@ -42,7 +47,10 @@ public class OptionsMenu : CanvasController {
             PersistentData.instance.benitratorWithoutAnimation = false;
         } else {
             //toggleBloom.isOn = PersistentData.instance.enableBloom;
-            if (PersistentData.instance.targetFPS == 30) {
+            if (PersistentData.instance.vSync) {
+                QualitySettings.vSyncCount = 1;
+                toggleVSync.isOn = true;
+            } else if (PersistentData.instance.targetFPS == 30) {
                 Application.targetFrameRate = 30;
                 toggleFPS_30.isOn = true;
             } else {
@@ -84,6 +92,11 @@ public class OptionsMenu : CanvasController {
     public void OnValueChanged_ToggleFPS_60(bool value) {
         Application.targetFrameRate = 60;
         PersistentData.instance.targetFPS = 60;
+    }
+
+    public void OnValueChanged_ToggleFPS_VSync(bool value) {
+        PersistentData.instance.vSync = value;
+        QualitySettings.vSyncCount = value ? 1 : 0;
     }
 
     public void OnValueChanged_ScreenShake(bool value) {

@@ -15,6 +15,7 @@ public class PersistentData : MonoBehaviour {
     public Highscores highscores;
     public Statistics statistics;
 
+    public bool vSync;
     public int targetFPS;
     public bool uniColor;
     public bool isGameOver;
@@ -61,6 +62,7 @@ public class PersistentData : MonoBehaviour {
         highscores = saveData.highscores ?? new Highscores();
         currentLevelData = saveData.currentLevelData ?? new CurrentLevelData();
 
+        vSync = saveData.vSync;
         uniColor = saveData.uniColor;
         targetFPS = saveData.targetFPS;
         statistics = saveData.statistics;

@@ -11,6 +11,7 @@ public class SaveData {
     public Statistics statistics;
     public CurrentLevelData currentLevelData;
 
+    public bool vSync;
     public int targetFPS;
     public bool uniColor;
     public bool isGameOver;
@@ -35,6 +36,7 @@ public class SaveData {
         statistics = PersistentData.instance.statistics;
         currentLevelData = PersistentData.instance.currentLevelData;
 
+        vSync = PersistentData.instance.vSync;
         uniColor = PersistentData.instance.uniColor;
         targetFPS = PersistentData.instance.targetFPS;
         isGameOver = PersistentData.instance.isGameOver;
