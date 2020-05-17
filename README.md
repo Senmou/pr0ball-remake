@@ -1,7 +1,7 @@
 # pr0ball 2.0
 
 ### GitHub
-[Download .apk](https://github.com/Senmou/pr0ball-remake/releases/download/v2.1/pr0ball_remake_v2.apk)
+[Download .apk](https://github.com/Senmou/pr0ball-remake/releases/download/v2.1/pr0ball_remake_v3.apk)
 
 ### Bekannte Bugs
 - Die Lautstärke der Bälle ist nicht von der globalen Lautstärke betroffen
